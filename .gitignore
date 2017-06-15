@@ -4,3 +4,7 @@
 /src/IDI.Core/obj
 /src/.vs/IDI.Central/v15/*.suo
 /src/.vs
+/src/IDI.Central.Models/bin
+/src/IDI.Central.Models/obj
+/src/IDI.Central.Domain/bin
+/src/IDI.Central.Domain/obj

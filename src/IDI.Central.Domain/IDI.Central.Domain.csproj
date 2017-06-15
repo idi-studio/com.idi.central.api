@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IDI.Central.Models\IDI.Central.Models.csproj" />
+    <ProjectReference Include="..\IDI.Core\IDI.Core.csproj" />
+  </ItemGroup>
+
+</Project>
