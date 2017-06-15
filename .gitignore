@@ -1,0 +1,6 @@
+/src/IDI.Central/bin
+/src/IDI.Central/obj
+/src/IDI.Core/bin
+/src/IDI.Core/obj
+/src/.vs/IDI.Central/v15/*.suo
+/src/.vs
