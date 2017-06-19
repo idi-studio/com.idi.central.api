@@ -8,3 +8,7 @@
 /src/IDI.Central.Models/obj
 /src/IDI.Central.Domain/bin
 /src/IDI.Central.Domain/obj
+/src/IDI.Core.Tests/bin
+/src/IDI.Core.Tests/obj
+/src/IDI.Central.Domain.Tests/obj
+/src/IDI.Central.Domain.Tests/bin
