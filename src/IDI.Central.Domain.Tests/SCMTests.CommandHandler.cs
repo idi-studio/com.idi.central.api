@@ -31,7 +31,7 @@ namespace IDI.Central.Domain.Tests
                 Assert.AreEqual(1, context.Users.Count());
                 Assert.AreEqual(1, context.UserRoles.Count());
                 Assert.AreEqual(1, context.Roles.Count());
-                Assert.AreEqual(1, context.Modules.Count());
+                Assert.AreEqual(2, context.Modules.Count());
                 Assert.AreEqual(5, context.Menus.Count());
                 Assert.AreEqual(5, context.Privileges.Count());
             });
