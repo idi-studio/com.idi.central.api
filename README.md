@@ -1,9 +1,5 @@
 # IDI CENTRAL WEB API
+This project was generated with AspNetCore version 1.1.2.
 
 ## Swagger 
-
-### JSON
-http://localhost:<random_port>/swagger/v1/swagger.json
-
-### UI
 http://localhost:<random_port>/swagger/ui/index.html
