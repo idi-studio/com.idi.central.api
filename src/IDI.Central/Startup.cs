@@ -32,6 +32,9 @@ namespace IDI.Central
             services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddSqlServer<CentralContext>(Configuration.GetConnectionString("DefaultConnection"));
+
+            // Inject an implementation of ISwaggerProvider with defaulted settings applied  
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +63,12 @@ namespace IDI.Central
             {
                 routes.MapRoute(name: "default", template: "{controller=Platform}/{action=Login}/{id?}");
             });
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint  
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)  
+            app.UseSwaggerUi();
 
             Platform.SeedData().Initial();
         }

@@ -3,21 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDI.Central", "IDI.Central\IDI.Central.csproj", "{0B675D2B-763D-43A4-AEC2-A898A8D14405}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDI.Central", "IDI.Central\IDI.Central.csproj", "{0B675D2B-763D-43A4-AEC2-A898A8D14405}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDI.Core", "IDI.Core\IDI.Core.csproj", "{C9AEB33B-DF60-4EB2-8E43-0DBBEE7F6D11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDI.Core", "IDI.Core\IDI.Core.csproj", "{C9AEB33B-DF60-4EB2-8E43-0DBBEE7F6D11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDI.Central.Models", "IDI.Central.Models\IDI.Central.Models.csproj", "{F5B49D90-7EE6-47A1-9803-24B92A26FE7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDI.Central.Models", "IDI.Central.Models\IDI.Central.Models.csproj", "{F5B49D90-7EE6-47A1-9803-24B92A26FE7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDI.Central.Domain", "IDI.Central.Domain\IDI.Central.Domain.csproj", "{BB09A2C8-2E71-4B78-AADB-9496B3EA1BF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDI.Central.Domain", "IDI.Central.Domain\IDI.Central.Domain.csproj", "{BB09A2C8-2E71-4B78-AADB-9496B3EA1BF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDI.Central.Domain.Tests", "IDI.Central.Domain.Tests\IDI.Central.Domain.Tests.csproj", "{796D0E4C-CA73-4DA4-952D-659405488E4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDI.Central.Domain.Tests", "IDI.Central.Domain.Tests\IDI.Central.Domain.Tests.csproj", "{796D0E4C-CA73-4DA4-952D-659405488E4B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.Framework", "01.Framework", "{B63C0518-ED15-42C2-9C58-975318BE4C29}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Central", "02.Central", "{CB6294DE-D055-485F-9D3E-AD8A8C4407EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDI.Core.Tests", "IDI.Core.Tests\IDI.Core.Tests.csproj", "{485C9BE7-8831-45B2-B1F8-61FFEE2D43B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDI.Core.Tests", "IDI.Core.Tests\IDI.Core.Tests.csproj", "{485C9BE7-8831-45B2-B1F8-61FFEE2D43B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00.Documents", "00.Documents", "{422F57D3-9514-459B-A6BF-621FCF2DBE64}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
