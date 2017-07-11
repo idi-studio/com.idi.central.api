@@ -29,7 +29,7 @@ namespace IDI.Core.Common
             return new Result { Status = ResultStatus.Success, Code = code, Message = message, Details = new Dictionary<string, object> { { "info", details ?? new List<string>() } } };
         }
 
-        public static Result<T> Success<T>(T data, string code = "200", string message = "", List<string> details = null) where T : class
+        public static Result<T> Success<T>(T data, string code = "200", string message = "", List<string> details = null)
         {
             return new Result<T> { Data = data, Status = ResultStatus.Success, Code = code, Message = message, Details = new Dictionary<string, object> { { "info", details ?? new List<string>() } } };
         }
@@ -39,7 +39,7 @@ namespace IDI.Core.Common
             return new Result { Status = ResultStatus.Fail, Message = message, Code = code, Details = new Dictionary<string, object> { { "info", details ?? new List<string>() } } };
         }
 
-        public static Result<T> Fail<T>(string message, string code = "400", List<string> details = null) where T : class
+        public static Result<T> Fail<T>(string message, string code = "400", List<string> details = null)
         {
             return new Result<T> { Status = ResultStatus.Fail, Message = message, Code = code, Details = new Dictionary<string, object> { { "info", details ?? new List<string>() } } };
         }
@@ -60,12 +60,12 @@ namespace IDI.Core.Common
             };
         }
 
-        public static Result<T> Error<T>(string message, List<string> details = null) where T : class
+        public static Result<T> Error<T>(string message, List<string> details = null)
         {
             return new Result<T> { Status = ResultStatus.Error, Message = message, Code = "500", Details = new Dictionary<string, object> { { "info", details ?? new List<string>() } } };
         }
 
-        public static Result<T> Error<T>(Exception exception) where T : class
+        public static Result<T> Error<T>(Exception exception)
         {
             return new Result<T>
             {
@@ -77,7 +77,7 @@ namespace IDI.Core.Common
         }
     }
 
-    public class Result<T> : Result where T : class
+    public class Result<T> : Result
     {
         [JsonProperty("data")]
         public T Data { get; set; }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using System.Linq;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -14,8 +16,17 @@ namespace IDI.Core.Authentication.TokenAuthentication
     {
         public static bool TryGetClientCredential(this HttpContext context, out string clientId, out string clientSecret)
         {
-            clientId = context.Request.Form["clientId"];
-            clientSecret = context.Request.Form["clientSecret"];
+            clientId = string.Empty; clientSecret = string.Empty;
+            string authorization = context.Request.Headers["Authorization"];
+
+            if (!authorization.StartsWith("Basic"))
+                return false;
+
+            authorization = authorization.Split(new char[] { ' ' }).Last();
+            authorization = Encoding.UTF8.GetString(Convert.FromBase64String(authorization));
+
+            clientId = authorization.Split(new char[] { ':' }).FirstOrDefault();
+            clientSecret = authorization.Split(new char[] { ':' }).LastOrDefault();
 
             if (clientId.IsNull() || clientSecret.IsNull())
                 return false;

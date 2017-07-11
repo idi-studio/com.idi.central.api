@@ -43,26 +43,26 @@ namespace IDI.Central
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //    app.UseBrowserLink();
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler("/Home/Error");
+            //}
 
-            app.UseCookieAuthentication(AuthOptions.CookieOptions());
+            //app.UseCookieAuthentication(AuthOptions.CookieOptions());
 
             app.UseTokenAuthentication<ApplicationTokenAuthProvider>();
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(name: "default", template: "{controller=Platform}/{action=Login}/{id?}");
-            });
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(name: "default", template: "{controller=Platform}/{action=Login}/{id?}");
+            //});
 
             // Enable middleware to serve generated Swagger as a JSON endpoint  
             app.UseSwagger();

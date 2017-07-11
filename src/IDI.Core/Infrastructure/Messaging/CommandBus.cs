@@ -23,12 +23,12 @@ namespace IDI.Core.Infrastructure.Messaging
             List<string> errors;
 
             if (!command.IsValid(out errors))
-                return Result.Fail("命令参数验证失败!", errors);
+                return Result.Fail("命令参数验证失败!", details: errors);
 
             var handler = _commandHandlerFactory.GetHandler<T>();
 
             if (handler == null)
-                return Result.Error("未找到任何相关命令处理器!", errors);
+                return Result.Error("未找到任何相关命令处理器!", details: errors);
 
             return handler.Execute(command);
         }

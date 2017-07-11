@@ -42,19 +42,23 @@ namespace IDI.Central.Tests.Utils
         {
             parameters = parameters ?? new Dictionary<string, string>();
 
-            if (url == "/token")
+            if (url == "api/token")
             {
                 string basic = Convert.ToBase64String(Encoding.UTF8.GetBytes(clientId + ":" + clientSecret));
 
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", basic);
 
-                return client.PostAsync(url, new FormUrlEncodedContent(parameters)).Result.Content.ReadAsStringAsync().Result;
+                var response = client.PostAsync(url, new FormUrlEncodedContent(parameters)).Result;
+
+                return response.Content.ReadAsStringAsync().Result;
             }
             else
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-                return client.PostAsync(url, new StringContent(parameters.ToJson(), Encoding.UTF8, "application/json")).Result.Content.ReadAsStringAsync().Result;
+                var response = client.PostAsync(url, new StringContent(parameters.ToJson(), Encoding.UTF8, "application/json")).Result;
+                
+                return response.Content.ReadAsStringAsync().Result;
             }
         }
     }
