@@ -9,12 +9,12 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace IDI.Core.Authentication.TokenAuthentication
 {
-    internal class CustomJwtDataFormat : ISecureDataFormat<AuthenticationTicket>
+    internal class JwtDataFormat : ISecureDataFormat<AuthenticationTicket>
     {
         private readonly string algorithm;
         private readonly TokenValidationParameters validationParameters;
 
-        public CustomJwtDataFormat(string algorithm, TokenValidationParameters validationParameters)
+        public JwtDataFormat(string algorithm, TokenValidationParameters validationParameters)
         {
             this.algorithm = algorithm;
             this.validationParameters = validationParameters;

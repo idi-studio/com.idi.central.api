@@ -48,13 +48,13 @@ namespace IDI.Core.Authentication
                 ExpireTimeSpan = TimeSpan.FromMinutes(20),
                 LoginPath = new PathString("/platform/login"),
                 DataProtectionProvider = DataProtectionProvider.Create(new DirectoryInfo(@"\\10.248.36.91\shared-auth-ticket-keys\")),
-                TicketDataFormat = new CustomJwtDataFormat(SecurityAlgorithms.HmacSha256, validationParameters)
+                TicketDataFormat = new JwtDataFormat(SecurityAlgorithms.HmacSha256, validationParameters)
             };
         }
 
-        public static IOptions<TokenAuthenticationOptions> TokenOptions()
+        public static IOptions<TokenAuthOptions> TokenOptions()
         {
-            var options= new TokenAuthenticationOptions
+            var options= new TokenAuthOptions
             {
                 SigningCredentials = new SigningCredentials(Signing(), SecurityAlgorithms.HmacSha256),
             };

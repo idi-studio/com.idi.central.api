@@ -21,8 +21,8 @@ namespace IDI.Core.Common.Extensions
             ServiceLocator.AddDbContext<TContext>(options => options.UseSqlServer(connectionString, o => o.UseRowNumberForPaging()));
         }
 
-        public static void UseTokenAuthentication<TTokenAuthenticationMiddleware>(this IApplicationBuilder app, IOptions<TokenAuthenticationOptions> options = null)
-            where TTokenAuthenticationMiddleware : TokenAuthenticationMiddleware
+        public static void UseTokenAuthentication<TTokenAuthenticationMiddleware>(this IApplicationBuilder app, IOptions<TokenAuthOptions> options = null)
+            where TTokenAuthenticationMiddleware : TokenAuthProvider
         {
             app.UseMiddleware<TTokenAuthenticationMiddleware>(options ?? AuthOptions.TokenOptions());
         }
