@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using IDI.Central.Domain.Common;
-using IDI.Central.Domain.Modules.SCM.AggregateRoots;
+using IDI.Central.Domain.Modules.Identity.AggregateRoots;
 using IDI.Core.Common;
 
 namespace IDI.Central.Domain
@@ -69,13 +69,13 @@ namespace IDI.Central.Domain
     {
         public class ModuleSeed
         {
-            public Module SCM { get; private set; }
+            public Module Identity { get; private set; }
 
             public Module OMM { get; private set; }
 
             public ModuleSeed()
             {
-                this.SCM = new Module { SN = 10, Name = "Platform", Code = "SCM", Description = "Platform Management", Icon = "fa fa-cogs" };
+                this.Identity = new Module { SN = 10, Name = "Platform", Code = "Identity", Description = "Platform Management", Icon = "fa fa-cogs" };
                 this.OMM = new Module { SN = 20, Name = "Order", Code = "OMM", Description = "Order Management", Icon = "fa fa-tasks" };
             }
         }
@@ -119,15 +119,15 @@ namespace IDI.Central.Domain
 
         private void Initialize()
         {
-            this.Modules.SCM.NewPage(sn: 10, name: "Dashboard", controller: "platform", action: "dashboard", privilege: true, display: false);
-            this.Modules.SCM.NewPage(sn: 20, name: "Settings", controller: "platform", action: "settings", privilege: true);
-            this.Modules.SCM.NewPage(sn: 30, name: "Role", controller: "role", action: "administration", privilege: true);
-            this.Modules.SCM.NewPage(sn: 40, name: "User", controller: "user", action: "administration", privilege: true);
+            this.Modules.Identity.NewPage(sn: 10, name: "Dashboard", controller: "platform", action: "dashboard", privilege: true, display: false);
+            this.Modules.Identity.NewPage(sn: 20, name: "Settings", controller: "platform", action: "settings", privilege: true);
+            this.Modules.Identity.NewPage(sn: 30, name: "Role", controller: "role", action: "administration", privilege: true);
+            this.Modules.Identity.NewPage(sn: 40, name: "User", controller: "user", action: "administration", privilege: true);
 
             this.Modules.OMM.NewPage(sn: 10, name: "Order", controller: "order", action: "index", privilege: true);
 
             this.Users.Administrator.Authorize(this.Roles.Administrators);
-            this.Roles.Administrators.Authorize(this.Modules.SCM, this.Modules.OMM);
+            this.Roles.Administrators.Authorize(this.Modules.Identity, this.Modules.OMM);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using IDI.Central.Domain.Modules.SCM.Commands;
+﻿using IDI.Central.Domain.Modules.Identity.Commands;
 using IDI.Core.Infrastructure;
 
 namespace IDI.Central.Common

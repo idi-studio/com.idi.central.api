@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Queries;
 
-namespace IDI.Central.Models.SCM
+namespace IDI.Central.Models.Identity
 {
     public class Sidebar : IQueryResult
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IDI.Central.Models.SCM
+namespace IDI.Central.Models.Identity
 {
     public class RoleTableRow
     {

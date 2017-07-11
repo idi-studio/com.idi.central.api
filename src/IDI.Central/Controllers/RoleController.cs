@@ -1,5 +1,5 @@
-﻿using IDI.Central.Domain.Modules.SCM.Commands;
-using IDI.Central.Models.SCM;
+﻿using IDI.Central.Domain.Modules.Identity.Commands;
+using IDI.Central.Models.Identity;
 using IDI.Central.Common;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;

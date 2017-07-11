@@ -16,13 +16,13 @@ namespace IDI.Core.Authentication
         // The secret key every token will be signed with.
         // In production, you should store this securely in environment variables
         // or a key management tool. Don't hardcode this into your application!
-        private static readonly string secretKey = "mysupersecret_secretkey!123";
+        private static readonly string secretkey = "mysupersecret_secretkey!123";
 
-        private static SecurityKey Signing() => new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
+        private static SecurityKey Signing() => new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretkey));
 
         public static CookieAuthenticationOptions CookieOptions()
         {
-            var tokenValidationParameters = new TokenValidationParameters
+            var validationParameters = new TokenValidationParameters
             {
                 // The signing key must match!
                 ValidateIssuerSigningKey = true,
@@ -48,7 +48,7 @@ namespace IDI.Core.Authentication
                 ExpireTimeSpan = TimeSpan.FromMinutes(20),
                 LoginPath = new PathString("/platform/login"),
                 DataProtectionProvider = DataProtectionProvider.Create(new DirectoryInfo(@"\\10.248.36.91\shared-auth-ticket-keys\")),
-                TicketDataFormat = new CustomJwtDataFormat(SecurityAlgorithms.HmacSha256, tokenValidationParameters)
+                TicketDataFormat = new CustomJwtDataFormat(SecurityAlgorithms.HmacSha256, validationParameters)
             };
         }
 

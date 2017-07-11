@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using IDI.Central.Domain.Common;
-using IDI.Central.Domain.Modules.SCM.AggregateRoots;
-using IDI.Central.Domain.Modules.SCM.Commands;
-using IDI.Central.Domain.Modules.SCM.Handlers;
+using IDI.Central.Domain.Modules.Identity.AggregateRoots;
+using IDI.Central.Domain.Modules.Identity.Commands;
+using IDI.Central.Domain.Modules.Identity.Handlers;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;
 using IDI.Core.Repositories;
@@ -11,10 +11,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IDI.Central.Domain.Tests
 {
-    public partial class SCMTests : IntegrationTests
+    public partial class IdentityTests : IntegrationTests
     {
         [TestMethod]
-        public void SCM_Command_Initialize()
+        public void Identity_Command_Initialize()
         {
             var hanlder = new InitializeCommandHandler();
             hanlder.UserRepository = ServiceLocator.GetService<IRepository<User>>();
@@ -38,7 +38,7 @@ namespace IDI.Central.Domain.Tests
         }
 
         [TestMethod]
-        public void SCM_Command_Register()
+        public void Identity_Command_Register()
         {
             var hanlder = new RegisterCommandHandler();
             hanlder.UserRepository = ServiceLocator.GetService<IRepository<User>>();
@@ -55,9 +55,9 @@ namespace IDI.Central.Domain.Tests
         }
 
         [TestMethod]
-        public void SCM_Command_RoleAuthorize()
+        public void Identity_Command_RoleAuthorize()
         {
-            var module = new Module { Name = "SCM", Code = "SCM" };
+            var module = new Module { Name = "Identity", Code = "Identity" };
             var privilege1 = new Privilege { Id = Utils.NewGuid(1), Name = "privilege1", Code = "action1", PrivilegeType = PrivilegeType.View, Module = module };
             var privilege2 = new Privilege { Id = Utils.NewGuid(2), Name = "privilege2", Code = "action2", PrivilegeType = PrivilegeType.View, Module = module };
             var privilege3 = new Privilege { Id = Utils.NewGuid(3), Name = "privilege3", Code = "action3", PrivilegeType = PrivilegeType.View, Module = module };
@@ -98,7 +98,7 @@ namespace IDI.Central.Domain.Tests
         }
 
         [TestMethod]
-        public void SCM_Command_UserAuthorize()
+        public void Identity_Command_UserAuthorize()
         {
             var role1 = new Role { Id = Utils.NewGuid(1), Name = "role1" };
             var role2 = new Role { Id = Utils.NewGuid(2), Name = "role2" };

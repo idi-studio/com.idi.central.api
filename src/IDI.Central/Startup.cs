@@ -55,7 +55,7 @@ namespace IDI.Central
 
             app.UseCookieAuthentication(AuthOptions.CookieOptions());
 
-            app.UseTokenAuthentication<TokenAuthMiddleware>();
+            app.UseTokenAuthentication<ApplicationTokenAuthentication>();
 
             app.UseStaticFiles();
 

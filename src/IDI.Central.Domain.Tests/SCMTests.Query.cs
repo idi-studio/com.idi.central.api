@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using IDI.Central.Domain.Modules.SCM.AggregateRoots;
-using IDI.Central.Domain.Modules.SCM.Conditions;
-using IDI.Central.Domain.Modules.SCM.Queries;
+using IDI.Central.Domain.Modules.Identity.AggregateRoots;
+using IDI.Central.Domain.Modules.Identity.Conditions;
+using IDI.Central.Domain.Modules.Identity.Queries;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;
 using IDI.Core.Repositories;
@@ -9,12 +9,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IDI.Central.Domain.Tests
 {
-    public partial class SCMTests : IntegrationTests
+    public partial class IdentityTests : IntegrationTests
     {
         [TestMethod]
-        public void SCM_Query_Sidebar()
+        public void Identity_Query_Sidebar()
         {
-            SCM_Command_Initialize();
+            Identity_Command_Initialize();
 
             var query = new SidebarQuery();
             query.MenuRepository = ServiceLocator.GetService<IQueryRepository<Menu>>();

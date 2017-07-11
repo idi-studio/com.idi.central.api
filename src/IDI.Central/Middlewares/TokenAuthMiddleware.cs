@@ -2,8 +2,8 @@
 using System.Security.Claims;
 using IDI.Core.Authentication;
 using IDI.Core.Authentication.TokenAuthentication;
-using IDI.Central.Domain.Modules.SCM.Commands;
-using IDI.Central.Domain.Modules.SCM.Conditions;
+using IDI.Central.Domain.Modules.Identity.Commands;
+using IDI.Central.Domain.Modules.Identity.Conditions;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;
 using Microsoft.AspNetCore.Http;
@@ -11,9 +11,9 @@ using Microsoft.Extensions.Options;
 
 namespace IDI.Central.Middlewares
 {
-    public class TokenAuthMiddleware : TokenAuthenticationMiddleware
+    public class ApplicationTokenAuthentication : TokenAuthenticationMiddleware
     {
-        public TokenAuthMiddleware(RequestDelegate next, IOptions<TokenAuthenticationOptions> options) : base(next, options) { }
+        public ApplicationTokenAuthentication(RequestDelegate next, IOptions<TokenAuthenticationOptions> options) : base(next, options) { }
 
         protected override List<Claim> GetIdentity(string username)
         {
