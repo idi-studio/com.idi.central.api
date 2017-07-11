@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Authentication;
 using System.Text;
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
@@ -12,8 +13,9 @@ namespace IDI.Central.Tests.Utils
     public sealed class HttpUtil : Singleton<HttpUtil>
     {
         private HttpClient client;
-        private readonly string address = "http://10.248.36.91/";
-        //private readonly string address = "https://10.248.36.91/";
+        private readonly string address = "http://localhost:50963";
+        private readonly string clientId = "com.idi.central.testing";
+        private readonly string clientSecret = "p@55w0rd";
         private string token = "";
 
         private HttpUtil()
@@ -21,15 +23,14 @@ namespace IDI.Central.Tests.Utils
             var handler = new HttpClientHandler
             {
                 UseDefaultCredentials = true,
-                AutomaticDecompression = DecompressionMethods.GZip
+                AutomaticDecompression = DecompressionMethods.GZip,
+                SslProtocols = SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12,
+                ServerCertificateCustomValidationCallback = (sender, certificate, chain, errors) => { return true; }
             };
             client = new HttpClient(handler);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Add("Device", "UnitTesting");
             client.BaseAddress = new Uri(address);
-
-            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-            //ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
         }
 
         public void SetToken(string token)
@@ -43,7 +44,6 @@ namespace IDI.Central.Tests.Utils
 
             if (url == "/token")
             {
-                string clientId = "mslmoveapp_sit", clientSecret = "Qazwsx1!";
                 string basic = Convert.ToBase64String(Encoding.UTF8.GetBytes(clientId + ":" + clientSecret));
 
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", basic);
@@ -57,10 +57,5 @@ namespace IDI.Central.Tests.Utils
                 return client.PostAsync(url, new StringContent(parameters.ToJson(), Encoding.UTF8, "application/json")).Result.Content.ReadAsStringAsync().Result;
             }
         }
-
-        //private static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
-        //{
-        //    return true;
-        //}
     }
 }

@@ -9,7 +9,7 @@ namespace IDI.Central.Tests
     [TestClass]
     public class IdentityModuleUnitTest
     {
-        private const string API_TOKEN = "/token";
+        private const string API_TOKEN = "api/token";
 
         [TestMethod]
         public void IdentityModule_Can_GetToken_ByPassword()
@@ -23,6 +23,8 @@ namespace IDI.Central.Tests
             Assert.IsNotNull(token.token_type);
             Assert.AreEqual(token.token_type.Value, "bearer");
             Assert.IsNotNull(token.expires_in);
+
+            Console.WriteLine(token.ToJson());
         }
 
         [TestMethod]
@@ -34,6 +36,8 @@ namespace IDI.Central.Tests
             Assert.IsNotNull(token.token_type);
             Assert.AreEqual(token.token_type.Value, "bearer");
             Assert.IsNotNull(token.expires_in);
+
+            Console.WriteLine(token.ToJson());
         }
     }
 }
