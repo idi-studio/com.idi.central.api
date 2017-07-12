@@ -26,7 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00.Documents", "00.Document
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03.Testing", "03.Testing", "{A3B155FD-AB04-4255-B9A8-4E0414361C2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDI.Central.Tests", "IDI.Central.Tests\IDI.Central.Tests.csproj", "{F1029691-E021-4B6B-AAD3-F83CFF686B9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDI.Central.Tests", "IDI.Central.Tests\IDI.Central.Tests.csproj", "{F1029691-E021-4B6B-AAD3-F83CFF686B9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

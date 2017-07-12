@@ -1,11 +1,11 @@
-﻿using IDI.Central.Domain.Modules.Identity.AggregateRoots;
+﻿using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using Microsoft.EntityFrameworkCore;
 
 namespace IDI.Central.Domain
 {
     public class CentralContext : DbContext
     {
-        #region Identity
+        #region Administration
         public DbSet<Module> Modules { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Privilege> Privileges { get; set; }
@@ -20,7 +20,7 @@ namespace IDI.Central.Domain
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            #region Identity
+            #region Administration
             modelBuilder.Entity<Module>().HasMany(m => m.Privileges).WithOne(p => p.Module).HasForeignKey(p => p.ModuleId);
             modelBuilder.Entity<Menu>().HasOne(m => m.Module).WithMany(m => m.Menus).HasForeignKey(m => m.ModuleId);
             modelBuilder.Entity<RolePrivilege>().HasKey(rp => new { rp.RoleId, rp.PrivilegeId });

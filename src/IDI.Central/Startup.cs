@@ -1,7 +1,7 @@
 ﻿using IDI.Core.Authentication;
 using IDI.Central.Domain;
 using IDI.Central.Common;
-using IDI.Central.Middlewares;
+using IDI.Central.Providers;
 using IDI.Core.Common.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

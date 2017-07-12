@@ -1,4 +1,4 @@
-﻿using IDI.Central.Domain.Modules.Identity.Commands;
+﻿using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Core.Infrastructure;
 
 namespace IDI.Central.Common
@@ -9,7 +9,7 @@ namespace IDI.Central.Common
         {
             public void Initial()
             {
-                ServiceLocator.CommandBus.Send(new InitializeCommand());
+                ServiceLocator.CommandBus.Send(new DataInitializationCommand());
             }
         }
 

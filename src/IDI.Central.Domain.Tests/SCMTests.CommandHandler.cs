@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using IDI.Central.Domain.Common;
-using IDI.Central.Domain.Modules.Identity.AggregateRoots;
-using IDI.Central.Domain.Modules.Identity.Commands;
-using IDI.Central.Domain.Modules.Identity.Handlers;
+using IDI.Central.Domain.Modules.Administration.AggregateRoots;
+using IDI.Central.Domain.Modules.Administration.Commands;
+using IDI.Central.Domain.Modules.Administration.Handlers;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;
 using IDI.Core.Repositories;
@@ -11,17 +11,17 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IDI.Central.Domain.Tests
 {
-    public partial class IdentityTests : IntegrationTests
+    public partial class AdministrationTests : IntegrationTests
     {
         [TestMethod]
-        public void Identity_Command_Initialize()
+        public void Administration_DataInitializationCommand()
         {
-            var hanlder = new InitializeCommandHandler();
+            var hanlder = new DataInitializationCommandHandler();
             hanlder.UserRepository = ServiceLocator.GetService<IRepository<User>>();
             hanlder.RoleRepository = ServiceLocator.GetService<IRepository<Role>>();
             hanlder.ModuleRepository = ServiceLocator.GetService<IRepository<Module>>();
 
-            var result = hanlder.Execute(new InitializeCommand());
+            var result = hanlder.Execute(new DataInitializationCommand());
 
             Assert.AreEqual(ResultStatus.Success, result.Status);
             Assert.AreEqual("初始化成功!", result.Message);
@@ -38,12 +38,12 @@ namespace IDI.Central.Domain.Tests
         }
 
         [TestMethod]
-        public void Identity_Command_Register()
+        public void Administration_UserRegisterCommand()
         {
-            var hanlder = new RegisterCommandHandler();
+            var hanlder = new UserRegisterCommandHandler();
             hanlder.UserRepository = ServiceLocator.GetService<IRepository<User>>();
 
-            var result = hanlder.Execute(new RegisterCommand("administrator", "123456", "123456"));
+            var result = hanlder.Execute(new UserRegisterCommand("administrator", "123456", "123456"));
 
             Assert.AreEqual(ResultStatus.Success, result.Status);
             Assert.AreEqual("注册成功!", result.Message);
@@ -55,9 +55,9 @@ namespace IDI.Central.Domain.Tests
         }
 
         [TestMethod]
-        public void Identity_Command_RoleAuthorize()
+        public void Administration_RoleAuthorizationCommand()
         {
-            var module = new Module { Name = "Identity", Code = "Identity" };
+            var module = new Module { Name = "Administration", Code = "Administration" };
             var privilege1 = new Privilege { Id = Utils.NewGuid(1), Name = "privilege1", Code = "action1", PrivilegeType = PrivilegeType.View, Module = module };
             var privilege2 = new Privilege { Id = Utils.NewGuid(2), Name = "privilege2", Code = "action2", PrivilegeType = PrivilegeType.View, Module = module };
             var privilege3 = new Privilege { Id = Utils.NewGuid(3), Name = "privilege3", Code = "action3", PrivilegeType = PrivilegeType.View, Module = module };
@@ -76,11 +76,11 @@ namespace IDI.Central.Domain.Tests
                 context.Dispose();
             });
 
-            var hanlder = new RoleAuthorizeCommandHandler();
+            var hanlder = new RoleAuthorizationCommandHandler();
             hanlder.RoleRepository = ServiceLocator.GetService<IRepository<Role>>();
             hanlder.PrivilegeRepository = ServiceLocator.GetService<IRepository<Privilege>>();
 
-            var result = hanlder.Execute(new RoleAuthorizeCommand(role.Name, new Guid[] { privilege2.Id, privilege3.Id, privilege4.Id }));
+            var result = hanlder.Execute(new RoleAuthorizationCommand(role.Name, new Guid[] { privilege2.Id, privilege3.Id, privilege4.Id }));
 
             Assert.AreEqual(ResultStatus.Success, result.Status);
             Assert.AreEqual("角色授权成功!", result.Message);
@@ -98,7 +98,7 @@ namespace IDI.Central.Domain.Tests
         }
 
         [TestMethod]
-        public void Identity_Command_UserAuthorize()
+        public void Administration_UserAuthorizeCommand()
         {
             var role1 = new Role { Id = Utils.NewGuid(1), Name = "role1" };
             var role2 = new Role { Id = Utils.NewGuid(2), Name = "role2" };

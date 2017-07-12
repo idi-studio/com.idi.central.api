@@ -1,6 +1,6 @@
-﻿using IDI.Central.Domain.Modules.Identity.Commands;
-using IDI.Central.Models.Identity;
-using IDI.Central.Common;
+﻿using IDI.Central.Common;
+using IDI.Central.Domain.Modules.Administration.Commands;
+using IDI.Central.Models.Administration;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +13,7 @@ namespace IDI.Central.APIs
         [HttpPost]
         public Result Post([FromBody]CreateRoleForm form)
         {
-            return ServiceLocator.CommandBus.Send(new CreateRoleCommand(form.RoleName));
+            return ServiceLocator.CommandBus.Send(new RoleCreationCommand(form.RoleName));
         }
 
         //// GET: api/values

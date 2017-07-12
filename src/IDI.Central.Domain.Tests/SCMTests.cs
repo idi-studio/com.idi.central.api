@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using IDI.Central.Domain.Common;
-using IDI.Central.Domain.Modules.Identity.AggregateRoots;
-using IDI.Central.Domain.Modules.Identity.Queries;
+using IDI.Central.Domain.Modules.Administration.AggregateRoots;
+using IDI.Central.Domain.Modules.Administration.Queries;
 using IDI.Core.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IDI.Central.Domain.Tests
 {
     [TestClass]
-    public partial class IdentityTests : IntegrationTests
+    public partial class AdministrationTests : IntegrationTests
     {
         [TestMethod]
-        public void Identity_Extension_Menu_IsAuthorized()
+        public void Administration_Extension_Menu_IsAuthorized()
         {
             var menu = new Menu { ModuleId = Utils.NewGuid(1), Code = "1" };
 

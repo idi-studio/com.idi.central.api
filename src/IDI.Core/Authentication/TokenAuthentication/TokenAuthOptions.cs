@@ -9,7 +9,7 @@ namespace IDI.Core.Authentication.TokenAuthentication
 
         public string Issuer { get; set; } = "IDI";
 
-        public string Audience { get; set; } = "IDI-Audience";
+        public string Audience { get; set; } = "IDI-Client";
 
         public TimeSpan Expiration { get; set; } = TimeSpan.FromHours(6);
 

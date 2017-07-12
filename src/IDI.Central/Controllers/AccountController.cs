@@ -1,6 +1,6 @@
-﻿using IDI.Central.Domain.Modules.Identity.Commands;
-using IDI.Central.Models.Identity;
-using IDI.Central.Common;
+﻿using IDI.Central.Common;
+using IDI.Central.Domain.Modules.Administration.Commands;
+using IDI.Central.Models.Administration;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
@@ -14,7 +14,7 @@ namespace IDI.Central.APIs
         [HttpPost, AllowAnonymous]
         public Result Post([FromBody]RegisterForm form)
         {
-            return ServiceLocator.CommandBus.Send(new RegisterCommand(form.UserName, form.Password, form.Confirm));
+            return ServiceLocator.CommandBus.Send(new UserRegisterCommand(form.UserName, form.Password, form.Confirm));
         }
     }
 }
