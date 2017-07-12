@@ -75,7 +75,7 @@ namespace IDI.Central.Domain
 
             public ModuleSeed()
             {
-                this.Administration = new Module { SN = 10, Name = "Platform", Code = "Administration", Description = "Platform Management", Icon = "fa fa-cogs" };
+                this.Administration = new Module { SN = 10, Name = "Administration", Code = "ADM", Description = "Administration", Icon = "fa fa-cogs" };
                 this.OMM = new Module { SN = 20, Name = "Order", Code = "OMM", Description = "Order Management", Icon = "fa fa-tasks" };
             }
         }

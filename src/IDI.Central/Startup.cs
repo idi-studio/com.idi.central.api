@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace IDI.Central
 {
@@ -57,18 +58,27 @@ namespace IDI.Central
 
             app.UseTokenAuthentication<ApplicationTokenAuthProvider>();
 
-            app.UseStaticFiles();
-
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(name: "default", template: "{controller=Platform}/{action=Login}/{id?}");
-            //});
-
             // Enable middleware to serve generated Swagger as a JSON endpoint  
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)  
             app.UseSwaggerUi();
+
+            var options = new DefaultFilesOptions();
+            options.DefaultFileNames.Add("index.html");
+            app.UseDefaultFiles(options);
+
+            app.UseStaticFiles();
+
+            app.Run(context =>
+            {
+                context.Response.Redirect("/swagger/ui/");
+                return Task.FromResult(0);
+            });
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(name: "default", template: "{controller=Platform}/{action=Login}/{id?}");
+            //});
 
             Platform.SeedData().Initial();
         }
