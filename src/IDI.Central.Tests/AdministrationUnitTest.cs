@@ -9,12 +9,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IDI.Central.Tests
 {
     [TestClass]
-    public class IdentityModuleUnitTest
+    public class AdministrationUnitTest
     {
         private const string API_TOKEN = "api/token";
 
         [TestMethod]
-        public void IdentityModule_Can_GetToken_ByPassword()
+        public void Administration_Can_GetToken_ByPassword()
         {
             var json = HttpUtil.Instance.Post(API_TOKEN, new Dictionary<string, string>
             {
@@ -35,9 +35,9 @@ namespace IDI.Central.Tests
         }
 
         [TestMethod]
-        public void IdentityModule_Can_GetToken_ByClientCredentials()
+        public void Administration_Can_GetToken_ByClientCredentials()
         {
-            var json = HttpUtil.Instance.Post(API_TOKEN, new Dictionary<string, string> { { "grant_type", "client_credentials" } });
+            var json = HttpUtil.Instance.Post(API_TOKEN, new Dictionary<string, string> { { "grant_type", Constants.GrantType.ClientCredentials } });
 
             Assert.IsNotNull(json);
 
@@ -48,7 +48,7 @@ namespace IDI.Central.Tests
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(result.Status, ResultStatus.Success);
-            Assert.AreEqual(result.Data.TokenType, "bearer");
+            Assert.AreEqual(result.Data.TokenType, Constants.TokenType.Bearer);
             Assert.IsTrue(result.Data.ExpiresIn > 0);
         }
     }

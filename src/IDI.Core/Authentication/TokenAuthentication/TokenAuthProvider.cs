@@ -14,19 +14,26 @@ namespace IDI.Core.Authentication.TokenAuthentication
 {
     internal static class TokenAuthExtention
     {
+        public static string GrantType(this HttpContext context)
+        {
+            return context.Request.Form["grant_type"];
+        }
+
         public static bool TryGetClientCredential(this HttpContext context, out string clientId, out string clientSecret)
         {
             clientId = string.Empty; clientSecret = string.Empty;
             string authorization = context.Request.Headers["Authorization"];
 
-            if (!authorization.StartsWith("Basic"))
+            if (!authorization.StartsWith(Constants.TokenType.Basic))
                 return false;
 
             authorization = authorization.Split(new char[] { ' ' }).Last();
             authorization = Encoding.UTF8.GetString(Convert.FromBase64String(authorization));
 
-            clientId = authorization.Split(new char[] { ':' }).FirstOrDefault();
-            clientSecret = authorization.Split(new char[] { ':' }).LastOrDefault();
+            var parameters = authorization.Split(new char[] { ':' });
+
+            clientId = parameters.FirstOrDefault();
+            clientSecret = parameters.LastOrDefault();
 
             if (clientId.IsNull() || clientSecret.IsNull())
                 return false;
@@ -99,16 +106,14 @@ namespace IDI.Core.Authentication.TokenAuthentication
             Result result = null;
             Func<string, string, List<Claim>> generateIdentity;
 
-            var grantType = context.Request.Form["grant_type"];
-
-            switch (grantType)
+            switch (context.GrantType())
             {
-                case "client_credentials":
+                case Constants.GrantType.ClientCredentials:
                     if (context.TryGetClientCredential(out identity, out secret))
                         result = GrantClientCredentials(identity, secret);
                     generateIdentity = GenerateClientIdentity;
                     break;
-                case "password":
+                case Constants.GrantType.Password:
                     if (context.TryGetUserCredential(out identity, out secret))
                         result = GrantUserCredential(identity, secret);
                     generateIdentity = GenerateUserIdentity;
