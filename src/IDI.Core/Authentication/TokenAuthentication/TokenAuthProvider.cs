@@ -170,7 +170,7 @@ namespace IDI.Core.Authentication.TokenAuthentication
                 var token = new TokenModel
                 {
                     Token = new JwtSecurityTokenHandler().WriteToken(jwt),
-                    Expiration = (int)options.Expiration.TotalSeconds
+                    ExpiresIn = (int)options.Expiration.TotalSeconds
                 };
 
                 await context.OK(token);

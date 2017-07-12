@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using IDI.Central.Tests.Utils;
+using IDI.Core.Authentication.TokenAuthentication;
+using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,30 +16,40 @@ namespace IDI.Central.Tests
         [TestMethod]
         public void IdentityModule_Can_GetToken_ByPassword()
         {
-            var token = HttpUtil.Instance.Post(API_TOKEN, new Dictionary<string, string>
+            var json = HttpUtil.Instance.Post(API_TOKEN, new Dictionary<string, string>
             {
-                { "grant_type", "password" },{ "username", "admin" },{ "password", "123456" }
-            }).ToDynamic();
+                { "grant_type", "password" },{ "username", "admin" },{ "password", "p@55w0rd" }
+            });
 
-            Assert.IsNotNull(token.access_token);
-            Assert.IsNotNull(token.token_type);
-            Assert.AreEqual(token.token_type.Value, "bearer");
-            Assert.IsNotNull(token.expires_in);
+            Assert.IsNotNull(json);
 
-            Console.WriteLine(token.ToJson());
+            Console.WriteLine(json);
+
+            var result = json.To<Result<TokenModel>>();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(result.Status, ResultStatus.Success);
+            Assert.AreEqual(result.Data.TokenType, "bearer");
+            Assert.IsTrue(result.Data.ExpiresIn > 0);
         }
 
         [TestMethod]
         public void IdentityModule_Can_GetToken_ByClientCredentials()
         {
-            var token = HttpUtil.Instance.Post(API_TOKEN, new Dictionary<string, string> { { "grant_type", "client_credentials" } }).ToDynamic();
+            var json = HttpUtil.Instance.Post(API_TOKEN, new Dictionary<string, string> { { "grant_type", "client_credentials" } });
 
-            Assert.IsNotNull(token.access_token);
-            Assert.IsNotNull(token.token_type);
-            Assert.AreEqual(token.token_type.Value, "bearer");
-            Assert.IsNotNull(token.expires_in);
+            Assert.IsNotNull(json);
 
-            Console.WriteLine(token.ToJson());
+            Console.WriteLine(json);
+
+            var result = json.To<Result<TokenModel>>();
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(result.Status, ResultStatus.Success);
+            Assert.AreEqual(result.Data.TokenType, "bearer");
+            Assert.IsTrue(result.Data.ExpiresIn > 0);
         }
     }
 }

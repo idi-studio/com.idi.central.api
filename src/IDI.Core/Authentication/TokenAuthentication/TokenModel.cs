@@ -2,15 +2,15 @@
 
 namespace IDI.Core.Authentication.TokenAuthentication
 {
-    internal class TokenModel
+    public class TokenModel
     {
         [JsonProperty("access_token")]
         public string Token { get; set; }
 
         [JsonProperty("expires_in")]
-        public int Expiration { get; set; }
+        public int ExpiresIn { get; set; }
 
-        [JsonProperty("type")]
-        public string Type { get; set; } = "Bearer";
+        [JsonProperty("token_type")]
+        public string TokenType { get; set; } = "Bearer";
     }
 }
