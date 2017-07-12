@@ -14,3 +14,6 @@
 /src/IDI.Central.Domain.Tests/bin
 /src/IDI.Central.Tests/obj
 /src/IDI.Central.Tests/bin
+/src/IDI.Central/*.user
+/src/IDI.Central/Properties/PublishProfiles/*.user
+/src/IDI.Central/Properties/PublishProfiles
