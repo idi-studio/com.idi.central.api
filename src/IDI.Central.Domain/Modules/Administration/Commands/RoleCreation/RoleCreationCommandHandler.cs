@@ -9,19 +9,19 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
     public class RoleCreationCommandHandler : ICommandHandler<RoleCreationCommand>
     {
         [Injection]
-        public IRepository<Role> RoleRepository { get; set; }
+        public IRepository<Role> Roles { get; set; }
 
         public Result Execute(RoleCreationCommand command)
         {
 
-            if(this.RoleRepository.Exist(e=>e.Name==command.RoleName))
+            if(this.Roles.Exist(e=>e.Name==command.RoleName))
                 return new Result { Status = ResultStatus.Fail, Message = $"角色'{command.RoleName}'已存在!" };
 
             var role = new Role { Name = command.RoleName };
 
-            this.RoleRepository.Add(role);
-            this.RoleRepository.Context.Commit();
-            this.RoleRepository.Context.Dispose();
+            this.Roles.Add(role);
+            this.Roles.Context.Commit();
+            this.Roles.Context.Dispose();
 
             return new Result { Status = ResultStatus.Success, Message = $"角色'{command.RoleName}'创建成功!" };
         }

@@ -11,14 +11,14 @@ namespace IDI.Central.Domain.Modules.Administration.Handlers
     public class UserAuthorizeCommandHandler : ICommandHandler<UserAuthorizeCommand>
     {
         [Injection]
-        public IRepository<User> UserRepository { get; set; }
+        public IRepository<User> Users { get; set; }
 
         [Injection]
-        public IRepository<Role> RoleRepository { get; set; }
+        public IRepository<Role> Roles { get; set; }
 
         public Result Execute(UserAuthorizeCommand command)
         {
-            var user = this.UserRepository.Find(e => e.UserName == command.UserName, e => e.UserRoles);
+            var user = this.Users.Find(e => e.UserName == command.UserName, e => e.UserRoles);
 
             if (user == null)
                 return new Result { Status = ResultStatus.Fail, Message = "无效的用户!" };
@@ -30,13 +30,13 @@ namespace IDI.Central.Domain.Modules.Administration.Handlers
 
             user.UserRoles.RemoveAll(e => deletion.Contains(e.RoleId));
 
-            var roles = this.RoleRepository.Get(e => addition.Contains(e.Id));
+            var roles = this.Roles.Get(e => addition.Contains(e.Id));
             var additionRoles = roles.Select(role => new UserRole { UserId = user.Id, RoleId = role.Id }).ToList();
             user.UserRoles.AddRange(additionRoles);
 
-            this.UserRepository.Update(user);
-            this.UserRepository.Context.Commit();
-            this.UserRepository.Context.Dispose();
+            this.Users.Update(user);
+            this.Users.Context.Commit();
+            this.Users.Context.Dispose();
 
             return new Result { Status = ResultStatus.Success, Message = "用户角色授权成功!" };
         }

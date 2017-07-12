@@ -9,11 +9,11 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
     public class UserAuthenticationCommandHandler : ICommandHandler<UserAuthenticationCommand>
     {
         [Injection]
-        public IRepository<User> UserRepository { get; set; }
+        public IRepository<User> Users { get; set; }
 
         public Result Execute(UserAuthenticationCommand command)
         {
-            var user = this.UserRepository.Find(u => u.UserName == command.UserName);
+            var user = this.Users.Find(u => u.UserName == command.UserName);
 
             if (user == null)
                 return new Result { Status = ResultStatus.Fail, Message = "无效的用户名或密码!" };

@@ -9,14 +9,14 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
     public class UserRegisterCommandHandler : ICommandHandler<UserRegisterCommand>
     {
         [Injection]
-        public IRepository<User> UserRepository { get; set; }
+        public IRepository<User> Users { get; set; }
 
         public Result Execute(UserRegisterCommand command)
         {
             if (command.Password != command.Confirm)
                 return new Result { Status = ResultStatus.Fail, Message = "两次密码不一致" };
 
-            if (this.UserRepository.Exist(u => u.UserName == command.UserName))
+            if (this.Users.Exist(u => u.UserName == command.UserName))
                 return new Result { Status = ResultStatus.Fail, Message = $"'{command.UserName}'已被注册!" };
 
             var salt = Cryptography.Salt();
@@ -28,9 +28,9 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
                 Profile = new UserProfile { Name = command.UserName }
             };
 
-            this.UserRepository.Add(user);
-            this.UserRepository.Context.Commit();
-            this.UserRepository.Context.Dispose();
+            this.Users.Add(user);
+            this.Users.Context.Commit();
+            this.Users.Context.Dispose();
 
             return new Result { Status = ResultStatus.Success, Message = "注册成功!" };
         }

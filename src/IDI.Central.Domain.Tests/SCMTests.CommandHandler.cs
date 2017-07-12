@@ -17,9 +17,9 @@ namespace IDI.Central.Domain.Tests
         public void Administration_DataInitializationCommand()
         {
             var hanlder = new DataInitializationCommandHandler();
-            hanlder.UserRepository = ServiceLocator.GetService<IRepository<User>>();
-            hanlder.RoleRepository = ServiceLocator.GetService<IRepository<Role>>();
-            hanlder.ModuleRepository = ServiceLocator.GetService<IRepository<Module>>();
+            hanlder.Users = ServiceLocator.GetService<IRepository<User>>();
+            hanlder.Roles = ServiceLocator.GetService<IRepository<Role>>();
+            hanlder.Modules = ServiceLocator.GetService<IRepository<Module>>();
 
             var result = hanlder.Execute(new DataInitializationCommand());
 
@@ -41,7 +41,7 @@ namespace IDI.Central.Domain.Tests
         public void Administration_UserRegisterCommand()
         {
             var hanlder = new UserRegisterCommandHandler();
-            hanlder.UserRepository = ServiceLocator.GetService<IRepository<User>>();
+            hanlder.Users = ServiceLocator.GetService<IRepository<User>>();
 
             var result = hanlder.Execute(new UserRegisterCommand("administrator", "123456", "123456"));
 
@@ -77,8 +77,8 @@ namespace IDI.Central.Domain.Tests
             });
 
             var hanlder = new RoleAuthorizationCommandHandler();
-            hanlder.RoleRepository = ServiceLocator.GetService<IRepository<Role>>();
-            hanlder.PrivilegeRepository = ServiceLocator.GetService<IRepository<Privilege>>();
+            hanlder.Roles = ServiceLocator.GetService<IRepository<Role>>();
+            hanlder.Privileges = ServiceLocator.GetService<IRepository<Privilege>>();
 
             var result = hanlder.Execute(new RoleAuthorizationCommand(role.Name, new Guid[] { privilege2.Id, privilege3.Id, privilege4.Id }));
 
@@ -118,8 +118,8 @@ namespace IDI.Central.Domain.Tests
             });
 
             var hanlder = new UserAuthorizeCommandHandler();
-            hanlder.UserRepository = ServiceLocator.GetService<IRepository<User>>();
-            hanlder.RoleRepository = ServiceLocator.GetService<IRepository<Role>>();
+            hanlder.Users = ServiceLocator.GetService<IRepository<User>>();
+            hanlder.Roles = ServiceLocator.GetService<IRepository<Role>>();
 
             var result = hanlder.Execute(new UserAuthorizeCommand(user.UserName, new Guid[] { role2.Id, role3.Id, role4.Id }));
 

@@ -10,14 +10,14 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
     public class RoleAuthorizationCommandHandler : ICommandHandler<RoleAuthorizationCommand>
     {
         [Injection]
-        public IRepository<Role> RoleRepository { get; set; }
+        public IRepository<Role> Roles { get; set; }
 
         [Injection]
-        public IRepository<Privilege> PrivilegeRepository { get; set; }
+        public IRepository<Privilege> Privileges { get; set; }
 
         public Result Execute(RoleAuthorizationCommand command)
         {
-            var role = this.RoleRepository.Find(r => r.Name == command.RoleName, r => r.RolePrivileges);
+            var role = this.Roles.Find(r => r.Name == command.RoleName, r => r.RolePrivileges);
 
             if (role == null)
                 return new Result { Status = ResultStatus.Fail, Message = "无效的角色!" };
@@ -29,13 +29,13 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 
             role.RolePrivileges.RemoveAll(e => deletion.Contains(e.PrivilegeId));
 
-            var privileges = this.PrivilegeRepository.Get(e => addition.Contains(e.Id));
+            var privileges = this.Privileges.Get(e => addition.Contains(e.Id));
             var additionPrivileges = privileges.Select(privilege => new RolePrivilege { PrivilegeId = privilege.Id, RoleId = role.Id }).ToList();
             role.RolePrivileges.AddRange(additionPrivileges);
 
-            this.RoleRepository.Update(role);
-            this.RoleRepository.Context.Commit();
-            this.RoleRepository.Context.Dispose();
+            this.Roles.Update(role);
+            this.Roles.Context.Commit();
+            this.Roles.Context.Dispose();
 
             return new Result { Status = ResultStatus.Success, Message = "角色授权成功!" };
         }

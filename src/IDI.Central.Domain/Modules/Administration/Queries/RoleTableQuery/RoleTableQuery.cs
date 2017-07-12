@@ -11,12 +11,12 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
     public class RoleTableQuery : Query<RoleTableQueryCondition, RoleTable>
     {
         [Injection]
-        public IQueryRepository<Role> RoleRepository { get; set; }
+        public IQueryRepository<Role> Roles { get; set; }
 
 
         public override Result<RoleTable> Execute(RoleTableQueryCondition condition)
         {
-            var roles = this.RoleRepository.Get();
+            var roles = this.Roles.Get();
 
             var table = new RoleTable();
             table.Rows = roles.OrderBy(r => r.Name).Select(r => new RoleTableRow

@@ -11,17 +11,17 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
     public class SidebarQuery : Query<SidebarQueryCondition, Sidebar>
     {
         [Injection]
-        public IQueryRepository<Menu> MenuRepository { get; set; }
+        public IQueryRepository<Menu> Menus { get; set; }
 
         [Injection]
-        public IQueryRepository<User> UserRepository { get; set; }
+        public IQueryRepository<User> Users { get; set; }
 
         [Injection]
         public IQueryRepository<RolePrivilege> RolePrivilegeRepository { get; set; }
 
         public override Result<Sidebar> Execute(SidebarQueryCondition condition)
         {
-            var user = this.UserRepository.Find(e => e.UserName == condition.UserName, e => e.Profile, e => e.UserRoles);
+            var user = this.Users.Find(e => e.UserName == condition.UserName, e => e.Profile, e => e.UserRoles);
 
             if (user == null)
                 return Result.Fail<Sidebar>($"无效的用户名'{condition.UserName}'");
@@ -30,7 +30,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
 
             var privileges = this.RolePrivilegeRepository.Get(e => userRoles.Contains(e.RoleId), e => e.Privilege).Select(e => e.Privilege).ToList();
 
-            var menus = this.MenuRepository.Get(e => e.Module);
+            var menus = this.Menus.Get(e => e.Module);
             menus = menus.Where(e => e.IsAuthorized(privileges)).ToList();
 
             var sidebar = new Sidebar
