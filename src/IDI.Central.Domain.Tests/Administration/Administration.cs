@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IDI.Central.Domain.Tests
 {
     [TestClass]
-    public partial class AdministrationTests : IntegrationTests
+    public partial class AdministrationUnitTests : IntegrationTests
     {
         [TestMethod]
         public void Administration_Extension_Menu_IsAuthorized()

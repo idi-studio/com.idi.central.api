@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IDI.Central.Tests
 {
     [TestClass]
-    public class AdministrationUnitTest
+    public class AdministrationUnitTests
     {
         private const string API_TOKEN = "api/token";
 
@@ -18,7 +18,7 @@ namespace IDI.Central.Tests
         {
             var json = HttpUtil.Instance.Post(API_TOKEN, new Dictionary<string, string>
             {
-                { "grant_type", "password" },{ "username", "admin" },{ "password", "p@55w0rd" }
+                { "grant_type", "password" },{ "username", "administrator" },{ "password", "p@55w0rd" }
             });
 
             Assert.IsNotNull(json);
@@ -30,7 +30,7 @@ namespace IDI.Central.Tests
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(result.Status, ResultStatus.Success);
-            Assert.AreEqual(result.Data.TokenType, "bearer");
+            Assert.AreEqual(result.Data.TokenType, Constants.TokenType.Bearer);
             Assert.IsTrue(result.Data.ExpiresIn > 0);
         }
 

@@ -13,13 +13,18 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 
         public Result Execute(ClientAuthenticationCommand command)
         {
-            var client = this.Clients.Find(e => e.ClientId == command.ClientId && e.SecretKey == command.SecretKey);
+            var client = this.Clients.Find(e => e.ClientId == command.ClientId);
 
             if (client == null)
                 return Result.Fail("无效的客户端!");
 
             if (!client.IsActive)
                 return Result.Fail("该客户端已被禁用!");
+
+            string secret = Cryptography.Encrypt(command.SecretKey, client.Salt);
+
+            if (client.SecretKey != secret)
+                return Result.Fail("客户端认证失败!");
 
             return Result.Success(message: "认证成功!");
         }

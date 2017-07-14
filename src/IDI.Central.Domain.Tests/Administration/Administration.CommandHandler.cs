@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IDI.Central.Domain.Tests
 {
-    public partial class AdministrationTests : IntegrationTests
+    public partial class AdministrationUnitTests : IntegrationTests
     {
         [TestMethod]
         public void Administration_DataInitializationCommand()
@@ -20,6 +20,7 @@ namespace IDI.Central.Domain.Tests
             hanlder.Users = ServiceLocator.GetService<IRepository<User>>();
             hanlder.Roles = ServiceLocator.GetService<IRepository<Role>>();
             hanlder.Modules = ServiceLocator.GetService<IRepository<Module>>();
+            hanlder.Clients = ServiceLocator.GetService<IRepository<Client>>();
 
             var result = hanlder.Execute(new DataInitializationCommand());
 

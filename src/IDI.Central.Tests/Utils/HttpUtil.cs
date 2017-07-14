@@ -14,8 +14,8 @@ namespace IDI.Central.Tests.Utils
     {
         private HttpClient client;
         private readonly string address = "http://localhost:50963";
-        private readonly string clientId = "com.idi.central.testing";
-        private readonly string clientSecret = "p@55w0rd";
+        private readonly string clientId = "com.idi.central.web";
+        private readonly string clientSecret = "6ED5C478-1F3A-4C82-B668-99917D67784E";
         private string token = "";
 
         private HttpUtil()

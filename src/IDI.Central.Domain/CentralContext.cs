@@ -8,6 +8,7 @@ namespace IDI.Central.Domain
         #region Administration
         public DbSet<Module> Modules { get; set; }
         public DbSet<Menu> Menus { get; set; }
+        public DbSet<Client> Clients { get; set; }
         public DbSet<Privilege> Privileges { get; set; }
         public DbSet<RolePrivilege> RolePrivileges { get; set; }
         public DbSet<User> Users { get; set; }
@@ -30,6 +31,7 @@ namespace IDI.Central.Domain
             modelBuilder.Entity<UserRole>().HasOne(ur => ur.User).WithMany(user => user.UserRoles).HasForeignKey(ur => ur.UserId);
             modelBuilder.Entity<UserRole>().HasOne(ur => ur.Role).WithMany(role => role.UserRoles).HasForeignKey(ur => ur.RoleId);
             modelBuilder.Entity<User>().HasOne(u => u.Profile).WithOne(p => p.User).HasForeignKey<UserProfile>(p => p.UserId);
+            modelBuilder.Entity<Client>();
             #endregion
 
             base.OnModelCreating(modelBuilder);

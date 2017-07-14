@@ -17,6 +17,9 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
         [Injection]
         public IRepository<User> Users { get; set; }
 
+        [Injection]
+        public IRepository<Client> Clients { get; set; }
+
         public Result Execute(DataInitializationCommand command)
         {
             bool initialized = this.Modules.Exist(e => e.Code == command.Seed.Modules.Administration.Code);
@@ -30,6 +33,9 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 
             this.Users.Add(command.Seed.Users.Administrator);
             this.Users.Context.Commit();
+
+            this.Clients.Add(command.Seed.Clients.Central);
+            this.Clients.Context.Commit();
 
             return new Result { Status = ResultStatus.Success, Message = "初始化成功!" };
         }
