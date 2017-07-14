@@ -18,7 +18,7 @@ namespace IDI.Central.Tests
         {
             var json = HttpUtil.Instance.Post(API_TOKEN, new Dictionary<string, string>
             {
-                { "grant_type", "password" },{ "username", "administrator" },{ "password", "p@55w0rd" }
+                { "grant_type", Constants.GrantType.Password },{ "username", "administrator" },{ "password", "p@55w0rd" }
             });
 
             Assert.IsNotNull(json);

@@ -6,12 +6,12 @@ using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Commands
 {
-    public class UserRegisterCommandHandler : ICommandHandler<UserRegisterCommand>
+    public class UserRegistrationCommandHandler : ICommandHandler<UserRegistrationCommand>
     {
         [Injection]
         public IRepository<User> Users { get; set; }
 
-        public Result Execute(UserRegisterCommand command)
+        public Result Execute(UserRegistrationCommand command)
         {
             if (command.Password != command.Confirm)
                 return new Result { Status = ResultStatus.Fail, Message = "两次密码不一致" };

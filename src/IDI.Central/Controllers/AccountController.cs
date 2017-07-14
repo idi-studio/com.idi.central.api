@@ -14,7 +14,7 @@ namespace IDI.Central.APIs
         [HttpPost, AllowAnonymous]
         public Result Post([FromBody]RegisterForm form)
         {
-            return ServiceLocator.CommandBus.Send(new UserRegisterCommand(form.UserName, form.Password, form.Confirm));
+            return ServiceLocator.CommandBus.Send(new UserRegistrationCommand(form.UserName, form.Password, form.Confirm));
         }
     }
 }

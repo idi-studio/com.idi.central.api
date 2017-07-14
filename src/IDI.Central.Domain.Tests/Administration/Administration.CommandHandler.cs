@@ -41,10 +41,10 @@ namespace IDI.Central.Domain.Tests
         [TestMethod]
         public void Administration_UserRegisterCommand()
         {
-            var hanlder = new UserRegisterCommandHandler();
+            var hanlder = new UserRegistrationCommandHandler();
             hanlder.Users = ServiceLocator.GetService<IRepository<User>>();
 
-            var result = hanlder.Execute(new UserRegisterCommand("administrator", "123456", "123456"));
+            var result = hanlder.Execute(new UserRegistrationCommand("administrator", "123456", "123456"));
 
             Assert.AreEqual(ResultStatus.Success, result.Status);
             Assert.AreEqual("注册成功!", result.Message);

@@ -3,7 +3,7 @@ using IDI.Core.Infrastructure.Verification.Attributes;
 
 namespace IDI.Central.Domain.Modules.Administration.Commands
 {
-    public class UserRegisterCommand : Command
+    public class UserRegistrationCommand : Command
     {
         [RequiredField("用户名")]
         [StringLength("用户名", MinLength = 6, MaxLength = 20)]
@@ -17,7 +17,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
         [StringLength("确认密码", MinLength = 6, MaxLength = 20)]
         public string Confirm { get; private set; }
 
-        public UserRegisterCommand(string username, string password, string confirm)
+        public UserRegistrationCommand(string username, string password, string confirm)
         {
             this.UserName = username;
             this.Password = password;
