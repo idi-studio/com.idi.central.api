@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using IDI.Core.Localization;
 
 namespace IDI.Core.Infrastructure.Verification.Attributes
 {
@@ -28,7 +29,8 @@ namespace IDI.Core.Infrastructure.Verification.Attributes
             }
             else
             {
-                return new ValidationResult($"'{this.DisplayName}'必填!");
+                //return new ValidationResult($"'{this.DisplayName}'必填!");
+                return new ValidationResult(Language.Instance.Get("required"));
             }
         }
     }
