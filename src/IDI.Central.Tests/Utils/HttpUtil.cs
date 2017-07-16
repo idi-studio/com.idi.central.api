@@ -69,7 +69,10 @@ namespace IDI.Central.Tests.Utils
 
             var response = client.PostAsync(url, new StringContent(parameter.ToJson(), Encoding.UTF8, "application/json")).Result;
 
-            return response.Content.ReadAsStringAsync().Result;
+            if (response.IsSuccessStatusCode)
+                return response.Content.ReadAsStringAsync().Result;
+
+            throw new HttpRequestException(response.ReasonPhrase);
         }
     }
 }

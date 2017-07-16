@@ -65,17 +65,19 @@ namespace IDI.Central
             // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)  
             app.UseSwaggerUi();
 
-            var options = new DefaultFilesOptions();
-            options.DefaultFileNames.Add("index.html");
-            app.UseDefaultFiles(options);
+            //var options = new DefaultFilesOptions();
+            //options.DefaultFileNames.Add("index.html");
+            //app.UseDefaultFiles(options);
 
             app.UseStaticFiles();
 
-            app.Run(context =>
-            {
-                context.Response.Redirect("/swagger/ui/");
-                return Task.FromResult(0);
-            });
+            //app.Run(context =>
+            //{
+            //    context.Response.Redirect("/swagger/ui/");
+            //    return Task.FromResult(0);
+            //});
+
+            app.UseMvc();
             //app.UseMvc(routes =>
             //{
             //    routes.MapRoute(name: "default", template: "{controller=Platform}/{action=Login}/{id?}");

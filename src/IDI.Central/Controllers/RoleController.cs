@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IDI.Central.APIs
 {
     [Route("api/role")]
-    public class RoleController : ApiController
+    public class RoleController : Controller
     {
         [HttpPost]
         public Result Post([FromBody]RoleCreationInput input)
