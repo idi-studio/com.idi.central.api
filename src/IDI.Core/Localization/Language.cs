@@ -1,16 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using IDI.Core.Common;
+using IDI.Core.Localization.Packages;
 
 namespace IDI.Core.Localization
 {
     public sealed class Language : Singleton<Language>
     {
-        private Dictionary<string, string> packages;
+        private Dictionary<string, string> items;
+
+        public int Count => items.Count;
 
         private Language()
         {
-            packages = new Dictionary<string, string>();
+            items = new Dictionary<string, string>();
+
+            Load(new PackageCore());
         }
 
         public enum Category
@@ -27,15 +32,21 @@ namespace IDI.Core.Localization
         {
             string key = $"{category}-{name}".ToLower();
 
-            if (packages.ContainsKey(key))
-                return packages[key];
+            if (items.ContainsKey(key))
+                return items[key];
 
             return name;
         }
 
         public void Load(Package package)
         {
+            foreach (var item in package.Items)
+            {
+                string key = $"{item.Name}-{item.Category}";
 
+                if (!this.items.ContainsKey(key))
+                    this.items.Add(key, item.Value);
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ namespace IDI.Core.Tests.Common
         {
             public const string Verification = "Verification";
             public const string Command = "Command";
+            public const string Language = "Language";
         }
 
         public class Tables

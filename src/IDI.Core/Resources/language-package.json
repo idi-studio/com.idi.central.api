@@ -1,0 +1,42 @@
+[
+  {
+    "category": "chs",
+    "name": "verification-required",
+    "value": "'{0}'必填!"
+  },
+  {
+    "category": "en",
+    "name": "verification-required",
+    "value": "'{0}' Required."
+  },
+  {
+    "category": "chs",
+    "name": "verification-characters-range",
+    "value": "'{0}'最多{1}到{2}个字符!"
+  },
+  {
+    "category": "en",
+    "name": "verification-characters-range",
+    "value": "'{0}' maximum {1} to {2} characters."
+  },
+  {
+    "category": "chs",
+    "name": "verification-characters-maximum",
+    "value": "'{0}'最多{1}个字符!"
+  },
+  {
+    "category": "en",
+    "name": "verification-characters-maximum",
+    "value": "'{0} maximum is {1} characters."
+  },
+  {
+    "category": "chs",
+    "name": "verification-characters-minimum",
+    "value": "'{0}'最少{1}个字符!"
+  },
+  {
+    "category": "en",
+    "name": "verification-characters-minimum",
+    "value": "'{0}' minimum is {1} characters."
+  }
+]
