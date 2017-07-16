@@ -5,10 +5,10 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 {
     public class ClientAuthenticationCommand : Command
     {
-        [RequiredField("客户端编号")]
+        [RequiredField("client-id")]
         public string ClientId { get; private set; }
 
-        [RequiredField("安全码")]
+        [RequiredField("secret-key")]
         public string SecretKey { get; private set; }
 
         public ClientAuthenticationCommand(string clientId, string secretKey)

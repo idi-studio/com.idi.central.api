@@ -5,16 +5,16 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 {
     public class UserRegistrationCommand : Command
     {
-        [RequiredField("用户名")]
-        [StringLength("用户名", MinLength = 6, MaxLength = 20)]
+        [RequiredField("username")]
+        [StringLength("username", MinLength = 6, MaxLength = 20)]
         public string UserName { get; private set; }
 
-        [RequiredField("密码")]
-        [StringLength("密码", MinLength = 6, MaxLength = 20)]
+        [RequiredField("password")]
+        [StringLength("password", MinLength = 6, MaxLength = 20)]
         public string Password { get; private set; }
 
-        [RequiredField("确认密码")]
-        [StringLength("确认密码", MinLength = 6, MaxLength = 20)]
+        [RequiredField("confirm-password")]
+        [StringLength("confirm-password", MinLength = 6, MaxLength = 20)]
         public string Confirm { get; private set; }
 
         public UserRegistrationCommand(string username, string password, string confirm)

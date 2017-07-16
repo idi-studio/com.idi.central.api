@@ -1,0 +1,86 @@
+[
+  {
+    "language": "chs",
+    "name": "client-id",
+    "value": "客户端编号",
+    "prefix": "display-name"
+  },
+  {
+    "language": "en",
+    "name": "verification-client-id",
+    "value": "Client ID",
+    "prefix": "display-name"
+  },
+  {
+    "language": "chs",
+    "name": "secret-key",
+    "value": "安全码",
+    "prefix": "display-name"
+  },
+  {
+    "language": "en",
+    "name": "secret-key",
+    "value": "Secret Key",
+    "prefix": "display-name"
+  },
+  {
+    "language": "chs",
+    "name": "role",
+    "prefix": "display-name",
+    "value": "角色"
+  },
+  {
+    "language": "en",
+    "name": "role",
+    "value": "Role",
+    "prefix": "display-name"
+  },
+  {
+    "language": "chs",
+    "name": "username",
+    "value": "用户名",
+    "prefix": "display-name"
+  },
+  {
+    "language": "en",
+    "name": "username",
+    "value": "UserName",
+    "prefix": "display-name"
+  },
+  {
+    "language": "chs",
+    "name": "password",
+    "value": "密码",
+    "prefix": "display-name"
+  },
+  {
+    "language": "en",
+    "name": "password",
+    "value": "Password",
+    "prefix": "display-name"
+  },
+  {
+    "language": "chs",
+    "name": "user",
+    "value": "用户",
+    "prefix": "display-name"
+  },
+  {
+    "language": "en",
+    "name": "user",
+    "value": "User",
+    "prefix": "display-name"
+  },
+  {
+    "language": "chs",
+    "name": "confirm-password",
+    "value": "确认密码",
+    "prefix": "display-name"
+  },
+  {
+    "language": "en",
+    "name": "confirm-password",
+    "value": "Confirm Password",
+    "prefix": "display-name"
+  }
+]

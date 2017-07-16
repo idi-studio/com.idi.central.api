@@ -5,10 +5,10 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 {
     public class UserAuthenticationCommand : Command
     {
-        [RequiredField("用户名")]
+        [RequiredField("username")]
         public string UserName { get; private set; }
 
-        [RequiredField("密码")]
+        [RequiredField("password")]
         public string Password { get; private set; }
 
         public UserAuthenticationCommand(string username, string password)

@@ -30,19 +30,21 @@ namespace IDI.Core.Infrastructure.Verification.Attributes
 
             int length = propertyValue.ToString().Length;
 
+            string displayName = Language.Instance.GetByCulture("display-name", this.DisplayName);
+
             if (this.MinLength > 0 && this.MaxLength > 0 && (!(length >= this.MinLength && length <= this.MaxLength)))
             {
-                return new ValidationResult(Language.Instance.GetByCulture("verification-characters-range").ToFormat(this.DisplayName, this.MinLength, this.MaxLength));
+                return new ValidationResult(Language.Instance.GetByCulture("verification", "characters-range").ToFormat(displayName, this.MinLength, this.MaxLength));
             }
 
             if (this.MinLength > 0 && this.MaxLength == 0 && length < this.MinLength)
             {
-                return new ValidationResult(Language.Instance.GetByCulture("verification-characters-minimum").ToFormat(this.DisplayName, this.MinLength));
+                return new ValidationResult(Language.Instance.GetByCulture("verification", "characters-minimum").ToFormat(displayName, this.MinLength));
             }
 
             if (this.MinLength == 0 && this.MaxLength > 0 && length > this.MaxLength)
             {
-                return new ValidationResult(Language.Instance.GetByCulture("verification-characters-maximum").ToFormat(this.DisplayName, this.MaxLength));
+                return new ValidationResult(Language.Instance.GetByCulture("verification", "characters-maximum").ToFormat(displayName, this.MaxLength));
             }
 
             return ValidationResult.Success;

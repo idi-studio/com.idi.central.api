@@ -6,11 +6,10 @@
 
   <ItemGroup>
     <None Remove="Localization\Package.json" />
-    <None Remove="Resources\language-package.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\language-package.json" />
+    <EmbeddedResource Include="Localization\Resources\Package.Core.json" />
   </ItemGroup>
 
   <ItemGroup>

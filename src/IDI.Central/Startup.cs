@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using IDI.Core.Localization.Packages;
 
 namespace IDI.Central
 {
@@ -80,7 +81,8 @@ namespace IDI.Central
             //    routes.MapRoute(name: "default", template: "{controller=Platform}/{action=Login}/{id?}");
             //});
 
-            Platform.SeedData().Initial();
+            //Platform.SeedData().Initial();
+            app.UseLanguagePackage(new PackageCentral());
         }
     }
 }

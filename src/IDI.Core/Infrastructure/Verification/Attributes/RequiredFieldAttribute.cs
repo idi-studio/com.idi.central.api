@@ -30,7 +30,9 @@ namespace IDI.Core.Infrastructure.Verification.Attributes
             }
             else
             {
-                return new ValidationResult(Language.Instance.GetByCulture("verification-required").ToFormat(this.DisplayName));
+                string displayName = Language.Instance.GetByCulture("display-name", this.DisplayName);
+
+                return new ValidationResult(Language.Instance.GetByCulture("verification", "required").ToFormat(displayName));
             }
         }
     }

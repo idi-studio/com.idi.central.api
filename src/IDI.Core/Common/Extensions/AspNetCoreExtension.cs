@@ -1,6 +1,7 @@
 ﻿using IDI.Core.Authentication;
 using IDI.Core.Authentication.TokenAuthentication;
 using IDI.Core.Infrastructure;
+using IDI.Core.Localization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,11 @@ namespace IDI.Core.Common.Extensions
             where TTokenAuthenticationMiddleware : TokenAuthProvider
         {
             app.UseMiddleware<TTokenAuthenticationMiddleware>(options ?? AuthOptions.TokenOptions());
+        }
+
+        public static void UseLanguagePackage(this IApplicationBuilder app, Package package)
+        {
+            Language.Instance.Load(package);
         }
     }
 }

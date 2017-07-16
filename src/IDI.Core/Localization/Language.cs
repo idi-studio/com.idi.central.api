@@ -29,9 +29,9 @@ namespace IDI.Core.Localization
             English
         }
 
-        public string Get(string name, Category category = Category.English)
+        public string Get(string prefix, string name, Category category = Category.English)
         {
-            string key = $"{name}-{category.Description()}".ToLower();
+            string key = $"{prefix}-{name}-{category.Description()}".ToLower();
 
             if (items.ContainsKey(key))
                 return items[key];
@@ -39,7 +39,7 @@ namespace IDI.Core.Localization
             return name;
         }
 
-        public string GetByCulture(string name)
+        public string GetByCulture(string prefix, string name)
         {
             Category category;
 
@@ -55,14 +55,14 @@ namespace IDI.Core.Localization
                     break;
             }
 
-            return Get(name, category);
+            return Get(prefix, name, category);
         }
 
         public void Load(Package package)
         {
             foreach (var item in package.Items)
             {
-                string key = $"{item.Name}-{item.Category}";
+                string key = $"{item.Prefix}-{item.Name}-{item.Language}";
 
                 if (!this.items.ContainsKey(key))
                     this.items.Add(key, item.Value);

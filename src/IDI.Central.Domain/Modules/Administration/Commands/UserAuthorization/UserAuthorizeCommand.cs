@@ -6,7 +6,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 {
     public class UserAuthorizeCommand : Command
     {
-        [RequiredField("用户")]
+        [RequiredField("user")]
         public string UserName { get; private set; }
 
         public Guid[] Roles { get; private set; }

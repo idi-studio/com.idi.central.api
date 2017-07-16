@@ -6,7 +6,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 {
     public class RoleAuthorizationCommand : Command
     {
-        [RequiredField("角色")]
+        [RequiredField("role")]
         public string RoleName { get; private set; }
 
         public Guid[] Privileges { get; private set; }

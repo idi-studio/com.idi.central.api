@@ -5,7 +5,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
 {
     public class SidebarQueryCondition : Condition
     {
-        [RequiredField("用户名")]
+        [RequiredField("username")]
         public string UserName { get; set; }
     }
 }
