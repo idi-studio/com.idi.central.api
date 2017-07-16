@@ -43,7 +43,7 @@ namespace IDI.Core.Localization
         {
             Category category;
 
-            string culture = CultureInfo.CurrentCulture.Name;
+            string culture = (CultureInfo.DefaultThreadCurrentUICulture ?? CultureInfo.CurrentCulture).Name;
 
             switch (culture)
             {

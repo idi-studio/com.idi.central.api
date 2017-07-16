@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 using IDI.Core.Infrastructure.Verification;
 using IDI.Core.Tests.Common;
 using IDI.Core.Tests.Common.Models;
@@ -10,6 +12,12 @@ namespace IDI.Core.Tests.Infrastructure
     [TestCategory(Contants.TestCategory.Verification)]
     public class RequiredFieldVerificationUnitTests
     {
+        [TestInitialize]
+        public void Setup()
+        {
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("zh-CN");
+        }
+
         [TestMethod]
         public void TestRequiredFieldVerification_Fail_ForEmptyValue()
         {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using IDI.Core.Infrastructure.Verification;
 using IDI.Core.Tests.Common;
 using IDI.Core.Tests.Common.Models;
@@ -10,6 +11,12 @@ namespace IDI.Core.Tests.Infrastructure
     [TestCategory(Contants.TestCategory.Verification)]
     public class StringLengthVerificationUnitTests
     {
+        [TestInitialize]
+        public void Setup()
+        {
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("zh-CN");
+        }
+
         [TestMethod]
         public void TestStringLengthVerification_Fail_ForRangeLengthLimite_LessThanMinLength()
         {
