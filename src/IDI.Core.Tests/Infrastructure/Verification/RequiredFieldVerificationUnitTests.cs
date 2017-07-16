@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using IDI.Core.Infrastructure.Verification;
-using IDI.Core.Infrastructure.Verification.Attributes;
 using IDI.Core.Tests.Common;
 using IDI.Core.Tests.Common.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using IDI.Core.Common;
+using IDI.Core.Localization;
 
 namespace IDI.Core.Infrastructure.Verification.Attributes
 {
@@ -30,17 +32,17 @@ namespace IDI.Core.Infrastructure.Verification.Attributes
 
             if (this.MinLength > 0 && this.MaxLength > 0 && (!(length >= this.MinLength && length <= this.MaxLength)))
             {
-                return new ValidationResult($"'{this.DisplayName}'最长{this.MinLength}-{this.MaxLength}个字符!");
+                return new ValidationResult(Language.Instance.GetByCulture("verification-characters-range").ToFormat(this.DisplayName, this.MinLength, this.MaxLength));
             }
 
             if (this.MinLength > 0 && this.MaxLength == 0 && length < this.MinLength)
             {
-                return new ValidationResult($"'{this.DisplayName}'最小{this.MinLength}个字符!");
+                return new ValidationResult(Language.Instance.GetByCulture("verification-characters-minimum").ToFormat(this.DisplayName, this.MinLength));
             }
 
             if (this.MinLength == 0 && this.MaxLength > 0 && length > this.MaxLength)
             {
-                return new ValidationResult($"'{this.DisplayName}'最长{this.MaxLength}个字符!");
+                return new ValidationResult(Language.Instance.GetByCulture("verification-characters-maximum").ToFormat(this.DisplayName, this.MaxLength));
             }
 
             return ValidationResult.Success;

@@ -21,7 +21,7 @@ namespace IDI.Core.Tests.Infrastructure
 
             Assert.IsFalse(result);
             Assert.AreEqual(1, errors.Count);
-            Assert.AreEqual("'测试字段'最长5-10个字符!", errors[0]);
+            Assert.AreEqual("'测试字段'最多5到10个字符!", errors[0]);
         }
 
         [TestMethod]
@@ -35,7 +35,7 @@ namespace IDI.Core.Tests.Infrastructure
 
             Assert.IsFalse(result);
             Assert.AreEqual(1, errors.Count);
-            Assert.AreEqual("'测试字段'最长5-10个字符!", errors[0]);
+            Assert.AreEqual("'测试字段'最多5到10个字符!", errors[0]);
         }
 
         [TestMethod]
@@ -140,7 +140,7 @@ namespace IDI.Core.Tests.Infrastructure
 
             Assert.IsFalse(result);
             Assert.AreEqual(1, errors.Count);
-            Assert.AreEqual("'测试字段'最长10个字符!", errors[0]);
+            Assert.AreEqual("'测试字段'最多10个字符!", errors[0]);
         }
 
         [TestMethod]
@@ -180,7 +180,7 @@ namespace IDI.Core.Tests.Infrastructure
 
             Assert.IsFalse(result);
             Assert.AreEqual(1, errors.Count);
-            Assert.AreEqual("'测试字段'最小5个字符!", errors[0]);
+            Assert.AreEqual("'测试字段'最少5个字符!", errors[0]);
         }
 
         [TestMethod]
@@ -194,7 +194,7 @@ namespace IDI.Core.Tests.Infrastructure
 
             Assert.IsFalse(result);
             Assert.AreEqual(1, errors.Count);
-            Assert.AreEqual("'测试字段'最小5个字符!", errors[0]);
+            Assert.AreEqual("'测试字段'最少5个字符!", errors[0]);
         }
 
         [TestMethod]
@@ -208,7 +208,7 @@ namespace IDI.Core.Tests.Infrastructure
 
             Assert.IsFalse(result);
             Assert.AreEqual(1, errors.Count);
-            Assert.AreEqual("'测试字段'最小5个字符!", errors[0]);
+            Assert.AreEqual("'测试字段'最少5个字符!", errors[0]);
         }
     }
 }
