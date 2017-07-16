@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IDI.Central.APIs
 {
-    [Route("api/account")]
-    public class AccountController : ApiController
+    [Route("api/user")]
+    public class UserController : ApiController
     {
         [HttpPost, AllowAnonymous]
         public Result Post([FromBody]UserRegistrationInput input)

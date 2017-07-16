@@ -60,5 +60,16 @@ namespace IDI.Central.Tests.Utils
                 return response.Content.ReadAsStringAsync().Result;
             }
         }
+
+        public string Post(string url, object parameter)
+        {
+            parameter = parameter ?? new object();
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Constants.TokenType.Bearer, token);
+
+            var response = client.PostAsync(url, new StringContent(parameter.ToJson(), Encoding.UTF8, "application/json")).Result;
+
+            return response.Content.ReadAsStringAsync().Result;
+        }
     }
 }

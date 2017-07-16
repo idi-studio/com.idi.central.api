@@ -9,14 +9,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IDI.Central.Tests
 {
     [TestClass]
-    public class AdministrationUnitTests
+    [TestCategory("api/token")]
+    public class TokenTests : IntegrationTest
     {
         private const string API_TOKEN = "api/token";
 
         [TestMethod]
-        public void Administration_Can_GetToken_ByPassword()
+        public void Can_GetToken_ByPassword()
         {
-            var json = HttpUtil.Instance.Post(API_TOKEN, new Dictionary<string, string>
+            var json = Post(API_TOKEN, new Dictionary<string, string>
             {
                 { "grant_type", Constants.GrantType.Password },{ "username", "administrator" },{ "password", "p@55w0rd" }
             });
@@ -35,9 +36,9 @@ namespace IDI.Central.Tests
         }
 
         [TestMethod]
-        public void Administration_Can_GetToken_ByClientCredentials()
+        public void Can_GetToken_ByClientCredentials()
         {
-            var json = HttpUtil.Instance.Post(API_TOKEN, new Dictionary<string, string> { { "grant_type", Constants.GrantType.ClientCredentials } });
+            var json = Post(API_TOKEN, new Dictionary<string, string> { { "grant_type", Constants.GrantType.ClientCredentials } });
 
             Assert.IsNotNull(json);
 
