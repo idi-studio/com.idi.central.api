@@ -29,7 +29,6 @@ namespace IDI.Central.Tests.Utils
             };
             client = new HttpClient(handler);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("Device", "UnitTesting");
             client.BaseAddress = new Uri(address);
         }
 
@@ -46,7 +45,7 @@ namespace IDI.Central.Tests.Utils
             {
                 string basic = Convert.ToBase64String(Encoding.UTF8.GetBytes(clientId + ":" + clientSecret));
 
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", basic);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Constants.TokenType.Basic, basic);
 
                 var response = client.PostAsync(url, new FormUrlEncodedContent(parameters)).Result;
 
@@ -54,10 +53,10 @@ namespace IDI.Central.Tests.Utils
             }
             else
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Constants.TokenType.Bearer, token);
 
                 var response = client.PostAsync(url, new StringContent(parameters.ToJson(), Encoding.UTF8, "application/json")).Result;
-                
+
                 return response.Content.ReadAsStringAsync().Result;
             }
         }

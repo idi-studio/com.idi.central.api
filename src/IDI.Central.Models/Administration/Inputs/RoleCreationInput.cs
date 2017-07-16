@@ -2,7 +2,7 @@
 
 namespace IDI.Central.Models.Administration
 {
-    public class CreateRoleForm : IForm
+    public class RoleCreationInput : IInput
     {
         public string RoleName { get; set; }
     }

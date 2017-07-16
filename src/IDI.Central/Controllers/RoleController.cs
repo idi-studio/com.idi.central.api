@@ -11,9 +11,9 @@ namespace IDI.Central.APIs
     public class RoleController : ApiController
     {
         [HttpPost]
-        public Result Post([FromBody]CreateRoleForm form)
+        public Result Post([FromBody]RoleCreationInput input)
         {
-            return ServiceLocator.CommandBus.Send(new RoleCreationCommand(form.RoleName));
+            return ServiceLocator.CommandBus.Send(new RoleCreationCommand(input.RoleName));
         }
 
         //// GET: api/values

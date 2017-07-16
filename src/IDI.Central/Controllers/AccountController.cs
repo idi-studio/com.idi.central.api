@@ -12,9 +12,9 @@ namespace IDI.Central.APIs
     public class AccountController : ApiController
     {
         [HttpPost, AllowAnonymous]
-        public Result Post([FromBody]RegisterForm form)
+        public Result Post([FromBody]UserRegistrationInput input)
         {
-            return ServiceLocator.CommandBus.Send(new UserRegistrationCommand(form.UserName, form.Password, form.Confirm));
+            return ServiceLocator.CommandBus.Send(new UserRegistrationCommand(input.UserName, input.Password, input.Confirm));
         }
     }
 }
