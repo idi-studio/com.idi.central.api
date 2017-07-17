@@ -8,15 +8,15 @@
 
 namespace IDI.Core.Localization.Packages
 {
-    public partial class Resources
+    public class Resources
     {
-        public partial class Prefix
+        public class Prefix
         {
 		    			public const string DISPLAY_NAME = "display-name";
 						public const string VERIFICATION = "verification";
 			        }
 
-		public partial class Key
+		public class Key
         {
 		    			public const string CHARACTERS_MAXIMUM = "characters-maximum";
 						public const string CHARACTERS_MINIMUM = "characters-minimum";

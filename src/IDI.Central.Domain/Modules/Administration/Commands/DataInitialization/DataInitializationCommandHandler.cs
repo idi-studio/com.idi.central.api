@@ -1,4 +1,5 @@
-﻿using IDI.Central.Domain.Modules.Administration.AggregateRoots;
+﻿using IDI.Central.Domain.Localization;
+using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
@@ -26,7 +27,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             bool initialized = this.Modules.Exist(e => e.Code == command.Seed.Modules.Administration.Code);
 
             if (initialized)
-                return Result.Success(message: Language.Instance.GetByCulture("command", "system-data-initialized"));
+                return Result.Success(message: Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.SYSTEM_DATA_INITIALIZED));
 
             this.Modules.Add(command.Seed.Modules.Administration);
             this.Modules.Add(command.Seed.Modules.Sales);
@@ -38,7 +39,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             this.Clients.Add(command.Seed.Clients.Central);
             this.Clients.Context.Commit();
 
-            return Result.Success(message: Language.Instance.GetByCulture("command", "system-data-initialize-success"));
+            return Result.Success(message: Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.SYSTEM_DATA_INITIALIZE_SUCCESS));
         }
     }
 }

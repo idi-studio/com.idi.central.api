@@ -21,10 +21,22 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Package.json</LastGenOutput>
     </None>
+    <None Update="Localization\PackageResource.tt">
+      <LastGenOutput>PackageResource.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Localization\PackageResource.cs">
+      <DependentUpon>PackageResource.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
   </ItemGroup>
 
 </Project>

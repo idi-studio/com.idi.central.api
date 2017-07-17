@@ -1,4 +1,5 @@
-﻿using IDI.Central.Domain.Modules.Administration.AggregateRoots;
+﻿using IDI.Central.Domain.Localization;
+using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
@@ -17,17 +18,17 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             var client = this.Clients.Find(e => e.ClientId == command.ClientId);
 
             if (client == null)
-                return Result.Fail(Language.Instance.GetByCulture("command", "invalid-client"));
+                return Result.Fail(Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.INVALID_CLIENT));
 
             if (!client.IsActive)
-                return Result.Fail(Language.Instance.GetByCulture("command", "invalid-disabled"));
+                return Result.Fail(Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.CLIENT_DISABLED));
 
             string secret = Cryptography.Encrypt(command.SecretKey, client.Salt);
 
             if (client.SecretKey != secret)
-                return Result.Fail(Language.Instance.GetByCulture("command", "client-authentication-fail"));
+                return Result.Fail(Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.CLIENT_AUTHENTICATION_FAIL));
 
-            return Result.Success(message: Language.Instance.GetByCulture("command", "client-authentication-success"));
+            return Result.Success(message: Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.CLIENT_AUTHENTICATION_SUCCESS));
         }
     }
 }

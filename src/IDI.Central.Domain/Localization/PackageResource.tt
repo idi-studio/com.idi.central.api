@@ -25,7 +25,7 @@
 // </auto-generated>
 //--------------------------------------------------------------------------------------------------------------
 
-namespace IDI.Core.Localization.Packages
+namespace IDI.Central.Domain.Localization
 {
     public class Resources
     {
