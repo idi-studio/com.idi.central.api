@@ -1,15 +1,12 @@
-﻿using IDI.Core.Authentication;
-using IDI.Central.Domain;
-using IDI.Central.Common;
+﻿using IDI.Central.Domain;
 using IDI.Central.Providers;
 using IDI.Core.Common.Extensions;
+using IDI.Core.Localization.Packages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
-using IDI.Core.Localization.Packages;
 
 namespace IDI.Central
 {
@@ -65,25 +62,13 @@ namespace IDI.Central
             // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)  
             app.UseSwaggerUi();
 
-            //var options = new DefaultFilesOptions();
-            //options.DefaultFileNames.Add("index.html");
-            //app.UseDefaultFiles(options);
-
             app.UseStaticFiles();
-
-            //app.Run(context =>
-            //{
-            //    context.Response.Redirect("/swagger/ui/");
-            //    return Task.FromResult(0);
-            //});
 
             app.UseMvc();
             //app.UseMvc(routes =>
             //{
             //    routes.MapRoute(name: "default", template: "{controller=Platform}/{action=Login}/{id?}");
             //});
-
-            //Platform.SeedData().Initial();
             app.UseLanguagePackage(new PackageCentral());
         }
     }
