@@ -8,6 +8,12 @@
   <item prefix="display-name" name="user" en="User" chs="用户" />
   <item prefix="display-name" name="confirm-password" en="Confirm Password" chs="确认密码" />
 
-  <item prefix="command" name="invalid-username-or-password" en="Invalid UserName or Password" chs="无效的用户名或密码!" />
-  <item prefix="command" name="authentication-success" en="Authentication Success" chs="认证成功!" />
+  <item prefix="command" name="invalid-username-or-password" en="Invalid username or password." chs="无效的用户名或密码!" />
+  <item prefix="command" name="authentication-success" en="Authentication successfully." chs="认证成功!" />
+  <item prefix="command" name="invalid-client" en="Invalid client." chs="无效的客户端!" />
+  <item prefix="command" name="client-disabled" en="The client has been disabled." chs="该客户端已被禁用!" />
+  <item prefix="command" name="client-authentication-fail" en="Client authentication fail." chs="客户端认证失败!" />
+  <item prefix="command" name="client-authentication-success" en="Client authentication successfully." chs="客户端认证成功!" />
+  <item prefix="command" name="system-data-initialized" en="System data has been initialized!" chs="系统数据已初始化!" />
+  <item prefix="command" name="system-data-initialize-success" en="The system data is initialized successfully!" chs="系统数据初始化成功!" />
 </items>

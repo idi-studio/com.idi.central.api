@@ -4,4 +4,6 @@
   <item prefix="verification" name="characters-range" en="'{0}' maximum {1} to {2} characters." chs="'{0}'最多{1}到{2}个字符!" />
   <item prefix="verification" name="characters-maximum" en="'{0} maximum is {1} characters." chs="'{0}'最多{1}个字符!" />
   <item prefix="verification" name="characters-minimum" en="'{0}' minimum is {1} characters." chs="'{0}'最少{1}个字符!" />
+
+  <item prefix="display-name" name="token" en="Token" chs="令牌" />
 </items>

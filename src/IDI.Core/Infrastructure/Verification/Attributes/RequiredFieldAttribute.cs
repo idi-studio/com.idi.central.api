@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using IDI.Core.Common;
 using IDI.Core.Localization;
+using IDI.Core.Localization.Packages;
 
 namespace IDI.Core.Infrastructure.Verification.Attributes
 {
@@ -30,9 +31,9 @@ namespace IDI.Core.Infrastructure.Verification.Attributes
             }
             else
             {
-                string displayName = Language.Instance.GetByCulture("display-name", this.DisplayName);
+                string displayName = Language.Instance.GetByCulture(Resources.Prefix.DISPLAY_NAME, this.DisplayName);
 
-                return new ValidationResult(Language.Instance.GetByCulture("verification", "required").ToFormat(displayName));
+                return new ValidationResult(Language.Instance.GetByCulture(Resources.Prefix.VERIFICATION, Resources.Key.REQUIRED).ToFormat(displayName));
             }
         }
     }

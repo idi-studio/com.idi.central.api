@@ -2,6 +2,7 @@
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Commands
@@ -16,17 +17,17 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             var client = this.Clients.Find(e => e.ClientId == command.ClientId);
 
             if (client == null)
-                return Result.Fail("无效的客户端!");
+                return Result.Fail(Language.Instance.GetByCulture("command", "invalid-client"));
 
             if (!client.IsActive)
-                return Result.Fail("该客户端已被禁用!");
+                return Result.Fail(Language.Instance.GetByCulture("command", "invalid-disabled"));
 
             string secret = Cryptography.Encrypt(command.SecretKey, client.Salt);
 
             if (client.SecretKey != secret)
-                return Result.Fail("客户端认证失败!");
+                return Result.Fail(Language.Instance.GetByCulture("command", "client-authentication-fail"));
 
-            return Result.Success(message: "认证成功!");
+            return Result.Success(message: Language.Instance.GetByCulture("command", "client-authentication-success"));
         }
     }
 }

@@ -2,6 +2,7 @@
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Commands
@@ -25,7 +26,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             bool initialized = this.Modules.Exist(e => e.Code == command.Seed.Modules.Administration.Code);
 
             if (initialized)
-                return new Result { Status = ResultStatus.Success, Message = "系统数据已初始化!" };
+                return Result.Success(message: Language.Instance.GetByCulture("command", "system-data-initialized"));
 
             this.Modules.Add(command.Seed.Modules.Administration);
             this.Modules.Add(command.Seed.Modules.Sales);
@@ -37,7 +38,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             this.Clients.Add(command.Seed.Clients.Central);
             this.Clients.Context.Commit();
 
-            return new Result { Status = ResultStatus.Success, Message = "初始化成功!" };
+            return Result.Success(message: Language.Instance.GetByCulture("command", "system-data-initialize-success"));
         }
     }
 }
