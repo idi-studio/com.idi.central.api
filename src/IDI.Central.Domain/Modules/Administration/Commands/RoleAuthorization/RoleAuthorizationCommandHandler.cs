@@ -1,8 +1,10 @@
 ﻿using System.Linq;
+using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Commands
@@ -20,7 +22,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             var role = this.Roles.Find(r => r.Name == command.RoleName, r => r.RolePrivileges);
 
             if (role == null)
-                return new Result { Status = ResultStatus.Fail, Message = "无效的角色!" };
+                return Result.Fail(Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.INVALID_ROLE));
 
             var recent = command.Privileges.ToList();
             var current = role.RolePrivileges.Select(e => e.PrivilegeId).ToList();
@@ -37,7 +39,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             this.Roles.Context.Commit();
             this.Roles.Context.Dispose();
 
-            return new Result { Status = ResultStatus.Success, Message = "角色授权成功!" };
+            return Result.Success(message: Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.ROLE_AUTHORIZATION_SUCCESS));
         }
     }
 }

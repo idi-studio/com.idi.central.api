@@ -1,9 +1,11 @@
 ﻿using System.Linq;
+using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Handlers
@@ -21,7 +23,7 @@ namespace IDI.Central.Domain.Modules.Administration.Handlers
             var user = this.Users.Find(e => e.UserName == command.UserName, e => e.UserRoles);
 
             if (user == null)
-                return new Result { Status = ResultStatus.Fail, Message = "无效的用户!" };
+                return Result.Fail(Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.INVALID_USER));
 
             var recent = command.Roles.ToList();
             var current = user.UserRoles.Select(e => e.RoleId).ToList();
@@ -38,7 +40,7 @@ namespace IDI.Central.Domain.Modules.Administration.Handlers
             this.Users.Context.Commit();
             this.Users.Context.Dispose();
 
-            return new Result { Status = ResultStatus.Success, Message = "用户角色授权成功!" };
+            return Result.Success(message: Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.USER_AUTHORIZATION_SUCCESS));
         }
     }
 }

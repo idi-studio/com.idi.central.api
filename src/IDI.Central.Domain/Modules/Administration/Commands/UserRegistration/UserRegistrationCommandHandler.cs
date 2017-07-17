@@ -1,7 +1,9 @@
-﻿using IDI.Central.Domain.Modules.Administration.AggregateRoots;
+﻿using IDI.Central.Domain.Localization;
+using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Commands
@@ -14,10 +16,10 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
         public Result Execute(UserRegistrationCommand command)
         {
             if (command.Password != command.Confirm)
-                return new Result { Status = ResultStatus.Fail, Message = "两次密码不一致" };
+                return Result.Fail(Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.PASSWORD_MISMATCH));
 
             if (this.Users.Exist(u => u.UserName == command.UserName))
-                return new Result { Status = ResultStatus.Fail, Message = $"'{command.UserName}'已被注册!" };
+                return Result.Fail(Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.USERNAME_REGISTERED));
 
             var salt = Cryptography.Salt();
             var user = new User
@@ -32,7 +34,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             this.Users.Context.Commit();
             this.Users.Context.Dispose();
 
-            return new Result { Status = ResultStatus.Success, Message = "注册成功!" };
+            return Result.Success(message: Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.REGISTRATION_SUCCESS));
         }
     }
 }

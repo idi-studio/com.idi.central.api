@@ -1,7 +1,9 @@
-﻿using IDI.Central.Domain.Modules.Administration.AggregateRoots;
+﻿using IDI.Central.Domain.Localization;
+using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Commands
@@ -14,8 +16,8 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
         public Result Execute(RoleCreationCommand command)
         {
 
-            if(this.Roles.Exist(e=>e.Name==command.RoleName))
-                return new Result { Status = ResultStatus.Fail, Message = $"角色'{command.RoleName}'已存在!" };
+            if (this.Roles.Exist(e => e.Name == command.RoleName))
+                return Result.Fail(Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.ROLE_EXISTS));
 
             var role = new Role { Name = command.RoleName };
 
@@ -23,7 +25,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             this.Roles.Context.Commit();
             this.Roles.Context.Dispose();
 
-            return new Result { Status = ResultStatus.Success, Message = $"角色'{command.RoleName}'创建成功!" };
+            return Result.Success(message: Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.CREATION_SUCCESS));
         }
     }
 }

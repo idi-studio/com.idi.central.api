@@ -92,7 +92,7 @@
 {
     "language": "en",
     "name": "invalid-username-or-password",
-    "value": "Invalid UserName or Password",
+    "value": "Invalid username or password.",
     "prefix": "command"
 },
 {
@@ -104,7 +104,199 @@
 {
     "language": "en",
     "name": "authentication-success",
-    "value": "Authentication Success",
+    "value": "Authentication successfully.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "invalid-client",
+    "value": "无效的客户端!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "invalid-client",
+    "value": "Invalid client.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "invalid-user",
+    "value": "无效的用户!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "invalid-user",
+    "value": "Invalid user.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "client-disabled",
+    "value": "该客户端已被禁用!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "client-disabled",
+    "value": "The client has been disabled.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "client-authentication-fail",
+    "value": "客户端认证失败!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "client-authentication-fail",
+    "value": "Client authentication fail.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "client-authentication-success",
+    "value": "客户端认证成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "client-authentication-success",
+    "value": "Client authentication successfully.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "system-data-initialized",
+    "value": "系统数据已初始化!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "system-data-initialized",
+    "value": "System data has been initialized!",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "system-data-initialize-success",
+    "value": "系统数据初始化成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "system-data-initialize-success",
+    "value": "The system data is initialized successfully!",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "invalid-role",
+    "value": "无效的角色!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "invalid-role",
+    "value": "Invalid Role.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "role-authorization-success",
+    "value": "角色授权成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "role-authorization-success",
+    "value": "Role authorization success.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "user-authorization-success",
+    "value": "用户授权成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "user-authorization-success",
+    "value": "User authorization success.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "role-exists",
+    "value": "角色已存在!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "role-exists",
+    "value": "The role already exists.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "username-registered",
+    "value": "该用户名已被注册!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "username-registered",
+    "value": "The username has been registered.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "creation-success",
+    "value": "创建成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "creation-success",
+    "value": "Created success.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "registration-success",
+    "value": "注册成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "registration-success",
+    "value": "Registration success.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "password-mismatch",
+    "value": "两次密码不一致!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "password-mismatch",
+    "value": "Passwords does not match.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "password-mismatch",
+    "value": "两次密码不一致!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "password-mismatch",
+    "value": "Passwords does not match.",
     "prefix": "command"
 }]
  
