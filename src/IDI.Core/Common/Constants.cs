@@ -7,7 +7,7 @@
             public const string ClientCredentials = "client_credentials";
             public const string Password = "password";
         }
-        public class TokenType
+        public class AuthenticationScheme
         {
             public const string Basic = "Basic";
             public const string Bearer = "Bearer";

@@ -10,9 +10,9 @@ using Microsoft.Extensions.Options;
 
 namespace IDI.Central.Providers
 {
-    public class ApplicationTokenAuthProvider : TokenAuthenticationProvider
+    public class ApplicationAuthenticationProvider : TokenAuthenticationProvider
     {
-        public ApplicationTokenAuthProvider(RequestDelegate next, IOptions<TokenAuthenticationOptions> options) : base(next, options) { }
+        public ApplicationAuthenticationProvider(RequestDelegate next, IOptions<TokenAuthenticationOptions> options) : base(next, options) { }
 
         protected override List<Claim> GenerateClientIdentity(string clientId, string clientSecret)
         {
@@ -51,34 +51,5 @@ namespace IDI.Central.Providers
         {
             return base.GrantClientCredentials(clientId, clientSecret);
         }
-
-        //protected override List<Claim> GetAdministration(string username)
-        //{
-        //    var condition = new UserAdministrationQueryCondition { UserName = username };
-
-        //    var result = ServiceLocator.QueryProcessor.Execute<UserAdministrationQueryCondition, UserAdministration>(condition);
-
-        //    if (result.Status == ResultStatus.Success)
-        //    {
-        //        var Administration = result.Data;
-
-        //        return new List<Claim>
-        //        {
-        //            new Claim(ClaimTypes.Role, Administration.Role, ClaimValueTypes.String),
-        //            new Claim(ClaimTypes.NameIdentifier, Administration.NameIdentifier, ClaimValueTypes.String),
-        //            new Claim(ClaimTypes.Name, Administration.Name, ClaimValueTypes.String),
-        //            new Claim(ClaimTypes.Gender, Administration.Gender.ToString(), ClaimValueTypes.String),
-        //        };
-        //    }
-
-        //    return null;
-        //}
-
-        //protected override Result Verify(string username, string password)
-        //{
-        //    var command = new AdministrationVerifyCommand(username, password);
-
-        //    return ServiceLocator.CommandBus.Send(command);
-        //}
     }
 }

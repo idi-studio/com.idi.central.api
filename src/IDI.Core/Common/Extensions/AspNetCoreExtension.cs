@@ -25,7 +25,7 @@ namespace IDI.Core.Common.Extensions
         public static void UseTokenAuthentication<TTokenAuthenticationMiddleware>(this IApplicationBuilder app, IOptions<TokenAuthenticationOptions> options = null)
             where TTokenAuthenticationMiddleware : TokenAuthenticationProvider
         {
-            app.UseMiddleware<TTokenAuthenticationMiddleware>(options ?? Authentication.AuthenticationOptions.TokenOptions());
+            app.UseMiddleware<TTokenAuthenticationMiddleware>(options ?? ApplicationAuthenticationOptions.TokenOptions());
         }
 
         public static void UseLanguagePackage(this IApplicationBuilder app, Package package)

@@ -45,7 +45,7 @@ namespace IDI.Central.Tests.Utils
             {
                 string basic = Convert.ToBase64String(Encoding.UTF8.GetBytes(clientId + ":" + clientSecret));
 
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Constants.TokenType.Basic, basic);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Constants.AuthenticationScheme.Basic, basic);
 
                 var response = client.PostAsync(url, new FormUrlEncodedContent(parameters)).Result;
 
@@ -53,7 +53,7 @@ namespace IDI.Central.Tests.Utils
             }
             else
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Constants.TokenType.Bearer, token);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Constants.AuthenticationScheme.Bearer, token);
 
                 var response = client.PostAsync(url, new StringContent(parameters.ToJson(), Encoding.UTF8, "application/json")).Result;
 
@@ -65,7 +65,7 @@ namespace IDI.Central.Tests.Utils
         {
             parameter = parameter ?? new object();
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Constants.TokenType.Bearer, token);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Constants.AuthenticationScheme.Bearer, token);
 
             var response = client.PostAsync(url, new StringContent(parameter.ToJson(), Encoding.UTF8, "application/json")).Result;
 
@@ -77,7 +77,7 @@ namespace IDI.Central.Tests.Utils
 
         public string Get(string url)
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Constants.TokenType.Bearer, token);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Constants.AuthenticationScheme.Bearer, token);
 
             var response = client.GetAsync(url).Result;
 

@@ -31,7 +31,7 @@ namespace IDI.Central.Tests
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(result.Status, ResultStatus.Success);
-            Assert.AreEqual(result.Data.TokenType, Constants.TokenType.Bearer);
+            Assert.AreEqual(result.Data.TokenType, Constants.AuthenticationScheme.Bearer);
             Assert.IsTrue(result.Data.ExpiresIn > 0);
         }
 
@@ -49,7 +49,7 @@ namespace IDI.Central.Tests
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(result.Status, ResultStatus.Success);
-            Assert.AreEqual(result.Data.TokenType, Constants.TokenType.Bearer);
+            Assert.AreEqual(result.Data.TokenType, Constants.AuthenticationScheme.Bearer);
             Assert.IsTrue(result.Data.ExpiresIn > 0);
         }
     }

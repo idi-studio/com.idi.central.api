@@ -24,7 +24,7 @@ namespace IDI.Core.Authentication.TokenAuthentication
             clientId = string.Empty; clientSecret = string.Empty;
             string authorization = context.Request.Headers["Authorization"];
 
-            if (!authorization.StartsWith(Constants.TokenType.Basic))
+            if (!authorization.StartsWith(Constants.AuthenticationScheme.Basic))
                 return false;
 
             authorization = authorization.Split(new char[] { ' ' }).Last();

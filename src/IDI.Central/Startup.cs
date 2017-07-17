@@ -54,7 +54,7 @@ namespace IDI.Central
 
             //app.UseCookieAuthentication(AuthOptions.CookieOptions());
 
-            app.UseTokenAuthentication<ApplicationTokenAuthProvider>();
+            app.UseTokenAuthentication<ApplicationAuthenticationProvider>();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint  
             app.UseSwagger();

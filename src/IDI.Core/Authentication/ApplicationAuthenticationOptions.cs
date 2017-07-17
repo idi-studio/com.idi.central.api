@@ -10,7 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace IDI.Core.Authentication
 {
-    public class AuthenticationOptions
+    public class ApplicationAuthenticationOptions
     {
         // The secret key every token will be signed with.
         // In production, you should store this securely in environment variables

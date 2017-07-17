@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -10,9 +11,9 @@ namespace IDI.Core.Authentication.TokenAuthentication
 
         public string Issuer { get; set; } = "IDI";
 
-        public string Audience { get; set; } = "IDI-Client";
+        public string Audience { get; set; } = "IDI.Audience";
 
-        public TimeSpan Expiration { get; set; } = TimeSpan.FromMinutes(30);
+        public TimeSpan Expiration { get; set; } = TimeSpan.FromDays(1);
 
         public SigningCredentials SigningCredentials { get; set; }
 
