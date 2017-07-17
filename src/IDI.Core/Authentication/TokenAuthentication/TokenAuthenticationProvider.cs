@@ -108,12 +108,12 @@ namespace IDI.Core.Authentication.TokenAuthentication
 
             switch (context.GrantType())
             {
-                case Constants.GrantType.ClientCredentials:
+                case Constants.AuthenticationMethod.ClientCredentials:
                     if (context.TryGetClientCredential(out identity, out secret))
                         result = GrantClientCredentials(identity, secret);
                     generateIdentity = GenerateClientIdentity;
                     break;
-                case Constants.GrantType.Password:
+                case Constants.AuthenticationMethod.Password:
                     if (context.TryGetUserCredential(out identity, out secret))
                         result = GrantUserCredential(identity, secret);
                     generateIdentity = GenerateUserIdentity;

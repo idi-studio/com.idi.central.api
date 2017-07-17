@@ -12,10 +12,7 @@ namespace IDI.Core.Authentication
 {
     public class ApplicationAuthenticationOptions
     {
-        // The secret key every token will be signed with.
-        // In production, you should store this securely in environment variables
-        // or a key management tool. Don't hardcode this into your application!
-        private static readonly string secretkey = "mysupersecret_secretkey!123";
+        private static readonly string secretkey = "584556DE-23D4-4CDA-995C-34A3552D8330";
 
         private static SecurityKey Signing() => new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretkey));
 

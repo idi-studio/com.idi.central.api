@@ -19,7 +19,7 @@ namespace IDI.Central.Tests
         {
             var json = Post(API_TOKEN, new Dictionary<string, string>
             {
-                { "grant_type", Constants.GrantType.Password },{ "username", "administrator" },{ "password", "p@55w0rd" }
+                { "grant_type", Constants.AuthenticationMethod.Password },{ "username", "administrator" },{ "password", "p@55w0rd" }
             });
 
             Assert.IsNotNull(json);
@@ -38,7 +38,7 @@ namespace IDI.Central.Tests
         [TestMethod]
         public void Can_GetToken_ByClientCredentials()
         {
-            var json = Post(API_TOKEN, new Dictionary<string, string> { { "grant_type", Constants.GrantType.ClientCredentials } });
+            var json = Post(API_TOKEN, new Dictionary<string, string> { { "grant_type", Constants.AuthenticationMethod.ClientCredentials } });
 
             Assert.IsNotNull(json);
 

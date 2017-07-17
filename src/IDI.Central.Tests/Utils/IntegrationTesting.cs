@@ -11,7 +11,7 @@ namespace IDI.Central.Tests.Utils
         {
             var json = Post("api/token", new Dictionary<string, string>
             {
-                { "grant_type", Constants.GrantType.Password },{ "username", username },{ "password", password }
+                { "grant_type", Constants.AuthenticationMethod.Password },{ "username", username },{ "password", password }
             });
 
             var result = json.To<Result<TokenModel>>();

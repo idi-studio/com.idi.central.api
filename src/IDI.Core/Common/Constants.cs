@@ -2,7 +2,7 @@
 {
     public class Constants
     {
-        public class GrantType
+        public class AuthenticationMethod
         {
             public const string ClientCredentials = "client_credentials";
             public const string Password = "password";
