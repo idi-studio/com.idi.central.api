@@ -1,9 +1,10 @@
 ﻿using System;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace IDI.Core.Authentication.TokenAuthentication
 {
-    public class TokenAuthOptions
+    public class TokenAuthenticationOptions : AuthenticationOptions, IOptions<TokenAuthenticationOptions>
     {
         public string Path { get; set; } = "/api/token";
 
@@ -11,8 +12,10 @@ namespace IDI.Core.Authentication.TokenAuthentication
 
         public string Audience { get; set; } = "IDI-Client";
 
-        public TimeSpan Expiration { get; set; } = TimeSpan.FromHours(6);
+        public TimeSpan Expiration { get; set; } = TimeSpan.FromMinutes(30);
 
         public SigningCredentials SigningCredentials { get; set; }
+
+        public TokenAuthenticationOptions Value { get { return this; } }
     }
 }

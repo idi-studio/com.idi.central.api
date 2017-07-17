@@ -10,9 +10,9 @@ using Microsoft.Extensions.Options;
 
 namespace IDI.Central.Providers
 {
-    public class ApplicationTokenAuthProvider : TokenAuthProvider
+    public class ApplicationTokenAuthProvider : TokenAuthenticationProvider
     {
-        public ApplicationTokenAuthProvider(RequestDelegate next, IOptions<TokenAuthOptions> options) : base(next, options) { }
+        public ApplicationTokenAuthProvider(RequestDelegate next, IOptions<TokenAuthenticationOptions> options) : base(next, options) { }
 
         protected override List<Claim> GenerateClientIdentity(string clientId, string clientSecret)
         {

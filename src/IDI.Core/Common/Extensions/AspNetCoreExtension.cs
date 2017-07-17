@@ -22,10 +22,10 @@ namespace IDI.Core.Common.Extensions
             ServiceLocator.AddDbContext<TContext>(options => options.UseSqlServer(connectionString, o => o.UseRowNumberForPaging()));
         }
 
-        public static void UseTokenAuthentication<TTokenAuthenticationMiddleware>(this IApplicationBuilder app, IOptions<TokenAuthOptions> options = null)
-            where TTokenAuthenticationMiddleware : TokenAuthProvider
+        public static void UseTokenAuthentication<TTokenAuthenticationMiddleware>(this IApplicationBuilder app, IOptions<TokenAuthenticationOptions> options = null)
+            where TTokenAuthenticationMiddleware : TokenAuthenticationProvider
         {
-            app.UseMiddleware<TTokenAuthenticationMiddleware>(options ?? AuthOptions.TokenOptions());
+            app.UseMiddleware<TTokenAuthenticationMiddleware>(options ?? Authentication.AuthenticationOptions.TokenOptions());
         }
 
         public static void UseLanguagePackage(this IApplicationBuilder app, Package package)

@@ -81,12 +81,12 @@ namespace IDI.Core.Authentication.TokenAuthentication
         }
     }
 
-    public abstract class TokenAuthProvider
+    public abstract class TokenAuthenticationProvider
     {
         private readonly RequestDelegate next;
-        private readonly TokenAuthOptions options;
+        private readonly TokenAuthenticationOptions options;
 
-        public TokenAuthProvider(RequestDelegate next, IOptions<TokenAuthOptions> options)
+        public TokenAuthenticationProvider(RequestDelegate next, IOptions<TokenAuthenticationOptions> options)
         {
             this.next = next;
             this.options = options.Value;

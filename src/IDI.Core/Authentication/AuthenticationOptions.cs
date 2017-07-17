@@ -6,12 +6,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace IDI.Core.Authentication
 {
-    public class AuthOptions
+    public class AuthenticationOptions
     {
         // The secret key every token will be signed with.
         // In production, you should store this securely in environment variables
@@ -52,15 +51,12 @@ namespace IDI.Core.Authentication
             };
         }
 
-        public static IOptions<TokenAuthOptions> TokenOptions()
+        public static TokenAuthenticationOptions TokenOptions()
         {
-            var options= new TokenAuthOptions
+            return new TokenAuthenticationOptions
             {
                 SigningCredentials = new SigningCredentials(Signing(), SecurityAlgorithms.HmacSha256),
             };
-
-            return Options.Create(options);
         }
-
     }
 }

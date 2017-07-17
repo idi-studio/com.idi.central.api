@@ -2,6 +2,7 @@
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace IDI.Central.Providers
@@ -14,6 +15,8 @@ namespace IDI.Central.Providers
 
             if (authorization.IsNull())
                 return context.HttpContext.Unauthorized();
+
+            AuthenticateInfo authenticate = context.HttpContext.Authentication.GetAuthenticateInfoAsync("").Result;
 
             return base.OnActionExecutionAsync(context, next);
         }
