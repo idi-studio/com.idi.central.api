@@ -74,5 +74,17 @@ namespace IDI.Central.Tests.Utils
 
             throw new HttpRequestException(response.ReasonPhrase);
         }
+
+        public string Get(string url)
+        {
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Constants.TokenType.Bearer, token);
+
+            var response = client.GetAsync(url).Result;
+
+            if (response.IsSuccessStatusCode)
+                return response.Content.ReadAsStringAsync().Result;
+
+            throw new HttpRequestException(response.ReasonPhrase);
+        }
     }
 }

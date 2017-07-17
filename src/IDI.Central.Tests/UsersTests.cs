@@ -7,8 +7,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IDI.Central.Tests
 {
     [TestClass]
-    [TestCategory("api/user")]
-    public class AccountUnitTests : IntegrationTest
+    [TestCategory("api/users")]
+    public class AccountUnitTests : IntegrationTesting
     {
         [TestInitialize]
         public void Setup()
@@ -21,7 +21,7 @@ namespace IDI.Central.Tests
         {
             var input = new UserRegistrationInput();
 
-            var json = Post("api/user", input);
+            var json = Post("api/users", input);
 
             var result= json.To<Result>();
 

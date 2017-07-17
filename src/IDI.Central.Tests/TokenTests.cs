@@ -10,7 +10,7 @@ namespace IDI.Central.Tests
 {
     [TestClass]
     [TestCategory("api/token")]
-    public class TokenTests : IntegrationTest
+    public class TokenTests : IntegrationTesting
     {
         private const string API_TOKEN = "api/token";
 

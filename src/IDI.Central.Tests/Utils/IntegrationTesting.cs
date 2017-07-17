@@ -5,7 +5,7 @@ using IDI.Core.Common.Extensions;
 
 namespace IDI.Central.Tests.Utils
 {
-    public abstract class IntegrationTest
+    public abstract class IntegrationTesting
     {
         public void SignIn(string username = "administrator", string password = "p@55w0rd")
         {
@@ -22,7 +22,7 @@ namespace IDI.Central.Tests.Utils
             }
         }
 
-        public string Post(string url, Dictionary<string, string> parameters = null)
+        public string Post(string url, Dictionary<string, string> parameters)
         {
             return HttpUtil.Instance.Post(url, parameters);
         }
@@ -30,6 +30,11 @@ namespace IDI.Central.Tests.Utils
         public string Post(string url, object parameter)
         {
             return HttpUtil.Instance.Post(url, parameter);
+        }
+
+        public string Get(string url)
+        {
+            return HttpUtil.Instance.Get(url);
         }
     }
 }
