@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Security.Claims;
+using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Central.Domain.Modules.Administration.Queries;
 using IDI.Core.Authentication;
 using IDI.Core.Authentication.TokenAuthentication;
@@ -47,12 +48,12 @@ namespace IDI.Central.Providers
 
         protected override Result GrantUserCredential(string username, string password)
         {
-            return base.GrantUserCredential(username, password);
+            return ServiceLocator.CommandBus.Send(new UserAuthenticationCommand(username, password));
         }
 
         protected override Result GrantClientCredentials(string clientId, string clientSecret)
         {
-            return base.GrantClientCredentials(clientId, clientSecret);
+            return ServiceLocator.CommandBus.Send(new ClientAuthenticationCommand(clientId, clientSecret));
         }
     }
 }

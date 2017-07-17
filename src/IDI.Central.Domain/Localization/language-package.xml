@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<items>
+  <item prefix="display-name" name="client-id" en="Client ID" chs="客户端编号" />
+  <item prefix="display-name" name="secret-key" en="Secret Key" chs="安全码" />
+  <item prefix="display-name" name="role" en="Role" chs="角色" />
+  <item prefix="display-name" name="username" en="UserName" chs="用户名" />
+  <item prefix="display-name" name="password" en="Password" chs="密码" />
+  <item prefix="display-name" name="user" en="User" chs="用户" />
+  <item prefix="display-name" name="confirm-password" en="Confirm Password" chs="确认密码" />
+
+  <item prefix="command" name="invalid-username-or-password" en="Invalid UserName or Password" chs="无效的用户名或密码!" />
+  <item prefix="command" name="authentication-success" en="Authentication Success" chs="认证成功!" />
+</items>

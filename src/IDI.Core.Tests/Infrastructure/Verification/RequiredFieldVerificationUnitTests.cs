@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Threading;
 using IDI.Core.Infrastructure.Verification;
 using IDI.Core.Tests.Common;
 using IDI.Core.Tests.Common.Models;

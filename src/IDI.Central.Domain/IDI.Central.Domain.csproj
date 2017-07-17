@@ -5,12 +5,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Localization\Package.Central.json" />
+    <ProjectReference Include="..\IDI.Central.Models\IDI.Central.Models.csproj" />
+    <ProjectReference Include="..\IDI.Core\IDI.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\IDI.Central.Models\IDI.Central.Models.csproj" />
-    <ProjectReference Include="..\IDI.Core\IDI.Core.csproj" />
+    <None Update="Localization\Package.json">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Package.tt</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Package.cs</LastGenOutput>
+    </None>
+    <None Update="Localization\Package.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Package.json</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
 </Project>

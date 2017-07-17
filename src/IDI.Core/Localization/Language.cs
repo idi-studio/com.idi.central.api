@@ -29,16 +29,6 @@ namespace IDI.Core.Localization
             English
         }
 
-        public string Get(string prefix, string name, Category category = Category.English)
-        {
-            string key = $"{prefix}-{name}-{category.Description()}".ToLower();
-
-            if (items.ContainsKey(key))
-                return items[key];
-
-            return name;
-        }
-
         public string GetByCulture(string prefix, string name)
         {
             Category category;
@@ -56,6 +46,16 @@ namespace IDI.Core.Localization
             }
 
             return Get(prefix, name, category);
+        }
+
+        private string Get(string prefix, string name, Category category = Category.English)
+        {
+            string key = $"{prefix}-{name}-{category.Description()}".ToLower();
+
+            if (items.ContainsKey(key))
+                return items[key];
+
+            return name;
         }
 
         public void Load(Package package)

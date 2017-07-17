@@ -2,6 +2,6 @@
 {
     public class PackageCentral : Package
     {
-        public PackageCentral() : base(assemblyName: "IDI.Central.Domain", packageName: "IDI.Central.Domain.Localization.Package.Central.json") { }
+        public PackageCentral() : base(assemblyName: "IDI.Central.Domain", packageName: "IDI.Central.Domain.Localization.Package.json") { }
     }
 }

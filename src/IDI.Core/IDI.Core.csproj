@@ -6,10 +6,16 @@
 
   <ItemGroup>
     <None Remove="Localization\Package.json" />
+    <None Remove="Localization\Resources\Package.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Localization\Resources\Package.Core.json" />
+    <EmbeddedResource Include="Localization\Resources\Package.json">
+      <DependentUpon>Package.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <AutoGen>True</AutoGen>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +28,29 @@
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.1.4" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.3.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Localization\Resources\language-package.xml">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>language-package.cs</LastGenOutput>
+    </None>
+    <None Update="Localization\Resources\Package.tt">
+      <LastGenOutput>Package.json</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Localization\Resources\language-package.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>language-package.xml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

@@ -24,14 +24,14 @@ namespace IDI.Core.Common
             this.Details = new Dictionary<string, object>();
         }
 
-        public static Result Success(string message, string code = "200", List<string> details = null)
+        public static Result Success(string message, List<string> details = null)
         {
-            return new Result { Status = ResultStatus.Success, Code = code, Message = message, Details = new Dictionary<string, object> { { "info", details ?? new List<string>() } } };
+            return new Result { Status = ResultStatus.Success, Code = "200", Message = message, Details = new Dictionary<string, object> { { "info", details ?? new List<string>() } } };
         }
 
-        public static Result<T> Success<T>(T data, string code = "200", string message = "", List<string> details = null)
+        public static Result<T> Success<T>(T data, string message = "", List<string> details = null)
         {
-            return new Result<T> { Data = data, Status = ResultStatus.Success, Code = code, Message = message, Details = new Dictionary<string, object> { { "info", details ?? new List<string>() } } };
+            return new Result<T> { Data = data, Status = ResultStatus.Success, Code = "200", Message = message, Details = new Dictionary<string, object> { { "info", details ?? new List<string>() } } };
         }
 
         public static Result Fail(string message, string code = "400", List<string> details = null)

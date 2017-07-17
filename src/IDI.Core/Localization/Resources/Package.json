@@ -1,50 +1,50 @@
-[
-  {
+﻿ 
+[{
     "language": "chs",
     "name": "required",
     "value": "'{0}'必填!",
     "prefix": "verification"
-  },
-  {
+},
+{
     "language": "en",
     "name": "required",
     "value": "'{0}' Required.",
     "prefix": "verification"
-  },
-  {
+},
+{
     "language": "chs",
     "name": "characters-range",
     "value": "'{0}'最多{1}到{2}个字符!",
     "prefix": "verification"
-  },
-  {
+},
+{
     "language": "en",
     "name": "characters-range",
     "value": "'{0}' maximum {1} to {2} characters.",
     "prefix": "verification"
-  },
-  {
+},
+{
     "language": "chs",
     "name": "characters-maximum",
     "value": "'{0}'最多{1}个字符!",
     "prefix": "verification"
-  },
-  {
+},
+{
     "language": "en",
     "name": "characters-maximum",
     "value": "'{0} maximum is {1} characters.",
     "prefix": "verification"
-  },
-  {
+},
+{
     "language": "chs",
     "name": "characters-minimum",
     "value": "'{0}'最少{1}个字符!",
     "prefix": "verification"
-  },
-  {
+},
+{
     "language": "en",
     "name": "characters-minimum",
     "value": "'{0}' minimum is {1} characters.",
     "prefix": "verification"
-  }
-]
+}]
+ 

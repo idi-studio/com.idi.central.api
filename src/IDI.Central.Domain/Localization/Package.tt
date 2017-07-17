@@ -1,0 +1,43 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".json"  encoding="utf-8" #>
+<#@ Assembly Name="System.Core" #>
+<#@ Assembly name="System.Xml" #>
+<#@ Assembly name="System.Xml.Linq" #>
+<#@ Assembly Name="System.Windows.Forms" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #> 
+<#
+	var path = Host.ResolvePath("language-package.xml");  
+	var doc = XDocument.Load(path);
+	var items = doc.Root.Elements("item");
+	var index = 0;
+#>[<#
+	foreach (var item in items)
+	{
+		index+=1;
+		string prefix=item.Attribute("prefix").Value;
+		string name=item.Attribute("name").Value;
+		string en=item.Attribute("en").Value;
+		string chs=item.Attribute("chs").Value;
+#>
+{
+    "language": "chs",
+    "name": "<#= name #>",
+    "value": "<#= chs #>",
+    "prefix": "<#= prefix #>"
+},
+{
+    "language": "en",
+    "name": "<#= name #>",
+    "value": "<#= en #>",
+    "prefix": "<#= prefix #>"
+<#= index==items.Count()?"}]":"},"  #>
+<# 
+	} 
+#>
+ 

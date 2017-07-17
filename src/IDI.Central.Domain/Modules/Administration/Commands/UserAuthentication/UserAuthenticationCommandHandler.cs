@@ -2,6 +2,7 @@
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Commands
@@ -16,14 +17,14 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             var user = this.Users.Find(u => u.UserName == command.UserName);
 
             if (user == null)
-                return new Result { Status = ResultStatus.Fail, Message = "无效的用户名或密码!" };
+                return Result.Fail(Language.Instance.GetByCulture("command", "invalid-username-or-password"));
 
             string hashed = Cryptography.Encrypt(command.Password, user.Salt);
 
             if (user.Password != hashed)
-                return new Result { Status = ResultStatus.Fail, Message = "无效的用户名或密码!" };
+                return Result.Fail(Language.Instance.GetByCulture("command", "invalid-username-or-password"));
 
-            return new Result { Status = ResultStatus.Success, Message = "认证成功!" };
+            return Result.Success(message: Language.Instance.GetByCulture("command", "authentication-success"));
         }
     }
 }
