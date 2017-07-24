@@ -34,6 +34,8 @@ namespace IDI.Central
 
             // Inject an implementation of ISwaggerProvider with defaulted settings applied  
             services.AddSwaggerGen();
+
+            services.AddCors(options => options.AddPolicy("AllowAnyOrigin", policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +65,8 @@ namespace IDI.Central
             app.UseSwaggerUi();
 
             app.UseStaticFiles();
+
+            app.UseCors("AllowAnyOrigin");
 
             app.UseMvc();
             //app.UseMvc(routes =>
