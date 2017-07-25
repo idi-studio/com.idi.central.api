@@ -1,9 +1,12 @@
 ﻿using IDI.Central.Domain;
 using IDI.Central.Providers;
+using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Localization.Packages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -35,7 +38,11 @@ namespace IDI.Central
             // Inject an implementation of ISwaggerProvider with defaulted settings applied  
             services.AddSwaggerGen();
 
-            services.AddCors(options => options.AddPolicy("AllowAnyOrigin", policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+            #region 跨域
+            var urls = Configuration["Cores"].Split(',');
+            services.AddCors(options => options.AddPolicy(Constants.Policy.AllowCorsDomain, builder => builder.WithOrigins(urls).AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin().AllowCredentials()));
+            services.Configure<MvcOptions>(options => { options.Filters.Add(new CorsAuthorizationFilterFactory(Constants.Policy.AllowCorsDomain)); });
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,7 +73,7 @@ namespace IDI.Central
 
             app.UseStaticFiles();
 
-            app.UseCors("AllowAnyOrigin");
+            app.UseCors(Constants.Policy.AllowCorsDomain);
 
             app.UseMvc();
             //app.UseMvc(routes =>

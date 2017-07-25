@@ -12,5 +12,10 @@
             public const string Basic = "Basic";
             public const string Bearer = "Bearer";
         }
+
+        public class Policy
+        {
+            public const string AllowCorsDomain = "AllowCorsDomain";
+        }
     }
 }
