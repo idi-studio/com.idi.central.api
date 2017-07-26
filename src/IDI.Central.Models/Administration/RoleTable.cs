@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using IDI.Core.Infrastructure.Queries;
+using Newtonsoft.Json;
 
 namespace IDI.Central.Models.Administration
 {
     public class RoleTable : IQueryResult
     {
-        public List<RoleTableRow> Rows { get; set; } = new List<RoleTableRow>();
+        [JsonProperty("rows")]
+        public List<RoleRow> Rows { get; set; } = new List<RoleRow>();
     }
 }

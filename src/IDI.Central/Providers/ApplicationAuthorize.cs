@@ -46,6 +46,10 @@ namespace IDI.Central.Providers
             {
                 return context.HttpContext.TokenExpired();
             }
+            catch (ArgumentException)
+            {
+                return context.HttpContext.TokenInvalid();
+            }
             catch (SecurityTokenValidationException)
             {
                 return context.HttpContext.TokenInvalid();

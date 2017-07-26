@@ -19,7 +19,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
             var roles = this.Roles.Get();
 
             var table = new RoleTable();
-            table.Rows = roles.OrderBy(r => r.Name).Select(r => new RoleTableRow
+            table.Rows = roles.OrderBy(r => r.Name).Select(r => new RoleRow
             {
                 Id = r.Id,
                 Name = r.Name,
