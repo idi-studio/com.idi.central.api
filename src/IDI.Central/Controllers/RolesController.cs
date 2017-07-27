@@ -1,6 +1,7 @@
 ﻿using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Central.Domain.Modules.Administration.Queries;
 using IDI.Central.Models.Administration;
+using IDI.Central.Models.Common;
 using IDI.Central.Providers;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;
@@ -20,9 +21,9 @@ namespace IDI.Central.Controllers
 
         // GET: api/roles
         [HttpGet]
-        public Result<RoleTable> Get()
+        public Result<Table<RoleRow>> Get()
         {
-            return ServiceLocator.QueryProcessor.Execute<RoleTableQueryCondition, RoleTable>(new RoleTableQueryCondition());
+            return ServiceLocator.QueryProcessor.Execute<RoleQueryCondition, Table<RoleRow>>(new RoleQueryCondition());
         }
 
         //// GET api/values/5

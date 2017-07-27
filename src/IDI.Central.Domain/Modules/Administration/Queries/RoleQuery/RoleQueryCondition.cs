@@ -2,5 +2,5 @@
 
 namespace IDI.Central.Domain.Modules.Administration.Queries
 {
-    public class RoleTableQueryCondition : Condition { }
+    public class RoleQueryCondition : Condition { }
 }
