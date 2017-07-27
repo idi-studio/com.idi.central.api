@@ -25,8 +25,9 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
             table.Rows = users.OrderBy(r => r.UserName).Select(r => new UserRow
             {
                 Id = r.Id,
-                Name = r.UserName,
+                UserName = r.UserName,
                 IsActive = r.IsActive,
+                Name = r.Profile.Name,
                 Gender = r.Profile.Gender,
                 Birthday = r.Profile.Birthday,
                 Photo = r.Profile.Photo
