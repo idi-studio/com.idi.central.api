@@ -16,18 +16,20 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
         [Injection]
         public IQueryRepository<User> Users { get; set; }
 
-
         public override Result<Table<UserRow>> Execute(QueryUserCondition condition)
         {
-            var roles = this.Users.Get();
+            var users = this.Users.Get(u => u.Profile);
 
             var table = new Table<UserRow>();
 
-            table.Rows = roles.OrderBy(r => r.UserName).Select(r => new UserRow
+            table.Rows = users.OrderBy(r => r.UserName).Select(r => new UserRow
             {
                 Id = r.Id,
-                UserName = r.UserName,
-                IsActive = r.IsActive
+                Name = r.UserName,
+                IsActive = r.IsActive,
+                Gender = r.Profile.Gender,
+                Birthday = r.Profile.Birthday,
+                Photo = r.Profile.Photo
             }).ToList();
 
             return Result.Success(table);
