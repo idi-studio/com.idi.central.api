@@ -46,7 +46,7 @@ namespace IDI.Central.Domain.Modules.Administration
         {
             string salt = Cryptography.Salt();
 
-            this.Administrator = new User { UserName = "administrator", Salt = salt, Password = Cryptography.Encrypt("p@55w0rd", salt), Profile = new UserProfile { Name = "Administrator" } };
+            this.Administrator = new User { UserName = "administrator", Salt = salt, Password = Cryptography.Encrypt("p@55w0rd", salt), Profile = new UserProfile { Name = "Administrator", Photo = "administrator.jpg" } };
         }
     }
 
