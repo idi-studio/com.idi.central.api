@@ -4,11 +4,18 @@ using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
+using IDI.Core.Infrastructure.Verification.Attributes;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Queries
 {
-    public class UserIdentityQuery : Query<UserIdentityQueryCondition, UserIdentity>
+    public class QueryUserIdentityCondition : Condition
+    {
+        [RequiredField("username")]
+        public string UserName { get; set; }
+    }
+
+    public class QueryUserIdentity : Query<QueryUserIdentityCondition, UserIdentity>
     {
         [Injection]
         public IQueryRepository<User> UserRepository { get; set; }
@@ -16,7 +23,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
         [Injection]
         public IQueryRepository<UserRole> UserRoleRepository { get; set; }
 
-        public override Result<UserIdentity> Execute(UserIdentityQueryCondition condition)
+        public override Result<UserIdentity> Execute(QueryUserIdentityCondition condition)
         {
             var user = this.UserRepository.Find(e => e.UserName == condition.UserName, e => e.Profile);
 

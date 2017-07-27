@@ -25,9 +25,9 @@ namespace IDI.Central.Providers
 
         protected override List<Claim> GenerateUserIdentity(string username, string password)
         {
-            var condition = new UserIdentityQueryCondition { UserName = username };
+            var condition = new QueryUserIdentityCondition { UserName = username };
 
-            var result = ServiceLocator.QueryProcessor.Execute<UserIdentityQueryCondition, UserIdentity>(condition);
+            var result = ServiceLocator.QueryProcessor.Execute<QueryUserIdentityCondition, UserIdentity>(condition);
 
             if (result.Status == ResultStatus.Success)
             {

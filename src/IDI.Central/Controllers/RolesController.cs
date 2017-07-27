@@ -23,7 +23,7 @@ namespace IDI.Central.Controllers
         [HttpGet]
         public Result<Table<RoleRow>> Get()
         {
-            return ServiceLocator.QueryProcessor.Execute<RoleQueryCondition, Table<RoleRow>>(new RoleQueryCondition());
+            return ServiceLocator.QueryProcessor.Execute<QueryRoleCondition, Table<RoleRow>>();
         }
 
         //// GET api/values/5

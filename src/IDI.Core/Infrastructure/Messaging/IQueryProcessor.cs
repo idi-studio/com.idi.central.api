@@ -5,7 +5,7 @@ namespace IDI.Core.Infrastructure.Messaging
 {
     public interface IQueryProcessor
     {
-        Result<TQueryResult> Execute<TCondition, TQueryResult>(TCondition condition) where TCondition : Condition
+        Result<TQueryResult> Execute<TCondition, TQueryResult>(TCondition condition = default(TCondition)) where TCondition : Condition
             where TQueryResult : IQueryResult;
     }
 }

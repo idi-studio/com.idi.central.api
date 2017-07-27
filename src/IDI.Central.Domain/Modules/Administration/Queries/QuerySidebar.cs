@@ -4,11 +4,18 @@ using IDI.Central.Models.Administration;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
+using IDI.Core.Infrastructure.Verification.Attributes;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Queries
 {
-    public class SidebarQuery : Query<SidebarQueryCondition, Sidebar>
+    public class QuerySidebarCondition : Condition
+    {
+        [RequiredField("username")]
+        public string UserName { get; set; }
+    }
+
+    public class QuerySidebar : Query<QuerySidebarCondition, Sidebar>
     {
         [Injection]
         public IQueryRepository<Menu> Menus { get; set; }
@@ -19,7 +26,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
         [Injection]
         public IQueryRepository<RolePrivilege> RolePrivilegeRepository { get; set; }
 
-        public override Result<Sidebar> Execute(SidebarQueryCondition condition)
+        public override Result<Sidebar> Execute(QuerySidebarCondition condition)
         {
             var user = this.Users.Find(e => e.UserName == condition.UserName, e => e.Profile, e => e.UserRoles);
 

@@ -19,6 +19,8 @@ namespace IDI.Core.Infrastructure.Messaging
         public Result<TQueryResut> Execute<TCondition, TQueryResut>(TCondition condition) where TCondition : Condition
             where TQueryResut : IQueryResult
         {
+            condition = condition ?? Activator.CreateInstance<TCondition>();
+
             if (condition == null)
                 return Result.Error<TQueryResut>("查询条件不能为空!");
 

@@ -9,23 +9,24 @@ using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Queries
 {
-    public class RoleQuery : Query<RoleQueryCondition, Table<RoleRow>>
+    public class QueryUserCondition : Condition { }
+
+    public class QueryUser : Query<QueryUserCondition, Table<UserRow>>
     {
         [Injection]
-        public IQueryRepository<Role> Roles { get; set; }
+        public IQueryRepository<User> Users { get; set; }
 
 
-        public override Result<Table<RoleRow>> Execute(RoleQueryCondition condition)
+        public override Result<Table<UserRow>> Execute(QueryUserCondition condition)
         {
-            var roles = this.Roles.Get();
+            var roles = this.Users.Get();
 
-            var table = new Table<RoleRow>();
+            var table = new Table<UserRow>();
 
-            table.Rows = roles.OrderBy(r => r.Name).Select(r => new RoleRow
+            table.Rows = roles.OrderBy(r => r.UserName).Select(r => new UserRow
             {
                 Id = r.Id,
-                Name = r.Name,
-                Descrition = r.Descrition,
+                UserName = r.UserName,
                 IsActive = r.IsActive
             }).ToList();
 

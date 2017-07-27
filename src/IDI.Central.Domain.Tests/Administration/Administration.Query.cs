@@ -15,12 +15,12 @@ namespace IDI.Central.Domain.Tests
         {
             Administration_DataInitializationCommand();
 
-            var query = new SidebarQuery();
+            var query = new QuerySidebar();
             query.Menus = ServiceLocator.GetService<IQueryRepository<Menu>>();
             query.RolePrivilegeRepository = ServiceLocator.GetService<IQueryRepository<RolePrivilege>>();
             query.Users = ServiceLocator.GetService<IQueryRepository<User>>();
 
-            var result = query.Execute(new SidebarQueryCondition { UserName = "administrator" });
+            var result = query.Execute(new QuerySidebarCondition { UserName = "administrator" });
 
             Assert.AreEqual(ResultStatus.Success, result.Status);
             Assert.IsNotNull(result.Data);
