@@ -25,13 +25,13 @@ namespace IDI.Central.Domain.Tests
             var result = hanlder.Execute(new DataInitializationCommand());
 
             Assert.AreEqual(ResultStatus.Success, result.Status);
-            Assert.AreEqual("初始化成功!", result.Message);
+            Assert.AreEqual("system-data-initialize-success", result.Message);
 
             TestData(context =>
             {
                 Assert.AreEqual(1, context.Users.Count());
                 Assert.AreEqual(1, context.UserRoles.Count());
-                Assert.AreEqual(1, context.Roles.Count());
+                Assert.AreEqual(2, context.Roles.Count());
                 Assert.AreEqual(2, context.Modules.Count());
                 Assert.AreEqual(5, context.Menus.Count());
                 Assert.AreEqual(5, context.Privileges.Count());

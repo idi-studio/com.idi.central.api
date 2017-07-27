@@ -29,9 +29,12 @@ namespace IDI.Central.Domain.Modules.Administration
     {
         public Role Administrators { get; private set; }
 
+        public Role Users { get; private set; }
+
         public RoleCollection()
         {
-            this.Administrators = new Role { Name = "Administrators" };
+            this.Administrators = new Role { Name = "Administrators", Descrition = "The administrator of system." };
+            this.Users = new Role { Name = "Users", Descrition = "The user of system.", IsActive = false };
         }
     }
 

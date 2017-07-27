@@ -36,6 +36,9 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             this.Users.Add(command.Seed.Users.Administrator);
             this.Users.Context.Commit();
 
+            this.Roles.Add(command.Seed.Roles.Users);
+            this.Roles.Context.Commit();
+
             this.Clients.Add(command.Seed.Clients.Central);
             this.Clients.Context.Commit();
 

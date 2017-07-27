@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IDI.Central.Domain.Tests
 {
     [TestClass]
+    [TestCategory("Administration")]
     public partial class AdministrationUnitTests : IntegrationTests
     {
         [TestMethod]
