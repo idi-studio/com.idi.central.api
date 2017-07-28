@@ -79,5 +79,13 @@ namespace IDI.Core.Authentication.TokenAuthentication
             context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
             return context.Response.WriteAsync(Result.Success(token).ToJson());
         }
+
+        public static Task OK(this HttpContext context, Result result)
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = StatusCodes.Status200OK;
+            context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            return context.Response.WriteAsync(result.ToJson());
+        }
     }
 }

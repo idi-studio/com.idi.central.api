@@ -53,6 +53,9 @@ namespace IDI.Core.Authentication.TokenAuthentication
             if (result != null && result.Status == ResultStatus.Success)
                 return GenerateToken(context, identity, secret, generateIdentity);
 
+            if (result != null && result.Status == ResultStatus.Fail)
+                return context.OK(result);
+
             return context.Unauthorized();
         }
 
