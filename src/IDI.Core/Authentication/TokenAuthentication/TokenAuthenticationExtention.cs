@@ -50,42 +50,43 @@ namespace IDI.Core.Authentication.TokenAuthentication
 
         public static Task BadRequest(this HttpContext context)
         {
-            context.Response.ContentType = "application/json";
+            context.DefaultHeader();
             context.Response.StatusCode = StatusCodes.Status400BadRequest;
-            context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
             return context.Response.WriteAsync("Bad Request.");
         }
 
         public static Task InternalServerError(this HttpContext context, Exception exception)
         {
-            context.Response.ContentType = "application/json";
+            context.DefaultHeader();
             context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-            context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
             return context.Response.WriteAsync(Result.Error(exception).ToJson());
         }
 
         public static Task Unauthorized(this HttpContext context)
         {
-            context.Response.ContentType = "application/json";
+            context.DefaultHeader();
             context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-            context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
             return context.Response.WriteAsync(Result.Fail("Unauthorized.").ToJson());
         }
 
         public static Task OK(this HttpContext context, TokenModel token)
         {
-            context.Response.ContentType = "application/json";
+            context.DefaultHeader();
             context.Response.StatusCode = StatusCodes.Status200OK;
-            context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
             return context.Response.WriteAsync(Result.Success(token).ToJson());
         }
 
         public static Task OK(this HttpContext context, Result result)
         {
-            context.Response.ContentType = "application/json";
+            context.DefaultHeader();
             context.Response.StatusCode = StatusCodes.Status200OK;
-            context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
             return context.Response.WriteAsync(result.ToJson());
+        }
+
+        private static void DefaultHeader(this HttpContext context)
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
         }
     }
 }

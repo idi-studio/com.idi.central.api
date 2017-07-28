@@ -23,7 +23,7 @@ namespace IDI.Core.Authentication.TokenAuthentication
         public Task Invoke(HttpContext context)
         {
             // If the request path doesn't match, skip
-            if (!context.Request.Path.Equals(options.Path, StringComparison.Ordinal))
+            if (!context.Request.Path.Equals(options.Path, StringComparison.Ordinal) || context.Request.Method.Equals(HttpMethods.Options))
                 return next(context);
 
             // Request must be POST with Content-Type: application/x-www-form-urlencoded
