@@ -17,3 +17,4 @@
 /src/IDI.Central/*.user
 /src/IDI.Central/Properties/PublishProfiles/*.user
 /src/IDI.Central/Properties/PublishProfiles
+/src/IDI.Central.Domain/*.user
