@@ -27,8 +27,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                 Id = r.Id,
                 Name = r.Name,
                 Code = r.Code,
-                Model = r.Model,
-                Specifications = r.Specifications,
+                Profile  = r.Profile,
                 Enabled = r.Enabled
             }).ToList();
 

@@ -1,6 +1,8 @@
 ﻿using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
+using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Core.Common;
+using System.Linq;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Localization;
@@ -25,6 +27,9 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
         [Injection]
         public IRepository<Client> Clients { get; set; }
 
+        [Injection]
+        public IRepository<Product> Products { get; set; }
+
         public Result Execute(DataInitializationCommand command)
         {
             bool initialized = this.Modules.Exist(e => e.Code == command.Seed.Modules.Administration.Code);
@@ -44,6 +49,9 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 
             this.Clients.Add(command.Seed.Clients.Central);
             this.Clients.Context.Commit();
+
+            command.Seed.Products.iPhones.ForEach(e => this.Products.Add(e));
+            this.Products.Context.Commit();
 
             return Result.Success(message: Localization.Get( Resources.Key.SYSTEM_DATA_INITIALIZE_SUCCESS));
         }

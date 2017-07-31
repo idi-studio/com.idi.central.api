@@ -19,14 +19,13 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
         public Result Execute(ProductCreationCommand command)
         {
             if (this.Products.Exist(e => e.Code == command.Code))
-                return Result.Fail(Localization.Get( Resources.Key.PRODUCT_CODE_DUPLICATED));
+                return Result.Fail(Localization.Get(Resources.Key.PRODUCT_CODE_DUPLICATED));
 
             var product = new Product
             {
                 Name = command.Name,
                 Code = command.Code,
-                Model = command.Model,
-                Specifications = command.Specifications,
+                Profile = command.Profile,
                 Enabled = false,
             };
 
@@ -34,7 +33,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             this.Products.Context.Commit();
             this.Products.Context.Dispose();
 
-            return Result.Success(message: Localization.Get( Resources.Key.CREATION_SUCCESS));
+            return Result.Success(message: Localization.Get(Resources.Key.CREATION_SUCCESS));
         }
     }
 }

@@ -8,8 +8,6 @@ namespace IDI.Central.Models.Retailing
 
         public string Code { get; set; } = "";
 
-        public string Model { get; set; } = "";
-
-        public string Specifications { get; set; } = "";
+        public string Profile { get; set; } = "";
     }
 }

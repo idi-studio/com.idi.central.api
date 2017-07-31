@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
@@ -14,16 +13,13 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
         [StringLength(50)]
         public string Code { get; set; }
 
-        [StringLength(50)]
-        public string Model { get; set; } = "";
+        public string Profile { get; set; }
 
-        [StringLength(50)]
-        public string Specifications { get; set; } = "";
+        public string Price { get; set; }
+
+        public string Picture { get; set; }
 
         public bool Enabled { get; set; } = true;
 
-        public List<ProductPrice> Prices { get; set; } = new List<ProductPrice>();
-
-        public List<ProductPicture> Pictures { get; set; } = new List<ProductPicture>();
     }
 }

@@ -20,8 +20,7 @@ namespace IDI.Central.Controllers
             {
                 Name = input.Name,
                 Code = input.Code,
-                Model = input.Model,
-                Specifications = input.Specifications
+                Profile = input.Profile,
             };
 
             return ServiceLocator.CommandBus.Send(command);

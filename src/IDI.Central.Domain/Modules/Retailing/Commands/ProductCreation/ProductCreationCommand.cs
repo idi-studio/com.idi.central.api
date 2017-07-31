@@ -13,10 +13,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
         [StringLength("product-code", MaxLength = 50)]
         public string Code { get; set; }
 
-        [StringLength("product-model", MaxLength = 50)]
-        public string Model { get; set; } = "";
-
-        [StringLength("product-spec", MaxLength = 50)]
-        public string Specifications { get; set; } = "";
+        [RequiredField("product-profile")]
+        public string Profile { get; set; }
     }
 }

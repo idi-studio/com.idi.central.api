@@ -14,11 +14,8 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("code")]
         public string Code { get; set; }
 
-        [JsonProperty("model")]
-        public string Model { get; set; }
-
-        [JsonProperty("spec")]
-        public string Specifications { get; set; }
+        [JsonProperty("profile")]
+        public string Profile { get; set; }
 
         [JsonProperty("active")]
         public bool Enabled { get; set; } = true;

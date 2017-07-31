@@ -4,6 +4,7 @@ using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Central.Domain.Modules.Administration.Handlers;
+using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;
 using IDI.Core.Repositories;
@@ -17,10 +18,12 @@ namespace IDI.Central.Domain.Tests
         public void Administration_DataInitializationCommand()
         {
             var hanlder = new DataInitializationCommandHandler();
+            hanlder.Localization = new Common.Localization();
             hanlder.Users = ServiceLocator.GetService<IRepository<User>>();
             hanlder.Roles = ServiceLocator.GetService<IRepository<Role>>();
             hanlder.Modules = ServiceLocator.GetService<IRepository<Module>>();
             hanlder.Clients = ServiceLocator.GetService<IRepository<Client>>();
+            hanlder.Products = ServiceLocator.GetService<IRepository<Product>>();
 
             var result = hanlder.Execute(new DataInitializationCommand());
 

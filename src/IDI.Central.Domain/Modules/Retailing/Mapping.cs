@@ -8,8 +8,9 @@ namespace IDI.Central.Domain.Modules.Retailing
     {
         public override void Create(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>().HasMany(e => e.Prices).WithOne(e=>e.Product).HasForeignKey(p => p.ProductId);
-            modelBuilder.Entity<Product>().HasMany(e => e.Pictures).WithOne(e => e.Product).HasForeignKey(p => p.ProductId);
+            modelBuilder.Entity<Product>().ToTable("Products");
+            //modelBuilder.Entity<Product>().HasMany(e => e.Prices).WithOne(e=>e.Product).HasForeignKey(p => p.ProductId);
+            //modelBuilder.Entity<Product>().HasMany(e => e.Pictures).WithOne(e => e.Product).HasForeignKey(p => p.ProductId);
         }
     }
 }
