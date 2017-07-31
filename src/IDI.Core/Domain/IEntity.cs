@@ -10,10 +10,10 @@ namespace IDI.Core.Domain
 
         string CreatedBy { get; set; }
 
-        DateTime CreatedTime { get; set; }
+        DateTime CreatedAt { get; set; }
 
         string LastUpdatedBy { get; set; }
 
-        DateTime LastUpdatedTime { get; set; }
+        DateTime LastUpdatedAt { get; set; }
     }
 }

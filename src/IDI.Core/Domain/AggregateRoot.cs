@@ -16,22 +16,22 @@ namespace IDI.Core.Domain
         [StringLength(256)]
         public string CreatedBy { get; set; }
 
-        public DateTime CreatedTime { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         [Required]
         [StringLength(256)]
         public string LastUpdatedBy { get; set; }
 
-        public DateTime LastUpdatedTime { get; set; }
+        public DateTime LastUpdatedAt { get; set; }
 
         public AggregateRoot()
         {
             this.Id = Guid.NewGuid();
             this.Version = 1;
             this.CreatedBy = "-";
-            this.CreatedTime = DateTime.Now;
+            this.CreatedAt = DateTime.Now;
             this.LastUpdatedBy = "-";
-            this.LastUpdatedTime = DateTime.Now;
+            this.LastUpdatedAt = DateTime.Now;
         }
 
         public override int GetHashCode()

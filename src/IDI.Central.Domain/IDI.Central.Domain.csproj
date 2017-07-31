@@ -45,4 +45,9 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Modules\Retailing\Commands\" />
+    <Folder Include="Modules\Retailing\Queries\" />
+  </ItemGroup>
+
 </Project>
