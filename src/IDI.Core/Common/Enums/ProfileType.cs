@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 
-namespace IDI.Central.Domain.Common
+namespace IDI.Core.Common.Enums
 {
-    public enum ProfileKey
+    public enum ProfileType
     {
         [Description("型号")]
         Model,

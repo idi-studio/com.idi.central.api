@@ -1,4 +1,5 @@
 ﻿using System;
+using IDI.Core.Common.Basetypes;
 using Newtonsoft.Json;
 
 namespace IDI.Central.Models.Retailing
@@ -15,7 +16,7 @@ namespace IDI.Central.Models.Retailing
         public string Code { get; set; }
 
         [JsonProperty("profile")]
-        public string Profile { get; set; }
+        public Profile Profile { get; set; }
 
         [JsonProperty("active")]
         public bool Enabled { get; set; } = true;
