@@ -11,6 +11,9 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
     public class UserAuthenticationCommandHandler : ICommandHandler<UserAuthenticationCommand>
     {
         [Injection]
+        public ILocalization Localization { get; set; }
+
+        [Injection]
         public IRepository<User> Users { get; set; }
 
         public Result Execute(UserAuthenticationCommand command)
@@ -18,14 +21,14 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             var user = this.Users.Find(u => u.UserName == command.UserName);
 
             if (user == null)
-                return Result.Fail(Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.INVALID_USERNAME_OR_PASSWORD));
+                return Result.Fail(Localization.Get( Resources.Key.INVALID_USERNAME_OR_PASSWORD));
 
             string hashed = Cryptography.Encrypt(command.Password, user.Salt);
 
             if (user.Password != hashed)
-                return Result.Fail(Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.INVALID_USERNAME_OR_PASSWORD));
+                return Result.Fail(Localization.Get( Resources.Key.INVALID_USERNAME_OR_PASSWORD));
 
-            return Result.Success(message: Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.AUTHENTICATION_SUCCESS));
+            return Result.Success(message: Localization.Get( Resources.Key.AUTHENTICATION_SUCCESS));
         }
     }
 }

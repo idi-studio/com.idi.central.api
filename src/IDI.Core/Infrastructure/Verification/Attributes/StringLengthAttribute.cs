@@ -31,21 +31,21 @@ namespace IDI.Core.Infrastructure.Verification.Attributes
 
             int length = propertyValue.ToString().Length;
 
-            string displayName = Language.Instance.GetByCulture(Resources.Prefix.DISPLAY_NAME, this.DisplayName);
+            string displayName = LanguageManager.Instance.Get(Resources.Prefix.DISPLAY_NAME, this.DisplayName);
 
             if (this.MinLength > 0 && this.MaxLength > 0 && (!(length >= this.MinLength && length <= this.MaxLength)))
             {
-                return new ValidationResult(Language.Instance.GetByCulture(Resources.Prefix.VERIFICATION, Resources.Key.CHARACTERS_RANGE).ToFormat(displayName, this.MinLength, this.MaxLength));
+                return new ValidationResult(LanguageManager.Instance.Get(Resources.Prefix.VERIFICATION, Resources.Key.CHARACTERS_RANGE).ToFormat(displayName, this.MinLength, this.MaxLength));
             }
 
             if (this.MinLength > 0 && this.MaxLength == 0 && length < this.MinLength)
             {
-                return new ValidationResult(Language.Instance.GetByCulture(Resources.Prefix.VERIFICATION, Resources.Key.CHARACTERS_MINIMUM).ToFormat(displayName, this.MinLength));
+                return new ValidationResult(LanguageManager.Instance.Get(Resources.Prefix.VERIFICATION, Resources.Key.CHARACTERS_MINIMUM).ToFormat(displayName, this.MinLength));
             }
 
             if (this.MinLength == 0 && this.MaxLength > 0 && length > this.MaxLength)
             {
-                return new ValidationResult(Language.Instance.GetByCulture(Resources.Prefix.VERIFICATION, Resources.Key.CHARACTERS_MAXIMUM).ToFormat(displayName, this.MaxLength));
+                return new ValidationResult(LanguageManager.Instance.Get(Resources.Prefix.VERIFICATION, Resources.Key.CHARACTERS_MAXIMUM).ToFormat(displayName, this.MaxLength));
             }
 
             return ValidationResult.Success;

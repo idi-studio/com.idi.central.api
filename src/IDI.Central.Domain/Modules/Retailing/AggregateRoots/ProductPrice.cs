@@ -14,7 +14,7 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
 
         public DateTime? ExpirationDate { get; set; }
 
-        public bool IsValid { get; set; } = true;
+        public bool Enabled { get; set; } = true;
 
         public Guid ProductId { get; set; }
 

@@ -11,7 +11,7 @@ namespace IDI.Core.Tests.Localization
         [TestMethod]
         public void Language_Can_Load_PackageCore()
         {
-            var language = Language.Instance;
+            var language = LanguageManager.Instance;
 
             Assert.IsTrue(language.Count > 0);
         }

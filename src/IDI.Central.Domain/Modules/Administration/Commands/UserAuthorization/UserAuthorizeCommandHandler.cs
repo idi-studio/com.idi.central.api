@@ -13,6 +13,9 @@ namespace IDI.Central.Domain.Modules.Administration.Handlers
     public class UserAuthorizeCommandHandler : ICommandHandler<UserAuthorizeCommand>
     {
         [Injection]
+        public ILocalization Localization { get; set; }
+
+        [Injection]
         public IRepository<User> Users { get; set; }
 
         [Injection]
@@ -23,7 +26,7 @@ namespace IDI.Central.Domain.Modules.Administration.Handlers
             var user = this.Users.Find(e => e.UserName == command.UserName, e => e.UserRoles);
 
             if (user == null)
-                return Result.Fail(Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.INVALID_USER));
+                return Result.Fail(Localization.Get( Resources.Key.INVALID_USER));
 
             var recent = command.Roles.ToList();
             var current = user.UserRoles.Select(e => e.RoleId).ToList();
@@ -40,7 +43,7 @@ namespace IDI.Central.Domain.Modules.Administration.Handlers
             this.Users.Context.Commit();
             this.Users.Context.Dispose();
 
-            return Result.Success(message: Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.USER_AUTHORIZATION_SUCCESS));
+            return Result.Success(message: Localization.Get( Resources.Key.USER_AUTHORIZATION_SUCCESS));
         }
     }
 }

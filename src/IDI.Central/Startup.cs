@@ -1,8 +1,9 @@
 ﻿using IDI.Central.Domain;
+using IDI.Central.Domain.Common;
+using IDI.Central.Domain.Localization.Packages;
 using IDI.Central.Providers;
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
-using IDI.Core.Localization.Packages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -80,7 +81,8 @@ namespace IDI.Central
             //{
             //    routes.MapRoute(name: "default", template: "{controller=Platform}/{action=Login}/{id?}");
             //});
-            app.UseLanguagePackage(new PackageCentral());
+            app.UseLanguagePackage<PackageCentral>();
+            app.UseLocalization<Localization>();
         }
     }
 }

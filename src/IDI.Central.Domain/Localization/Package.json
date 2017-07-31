@@ -85,6 +85,66 @@
 },
 {
     "language": "chs",
+    "name": "user",
+    "value": "用户",
+    "prefix": "display-name"
+},
+{
+    "language": "en",
+    "name": "user",
+    "value": "User",
+    "prefix": "display-name"
+},
+{
+    "language": "chs",
+    "name": "product-name",
+    "value": "产品名称",
+    "prefix": "display-name"
+},
+{
+    "language": "en",
+    "name": "product-name",
+    "value": "Product Name",
+    "prefix": "display-name"
+},
+{
+    "language": "chs",
+    "name": "product-code",
+    "value": "产品编码",
+    "prefix": "display-name"
+},
+{
+    "language": "en",
+    "name": "product-code",
+    "value": "Product Code",
+    "prefix": "display-name"
+},
+{
+    "language": "chs",
+    "name": "product-model",
+    "value": "产品型号",
+    "prefix": "display-name"
+},
+{
+    "language": "en",
+    "name": "product-model",
+    "value": "Product Model",
+    "prefix": "display-name"
+},
+{
+    "language": "chs",
+    "name": "product-spec",
+    "value": "产品规格",
+    "prefix": "display-name"
+},
+{
+    "language": "en",
+    "name": "product-spec",
+    "value": "Product Specifications",
+    "prefix": "display-name"
+},
+{
+    "language": "chs",
     "name": "invalid-username-or-password",
     "value": "无效的用户名或密码!",
     "prefix": "command"
@@ -289,14 +349,14 @@
 },
 {
     "language": "chs",
-    "name": "password-mismatch",
-    "value": "两次密码不一致!",
+    "name": "product-code-duplicated",
+    "value": "产品编码重复!",
     "prefix": "command"
 },
 {
     "language": "en",
-    "name": "password-mismatch",
-    "value": "Passwords does not match.",
+    "name": "product-code-duplicated",
+    "value": "Product code duplicated.",
     "prefix": "command"
 }]
  

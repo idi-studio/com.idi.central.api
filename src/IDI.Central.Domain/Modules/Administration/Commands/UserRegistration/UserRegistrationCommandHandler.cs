@@ -11,15 +11,18 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
     public class UserRegistrationCommandHandler : ICommandHandler<UserRegistrationCommand>
     {
         [Injection]
+        public ILocalization Localization { get; set; }
+
+        [Injection]
         public IRepository<User> Users { get; set; }
 
         public Result Execute(UserRegistrationCommand command)
         {
             if (command.Password != command.Confirm)
-                return Result.Fail(Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.PASSWORD_MISMATCH));
+                return Result.Fail(Localization.Get( Resources.Key.PASSWORD_MISMATCH));
 
             if (this.Users.Exist(u => u.UserName == command.UserName))
-                return Result.Fail(Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.USERNAME_REGISTERED));
+                return Result.Fail(Localization.Get( Resources.Key.USERNAME_REGISTERED));
 
             var salt = Cryptography.Salt();
             var user = new User
@@ -34,7 +37,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             this.Users.Context.Commit();
             this.Users.Context.Dispose();
 
-            return Result.Success(message: Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.REGISTRATION_SUCCESS));
+            return Result.Success(message: Localization.Get( Resources.Key.REGISTRATION_SUCCESS));
         }
     }
 }

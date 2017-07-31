@@ -31,6 +31,11 @@ namespace IDI.Central.Domain.Localization
 						public const string INVALID_USERNAME_OR_PASSWORD = "invalid-username-or-password";
 						public const string PASSWORD = "password";
 						public const string PASSWORD_MISMATCH = "password-mismatch";
+						public const string PRODUCT_CODE = "product-code";
+						public const string PRODUCT_CODE_DUPLICATED = "product-code-duplicated";
+						public const string PRODUCT_MODEL = "product-model";
+						public const string PRODUCT_NAME = "product-name";
+						public const string PRODUCT_SPEC = "product-spec";
 						public const string REGISTRATION_SUCCESS = "registration-success";
 						public const string ROLE = "role";
 						public const string ROLE_AUTHORIZATION_SUCCESS = "role-authorization-success";

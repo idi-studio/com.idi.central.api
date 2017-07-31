@@ -1,4 +1,6 @@
-﻿namespace IDI.Core.Localization.Packages
+﻿using IDI.Core.Localization;
+
+namespace IDI.Central.Domain.Localization.Packages
 {
     public class PackageCentral : Package
     {

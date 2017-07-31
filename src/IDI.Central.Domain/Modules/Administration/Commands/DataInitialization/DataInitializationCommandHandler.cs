@@ -11,6 +11,9 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
     public class DataInitializationCommandHandler : ICommandHandler<DataInitializationCommand>
     {
         [Injection]
+        public ILocalization Localization { get; set; }
+
+        [Injection]
         public IRepository<Module> Modules { get; set; }
 
         [Injection]
@@ -27,7 +30,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             bool initialized = this.Modules.Exist(e => e.Code == command.Seed.Modules.Administration.Code);
 
             if (initialized)
-                return Result.Success(message: Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.SYSTEM_DATA_INITIALIZED));
+                return Result.Success(message: Localization.Get( Resources.Key.SYSTEM_DATA_INITIALIZED));
 
             this.Modules.Add(command.Seed.Modules.Administration);
             this.Modules.Add(command.Seed.Modules.Sales);
@@ -42,7 +45,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             this.Clients.Add(command.Seed.Clients.Central);
             this.Clients.Context.Commit();
 
-            return Result.Success(message: Language.Instance.GetByCulture(Resources.Prefix.COMMAND, Resources.Key.SYSTEM_DATA_INITIALIZE_SUCCESS));
+            return Result.Success(message: Localization.Get( Resources.Key.SYSTEM_DATA_INITIALIZE_SUCCESS));
         }
     }
 }

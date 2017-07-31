@@ -31,9 +31,9 @@ namespace IDI.Core.Infrastructure.Verification.Attributes
             }
             else
             {
-                string displayName = Language.Instance.GetByCulture(Resources.Prefix.DISPLAY_NAME, this.DisplayName);
+                string displayName = LanguageManager.Instance.Get(Resources.Prefix.DISPLAY_NAME, this.DisplayName);
 
-                return new ValidationResult(Language.Instance.GetByCulture(Resources.Prefix.VERIFICATION, Resources.Key.REQUIRED).ToFormat(displayName));
+                return new ValidationResult(LanguageManager.Instance.Get(Resources.Prefix.VERIFICATION, Resources.Key.REQUIRED).ToFormat(displayName));
             }
         }
     }
