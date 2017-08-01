@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using IDI.Core.Infrastructure.Verification;
-using IDI.Core.Tests.Common;
-using IDI.Core.Tests.Common.Models;
+using IDI.Core.Tests.Utils;
+using IDI.Core.Tests.Utils.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IDI.Core.Tests.Infrastructure

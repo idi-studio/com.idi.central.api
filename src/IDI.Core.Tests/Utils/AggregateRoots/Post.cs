@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using IDI.Core.Domain;
 
-namespace IDI.Core.Tests.Common.AggregateRoots
+namespace IDI.Core.Tests.Utils.AggregateRoots
 {
     public class Post : AggregateRoot
     {

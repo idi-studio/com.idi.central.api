@@ -1,11 +1,11 @@
 ﻿using IDI.Core.Infrastructure.Verification;
 using IDI.Core.Infrastructure.Verification.Attributes;
 
-namespace IDI.Core.Tests.Common.Models
+namespace IDI.Core.Tests.Utils.Models
 {
-    public class TestObjectD : IVerifiable
+    public class TestObjectA : IVerifiable
     {
-        [StringLength("测试字段", MinLength = 5)]
+        [RequiredField("测试字段")]
         public string Field { get; set; }
     }
 }

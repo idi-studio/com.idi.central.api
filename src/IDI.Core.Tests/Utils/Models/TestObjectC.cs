@@ -1,7 +1,7 @@
 ﻿using IDI.Core.Infrastructure.Verification;
 using IDI.Core.Infrastructure.Verification.Attributes;
 
-namespace IDI.Core.Tests.Common.Models
+namespace IDI.Core.Tests.Utils.Models
 {
     public class TestObjectC : IVerifiable
     {

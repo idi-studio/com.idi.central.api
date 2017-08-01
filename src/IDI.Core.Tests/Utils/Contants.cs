@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace IDI.Core.Tests.Common
+namespace IDI.Core.Tests.Utils
 {
     public class Contants
     {
@@ -15,6 +15,7 @@ namespace IDI.Core.Tests.Common
             public const string Verification = "Verification";
             public const string Command = "Command";
             public const string Language = "Language";
+            public const string Common = "Common";
         }
 
         public class Tables

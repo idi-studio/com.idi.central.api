@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using IDI.Core.Domain;
 
-namespace IDI.Core.Tests.Common.AggregateRoots
+namespace IDI.Core.Tests.Utils.AggregateRoots
 {
     public class Blog : AggregateRoot
     {

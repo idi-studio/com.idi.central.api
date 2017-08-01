@@ -16,7 +16,7 @@ namespace IDI.Central.Models.Retailing
         public string Code { get; set; }
 
         [JsonProperty("profile")]
-        public Profile Profile { get; set; }
+        public ProfileCollection Profile { get; set; }
 
         [JsonProperty("active")]
         public bool Enabled { get; set; } = true;

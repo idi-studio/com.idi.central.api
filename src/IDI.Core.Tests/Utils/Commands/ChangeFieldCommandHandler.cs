@@ -3,7 +3,7 @@ using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Localization;
 
-namespace IDI.Core.Tests.Common.Commands
+namespace IDI.Core.Tests.Utils.Commands
 {
     public class ChangeFieldCommandHandler : ICommandHandler<ChangeFieldCommand>
     {

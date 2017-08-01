@@ -1,8 +1,8 @@
 ﻿using System;
 using IDI.Core.Infrastructure;
 using IDI.Core.Repositories;
-using IDI.Core.Tests.Common;
-using IDI.Core.Tests.Common.AggregateRoots;
+using IDI.Core.Tests.Utils;
+using IDI.Core.Tests.Utils.AggregateRoots;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IDI.Core.Tests.Repositories.EFCore
