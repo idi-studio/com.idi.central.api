@@ -26,7 +26,7 @@ namespace IDI.Central.Domain.Modules.Administration.Handlers
             var user = this.Users.Find(e => e.UserName == command.UserName, e => e.UserRoles);
 
             if (user == null)
-                return Result.Fail(Localization.Get( Resources.Key.INVALID_USER));
+                return Result.Fail(Localization.Get( Resources.Key.Command.InvalidUser));
 
             var recent = command.Roles.ToList();
             var current = user.UserRoles.Select(e => e.RoleId).ToList();
@@ -43,7 +43,7 @@ namespace IDI.Central.Domain.Modules.Administration.Handlers
             this.Users.Context.Commit();
             this.Users.Context.Dispose();
 
-            return Result.Success(message: Localization.Get( Resources.Key.USER_AUTHORIZATION_SUCCESS));
+            return Result.Success(message: Localization.Get( Resources.Key.Command.AuthenticationSuccess));
         }
     }
 }

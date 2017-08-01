@@ -19,10 +19,10 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
         public Result Execute(UserRegistrationCommand command)
         {
             if (command.Password != command.Confirm)
-                return Result.Fail(Localization.Get( Resources.Key.PASSWORD_MISMATCH));
+                return Result.Fail(Localization.Get( Resources.Key.Command.PasswordMismatch));
 
             if (this.Users.Exist(u => u.UserName == command.UserName))
-                return Result.Fail(Localization.Get( Resources.Key.USERNAME_REGISTERED));
+                return Result.Fail(Localization.Get( Resources.Key.Command.UsernameRegistered));
 
             var salt = Cryptography.Salt();
             var user = new User
@@ -37,7 +37,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             this.Users.Context.Commit();
             this.Users.Context.Dispose();
 
-            return Result.Success(message: Localization.Get( Resources.Key.REGISTRATION_SUCCESS));
+            return Result.Success(message: Localization.Get( Resources.Key.Command.RegistrationSuccess));
         }
     }
 }

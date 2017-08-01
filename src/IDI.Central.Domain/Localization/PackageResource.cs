@@ -16,37 +16,41 @@ namespace IDI.Central.Domain.Localization
 						public const string DISPLAY_NAME = "display-name";
 			        }
 
-		public class Key
-        {
-		    			public const string AUTHENTICATION_SUCCESS = "authentication-success";
-						public const string CLIENT_AUTHENTICATION_FAIL = "client-authentication-fail";
-						public const string CLIENT_AUTHENTICATION_SUCCESS = "client-authentication-success";
-						public const string CLIENT_DISABLED = "client-disabled";
-						public const string CLIENT_ID = "client-id";
-						public const string CONFIRM_PASSWORD = "confirm-password";
-						public const string CREATION_SUCCESS = "creation-success";
-						public const string INVALID_CLIENT = "invalid-client";
-						public const string INVALID_ROLE = "invalid-role";
-						public const string INVALID_USER = "invalid-user";
-						public const string INVALID_USERNAME_OR_PASSWORD = "invalid-username-or-password";
-						public const string PASSWORD = "password";
-						public const string PASSWORD_MISMATCH = "password-mismatch";
-						public const string PRODUCT_CODE = "product-code";
-						public const string PRODUCT_CODE_DUPLICATED = "product-code-duplicated";
-						public const string PRODUCT_MODEL = "product-model";
-						public const string PRODUCT_NAME = "product-name";
-						public const string PRODUCT_SPEC = "product-spec";
-						public const string REGISTRATION_SUCCESS = "registration-success";
-						public const string ROLE = "role";
-						public const string ROLE_AUTHORIZATION_SUCCESS = "role-authorization-success";
-						public const string ROLE_EXISTS = "role-exists";
-						public const string SECRET_KEY = "secret-key";
-						public const string SYSTEM_DATA_INITIALIZED = "system-data-initialized";
-						public const string SYSTEM_DATA_INITIALIZE_SUCCESS = "system-data-initialize-success";
-						public const string USER = "user";
-						public const string USER_AUTHORIZATION_SUCCESS = "user-authorization-success";
-						public const string USERNAME = "username";
-						public const string USERNAME_REGISTERED = "username-registered";
-			        }
+		public class Key 
+		{
+						public class DisplayName {
+								public const string ClientId = "client-id";
+								public const string SecretKey = "secret-key";
+								public const string Role = "role";
+								public const string Username = "username";
+								public const string Password = "password";
+								public const string User = "user";
+								public const string ConfirmPassword = "confirm-password";
+								public const string ProductName = "product-name";
+								public const string ProductCode = "product-code";
+								}
+
+						public class Command {
+								public const string InvalidUsernameOrPassword = "invalid-username-or-password";
+								public const string AuthenticationSuccess = "authentication-success";
+								public const string InvalidClient = "invalid-client";
+								public const string InvalidUser = "invalid-user";
+								public const string ClientDisabled = "client-disabled";
+								public const string ClientAuthenticationFail = "client-authentication-fail";
+								public const string ClientAuthenticationSuccess = "client-authentication-success";
+								public const string SystemDataInitialized = "system-data-initialized";
+								public const string SystemDataInitializeSuccess = "system-data-initialize-success";
+								public const string InvalidRole = "invalid-role";
+								public const string RoleAuthorizationSuccess = "role-authorization-success";
+								public const string UserAuthorizationSuccess = "user-authorization-success";
+								public const string RoleExists = "role-exists";
+								public const string UsernameRegistered = "username-registered";
+								public const string CreationSuccess = "creation-success";
+								public const string RegistrationSuccess = "registration-success";
+								public const string PasswordMismatch = "password-mismatch";
+								public const string ProductCodeDuplicated = "product-code-duplicated";
+								}
+
+					}
     }
 }

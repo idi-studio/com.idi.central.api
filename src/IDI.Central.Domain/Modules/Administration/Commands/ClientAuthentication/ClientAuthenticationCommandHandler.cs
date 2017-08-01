@@ -21,17 +21,17 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             var client = this.Clients.Find(e => e.ClientId == command.ClientId);
 
             if (client == null)
-                return Result.Fail(Localization.Get( Resources.Key.INVALID_CLIENT));
+                return Result.Fail(Localization.Get( Resources.Key.Command.InvalidClient));
 
             if (!client.IsActive)
-                return Result.Fail(Localization.Get( Resources.Key.CLIENT_DISABLED));
+                return Result.Fail(Localization.Get( Resources.Key.Command.ClientDisabled));
 
             string secret = Cryptography.Encrypt(command.SecretKey, client.Salt);
 
             if (client.SecretKey != secret)
-                return Result.Fail(Localization.Get( Resources.Key.CLIENT_AUTHENTICATION_FAIL));
+                return Result.Fail(Localization.Get( Resources.Key.Command.ClientAuthenticationFail));
 
-            return Result.Success(message: Localization.Get( Resources.Key.CLIENT_AUTHENTICATION_SUCCESS));
+            return Result.Success(message: Localization.Get( Resources.Key.Command.ClientAuthenticationSuccess));
         }
     }
 }

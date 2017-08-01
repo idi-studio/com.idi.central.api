@@ -33,7 +33,7 @@ namespace IDI.Core.Infrastructure.Verification.Attributes
             {
                 string displayName = LanguageManager.Instance.Get(Resources.Prefix.DISPLAY_NAME, this.DisplayName);
 
-                return new ValidationResult(LanguageManager.Instance.Get(Resources.Prefix.VERIFICATION, Resources.Key.REQUIRED).ToFormat(displayName));
+                return new ValidationResult(LanguageManager.Instance.Get(Resources.Prefix.VERIFICATION, Resources.Key.Verification.Required).ToFormat(displayName));
             }
         }
     }

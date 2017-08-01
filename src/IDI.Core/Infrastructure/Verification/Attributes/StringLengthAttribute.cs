@@ -35,17 +35,17 @@ namespace IDI.Core.Infrastructure.Verification.Attributes
 
             if (this.MinLength > 0 && this.MaxLength > 0 && (!(length >= this.MinLength && length <= this.MaxLength)))
             {
-                return new ValidationResult(LanguageManager.Instance.Get(Resources.Prefix.VERIFICATION, Resources.Key.CHARACTERS_RANGE).ToFormat(displayName, this.MinLength, this.MaxLength));
+                return new ValidationResult(LanguageManager.Instance.Get(Resources.Prefix.VERIFICATION, Resources.Key.Verification.CharactersRange).ToFormat(displayName, this.MinLength, this.MaxLength));
             }
 
             if (this.MinLength > 0 && this.MaxLength == 0 && length < this.MinLength)
             {
-                return new ValidationResult(LanguageManager.Instance.Get(Resources.Prefix.VERIFICATION, Resources.Key.CHARACTERS_MINIMUM).ToFormat(displayName, this.MinLength));
+                return new ValidationResult(LanguageManager.Instance.Get(Resources.Prefix.VERIFICATION, Resources.Key.Verification.CharactersMinimum).ToFormat(displayName, this.MinLength));
             }
 
             if (this.MinLength == 0 && this.MaxLength > 0 && length > this.MaxLength)
             {
-                return new ValidationResult(LanguageManager.Instance.Get(Resources.Prefix.VERIFICATION, Resources.Key.CHARACTERS_MAXIMUM).ToFormat(displayName, this.MaxLength));
+                return new ValidationResult(LanguageManager.Instance.Get(Resources.Prefix.VERIFICATION, Resources.Key.Verification.CharactersMaximum).ToFormat(displayName, this.MaxLength));
             }
 
             return ValidationResult.Success;

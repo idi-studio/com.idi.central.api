@@ -13,16 +13,37 @@ namespace IDI.Core.Localization.Packages
         public class Prefix
         {
 		    			public const string DISPLAY_NAME = "display-name";
+						public const string PROFILE_TYPE = "profile-type";
 						public const string VERIFICATION = "verification";
 			        }
 
-		public class Key
-        {
-		    			public const string CHARACTERS_MAXIMUM = "characters-maximum";
-						public const string CHARACTERS_MINIMUM = "characters-minimum";
-						public const string CHARACTERS_RANGE = "characters-range";
-						public const string REQUIRED = "required";
-						public const string TOKEN = "token";
-			        }
+		public class Key 
+		{
+						public class Verification {
+								public const string Required = "required";
+								public const string CharactersRange = "characters-range";
+								public const string CharactersMaximum = "characters-maximum";
+								public const string CharactersMinimum = "characters-minimum";
+								}
+
+						public class DisplayName {
+								public const string Token = "token";
+								}
+
+						public class ProfileType {
+								public const string Model = "model";
+								public const string Spec = "spec";
+								public const string Capacity = "capacity";
+								public const string Weight = "weight";
+								public const string Length = "length";
+								public const string Height = "height";
+								public const string Width = "width";
+								public const string Size = "size";
+								public const string Color = "color";
+								public const string Year = "year";
+								public const string Desc = "desc";
+								}
+
+					}
     }
 }

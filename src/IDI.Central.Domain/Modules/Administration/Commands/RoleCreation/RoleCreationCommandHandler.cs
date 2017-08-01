@@ -19,7 +19,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
         public Result Execute(RoleCreationCommand command)
         {
             if (this.Roles.Exist(e => e.Name == command.RoleName))
-                return Result.Fail(Localization.Get(Resources.Key.ROLE_EXISTS));
+                return Result.Fail(Localization.Get(Resources.Key.Command.RoleExists));
 
             var role = new Role { Name = command.RoleName };
 
@@ -27,7 +27,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             this.Roles.Context.Commit();
             this.Roles.Context.Dispose();
 
-            return Result.Success(message: Localization.Get(Resources.Key.CREATION_SUCCESS));
+            return Result.Success(message: Localization.Get(Resources.Key.Command.CreationSuccess));
         }
     }
 }

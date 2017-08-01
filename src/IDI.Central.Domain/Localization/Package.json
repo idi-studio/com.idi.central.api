@@ -85,18 +85,6 @@
 },
 {
     "language": "chs",
-    "name": "user",
-    "value": "用户",
-    "prefix": "display-name"
-},
-{
-    "language": "en",
-    "name": "user",
-    "value": "User",
-    "prefix": "display-name"
-},
-{
-    "language": "chs",
     "name": "product-name",
     "value": "产品名称",
     "prefix": "display-name"
@@ -117,30 +105,6 @@
     "language": "en",
     "name": "product-code",
     "value": "Product Code",
-    "prefix": "display-name"
-},
-{
-    "language": "chs",
-    "name": "product-model",
-    "value": "产品型号",
-    "prefix": "display-name"
-},
-{
-    "language": "en",
-    "name": "product-model",
-    "value": "Product Model",
-    "prefix": "display-name"
-},
-{
-    "language": "chs",
-    "name": "product-spec",
-    "value": "产品规格",
-    "prefix": "display-name"
-},
-{
-    "language": "en",
-    "name": "product-spec",
-    "value": "Product Specifications",
     "prefix": "display-name"
 },
 {

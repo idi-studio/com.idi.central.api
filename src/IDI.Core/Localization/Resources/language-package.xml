@@ -6,4 +6,17 @@
   <item prefix="verification" name="characters-minimum" en="'{0}' minimum is {1} characters." chs="'{0}'最少{1}个字符!" />
 
   <item prefix="display-name" name="token" en="Token" chs="令牌" />
+
+  <item prefix="profile-type" name="model" en="Model" chs="型号" />
+  <item prefix="profile-type" name="spec" en="Spec" chs="规格" />
+  <item prefix="profile-type" name="capacity" en="Capacity" chs="容量" />
+  <item prefix="profile-type" name="weight" en="Weight" chs="重量" />
+  <item prefix="profile-type" name="length" en="Length" chs="长" />
+  <item prefix="profile-type" name="height" en="Height" chs="高" />
+  <item prefix="profile-type" name="width" en="Width" chs="宽" />
+  <item prefix="profile-type" name="size" en="Size" chs="尺寸" />
+  <item prefix="profile-type" name="color" en="Color" chs="颜色" />
+  <item prefix="profile-type" name="year" en="Year" chs="年份" />
+  <item prefix="profile-type" name="desc" en="Description" chs="描述" />
+  
 </items>

@@ -35,7 +35,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             bool initialized = this.Modules.Exist(e => e.Code == command.Seed.Modules.Administration.Code);
 
             if (initialized)
-                return Result.Success(message: Localization.Get( Resources.Key.SYSTEM_DATA_INITIALIZED));
+                return Result.Success(message: Localization.Get( Resources.Key.Command.SystemDataInitialized));
 
             this.Modules.Add(command.Seed.Modules.Administration);
             this.Modules.Add(command.Seed.Modules.Sales);
@@ -53,7 +53,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             command.Seed.Products.iPhones.ForEach(e => this.Products.Add(e));
             this.Products.Context.Commit();
 
-            return Result.Success(message: Localization.Get( Resources.Key.SYSTEM_DATA_INITIALIZE_SUCCESS));
+            return Result.Success(message: Localization.Get( Resources.Key.Command.SystemDataInitializeSuccess));
         }
     }
 }

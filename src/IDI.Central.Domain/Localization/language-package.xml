@@ -7,11 +7,8 @@
   <item prefix="display-name" name="password" en="Password" chs="密码" />
   <item prefix="display-name" name="user" en="User" chs="用户" />
   <item prefix="display-name" name="confirm-password" en="Confirm Password" chs="确认密码" />
-  <item prefix="display-name" name="user" en="User" chs="用户" />
   <item prefix="display-name" name="product-name" en="Product Name" chs="产品名称" />
   <item prefix="display-name" name="product-code" en="Product Code" chs="产品编码" />
-  <item prefix="display-name" name="product-model" en="Product Model" chs="产品型号" />
-  <item prefix="display-name" name="product-spec" en="Product Specifications" chs="产品规格" />
 
   <item prefix="command" name="invalid-username-or-password" en="Invalid username or password." chs="无效的用户名或密码!" />
   <item prefix="command" name="authentication-success" en="Authentication successfully." chs="认证成功!" />

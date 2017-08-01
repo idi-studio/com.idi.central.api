@@ -25,7 +25,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             var role = this.Roles.Find(r => r.Name == command.RoleName, r => r.RolePrivileges);
 
             if (role == null)
-                return Result.Fail(Localization.Get( Resources.Key.INVALID_ROLE));
+                return Result.Fail(Localization.Get( Resources.Key.Command.InvalidRole));
 
             var recent = command.Privileges.ToList();
             var current = role.RolePrivileges.Select(e => e.PrivilegeId).ToList();
@@ -42,7 +42,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             this.Roles.Context.Commit();
             this.Roles.Context.Dispose();
 
-            return Result.Success(message: Localization.Get( Resources.Key.ROLE_AUTHORIZATION_SUCCESS));
+            return Result.Success(message: Localization.Get( Resources.Key.Command.RoleAuthorizationSuccess));
         }
     }
 }
