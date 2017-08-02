@@ -8,6 +8,7 @@ using IDI.Core.Common;
 using IDI.Core.Common.Basetypes;
 using IDI.Core.Common.Enums;
 using IDI.Core.Common.Extensions;
+using IDI.Core.Localization.Packages;
 
 namespace IDI.Central.Domain.Modules.Administration
 {
@@ -75,41 +76,41 @@ namespace IDI.Central.Domain.Modules.Administration
         public ProductCollection()
         {
             this.iPhones = new List<Product> {
-                new Product { Name = "iPhone 5 黑色 16GB", Profile = new Profile {  { ProfileType.Model, "A1442" }, { ProfileType.Color, "黑色" }, { ProfileType.Year, "2012" }, { ProfileType.Capacity, "16GB" } }.ToJson() },
-                new Product { Name = "iPhone 5 黑色 32GB", Profile = new Profile {  { ProfileType.Model, "A1442" }, { ProfileType.Color, "黑色" }, { ProfileType.Year, "2012" }, { ProfileType.Capacity, "32GB" } }.ToJson() },
-                new Product { Name = "iPhone 5 黑色 64GB", Profile = new Profile {  { ProfileType.Model, "A1442" }, { ProfileType.Color, "黑色" }, { ProfileType.Year, "2012" }, { ProfileType.Capacity, "64GB" } }.ToJson() },
-                new Product { Name = "iPhone 5 白色 16GB", Profile = new Profile {  { ProfileType.Model, "A1442" }, { ProfileType.Color, "白色" }, { ProfileType.Year, "2012" }, { ProfileType.Capacity, "16GB" } }.ToJson() },
-                new Product { Name = "iPhone 5 白色 32GB", Profile = new Profile {  { ProfileType.Model, "A1442" }, { ProfileType.Color, "白色" }, { ProfileType.Year, "2012" }, { ProfileType.Capacity, "32GB" } }.ToJson() },
-                new Product { Name = "iPhone 5 白色 64GB", Profile = new Profile {  { ProfileType.Model, "A1442" }, { ProfileType.Color, "白色" }, { ProfileType.Year, "2012" }, { ProfileType.Capacity, "64GB" } }.ToJson() },
+                new Product { Name = "iPhone 5 黑色 16GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1442" }, { Resources.Key.ProfileType.Color, "黑色" }, { Resources.Key.ProfileType.Year, "2012" }, { Resources.Key.ProfileType.Capacity, "16GB" } }.ToJson() },
+                new Product { Name = "iPhone 5 黑色 32GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1442" }, { Resources.Key.ProfileType.Color, "黑色" }, { Resources.Key.ProfileType.Year, "2012" }, { Resources.Key.ProfileType.Capacity, "32GB" } }.ToJson() },
+                new Product { Name = "iPhone 5 黑色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1442" }, { Resources.Key.ProfileType.Color, "黑色" }, { Resources.Key.ProfileType.Year, "2012" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
+                new Product { Name = "iPhone 5 白色 16GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1442" }, { Resources.Key.ProfileType.Color, "白色" }, { Resources.Key.ProfileType.Year, "2012" }, { Resources.Key.ProfileType.Capacity, "16GB" } }.ToJson() },
+                new Product { Name = "iPhone 5 白色 32GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1442" }, { Resources.Key.ProfileType.Color, "白色" }, { Resources.Key.ProfileType.Year, "2012" }, { Resources.Key.ProfileType.Capacity, "32GB" } }.ToJson() },
+                new Product { Name = "iPhone 5 白色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1442" }, { Resources.Key.ProfileType.Color, "白色" }, { Resources.Key.ProfileType.Year, "2012" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
 
-                new Product { Name = "iPhone 5s 深空灰色 32GB", Profile = new Profile {  { ProfileType.Model, "A1533" }, { ProfileType.Color, "深空灰色" }, { ProfileType.Year, "2013" }, { ProfileType.Capacity, "32GB" } }.ToJson() },
-                new Product { Name = "iPhone 5s 银色 32GB", Profile = new Profile {  { ProfileType.Model, "A1533" }, { ProfileType.Color, "银色" }, { ProfileType.Year, "2013" }, { ProfileType.Capacity, "32GB" } }.ToJson() },
-                new Product { Name = "iPhone 5s 金色 32GB", Profile = new Profile {  { ProfileType.Model, "A1533" }, { ProfileType.Color, "金色" }, { ProfileType.Year, "2013" }, { ProfileType.Capacity, "32GB" } }.ToJson() },
-                new Product { Name = "iPhone 5s 深空灰色 64GB", Profile = new Profile {  { ProfileType.Model, "A1533" }, { ProfileType.Color, "深空灰色" }, { ProfileType.Year, "2013" }, { ProfileType.Capacity, "64GB" } }.ToJson() },
-                new Product { Name = "iPhone 5s 银色 64GB", Profile = new Profile {  { ProfileType.Model, "A1533" }, { ProfileType.Color, "银色" }, { ProfileType.Year, "2013" }, { ProfileType.Capacity, "64GB" } }.ToJson() },
-                new Product { Name = "iPhone 5s 金色 64GB", Profile = new Profile {  { ProfileType.Model, "A1533" }, { ProfileType.Color, "金色" }, { ProfileType.Year, "2013" }, { ProfileType.Capacity, "64GB" } }.ToJson() },
+                new Product { Name = "iPhone 5s 深空灰色 32GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1533" }, { Resources.Key.ProfileType.Color, "深空灰色" }, { Resources.Key.ProfileType.Year, "2013" }, { Resources.Key.ProfileType.Capacity, "32GB" } }.ToJson() },
+                new Product { Name = "iPhone 5s 银色 32GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1533" }, { Resources.Key.ProfileType.Color, "银色" }, { Resources.Key.ProfileType.Year, "2013" }, { Resources.Key.ProfileType.Capacity, "32GB" } }.ToJson() },
+                new Product { Name = "iPhone 5s 金色 32GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1533" }, { Resources.Key.ProfileType.Color, "金色" }, { Resources.Key.ProfileType.Year, "2013" }, { Resources.Key.ProfileType.Capacity, "32GB" } }.ToJson() },
+                new Product { Name = "iPhone 5s 深空灰色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1533" }, { Resources.Key.ProfileType.Color, "深空灰色" }, { Resources.Key.ProfileType.Year, "2013" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
+                new Product { Name = "iPhone 5s 银色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1533" }, { Resources.Key.ProfileType.Color, "银色" }, { Resources.Key.ProfileType.Year, "2013" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
+                new Product { Name = "iPhone 5s 金色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1533" }, { Resources.Key.ProfileType.Color, "金色" }, { Resources.Key.ProfileType.Year, "2013" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
 
-                new Product { Name = "iPhone 6 深空灰色 64GB", Profile = new Profile {  { ProfileType.Model, "A1589" }, { ProfileType.Color, "深空灰色" }, { ProfileType.Year, "2014" }, { ProfileType.Capacity, "64GB" } }.ToJson() },
-                new Product { Name = "iPhone 6 银色 64GB", Profile = new Profile {  { ProfileType.Model, "A1589" }, { ProfileType.Color, "银色" }, { ProfileType.Year, "2014" }, { ProfileType.Capacity, "64GB" } }.ToJson() },
-                new Product { Name = "iPhone 6 金色 64GB", Profile = new Profile {  { ProfileType.Model, "A1589" }, { ProfileType.Color, "金色" }, { ProfileType.Year, "2014" }, { ProfileType.Capacity, "64GB" } }.ToJson() },
+                new Product { Name = "iPhone 6 深空灰色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1589" }, { Resources.Key.ProfileType.Color, "深空灰色" }, { Resources.Key.ProfileType.Year, "2014" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
+                new Product { Name = "iPhone 6 银色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1589" }, { Resources.Key.ProfileType.Color, "银色" }, { Resources.Key.ProfileType.Year, "2014" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
+                new Product { Name = "iPhone 6 金色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1589" }, { Resources.Key.ProfileType.Color, "金色" }, { Resources.Key.ProfileType.Year, "2014" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
 
-                new Product { Name = "iPhone 6 Plus 深空灰色 64GB", Profile = new Profile {  { ProfileType.Model, "A1593" }, { ProfileType.Color, "深空灰色" }, { ProfileType.Year, "2014" }, { ProfileType.Capacity, "64GB" } }.ToJson() },
-                new Product { Name = "iPhone 6 Plus 银色 64GB", Profile = new Profile {  { ProfileType.Model, "A1593" }, { ProfileType.Color, "银色" }, { ProfileType.Year, "2014" }, { ProfileType.Capacity, "64GB" } }.ToJson() },
-                new Product { Name = "iPhone 6 Plus 金色 64GB", Profile = new Profile {  { ProfileType.Model, "A1593" }, { ProfileType.Color, "金色" }, { ProfileType.Year, "2014" }, { ProfileType.Capacity, "64GB" } }.ToJson() },
+                new Product { Name = "iPhone 6 Plus 深空灰色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1593" }, { Resources.Key.ProfileType.Color, "深空灰色" }, { Resources.Key.ProfileType.Year, "2014" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
+                new Product { Name = "iPhone 6 Plus 银色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1593" }, { Resources.Key.ProfileType.Color, "银色" }, { Resources.Key.ProfileType.Year, "2014" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
+                new Product { Name = "iPhone 6 Plus 金色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1593" }, { Resources.Key.ProfileType.Color, "金色" }, { Resources.Key.ProfileType.Year, "2014" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
 
-                new Product { Name = "iPhone 7 黑色 128GB", Profile = new Profile {  { ProfileType.Model, "A1778" }, { ProfileType.Color, "黑色" }, { ProfileType.Year, "2016" }, { ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 亮黑色 128GB", Profile = new Profile {  { ProfileType.Model, "A1778" }, { ProfileType.Color, "亮黑色" }, { ProfileType.Year, "2016" }, { ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 金色 128GB", Profile = new Profile {  { ProfileType.Model, "A1778" }, { ProfileType.Color, "金色" }, { ProfileType.Year, "2016" }, { ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 玫瑰金色 128GB", Profile = new Profile {  { ProfileType.Model, "A1778" }, { ProfileType.Color, "玫瑰金色" }, { ProfileType.Year, "2016" }, { ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 银色 128GB", Profile = new Profile {  { ProfileType.Model, "A1778" }, { ProfileType.Color, "银色" }, { ProfileType.Year, "2016" }, { ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 红色 128GB", Profile = new Profile {  { ProfileType.Model, "A1778" }, { ProfileType.Color, "红色" }, { ProfileType.Year, "2016" }, { ProfileType.Capacity, "128GB" } }.ToJson() },
+                new Product { Name = "iPhone 7 黑色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1778" }, { Resources.Key.ProfileType.Color, "黑色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
+                new Product { Name = "iPhone 7 亮黑色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1778" }, { Resources.Key.ProfileType.Color, "亮黑色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
+                new Product { Name = "iPhone 7 金色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1778" }, { Resources.Key.ProfileType.Color, "金色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
+                new Product { Name = "iPhone 7 玫瑰金色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1778" }, { Resources.Key.ProfileType.Color, "玫瑰金色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
+                new Product { Name = "iPhone 7 银色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1778" }, { Resources.Key.ProfileType.Color, "银色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
+                new Product { Name = "iPhone 7 红色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1778" }, { Resources.Key.ProfileType.Color, "红色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
 
-                new Product { Name = "iPhone 7 Plus 黑色 128GB", Profile = new Profile {  { ProfileType.Model, "A1661" }, { ProfileType.Color, "黑色" }, { ProfileType.Year, "2016" }, { ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 Plus 亮黑色 128GB", Profile = new Profile {  { ProfileType.Model, "A1661" }, { ProfileType.Color, "亮黑色" }, { ProfileType.Year, "2016" }, { ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 Plus 金色 128GB", Profile = new Profile {  { ProfileType.Model, "A1661" }, { ProfileType.Color, "金色" }, { ProfileType.Year, "2016" }, { ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 Plus 玫瑰金色 128GB", Profile = new Profile {  { ProfileType.Model, "A1661" }, { ProfileType.Color, "玫瑰金色" }, { ProfileType.Year, "2016" }, { ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 Plus 银色 128GB", Profile = new Profile {  { ProfileType.Model, "A1661" }, { ProfileType.Color, "银色" }, { ProfileType.Year, "2016" }, { ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 Plus 红色 128GB", Profile = new Profile {  { ProfileType.Model, "A1661" }, { ProfileType.Color, "红色" }, { ProfileType.Year, "2016" }, { ProfileType.Capacity, "128GB" } }.ToJson() },
+                new Product { Name = "iPhone 7 Plus 黑色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1661" }, { Resources.Key.ProfileType.Color, "黑色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
+                new Product { Name = "iPhone 7 Plus 亮黑色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1661" }, { Resources.Key.ProfileType.Color, "亮黑色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
+                new Product { Name = "iPhone 7 Plus 金色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1661" }, { Resources.Key.ProfileType.Color, "金色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
+                new Product { Name = "iPhone 7 Plus 玫瑰金色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1661" }, { Resources.Key.ProfileType.Color, "玫瑰金色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
+                new Product { Name = "iPhone 7 Plus 银色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1661" }, { Resources.Key.ProfileType.Color, "银色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
+                new Product { Name = "iPhone 7 Plus 红色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1661" }, { Resources.Key.ProfileType.Color, "红色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
             };
 
             this.iPhones.ForEach(e => e.Code = Guid.NewGuid().ToString("N"));

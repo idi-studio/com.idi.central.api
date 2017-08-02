@@ -1,4 +1,5 @@
 ﻿using System;
+using IDI.Central.Domain.Localization;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.Verification.Attributes;
 
@@ -6,7 +7,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 {
     public class UserAuthorizeCommand : Command
     {
-        [RequiredField("user")]
+        [RequiredField(Resources.Key.DisplayName.User)]
         public string UserName { get; private set; }
 
         public Guid[] Roles { get; private set; }

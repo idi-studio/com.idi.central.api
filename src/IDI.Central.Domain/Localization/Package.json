@@ -109,6 +109,18 @@
 },
 {
     "language": "chs",
+    "name": "product-profile",
+    "value": "产品描述",
+    "prefix": "display-name"
+},
+{
+    "language": "en",
+    "name": "product-profile",
+    "value": "Product Profile",
+    "prefix": "display-name"
+},
+{
+    "language": "chs",
     "name": "invalid-username-or-password",
     "value": "无效的用户名或密码!",
     "prefix": "command"

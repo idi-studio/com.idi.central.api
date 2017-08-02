@@ -15,6 +15,9 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("code")]
         public string Code { get; set; }
 
+        [JsonProperty("description")]
+        public string Description { get; set; }
+
         [JsonProperty("profile")]
         public ProfileCollection Profile { get; set; }
 

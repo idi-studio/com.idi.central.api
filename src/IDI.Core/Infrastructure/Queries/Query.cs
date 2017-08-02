@@ -1,4 +1,5 @@
 ﻿using IDI.Core.Common;
+using IDI.Core.Localization;
 
 namespace IDI.Core.Infrastructure.Queries
 {

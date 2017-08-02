@@ -28,6 +28,7 @@ namespace IDI.Central.Domain.Localization
 								public const string ConfirmPassword = "confirm-password";
 								public const string ProductName = "product-name";
 								public const string ProductCode = "product-code";
+								public const string ProductProfile = "product-profile";
 								}
 
 						public class Command {

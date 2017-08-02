@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Authentication;
 using IDI.Core.Common;
@@ -11,7 +12,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
 {
     public class QueryUserIdentityCondition : Condition
     {
-        [RequiredField("username")]
+        [RequiredField(Resources.Key.DisplayName.Username)]
         public string UserName { get; set; }
     }
 

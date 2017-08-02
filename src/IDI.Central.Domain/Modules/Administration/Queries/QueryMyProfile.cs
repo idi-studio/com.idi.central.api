@@ -1,7 +1,6 @@
-﻿using System.Linq;
+﻿using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Models.Administration;
-using IDI.Central.Models.Common;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
@@ -12,7 +11,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
 {
     public class QueryMyProfileCondition : Condition
     {
-        [RequiredField("username")]
+        [RequiredField(Resources.Key.DisplayName.Username)]
         public string UserName { get; set; }
     }
 

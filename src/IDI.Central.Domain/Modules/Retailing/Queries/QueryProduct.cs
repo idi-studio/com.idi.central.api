@@ -31,6 +31,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                 Id = r.Id,
                 Name = r.Name,
                 Code = r.Code,
+                Description = r.Profile.To<Profile>().ToString(),
                 Profile = r.Profile.To<Profile>().ToCollection(),
                 Enabled = r.Enabled
             }).ToList();

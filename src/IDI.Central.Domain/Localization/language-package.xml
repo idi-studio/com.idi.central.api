@@ -9,6 +9,7 @@
   <item prefix="display-name" name="confirm-password" en="Confirm Password" chs="确认密码" />
   <item prefix="display-name" name="product-name" en="Product Name" chs="产品名称" />
   <item prefix="display-name" name="product-code" en="Product Code" chs="产品编码" />
+  <item prefix="display-name" name="product-profile" en="Product Profile" chs="产品描述" />
 
   <item prefix="command" name="invalid-username-or-password" en="Invalid username or password." chs="无效的用户名或密码!" />
   <item prefix="command" name="authentication-success" en="Authentication successfully." chs="认证成功!" />

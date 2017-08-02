@@ -1,22 +1,27 @@
 ﻿using System.Linq;
+using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Models.Administration;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
 using IDI.Core.Infrastructure.Verification.Attributes;
+using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Queries
 {
     public class QuerySidebarCondition : Condition
     {
-        [RequiredField("username")]
+        [RequiredField(Resources.Key.DisplayName.Username)]
         public string UserName { get; set; }
     }
 
     public class QuerySidebar : Query<QuerySidebarCondition, Sidebar>
     {
+        [Injection]
+        public ILocalization Localization { get; set; }
+
         [Injection]
         public IQueryRepository<Menu> Menus { get; set; }
 
@@ -31,7 +36,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
             var user = this.Users.Find(e => e.UserName == condition.UserName, e => e.Profile, e => e.UserRoles);
 
             if (user == null)
-                return Result.Fail<Sidebar>($"无效的用户名'{condition.UserName}'");
+                return Result.Fail<Sidebar>(Localization.Get(Resources.Key.Command.InvalidUser));
 
             var userRoles = user.UserRoles.Select(e => e.RoleId).ToList();
 
