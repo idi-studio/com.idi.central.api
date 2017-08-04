@@ -4,6 +4,7 @@ using IDI.Central.Models.Common;
 using IDI.Central.Models.Retailing;
 using IDI.Central.Providers;
 using IDI.Core.Common;
+using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,7 +21,7 @@ namespace IDI.Central.Controllers
             {
                 Name = input.Name,
                 Code = input.Code,
-                Profile = input.Profile,
+                Profile = input.Profile.ToJson(),
             };
 
             return ServiceLocator.CommandBus.Send(command);

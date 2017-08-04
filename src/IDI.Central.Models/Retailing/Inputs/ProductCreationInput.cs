@@ -1,4 +1,5 @@
 ﻿using IDI.Core.Common;
+using IDI.Core.Common.Basetypes;
 
 namespace IDI.Central.Models.Retailing
 {
@@ -8,6 +9,6 @@ namespace IDI.Central.Models.Retailing
 
         public string Code { get; set; } = "";
 
-        public string Profile { get; set; } = "";
+        public ProfileCollection Profile { get; set; } = new ProfileCollection();
     }
 }
