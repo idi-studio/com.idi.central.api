@@ -9,7 +9,7 @@
   <item prefix="display-name" name="confirm-password" en="Confirm Password" chs="确认密码" />
   <item prefix="display-name" name="product-name" en="Product Name" chs="产品名称" />
   <item prefix="display-name" name="product-code" en="Product Code" chs="产品编码" />
-  <item prefix="display-name" name="product-profile" en="Product Profile" chs="产品描述" />
+  <item prefix="display-name" name="product-tags" en="Product Tags" chs="产品标签" />
 
   <item prefix="command" name="invalid-username-or-password" en="Invalid username or password." chs="无效的用户名或密码!" />
   <item prefix="command" name="authentication-success" en="Authentication successfully." chs="认证成功!" />
@@ -29,4 +29,16 @@
   <item prefix="command" name="registration-success" en="Registration success." chs="注册成功!" />
   <item prefix="command" name="password-mismatch" en="Passwords does not match." chs="两次密码不一致!" />
   <item prefix="command" name="product-code-duplicated" en="Product code duplicated." chs="产品编码重复!" />
+
+  <item prefix="tag" name="model" en="Model" chs="型号" />
+  <item prefix="tag" name="spec" en="Spec" chs="规格" />
+  <item prefix="tag" name="capacity" en="Capacity" chs="容量" />
+  <item prefix="tag" name="weight" en="Weight" chs="重量" />
+  <item prefix="tag" name="length" en="Length" chs="长" />
+  <item prefix="tag" name="height" en="Height" chs="高" />
+  <item prefix="tag" name="width" en="Width" chs="宽" />
+  <item prefix="tag" name="size" en="Size" chs="尺寸" />
+  <item prefix="tag" name="color" en="Color" chs="颜色" />
+  <item prefix="tag" name="year" en="Year" chs="年份" />
+  <item prefix="tag" name="desc" en="Description" chs="描述" />
 </items>

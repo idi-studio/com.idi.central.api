@@ -1,5 +1,5 @@
-﻿using IDI.Core.Common;
-using IDI.Core.Common.Basetypes;
+﻿using System.Collections.Generic;
+using IDI.Core.Common;
 
 namespace IDI.Central.Models.Retailing
 {
@@ -9,6 +9,6 @@ namespace IDI.Central.Models.Retailing
 
         public string Code { get; set; } = "";
 
-        public ProfileCollection Profile { get; set; } = new ProfileCollection();
+        public List<Tag> Tags { get; set; } = new List<Tag>();
     }
 }

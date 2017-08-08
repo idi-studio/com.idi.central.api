@@ -1,20 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using IDI.Core.Common;
+using IDI.Core.Common.Basetypes;
 using IDI.Core.Localization.Packages;
 
 namespace IDI.Core.Localization
 {
     public sealed class LanguageManager : Singleton<LanguageManager>, ILocalization
     {
-        private Dictionary<string, string> items;
+        private List<PackageItem> items;
 
         public int Count => items.Count;
 
         private LanguageManager()
         {
-            items = new Dictionary<string, string>();
+            items = new List<PackageItem>();
 
             Load(new PackageCore());
         }
@@ -31,10 +34,10 @@ namespace IDI.Core.Localization
 
         private string GetValue(string prefix, string name, Category category = Category.English)
         {
-            string key = $"{prefix}-{name}-{category.Description()}".ToLower();
+            var item = items.FirstOrDefault(e => e.Prefix == prefix && e.Name == name && e.Language == category.Description());
 
-            if (items.ContainsKey(key))
-                return items[key];
+            if (item != null)
+                return item.Value;
 
             return name;
         }
@@ -43,10 +46,8 @@ namespace IDI.Core.Localization
         {
             foreach (var item in package.Items)
             {
-                string key = $"{item.Prefix}-{item.Name}-{item.Language}";
-
-                if (!this.items.ContainsKey(key))
-                    this.items.Add(key, item.Value);
+                if (!this.items.Any(e => e.Prefix == item.Prefix && e.Name == item.Name && e.Language == item.Language))
+                    this.items.Add(item);
             }
         }
 
@@ -72,6 +73,25 @@ namespace IDI.Core.Localization
         public string Get(string name)
         {
             return Get(prefix: "default", name: name);
+        }
+
+        public List<PackageItem> GetAll(string prefix)
+        {
+            Category category;
+
+            string culture = (CultureInfo.DefaultThreadCurrentUICulture ?? CultureInfo.CurrentCulture).Name;
+
+            switch (culture)
+            {
+                case "zh-CN":
+                    category = Category.SimplifiedChinese;
+                    break;
+                default:
+                    category = Category.English;
+                    break;
+            }
+
+            return this.items.Where(e => e.Prefix == prefix && e.Language == category.Description()).ToList();
         }
     }
 }

@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Central.Models.Common;
 using IDI.Central.Models.Retailing;
 using IDI.Core.Common;
-using IDI.Core.Common.Basetypes;
-using IDI.Core.Common.Enums;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
@@ -31,8 +30,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                 Id = r.Id,
                 Name = r.Name,
                 Code = r.Code,
-                Description = r.Profile.To<Profile>().ToString(),
-                Profile = r.Profile.To<Profile>().ToCollection(),
+                Description = r.Tags.To<List<Tag>>().AsString(),
+                Tags = r.Tags.To<List<Tag>>(),
                 Enabled = r.Enabled
             }).ToList();
 

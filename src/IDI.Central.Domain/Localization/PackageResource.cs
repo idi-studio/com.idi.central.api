@@ -14,6 +14,7 @@ namespace IDI.Central.Domain.Localization
         {
 		    			public const string COMMAND = "command";
 						public const string DISPLAY_NAME = "display-name";
+						public const string TAG = "tag";
 			        }
 
 		public class Key 
@@ -28,7 +29,7 @@ namespace IDI.Central.Domain.Localization
 								public const string ConfirmPassword = "confirm-password";
 								public const string ProductName = "product-name";
 								public const string ProductCode = "product-code";
-								public const string ProductProfile = "product-profile";
+								public const string ProductTags = "product-tags";
 								}
 
 						public class Command {
@@ -50,6 +51,20 @@ namespace IDI.Central.Domain.Localization
 								public const string RegistrationSuccess = "registration-success";
 								public const string PasswordMismatch = "password-mismatch";
 								public const string ProductCodeDuplicated = "product-code-duplicated";
+								}
+
+						public class Tag {
+								public const string Model = "model";
+								public const string Spec = "spec";
+								public const string Capacity = "capacity";
+								public const string Weight = "weight";
+								public const string Length = "length";
+								public const string Height = "height";
+								public const string Width = "width";
+								public const string Size = "size";
+								public const string Color = "color";
+								public const string Year = "year";
+								public const string Desc = "desc";
 								}
 
 					}

@@ -109,14 +109,14 @@
 },
 {
     "language": "chs",
-    "name": "product-profile",
-    "value": "产品描述",
+    "name": "product-tags",
+    "value": "产品标签",
     "prefix": "display-name"
 },
 {
     "language": "en",
-    "name": "product-profile",
-    "value": "Product Profile",
+    "name": "product-tags",
+    "value": "Product Tags",
     "prefix": "display-name"
 },
 {
@@ -334,5 +334,137 @@
     "name": "product-code-duplicated",
     "value": "Product code duplicated.",
     "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "model",
+    "value": "型号",
+    "prefix": "tag"
+},
+{
+    "language": "en",
+    "name": "model",
+    "value": "Model",
+    "prefix": "tag"
+},
+{
+    "language": "chs",
+    "name": "spec",
+    "value": "规格",
+    "prefix": "tag"
+},
+{
+    "language": "en",
+    "name": "spec",
+    "value": "Spec",
+    "prefix": "tag"
+},
+{
+    "language": "chs",
+    "name": "capacity",
+    "value": "容量",
+    "prefix": "tag"
+},
+{
+    "language": "en",
+    "name": "capacity",
+    "value": "Capacity",
+    "prefix": "tag"
+},
+{
+    "language": "chs",
+    "name": "weight",
+    "value": "重量",
+    "prefix": "tag"
+},
+{
+    "language": "en",
+    "name": "weight",
+    "value": "Weight",
+    "prefix": "tag"
+},
+{
+    "language": "chs",
+    "name": "length",
+    "value": "长",
+    "prefix": "tag"
+},
+{
+    "language": "en",
+    "name": "length",
+    "value": "Length",
+    "prefix": "tag"
+},
+{
+    "language": "chs",
+    "name": "height",
+    "value": "高",
+    "prefix": "tag"
+},
+{
+    "language": "en",
+    "name": "height",
+    "value": "Height",
+    "prefix": "tag"
+},
+{
+    "language": "chs",
+    "name": "width",
+    "value": "宽",
+    "prefix": "tag"
+},
+{
+    "language": "en",
+    "name": "width",
+    "value": "Width",
+    "prefix": "tag"
+},
+{
+    "language": "chs",
+    "name": "size",
+    "value": "尺寸",
+    "prefix": "tag"
+},
+{
+    "language": "en",
+    "name": "size",
+    "value": "Size",
+    "prefix": "tag"
+},
+{
+    "language": "chs",
+    "name": "color",
+    "value": "颜色",
+    "prefix": "tag"
+},
+{
+    "language": "en",
+    "name": "color",
+    "value": "Color",
+    "prefix": "tag"
+},
+{
+    "language": "chs",
+    "name": "year",
+    "value": "年份",
+    "prefix": "tag"
+},
+{
+    "language": "en",
+    "name": "year",
+    "value": "Year",
+    "prefix": "tag"
+},
+{
+    "language": "chs",
+    "name": "desc",
+    "value": "描述",
+    "prefix": "tag"
+},
+{
+    "language": "en",
+    "name": "desc",
+    "value": "Description",
+    "prefix": "tag"
 }]
  

@@ -21,7 +21,7 @@ namespace IDI.Central.Controllers
             {
                 Name = input.Name,
                 Code = input.Code,
-                Profile = input.Profile.ToJson(),
+                Tags = input.Tags.ToJson(),
             };
 
             return ServiceLocator.CommandBus.Send(command);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using IDI.Core.Common.Basetypes;
 using Newtonsoft.Json;
 
@@ -18,8 +19,8 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("description")]
         public string Description { get; set; }
 
-        [JsonProperty("profile")]
-        public ProfileCollection Profile { get; set; }
+        [JsonProperty("tags")]
+        public List<Tag> Tags { get; set; }
 
         [JsonProperty("active")]
         public bool Enabled { get; set; } = true;

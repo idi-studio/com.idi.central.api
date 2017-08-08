@@ -25,7 +25,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             {
                 Name = command.Name,
                 Code = command.Code,
-                Profile = command.Profile,
+                Tags = command.Tags,
                 Enabled = false,
             };
 

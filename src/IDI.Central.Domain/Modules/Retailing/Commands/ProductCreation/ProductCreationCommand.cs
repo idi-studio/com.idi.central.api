@@ -14,7 +14,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
         [StringLength(Resources.Key.DisplayName.ProductCode, MaxLength = 50)]
         public string Code { get; set; }
 
-        [RequiredField(Resources.Key.DisplayName.ProductProfile)]
-        public string Profile { get; set; }
+        [RequiredField(Resources.Key.DisplayName.ProductTags)]
+        public string Tags { get; set; }
     }
 }

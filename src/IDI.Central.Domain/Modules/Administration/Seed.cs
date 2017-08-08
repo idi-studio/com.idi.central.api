@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using IDI.Central.Domain.Common;
+using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
+using IDI.Central.Models.Retailing;
 using IDI.Core.Common;
 using IDI.Core.Common.Basetypes;
-using IDI.Core.Common.Enums;
 using IDI.Core.Common.Extensions;
-using IDI.Core.Localization.Packages;
 
 namespace IDI.Central.Domain.Modules.Administration
 {
@@ -76,41 +76,217 @@ namespace IDI.Central.Domain.Modules.Administration
         public ProductCollection()
         {
             this.iPhones = new List<Product> {
-                new Product { Name = "iPhone 5 黑色 16GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1442" }, { Resources.Key.ProfileType.Color, "黑色" }, { Resources.Key.ProfileType.Year, "2012" }, { Resources.Key.ProfileType.Capacity, "16GB" } }.ToJson() },
-                new Product { Name = "iPhone 5 黑色 32GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1442" }, { Resources.Key.ProfileType.Color, "黑色" }, { Resources.Key.ProfileType.Year, "2012" }, { Resources.Key.ProfileType.Capacity, "32GB" } }.ToJson() },
-                new Product { Name = "iPhone 5 黑色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1442" }, { Resources.Key.ProfileType.Color, "黑色" }, { Resources.Key.ProfileType.Year, "2012" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
-                new Product { Name = "iPhone 5 白色 16GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1442" }, { Resources.Key.ProfileType.Color, "白色" }, { Resources.Key.ProfileType.Year, "2012" }, { Resources.Key.ProfileType.Capacity, "16GB" } }.ToJson() },
-                new Product { Name = "iPhone 5 白色 32GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1442" }, { Resources.Key.ProfileType.Color, "白色" }, { Resources.Key.ProfileType.Year, "2012" }, { Resources.Key.ProfileType.Capacity, "32GB" } }.ToJson() },
-                new Product { Name = "iPhone 5 白色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1442" }, { Resources.Key.ProfileType.Color, "白色" }, { Resources.Key.ProfileType.Year, "2012" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
+                new Product { Name = "iPhone 5 黑色 16GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1442" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "黑色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2012" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "16GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 5 黑色 32GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1442" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "黑色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2012" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "32GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 5 黑色 64GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1442" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "黑色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2012" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "64GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 5 白色 16GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1442" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "白色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2012" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "16GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 5 白色 32GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1442" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "白色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2012" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "32GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 5 白色 64GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1442" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "白色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2012" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "64GB" },
+                }.ToJson() },
 
-                new Product { Name = "iPhone 5s 深空灰色 32GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1533" }, { Resources.Key.ProfileType.Color, "深空灰色" }, { Resources.Key.ProfileType.Year, "2013" }, { Resources.Key.ProfileType.Capacity, "32GB" } }.ToJson() },
-                new Product { Name = "iPhone 5s 银色 32GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1533" }, { Resources.Key.ProfileType.Color, "银色" }, { Resources.Key.ProfileType.Year, "2013" }, { Resources.Key.ProfileType.Capacity, "32GB" } }.ToJson() },
-                new Product { Name = "iPhone 5s 金色 32GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1533" }, { Resources.Key.ProfileType.Color, "金色" }, { Resources.Key.ProfileType.Year, "2013" }, { Resources.Key.ProfileType.Capacity, "32GB" } }.ToJson() },
-                new Product { Name = "iPhone 5s 深空灰色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1533" }, { Resources.Key.ProfileType.Color, "深空灰色" }, { Resources.Key.ProfileType.Year, "2013" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
-                new Product { Name = "iPhone 5s 银色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1533" }, { Resources.Key.ProfileType.Color, "银色" }, { Resources.Key.ProfileType.Year, "2013" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
-                new Product { Name = "iPhone 5s 金色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1533" }, { Resources.Key.ProfileType.Color, "金色" }, { Resources.Key.ProfileType.Year, "2013" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
-
-                new Product { Name = "iPhone 6 深空灰色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1589" }, { Resources.Key.ProfileType.Color, "深空灰色" }, { Resources.Key.ProfileType.Year, "2014" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
-                new Product { Name = "iPhone 6 银色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1589" }, { Resources.Key.ProfileType.Color, "银色" }, { Resources.Key.ProfileType.Year, "2014" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
-                new Product { Name = "iPhone 6 金色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1589" }, { Resources.Key.ProfileType.Color, "金色" }, { Resources.Key.ProfileType.Year, "2014" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
-
-                new Product { Name = "iPhone 6 Plus 深空灰色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1593" }, { Resources.Key.ProfileType.Color, "深空灰色" }, { Resources.Key.ProfileType.Year, "2014" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
-                new Product { Name = "iPhone 6 Plus 银色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1593" }, { Resources.Key.ProfileType.Color, "银色" }, { Resources.Key.ProfileType.Year, "2014" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
-                new Product { Name = "iPhone 6 Plus 金色 64GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1593" }, { Resources.Key.ProfileType.Color, "金色" }, { Resources.Key.ProfileType.Year, "2014" }, { Resources.Key.ProfileType.Capacity, "64GB" } }.ToJson() },
-
-                new Product { Name = "iPhone 7 黑色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1778" }, { Resources.Key.ProfileType.Color, "黑色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 亮黑色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1778" }, { Resources.Key.ProfileType.Color, "亮黑色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 金色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1778" }, { Resources.Key.ProfileType.Color, "金色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 玫瑰金色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1778" }, { Resources.Key.ProfileType.Color, "玫瑰金色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 银色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1778" }, { Resources.Key.ProfileType.Color, "银色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 红色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1778" }, { Resources.Key.ProfileType.Color, "红色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
-
-                new Product { Name = "iPhone 7 Plus 黑色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1661" }, { Resources.Key.ProfileType.Color, "黑色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 Plus 亮黑色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1661" }, { Resources.Key.ProfileType.Color, "亮黑色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 Plus 金色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1661" }, { Resources.Key.ProfileType.Color, "金色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 Plus 玫瑰金色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1661" }, { Resources.Key.ProfileType.Color, "玫瑰金色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 Plus 银色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1661" }, { Resources.Key.ProfileType.Color, "银色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
-                new Product { Name = "iPhone 7 Plus 红色 128GB", Profile = new Profile {  { Resources.Key.ProfileType.Model, "A1661" }, { Resources.Key.ProfileType.Color, "红色" }, { Resources.Key.ProfileType.Year, "2016" }, { Resources.Key.ProfileType.Capacity, "128GB" } }.ToJson() },
+                new Product { Name = "iPhone 5s 深空灰色 32GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1533" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "深空灰色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2013" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "32GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 5s 银色 32GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1533" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "银色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2013" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "32GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 5s 金色 32GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1533" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "金色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2013" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "32GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 5s 深空灰色 64GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1533" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "深空灰色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2013" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "64GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 5s 银色 64GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1533" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "银色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2013" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "64GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 5s 金色 64GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1533" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "金色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2013" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "64GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 6 深空灰色 64GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1589" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "深空灰色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2014" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "64GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 6 银色 64GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1589" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "银色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2014" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "64GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 6 金色 64GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1589" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "金色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2014" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "64GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 6 Plus 深空灰色 64GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1593" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "深空灰色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2014" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "64GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 6 Plus 银色 64GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1593" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "银色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2014" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "64GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 6 Plus 金色 64GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1593" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "金色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2014" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "64GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 7 黑色 128GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1778" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "黑色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2016" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "128GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 7 亮黑色 128GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1778" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "亮黑色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2016" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "128GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 7 金色 128GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1778" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "金色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2016" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "128GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 7 玫瑰金色 128GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1778" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "玫瑰金色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2016" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "128GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 7 银色 128GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1778" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "银色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2016" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "128GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 7 红色 128GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1778" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "红色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2016" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "128GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 7 Plus 黑色 128GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1661" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "黑色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2016" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "128GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 7 Plus 亮黑色 128GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1661" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "亮黑色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2016" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "128GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 7 Plus 金色 128GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1661" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "金色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2016" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "128GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 7 Plus 玫瑰金色 128GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1661" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "玫瑰金色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2016" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "128GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 7 Plus 银色 128GB", Tags = new List<Tag>
+                {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1661" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "银色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2016" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "128GB" },
+                }.ToJson() },
+                new Product { Name = "iPhone 7 Plus 红色 128GB", Tags = new List<Tag>
+                {
+                   new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1661" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "红色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2016" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "128GB" },
+                }.ToJson() },
             };
 
             this.iPhones.ForEach(e => e.Code = Guid.NewGuid().ToString("N"));

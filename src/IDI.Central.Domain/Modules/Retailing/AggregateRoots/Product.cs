@@ -13,7 +13,7 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
         [StringLength(50)]
         public string Code { get; set; }
 
-        public string Profile { get; set; }
+        public string Tags { get; set; }
 
         public string Price { get; set; }
 
