@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace IDI.Central.Models.Administration
 {
-    public class RoleRow
+    public class RoleModel
     {
         [JsonProperty("id")]
         public Guid Id { get; set; }

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using IDI.Core.Common.Basetypes;
+using IDI.Core.Infrastructure.Queries;
 using Newtonsoft.Json;
 
 namespace IDI.Central.Models.Retailing
 {
-    public class ProductRow
+    public class ProductModel: IQueryResult
     {
         [JsonProperty("id")]
         public Guid Id { get; set; }

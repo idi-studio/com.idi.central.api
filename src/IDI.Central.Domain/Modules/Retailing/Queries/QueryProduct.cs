@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using IDI.Central.Domain.Common;
-using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
-using IDI.Central.Models.Common;
 using IDI.Central.Models.Retailing;
 using IDI.Core.Common;
+using IDI.Core.Common.Basetypes;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
@@ -14,18 +13,16 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
 {
     public class QueryProductCondition : Condition { }
 
-    public class QueryProduct : Query<QueryProductCondition, Table<ProductRow>>
+    public class QueryProduct : Query<QueryProductCondition, Collection<ProductModel>>
     {
         [Injection]
-        public IQueryRepository<Product> Products { get; set; }
+        public IQueryRepository<AggregateRoots.Product> Products { get; set; }
 
-        public override Result<Table<ProductRow>> Execute(QueryProductCondition condition)
+        public override Result<Collection<ProductModel>> Execute(QueryProductCondition condition)
         {
-            var data = this.Products.Get();
+            var products = this.Products.Get();
 
-            var table = new Table<ProductRow>();
-
-            table.Rows = data.OrderBy(r => r.Name).Select(r => new ProductRow
+            var collection = products.OrderBy(r => r.Name).Select(r => new ProductModel
             {
                 Id = r.Id,
                 Name = r.Name,
@@ -35,7 +32,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                 Enabled = r.Enabled
             }).ToList();
 
-            return Result.Success(table);
+            return Result.Success(new Collection<ProductModel>(collection));
         }
     }
 }

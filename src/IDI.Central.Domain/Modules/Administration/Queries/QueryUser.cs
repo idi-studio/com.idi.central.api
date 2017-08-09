@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Models.Administration;
-using IDI.Central.Models.Common;
 using IDI.Core.Common;
+using IDI.Core.Common.Basetypes;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
 using IDI.Core.Repositories;
@@ -11,18 +11,16 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
 {
     public class QueryUserCondition : Condition { }
 
-    public class QueryUser : Query<QueryUserCondition, Table<UserRow>>
+    public class QueryUser : Query<QueryUserCondition, Collection<UserModel>>
     {
         [Injection]
         public IQueryRepository<User> Users { get; set; }
 
-        public override Result<Table<UserRow>> Execute(QueryUserCondition condition)
+        public override Result<Collection<UserModel>> Execute(QueryUserCondition condition)
         {
             var users = this.Users.Get(u => u.Profile);
 
-            var table = new Table<UserRow>();
-
-            table.Rows = users.OrderBy(r => r.UserName).Select(r => new UserRow
+            var collection = users.OrderBy(r => r.UserName).Select(r => new UserModel
             {
                 Id = r.Id,
                 UserName = r.UserName,
@@ -33,7 +31,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
                 Photo = r.Profile.Photo
             }).ToList();
 
-            return Result.Success(table);
+            return Result.Success(new Collection<UserModel>(collection));
         }
     }
 }

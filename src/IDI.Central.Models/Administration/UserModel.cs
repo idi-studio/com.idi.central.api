@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace IDI.Central.Models.Administration
 {
-    public class UserRow
+    public class UserModel
     {
         [JsonProperty("id")]
         public Guid Id { get; set; }

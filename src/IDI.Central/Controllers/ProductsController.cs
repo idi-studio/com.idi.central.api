@@ -1,9 +1,10 @@
-﻿using IDI.Central.Domain.Modules.Retailing.Commands;
+﻿using System;
+using IDI.Central.Domain.Modules.Retailing.Commands;
 using IDI.Central.Domain.Modules.Retailing.Queries;
-using IDI.Central.Models.Common;
 using IDI.Central.Models.Retailing;
 using IDI.Central.Providers;
 using IDI.Core.Common;
+using IDI.Core.Common.Basetypes;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
@@ -29,28 +30,30 @@ namespace IDI.Central.Controllers
 
         // GET: api/products
         [HttpGet]
-        public Result<Table<ProductRow>> Get()
+        public Result<Collection<ProductModel>> Get()
         {
-            return ServiceLocator.QueryProcessor.Execute<QueryProductCondition, Table<ProductRow>>();
+            return ServiceLocator.QueryProcessor.Execute<QueryProductCondition, Collection<ProductModel>>();
         }
 
-        //// GET api/values/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        // Put: api/products
+        [HttpPut("{id}")]
+        public Result Put(Guid id, [FromBody]string value)
+        {
+            throw new NotImplementedException();
+        }
 
-        //// PUT api/values/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
+        // GET api/products/{id}
+        [HttpGet("{id}")]
+        public Result<ProductModel> Get(Guid id)
+        {
+            throw new NotImplementedException();
+        }
 
-        //// DELETE api/values/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        // DELETE api/values/5
+        [HttpDelete("{id}")]
+        public Result Delete(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
