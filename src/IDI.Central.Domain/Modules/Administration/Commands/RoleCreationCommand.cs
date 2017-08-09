@@ -3,11 +3,24 @@ using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Infrastructure.Verification.Attributes;
 using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Commands
 {
+    public class RoleCreationCommand : Command
+    {
+        [RequiredField(Resources.Key.DisplayName.Role)]
+        [StringLength(Resources.Key.DisplayName.Role, MaxLength = 20)]
+        public string RoleName { get; private set; }
+
+        public RoleCreationCommand(string rolename)
+        {
+            this.RoleName = rolename;
+        }
+    }
+
     public class RoleCreationCommandHandler : ICommandHandler<RoleCreationCommand>
     {
         [Injection]

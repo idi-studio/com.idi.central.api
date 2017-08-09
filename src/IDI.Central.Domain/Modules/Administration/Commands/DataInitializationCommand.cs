@@ -2,7 +2,6 @@
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Core.Common;
-using System.Linq;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Localization;
@@ -10,6 +9,16 @@ using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Commands
 {
+    public class DataInitializationCommand : Command
+    {
+        public Seed Seed { get; private set; }
+
+        public DataInitializationCommand()
+        {
+            this.Seed = new Seed();
+        }
+    }
+
     public class DataInitializationCommandHandler : ICommandHandler<DataInitializationCommand>
     {
         [Injection]
@@ -35,7 +44,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             bool initialized = this.Modules.Exist(e => e.Code == command.Seed.Modules.Administration.Code);
 
             if (initialized)
-                return Result.Success(message: Localization.Get( Resources.Key.Command.SystemDataInitialized));
+                return Result.Success(message: Localization.Get(Resources.Key.Command.SystemDataInitialized));
 
             this.Modules.Add(command.Seed.Modules.Administration);
             this.Modules.Add(command.Seed.Modules.Sales);
@@ -53,7 +62,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             command.Seed.Products.iPhones.ForEach(e => this.Products.Add(e));
             this.Products.Context.Commit();
 
-            return Result.Success(message: Localization.Get( Resources.Key.Command.SystemDataInitializeSuccess));
+            return Result.Success(message: Localization.Get(Resources.Key.Command.SystemDataInitializeSuccess));
         }
     }
 }

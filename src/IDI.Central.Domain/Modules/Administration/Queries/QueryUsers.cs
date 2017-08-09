@@ -9,14 +9,14 @@ using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Queries
 {
-    public class QueryUserCondition : Condition { }
+    public class QueryUsersCondition : Condition { }
 
-    public class QueryUser : Query<QueryUserCondition, Collection<UserModel>>
+    public class QueryUsers : Query<QueryUsersCondition, Collection<UserModel>>
     {
         [Injection]
         public IQueryRepository<User> Users { get; set; }
 
-        public override Result<Collection<UserModel>> Execute(QueryUserCondition condition)
+        public override Result<Collection<UserModel>> Execute(QueryUsersCondition condition)
         {
             var users = this.Users.Get(u => u.Profile);
 

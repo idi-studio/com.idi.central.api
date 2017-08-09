@@ -3,11 +3,27 @@ using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Infrastructure.Verification.Attributes;
 using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Commands
 {
+    public class ClientAuthenticationCommand : Command
+    {
+        [RequiredField(Resources.Key.DisplayName.ClientId)]
+        public string ClientId { get; private set; }
+
+        [RequiredField(Resources.Key.DisplayName.SecretKey)]
+        public string SecretKey { get; private set; }
+
+        public ClientAuthenticationCommand(string clientId, string secretKey)
+        {
+            this.ClientId = clientId;
+            this.SecretKey = secretKey;
+        }
+    }
+
     public class ClientAuthenticationCommandHandler : ICommandHandler<ClientAuthenticationCommand>
     {
         [Injection]
@@ -21,17 +37,17 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             var client = this.Clients.Find(e => e.ClientId == command.ClientId);
 
             if (client == null)
-                return Result.Fail(Localization.Get( Resources.Key.Command.InvalidClient));
+                return Result.Fail(Localization.Get(Resources.Key.Command.InvalidClient));
 
             if (!client.IsActive)
-                return Result.Fail(Localization.Get( Resources.Key.Command.ClientDisabled));
+                return Result.Fail(Localization.Get(Resources.Key.Command.ClientDisabled));
 
             string secret = Cryptography.Encrypt(command.SecretKey, client.Salt);
 
             if (client.SecretKey != secret)
-                return Result.Fail(Localization.Get( Resources.Key.Command.ClientAuthenticationFail));
+                return Result.Fail(Localization.Get(Resources.Key.Command.ClientAuthenticationFail));
 
-            return Result.Success(message: Localization.Get( Resources.Key.Command.ClientAuthenticationSuccess));
+            return Result.Success(message: Localization.Get(Resources.Key.Command.ClientAuthenticationSuccess));
         }
     }
 }

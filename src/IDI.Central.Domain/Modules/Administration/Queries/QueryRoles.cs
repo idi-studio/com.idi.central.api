@@ -9,14 +9,14 @@ using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Queries
 {
-    public class QueryRoleCondition : Condition { }
+    public class QueryRolesCondition : Condition { }
 
-    public class QueryRole : Query<QueryRoleCondition, Collection<RoleModel>>
+    public class QueryRoles : Query<QueryRolesCondition, Collection<RoleModel>>
     {
         [Injection]
         public IQueryRepository<Role> Roles { get; set; }
 
-        public override Result<Collection<RoleModel>> Execute(QueryRoleCondition condition)
+        public override Result<Collection<RoleModel>> Execute(QueryRolesCondition condition)
         {
             var roles = this.Roles.Get();
 

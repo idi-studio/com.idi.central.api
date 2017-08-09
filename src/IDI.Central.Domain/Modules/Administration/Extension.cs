@@ -3,7 +3,7 @@ using System.Linq;
 using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 
-namespace IDI.Central.Domain.Modules.Administration.Queries
+namespace IDI.Central.Domain.Modules.Administration
 {
     public static class Extension
     {

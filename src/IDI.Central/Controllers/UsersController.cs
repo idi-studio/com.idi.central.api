@@ -23,7 +23,7 @@ namespace IDI.Central.Controllers
         [HttpGet]
         public Result<Collection<UserModel>> Get()
         {
-            return ServiceLocator.QueryProcessor.Execute<QueryUserCondition, Collection<UserModel>>();
+            return ServiceLocator.QueryProcessor.Execute<QueryUsersCondition, Collection<UserModel>>();
         }
     }
 }

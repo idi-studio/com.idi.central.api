@@ -1,15 +1,30 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
-using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Infrastructure.Verification.Attributes;
 using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
-namespace IDI.Central.Domain.Modules.Administration.Handlers
+namespace IDI.Central.Domain.Modules.Administration.Commands
 {
+    public class UserAuthorizeCommand : Command
+    {
+        [RequiredField(Resources.Key.DisplayName.User)]
+        public string UserName { get; private set; }
+
+        public Guid[] Roles { get; private set; }
+
+        public UserAuthorizeCommand(string userName, Guid[] roles)
+        {
+            this.UserName = userName;
+            this.Roles = roles;
+        }
+    }
+
     public class UserAuthorizeCommandHandler : ICommandHandler<UserAuthorizeCommand>
     {
         [Injection]
@@ -26,7 +41,7 @@ namespace IDI.Central.Domain.Modules.Administration.Handlers
             var user = this.Users.Find(e => e.UserName == command.UserName, e => e.UserRoles);
 
             if (user == null)
-                return Result.Fail(Localization.Get( Resources.Key.Command.InvalidUser));
+                return Result.Fail(Localization.Get(Resources.Key.Command.InvalidUser));
 
             var recent = command.Roles.ToList();
             var current = user.UserRoles.Select(e => e.RoleId).ToList();
@@ -43,7 +58,7 @@ namespace IDI.Central.Domain.Modules.Administration.Handlers
             this.Users.Context.Commit();
             this.Users.Context.Dispose();
 
-            return Result.Success(message: Localization.Get( Resources.Key.Command.AuthenticationSuccess));
+            return Result.Success(message: Localization.Get(Resources.Key.Command.AuthenticationSuccess));
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using IDI.Central.Domain.Common;
+using IDI.Central.Domain.Modules.Administration;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
-using IDI.Central.Domain.Modules.Administration.Queries;
 using IDI.Core.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

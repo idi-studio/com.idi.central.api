@@ -1,14 +1,30 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Infrastructure.Verification.Attributes;
 using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Commands
 {
+    public class RoleAuthorizationCommand : Command
+    {
+        [RequiredField(Resources.Key.DisplayName.Role)]
+        public string RoleName { get; private set; }
+
+        public Guid[] Privileges { get; private set; }
+
+        public RoleAuthorizationCommand(string rolename, Guid[] privileges)
+        {
+            this.RoleName = rolename;
+            this.Privileges = privileges;
+        }
+    }
+
     public class RoleAuthorizationCommandHandler : ICommandHandler<RoleAuthorizationCommand>
     {
         [Injection]
@@ -25,7 +41,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             var role = this.Roles.Find(r => r.Name == command.RoleName, r => r.RolePrivileges);
 
             if (role == null)
-                return Result.Fail(Localization.Get( Resources.Key.Command.InvalidRole));
+                return Result.Fail(Localization.Get(Resources.Key.Command.InvalidRole));
 
             var recent = command.Privileges.ToList();
             var current = role.RolePrivileges.Select(e => e.PrivilegeId).ToList();
@@ -42,7 +58,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             this.Roles.Context.Commit();
             this.Roles.Context.Dispose();
 
-            return Result.Success(message: Localization.Get( Resources.Key.Command.RoleAuthorizationSuccess));
+            return Result.Success(message: Localization.Get(Resources.Key.Command.RoleAuthorizationSuccess));
         }
     }
 }
