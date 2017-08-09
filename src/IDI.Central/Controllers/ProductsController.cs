@@ -64,7 +64,9 @@ namespace IDI.Central.Controllers
         [HttpDelete("{id}")]
         public Result Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var command = new ProductDeletionCommand { Id = id };
+
+            return ServiceLocator.CommandBus.Send(command);
         }
     }
 }
