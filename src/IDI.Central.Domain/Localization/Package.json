@@ -188,7 +188,7 @@
 {
     "language": "en",
     "name": "client-authentication-fail",
-    "value": "Client authentication fail.",
+    "value": "Client authentication failed.",
     "prefix": "command"
 },
 {
@@ -248,7 +248,7 @@
 {
     "language": "en",
     "name": "role-authorization-success",
-    "value": "Role authorization success.",
+    "value": "Role authorization successfully.",
     "prefix": "command"
 },
 {
@@ -260,7 +260,7 @@
 {
     "language": "en",
     "name": "user-authorization-success",
-    "value": "User authorization success.",
+    "value": "User authorization successfully.",
     "prefix": "command"
 },
 {
@@ -296,7 +296,19 @@
 {
     "language": "en",
     "name": "creation-success",
-    "value": "Created success.",
+    "value": "Create success.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "creation-fail",
+    "value": "创建失败!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "creation-fail",
+    "value": "Create failure.",
     "prefix": "command"
 },
 {
@@ -308,7 +320,43 @@
 {
     "language": "en",
     "name": "modification-success",
-    "value": "Updated success.",
+    "value": "Update successful.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "modification-fail",
+    "value": "更新失败!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "modification-fail",
+    "value": "Update failed.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "deletion-success",
+    "value": "删除成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "deletion-success",
+    "value": "Delete successfully.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "deletion-fail",
+    "value": "删除失败!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "deletion-fail",
+    "value": "Delete failed.",
     "prefix": "command"
 },
 {
@@ -320,7 +368,7 @@
 {
     "language": "en",
     "name": "registration-success",
-    "value": "Registration success.",
+    "value": "Registration successfully.",
     "prefix": "command"
 },
 {

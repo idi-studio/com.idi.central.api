@@ -48,7 +48,11 @@ namespace IDI.Central.Domain.Localization
 								public const string RoleExists = "role-exists";
 								public const string UsernameRegistered = "username-registered";
 								public const string CreationSuccess = "creation-success";
+								public const string CreationFail = "creation-fail";
 								public const string ModificationSuccess = "modification-success";
+								public const string ModificationFail = "modification-fail";
+								public const string DeletionSuccess = "deletion-success";
+								public const string DeletionFail = "deletion-fail";
 								public const string RegistrationSuccess = "registration-success";
 								public const string PasswordMismatch = "password-mismatch";
 								public const string ProductCodeDuplicated = "product-code-duplicated";
