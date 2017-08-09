@@ -9,14 +9,14 @@ using IDI.Core.Localization;
 
 namespace IDI.Central.Domain.Modules.Retailing.Queries
 {
-    public class QueryTagCondition : Condition { }
+    public class QueryTagsCondition : Condition { }
 
-    public class QueryTag : Query<QueryTagCondition, Collection<Tag>>
+    public class QueryTags : Query<QueryTagsCondition, Collection<Tag>>
     {
         [Injection]
         public ILocalization Localization { get; set; }
 
-        public override Result<Collection<Tag>> Execute(QueryTagCondition condition)
+        public override Result<Collection<Tag>> Execute(QueryTagsCondition condition)
         {
             var items = this.Localization.GetAll(Resources.Prefix.TAG).Select(item => new Tag { Key = item.Name, Name = item.Value, Value = string.Empty });
 

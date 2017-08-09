@@ -301,6 +301,18 @@
 },
 {
     "language": "chs",
+    "name": "modification-success",
+    "value": "更新成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "modification-success",
+    "value": "Updated success.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "registration-success",
     "value": "注册成功!",
     "prefix": "command"
@@ -333,6 +345,18 @@
     "language": "en",
     "name": "product-code-duplicated",
     "value": "Product code duplicated.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "product-not-existing",
+    "value": "产品不存在!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "product-not-existing",
+    "value": "Cannot found this product.",
     "prefix": "command"
 },
 {

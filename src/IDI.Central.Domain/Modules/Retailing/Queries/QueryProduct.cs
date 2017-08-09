@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using IDI.Central.Domain.Common;
+using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Central.Models.Retailing;
 using IDI.Core.Common;
-using IDI.Core.Common.Basetypes;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
@@ -11,28 +11,31 @@ using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Retailing.Queries
 {
-    public class QueryProductCondition : Condition { }
+    public class QueryProductCondition : Condition
+    {
+        public Guid Id { get; set; }
+    }
 
-    public class QueryProduct : Query<QueryProductCondition, Collection<ProductModel>>
+    public class QueryProduct : Query<QueryProductCondition, ProductModel>
     {
         [Injection]
-        public IQueryRepository<AggregateRoots.Product> Products { get; set; }
+        public IQueryRepository<Product> Products { get; set; }
 
-        public override Result<Collection<ProductModel>> Execute(QueryProductCondition condition)
+        public override Result<ProductModel> Execute(QueryProductCondition condition)
         {
-            var products = this.Products.Get();
+            var product = this.Products.Find(condition.Id);
 
-            var collection = products.OrderBy(r => r.Name).Select(r => new ProductModel
+            var model = new ProductModel
             {
-                Id = r.Id,
-                Name = r.Name,
-                Code = r.Code,
-                Description = r.Tags.To<List<Tag>>().AsString(),
-                Tags = r.Tags.To<List<Tag>>(),
-                Enabled = r.Enabled
-            }).ToList();
+                Id = product.Id,
+                Name = product.Name,
+                Code = product.Code,
+                Description = product.Tags.To<List<Tag>>().AsString(),
+                Tags = product.Tags.To<List<Tag>>(),
+                Enabled = product.Enabled
+            };
 
-            return Result.Success(new Collection<ProductModel>(collection));
+            return Result.Success(model);
         }
     }
 }

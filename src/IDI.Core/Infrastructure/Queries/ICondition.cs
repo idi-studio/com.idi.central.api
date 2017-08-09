@@ -4,6 +4,6 @@ namespace IDI.Core.Infrastructure.Queries
 {
     public interface ICondition
     {
-        Guid Id { get; }
+        Guid UniqueId { get; }
     }
 }

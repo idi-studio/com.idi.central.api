@@ -32,21 +32,32 @@ namespace IDI.Central.Controllers
         [HttpGet]
         public Result<Collection<ProductModel>> Get()
         {
-            return ServiceLocator.QueryProcessor.Execute<QueryProductCondition, Collection<ProductModel>>();
+            return ServiceLocator.QueryProcessor.Execute<QueryProductsCondition, Collection<ProductModel>>();
         }
 
         // Put: api/products
         [HttpPut("{id}")]
-        public Result Put(Guid id, [FromBody]string value)
+        public Result Put(Guid id, [FromBody]ProductModificationInput input)
         {
-            throw new NotImplementedException();
+            var command = new ProductModificationCommand
+            {
+                Id = id,
+                Name = input.Name,
+                Code = input.Code,
+                Tags = input.Tags.ToJson(),
+                Enabled = input.Enabled
+            };
+
+            return ServiceLocator.CommandBus.Send(command);
         }
 
         // GET api/products/{id}
         [HttpGet("{id}")]
         public Result<ProductModel> Get(Guid id)
         {
-            throw new NotImplementedException();
+            var condition = new QueryProductCondition { Id = id };
+
+            return ServiceLocator.QueryProcessor.Execute<QueryProductCondition, ProductModel>(condition);
         }
 
         // DELETE api/values/5

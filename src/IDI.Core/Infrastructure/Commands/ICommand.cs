@@ -4,7 +4,7 @@ namespace IDI.Core.Infrastructure.Commands
 {
     public interface ICommand
     {
-        Guid Id { get; }
+        Guid UniqueId { get; }
 
         int Version { get; }
     }

@@ -5,13 +5,13 @@ namespace IDI.Core.Infrastructure.Commands
 {
     public abstract class Command : ICommand, IVerifiable
     {
-        public Guid Id { get; private set; }
+        public Guid UniqueId { get; private set; }
 
         public int Version { get; private set; }
 
         public Command()
         {
-            Id = Guid.NewGuid();
+            UniqueId = Guid.NewGuid();
             Version = 1;
         }
     }

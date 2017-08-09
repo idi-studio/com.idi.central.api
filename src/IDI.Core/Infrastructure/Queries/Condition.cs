@@ -5,11 +5,11 @@ namespace IDI.Core.Infrastructure.Queries
 {
     public abstract class Condition : ICondition, IVerifiable
     {
-        public Guid Id { get; private set; }
+        public Guid UniqueId { get; private set; }
 
         public Condition()
         {
-            this.Id = Guid.NewGuid();
+            this.UniqueId = Guid.NewGuid();
         }
     }
 }
