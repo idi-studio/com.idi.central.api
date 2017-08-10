@@ -13,15 +13,15 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
     {
         public Guid Id { get; set; }
 
-        [RequiredField(Resources.Key.DisplayName.ProductName)]
-        [StringLength(Resources.Key.DisplayName.ProductName, MaxLength = 50)]
+        [RequiredField(Resources.Key.DisplayName.ProductName, Group = Constants.VerificationGroup.CreateOrUpdate)]
+        [StringLength(Resources.Key.DisplayName.ProductName, MaxLength = 50, Group = Constants.VerificationGroup.CreateOrUpdate)]
         public string Name { get; set; }
 
-        [RequiredField(Resources.Key.DisplayName.ProductCode)]
-        [StringLength(Resources.Key.DisplayName.ProductCode, MaxLength = 50)]
+        [RequiredField(Resources.Key.DisplayName.ProductCode, Group = Constants.VerificationGroup.CreateOrUpdate)]
+        [StringLength(Resources.Key.DisplayName.ProductCode, MaxLength = 50, Group = Constants.VerificationGroup.CreateOrUpdate)]
         public string Code { get; set; }
 
-        [RequiredField(Resources.Key.DisplayName.ProductTags)]
+        [RequiredField(Resources.Key.DisplayName.ProductTags, Group = Constants.VerificationGroup.CreateOrUpdate)]
         public string Tags { get; set; }
 
         public bool Enabled { get; set; }

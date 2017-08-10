@@ -50,6 +50,9 @@ namespace IDI.Core.Infrastructure.Verification
             {
                 var att = attribute as Attributes.ValidationAttribute;
 
+                if (!att.Enabled(this.Instance.Group))
+                    continue;
+
                 if (att != null)
                 {
                     var context = new ValidationContext(this.Instance, property);

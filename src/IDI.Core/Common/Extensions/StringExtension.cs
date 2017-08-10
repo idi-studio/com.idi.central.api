@@ -36,5 +36,10 @@ namespace IDI.Core.Common
 
             return attribute.Description;
         }
+
+        public static string[] Split(this string value, string separator)
+        {
+            return value.Split(new string[] { separator }, StringSplitOptions.RemoveEmptyEntries);
+        }
     }
 }

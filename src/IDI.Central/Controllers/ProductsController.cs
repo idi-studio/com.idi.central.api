@@ -21,11 +21,12 @@ namespace IDI.Central.Controllers
         {
             var command = new ProductCommand
             {
-                Mode = CommandMode.Create,
                 Name = input.Name,
                 Code = input.Code,
                 Tags = input.Tags.ToJson(),
-                Enabled = input.Enabled
+                Enabled = input.Enabled,
+                Mode = CommandMode.Create,
+                Group = Constants.VerificationGroup.Create,
             };
 
             return ServiceLocator.CommandBus.Send(command);
@@ -44,12 +45,13 @@ namespace IDI.Central.Controllers
         {
             var command = new ProductCommand
             {
-                Mode = CommandMode.Update,
                 Id = id,
                 Name = input.Name,
                 Code = input.Code,
                 Tags = input.Tags.ToJson(),
-                Enabled = input.Enabled
+                Enabled = input.Enabled,
+                Mode = CommandMode.Update,
+                Group = Constants.VerificationGroup.Update,
             };
 
             return ServiceLocator.CommandBus.Send(command);
@@ -68,7 +70,7 @@ namespace IDI.Central.Controllers
         [HttpDelete("{id}")]
         public Result Delete(Guid id)
         {
-            var command = new ProductCommand { Mode = CommandMode.Delete, Id = id };
+            var command = new ProductCommand { Id = id, Mode = CommandMode.Delete, Group = Constants.VerificationGroup.Delete };
 
             return ServiceLocator.CommandBus.Send(command);
         }
