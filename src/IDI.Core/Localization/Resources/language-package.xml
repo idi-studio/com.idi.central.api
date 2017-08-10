@@ -5,5 +5,7 @@
   <item prefix="verification" name="characters-maximum" en="'{0} maximum is {1} characters." chs="'{0}'最多{1}个字符!" />
   <item prefix="verification" name="characters-minimum" en="'{0}' minimum is {1} characters." chs="'{0}'最少{1}个字符!" />
 
-  <item prefix="display-name" name="token" en="Token" chs="令牌" />  
+  <item prefix="display-name" name="token" en="Token" chs="令牌" />
+
+  <item prefix="command" name="command-mode-nonsupport" en="Unsupported command mode." chs="不支持的命令模式!" />
 </items>

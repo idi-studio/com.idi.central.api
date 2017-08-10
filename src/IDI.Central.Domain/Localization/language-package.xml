@@ -25,13 +25,13 @@
   <item prefix="command" name="user-authorization-success" en="User authorization successfully." chs="用户授权成功!" />
   <item prefix="command" name="role-exists" en="The role already exists." chs="角色已存在!" />
   <item prefix="command" name="username-registered" en="The username has been registered." chs="该用户名已被注册!" />
-  <item prefix="command" name="creation-success" en="Create success." chs="创建成功!" />
-  <item prefix="command" name="creation-fail" en="Create failure." chs="创建失败!" />
-  <item prefix="command" name="modification-success" en="Update successful." chs="更新成功!" />
-  <item prefix="command" name="modification-fail" en="Update failed." chs="更新失败!" />
-  <item prefix="command" name="deletion-success" en="Delete successfully." chs="删除成功!" />
-  <item prefix="command" name="deletion-fail" en="Delete failed." chs="删除失败!" />
-  <item prefix="command" name="registration-success" en="Registration successfully." chs="注册成功!" />
+  <item prefix="command" name="create-success" en="Create success." chs="创建成功!" />
+  <item prefix="command" name="create-fail" en="Create failure." chs="创建失败!" />
+  <item prefix="command" name="update-success" en="Update successful." chs="更新成功!" />
+  <item prefix="command" name="update-fail" en="Update failed." chs="更新失败!" />
+  <item prefix="command" name="delete-success" en="Delete successfully." chs="删除成功!" />
+  <item prefix="command" name="delete-fail" en="Delete failed." chs="删除失败!" />
+  <item prefix="command" name="register-success" en="Registration successfully." chs="注册成功!" />
   <item prefix="command" name="password-mismatch" en="Passwords does not match." chs="两次密码不一致!" />
   <item prefix="command" name="product-code-duplicated" en="Product code duplicated." chs="产品编码重复!" />
   <item prefix="command" name="product-not-existing" en="Cannot found this product." chs="产品不存在!" />

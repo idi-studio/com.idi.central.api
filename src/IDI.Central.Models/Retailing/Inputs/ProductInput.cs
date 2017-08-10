@@ -3,7 +3,7 @@ using IDI.Core.Common;
 
 namespace IDI.Central.Models.Retailing
 {
-    public class ProductModificationInput : IInput
+    public class ProductInput : IInput
     {
         public string Name { get; set; } = "";
 

@@ -60,7 +60,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             this.Users.Context.Commit();
             this.Users.Context.Dispose();
 
-            return Result.Success(message: Localization.Get(Resources.Key.Command.RegistrationSuccess));
+            return Result.Success(message: Localization.Get(Resources.Key.Command.RegisterSuccess));
         }
     }
 }

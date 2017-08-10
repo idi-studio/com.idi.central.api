@@ -40,7 +40,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             this.Roles.Context.Commit();
             this.Roles.Context.Dispose();
 
-            return Result.Success(message: Localization.Get(Resources.Key.Command.CreationSuccess));
+            return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess));
         }
     }
 }

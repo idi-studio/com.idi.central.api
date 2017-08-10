@@ -289,85 +289,85 @@
 },
 {
     "language": "chs",
-    "name": "creation-success",
+    "name": "create-success",
     "value": "创建成功!",
     "prefix": "command"
 },
 {
     "language": "en",
-    "name": "creation-success",
+    "name": "create-success",
     "value": "Create success.",
     "prefix": "command"
 },
 {
     "language": "chs",
-    "name": "creation-fail",
+    "name": "create-fail",
     "value": "创建失败!",
     "prefix": "command"
 },
 {
     "language": "en",
-    "name": "creation-fail",
+    "name": "create-fail",
     "value": "Create failure.",
     "prefix": "command"
 },
 {
     "language": "chs",
-    "name": "modification-success",
+    "name": "update-success",
     "value": "更新成功!",
     "prefix": "command"
 },
 {
     "language": "en",
-    "name": "modification-success",
+    "name": "update-success",
     "value": "Update successful.",
     "prefix": "command"
 },
 {
     "language": "chs",
-    "name": "modification-fail",
+    "name": "update-fail",
     "value": "更新失败!",
     "prefix": "command"
 },
 {
     "language": "en",
-    "name": "modification-fail",
+    "name": "update-fail",
     "value": "Update failed.",
     "prefix": "command"
 },
 {
     "language": "chs",
-    "name": "deletion-success",
+    "name": "delete-success",
     "value": "删除成功!",
     "prefix": "command"
 },
 {
     "language": "en",
-    "name": "deletion-success",
+    "name": "delete-success",
     "value": "Delete successfully.",
     "prefix": "command"
 },
 {
     "language": "chs",
-    "name": "deletion-fail",
+    "name": "delete-fail",
     "value": "删除失败!",
     "prefix": "command"
 },
 {
     "language": "en",
-    "name": "deletion-fail",
+    "name": "delete-fail",
     "value": "Delete failed.",
     "prefix": "command"
 },
 {
     "language": "chs",
-    "name": "registration-success",
+    "name": "register-success",
     "value": "注册成功!",
     "prefix": "command"
 },
 {
     "language": "en",
-    "name": "registration-success",
+    "name": "register-success",
     "value": "Registration successfully.",
     "prefix": "command"
 },

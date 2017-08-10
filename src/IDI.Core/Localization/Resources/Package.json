@@ -58,5 +58,17 @@
     "name": "token",
     "value": "Token",
     "prefix": "display-name"
+},
+{
+    "language": "chs",
+    "name": "command-mode-nonsupport",
+    "value": "不支持的命令模式!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "command-mode-nonsupport",
+    "value": "Unsupported command mode.",
+    "prefix": "command"
 }]
  

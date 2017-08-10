@@ -12,7 +12,8 @@ namespace IDI.Core.Localization.Packages
     {
         public class Prefix
         {
-		    			public const string DISPLAY_NAME = "display-name";
+		    			public const string COMMAND = "command";
+						public const string DISPLAY_NAME = "display-name";
 						public const string VERIFICATION = "verification";
 			        }
 
@@ -27,6 +28,10 @@ namespace IDI.Core.Localization.Packages
 
 						public class DisplayName {
 								public const string Token = "token";
+								}
+
+						public class Command {
+								public const string CommandModeNonsupport = "command-mode-nonsupport";
 								}
 
 					}
