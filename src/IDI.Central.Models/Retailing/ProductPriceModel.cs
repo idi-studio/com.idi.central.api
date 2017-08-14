@@ -19,13 +19,13 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("grade")]
         public int Grade { get; set; }
 
-        [JsonProperty("start-date")]
+        [JsonProperty("startdate")]
         public DateTime StartDate { get; set; }
 
-        [JsonProperty("due-date")]
+        [JsonProperty("duedate")]
         public DateTime DueDate { get; set; }
 
-        [JsonProperty("product-id")]
+        [JsonProperty("pid")]
         public Guid ProductId { get; set; }
 
         [JsonProperty("active")]

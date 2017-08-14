@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Central.Models.Retailing;
 using IDI.Core.Common;
@@ -9,7 +10,10 @@ using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Retailing.Queries
 {
-    public class QueryProductPricesCondition : Condition { }
+    public class QueryProductPricesCondition : Condition
+    {
+        public Guid ProductId { get; set; }
+    }
 
     public class QueryProductPrices : Query<QueryProductPricesCondition, Collection<ProductPriceModel>>
     {
@@ -18,7 +22,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
 
         public override Result<Collection<ProductPriceModel>> Execute(QueryProductPricesCondition condition)
         {
-            var prices = this.Prices.Get();
+            var prices = this.Prices.Get(e => e.ProductId == condition.ProductId);
 
             var collection = prices.OrderBy(e => e.Category).Select(price => new ProductPriceModel
             {
