@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using IDI.Central.Common;
 using IDI.Core.Common;
 using Newtonsoft.Json;
 
@@ -13,10 +13,10 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("category")]
         public PriceCategory Category { get; set; }
 
-        [JsonProperty("tags")]
-        public List<Tag> Tags { get; set; } = new List<Tag>();
+        //[JsonProperty("tags")]
+        //public List<Tag> Tags { get; set; } = new List<Tag>();
 
-        [JsonProperty("active")]
-        public bool Enabled { get; set; }
+        //[JsonProperty("active")]
+        //public bool Enabled { get; set; }
     }
 }

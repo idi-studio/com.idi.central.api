@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using IDI.Central.Domain.Common;
+using IDI.Central.Common;
 using IDI.Central.Domain.Modules.Administration;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;

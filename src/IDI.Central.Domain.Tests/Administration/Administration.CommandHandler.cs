@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using IDI.Central.Domain.Common;
+using IDI.Central.Common;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
