@@ -18,3 +18,5 @@
 /src/IDI.Central/Properties/PublishProfiles/*.user
 /src/IDI.Central/Properties/PublishProfiles
 /src/IDI.Central.Domain/*.user
+/src/IDI.Central.Common/bin
+/src/IDI.Central.Common/obj
