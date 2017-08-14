@@ -42,7 +42,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 Name = command.Name,
                 Code = command.Code,
                 Tags = command.Tags,
-                Enabled = false,
+                Enabled = command.Enabled,
             };
 
             this.Products.Add(product);
