@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
@@ -20,6 +21,8 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
         public string Picture { get; set; }
 
         public bool Enabled { get; set; } = true;
+
+        public List<ProductPrice> Prices { get; set; }
 
     }
 }

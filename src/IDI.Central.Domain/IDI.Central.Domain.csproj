@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IDI.Central.Common\IDI.Central.Common.csproj" />
     <ProjectReference Include="..\IDI.Central.Models\IDI.Central.Models.csproj" />
     <ProjectReference Include="..\IDI.Core\IDI.Core.csproj" />
   </ItemGroup>

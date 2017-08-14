@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IDI.Central.Domain.Common
+namespace IDI.Central.Common
 {
     [Flags]
     public enum PrivilegeType
