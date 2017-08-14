@@ -34,8 +34,8 @@ namespace IDI.Central.Domain
             //modelBuilder.Entity<Client>();
             #endregion
 
-            new IDI.Central.Domain.Modules.Administration.Mapping().Create(modelBuilder);
-            new IDI.Central.Domain.Modules.Retailing.Mapping().Create(modelBuilder);
+            new Modules.Administration.Mapping().Create(modelBuilder);
+            new Modules.Retailing.Mapping().Create(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }
