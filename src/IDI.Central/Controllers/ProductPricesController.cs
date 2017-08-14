@@ -13,7 +13,7 @@ namespace IDI.Central.Controllers
     public class ProductPricesController : Controller
     {
         // GET: api/product/prices/{id}
-        [HttpGet]
+        [HttpGet("{id}")]
         public Result<Collection<ProductPriceModel>> Get(Guid id)
         {
             var condition = new QueryProductPricesCondition { ProductId = id };
