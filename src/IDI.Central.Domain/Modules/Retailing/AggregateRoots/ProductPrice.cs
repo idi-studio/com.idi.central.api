@@ -16,6 +16,8 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
 
         public DateTime DueDate { get; set; }
 
+        public bool Enabled { get; set; }
+
         public Guid ProductId { get; set; }
 
         public Product Product { get; set; }

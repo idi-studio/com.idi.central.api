@@ -66,7 +66,7 @@ namespace IDI.Central.Controllers
             return ServiceLocator.QueryProcessor.Execute<QueryProductCondition, ProductModel>(condition);
         }
 
-        // DELETE api/values/5
+        // DELETE api/products/{id}
         [HttpDelete("{id}")]
         public Result Delete(Guid id)
         {

@@ -409,6 +409,30 @@
 },
 {
     "language": "chs",
+    "name": "record-not-existing",
+    "value": "记录不存在!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "record-not-existing",
+    "value": "Record does not exist.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "time-conflict",
+    "value": "时间冲突!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "time-conflict",
+    "value": "Time conflict.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "model",
     "value": "型号",
     "prefix": "tag"

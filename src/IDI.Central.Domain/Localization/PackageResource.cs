@@ -57,6 +57,8 @@ namespace IDI.Central.Domain.Localization
 								public const string PasswordMismatch = "password-mismatch";
 								public const string ProductCodeDuplicated = "product-code-duplicated";
 								public const string ProductNotExisting = "product-not-existing";
+								public const string RecordNotExisting = "record-not-existing";
+								public const string TimeConflict = "time-conflict";
 								}
 
 						public class Tag {

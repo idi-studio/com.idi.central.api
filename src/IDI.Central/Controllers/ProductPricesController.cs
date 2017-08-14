@@ -15,15 +15,18 @@ namespace IDI.Central.Controllers
     [Route("api/product/prices"), ApplicationAuthorize]
     public class ProductPricesController : Controller
     {
-        //POST: api/products
+        //POST: api/product/prices
         [HttpPost]
-        public Result Post([FromBody]ProductInput input)
+        public Result Post([FromBody]ProductPriceInput input)
         {
-            var command = new ProductCommand
+            var command = new ProductPriceCommand
             {
-                Name = input.Name,
-                Code = input.Code,
-                Tags = input.Tags.ToJson(),
+                ProductId = input.ProductId,
+                Category = input.Category,
+                StartDate = input.StartDate,
+                DueDate = input.DueDate,
+                Amount = input.Amount,
+                Grade = input.Grade,
                 Enabled = input.Enabled,
                 Mode = CommandMode.Create,
                 Group = Constants.VerificationGroup.Create,
@@ -32,23 +35,26 @@ namespace IDI.Central.Controllers
             return ServiceLocator.CommandBus.Send(command);
         }
 
-        // GET: api/products
+        // GET: api/product/prices
         [HttpGet]
-        public Result<Collection<ProductModel>> Get()
+        public Result<Collection<ProductPriceModel>> Get()
         {
-            return ServiceLocator.QueryProcessor.Execute<QueryProductsCondition, Collection<ProductModel>>();
+            return ServiceLocator.QueryProcessor.Execute<QueryProductPricesCondition, Collection<ProductPriceModel>>();
         }
 
-        // Put: api/products
+        // Put: api/product/prices
         [HttpPut("{id}")]
-        public Result Put(Guid id, [FromBody]ProductInput input)
+        public Result Put(Guid id, [FromBody]ProductPriceInput input)
         {
-            var command = new ProductCommand
+            var command = new ProductPriceCommand
             {
                 Id = id,
-                Name = input.Name,
-                Code = input.Code,
-                Tags = input.Tags.ToJson(),
+                ProductId = input.ProductId,
+                Category = input.Category,
+                StartDate = input.StartDate,
+                DueDate = input.DueDate,
+                Amount = input.Amount,
+                Grade = input.Grade,
                 Enabled = input.Enabled,
                 Mode = CommandMode.Update,
                 Group = Constants.VerificationGroup.Update,
@@ -57,20 +63,20 @@ namespace IDI.Central.Controllers
             return ServiceLocator.CommandBus.Send(command);
         }
 
-        // GET api/products/{id}
+        // GET api/product/prices/{id}
         [HttpGet("{id}")]
-        public Result<ProductModel> Get(Guid id)
+        public Result<ProductPriceModel> Get(Guid id)
         {
-            var condition = new QueryProductCondition { Id = id };
+            var condition = new QueryProductPriceCondition { Id = id };
 
-            return ServiceLocator.QueryProcessor.Execute<QueryProductCondition, ProductModel>(condition);
+            return ServiceLocator.QueryProcessor.Execute<QueryProductPriceCondition, ProductPriceModel>(condition);
         }
 
-        // DELETE api/values/5
+        // DELETE api/product/prices/{id}
         [HttpDelete("{id}")]
         public Result Delete(Guid id)
         {
-            var command = new ProductCommand { Id = id, Mode = CommandMode.Delete, Group = Constants.VerificationGroup.Delete };
+            var command = new ProductPriceCommand { Id = id, Mode = CommandMode.Delete, Group = Constants.VerificationGroup.Delete };
 
             return ServiceLocator.CommandBus.Send(command);
         }
