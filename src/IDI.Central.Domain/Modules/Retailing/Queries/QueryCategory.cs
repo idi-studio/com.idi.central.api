@@ -15,27 +15,27 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
         public string EnumType { get; set; }
     }
 
-    public class QueryCategory : Query<QueryCategoryCondition, Collection<KeyValuePair<string, string>>>
+    public class QueryCategory : Query<QueryCategoryCondition, Collection<KeyValuePair<int, string>>>
     {
         [Injection]
         public ILocalization Localization { get; set; }
 
-        public override Result<Collection<KeyValuePair<string, string>>> Execute(QueryCategoryCondition condition)
+        public override Result<Collection<KeyValuePair<int, string>>> Execute(QueryCategoryCondition condition)
         {
             string prefix = condition.EnumType;
 
             Type enumType = Type.GetType($"IDI.Central.Common.{condition.EnumType},IDI.Central.Common");
 
             if (enumType == null)
-                return Result.Fail<Collection<KeyValuePair<string, string>>>(Localization.Get(Resources.Key.Command.InvalidCategory));
+                return Result.Fail<Collection<KeyValuePair<int, string>>>(Localization.Get(Resources.Key.Command.InvalidCategory));
 
             var collection = Enum.GetValues(enumType).Cast<object>().Select(value =>
             {
                 string name = Enum.GetName(enumType, value);
-                return new KeyValuePair<string, string>(value.ToString(), Localization.Get(prefix, name));
+                return new KeyValuePair<int, string>((int)value, Localization.Get(prefix, name));
             });
 
-            return Result.Success(new Collection<KeyValuePair<string, string>>(collection));
+            return Result.Success(new Collection<KeyValuePair<int, string>>(collection));
         }
     }
 }

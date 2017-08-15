@@ -13,11 +13,11 @@ namespace IDI.Central.Controllers
     {
         // GET: api/category/{typeName}
         [HttpGet("{typeName}")]
-        public Result<Collection<KeyValuePair<string, string>>> Get(string typeName)
+        public Result<Collection<KeyValuePair<int, string>>> Get(string typeName)
         {
             var condition = new QueryCategoryCondition { EnumType = typeName };
 
-            return ServiceLocator.QueryProcessor.Execute<QueryCategoryCondition, Collection<KeyValuePair<string, string>>>(condition);
+            return ServiceLocator.QueryProcessor.Execute<QueryCategoryCondition, Collection<KeyValuePair<int, string>>>(condition);
         }
     }
 }
