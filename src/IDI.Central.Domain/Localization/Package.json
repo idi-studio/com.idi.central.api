@@ -433,6 +433,18 @@
 },
 {
     "language": "chs",
+    "name": "invalid-category",
+    "value": "无效的类别!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "invalid-category",
+    "value": "Invalid Category.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "model",
     "value": "型号",
     "prefix": "tag"
@@ -562,5 +574,77 @@
     "name": "desc",
     "value": "Description",
     "prefix": "tag"
+},
+{
+    "language": "chs",
+    "name": "cost",
+    "value": "成本价",
+    "prefix": "price-category"
+},
+{
+    "language": "en",
+    "name": "cost",
+    "value": "Cost",
+    "prefix": "price-category"
+},
+{
+    "language": "chs",
+    "name": "purchase",
+    "value": "采购价",
+    "prefix": "price-category"
+},
+{
+    "language": "en",
+    "name": "purchase",
+    "value": "Purchase",
+    "prefix": "price-category"
+},
+{
+    "language": "chs",
+    "name": "original",
+    "value": "原价",
+    "prefix": "price-category"
+},
+{
+    "language": "en",
+    "name": "original",
+    "value": "Original",
+    "prefix": "price-category"
+},
+{
+    "language": "chs",
+    "name": "selling",
+    "value": "现价",
+    "prefix": "price-category"
+},
+{
+    "language": "en",
+    "name": "selling",
+    "value": "Selling",
+    "prefix": "price-category"
+},
+{
+    "language": "chs",
+    "name": "discount",
+    "value": "折扣价",
+    "prefix": "price-category"
+},
+{
+    "language": "en",
+    "name": "discount",
+    "value": "Discount",
+    "prefix": "price-category"
+},
+{
+    "language": "chs",
+    "name": "vip",
+    "value": "会员价",
+    "prefix": "price-category"
+},
+{
+    "language": "en",
+    "name": "vip",
+    "value": "VIP",
+    "prefix": "price-category"
 }]
  

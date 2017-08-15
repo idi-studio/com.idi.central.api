@@ -37,6 +37,8 @@
   <item prefix="command" name="product-not-existing" en="Cannot found this product." chs="产品不存在!" />
   <item prefix="command" name="record-not-existing" en="Record does not exist." chs="记录不存在!" />
   <item prefix="command" name="time-conflict" en="Time conflict." chs="时间冲突!" />
+  <item prefix="command" name="invalid-category" en="Invalid Category." chs="无效的类别!" />
+  
 
   <item prefix="tag" name="model" en="Model" chs="型号" />
   <item prefix="tag" name="spec" en="Spec" chs="规格" />
@@ -49,4 +51,12 @@
   <item prefix="tag" name="color" en="Color" chs="颜色" />
   <item prefix="tag" name="year" en="Year" chs="年份" />
   <item prefix="tag" name="desc" en="Description" chs="描述" />
+
+  <item prefix="price-category" name="cost" en="Cost" chs="成本价" />
+  <item prefix="price-category" name="purchase" en="Purchase" chs="采购价" />
+  <item prefix="price-category" name="original" en="Original" chs="原价" />
+  <item prefix="price-category" name="selling" en="Selling" chs="现价" />
+  <item prefix="price-category" name="discount" en="Discount" chs="折扣价" />
+  <item prefix="price-category" name="vip" en="VIP" chs="会员价" />
+
 </items>

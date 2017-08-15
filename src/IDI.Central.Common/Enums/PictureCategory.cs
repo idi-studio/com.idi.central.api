@@ -3,7 +3,7 @@
 namespace IDI.Central.Common
 {
     [Flags]
-    public enum PictureCategory
+    public enum PictureCategory : int
     {
         Small = 2,
         Medium = 4,

@@ -3,7 +3,7 @@
 namespace IDI.Central.Common
 {
     [Flags]
-    public enum PrivilegeType
+    public enum PrivilegeType : int
     {
         View = 2,
         Operate = 4
