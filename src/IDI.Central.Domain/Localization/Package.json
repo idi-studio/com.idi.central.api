@@ -433,6 +433,18 @@
 },
 {
     "language": "chs",
+    "name": "record-duplicated",
+    "value": "记录重复!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "record-duplicated",
+    "value": "Record duplicated.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "invalid-category",
     "value": "无效的类别!",
     "prefix": "command"

@@ -30,6 +30,9 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
     public class ProductPriceCommandHandler : CommandHandler<ProductPriceCommand>
     {
+        private readonly DateTime min = new DateTime(2010, 1, 1);
+        private readonly DateTime max = new DateTime(2030, 12, 31);
+
         [Injection]
         public IRepository<ProductPrice> Prices { get; set; }
 
@@ -38,10 +41,13 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (HasConflict(command))
                 return Result.Fail(Localization.Get(Resources.Key.Command.TimeConflict));
 
-            if (HasTerm(command.Category))
+            if (IsDuplicated(command))
+                return Result.Fail(Localization.Get(Resources.Key.Command.RecordDuplicated));
+
+            if (!HasTerm(command.Category))
             {
-                command.StartDate = new DateTime(2000, 1, 1);
-                command.DueDate = new DateTime(2099, 12, 31);
+                command.StartDate = this.min;
+                command.DueDate = this.max;
             }
 
             var price = new ProductPrice
@@ -67,15 +73,18 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (HasConflict(command))
                 return Result.Fail(Localization.Get(Resources.Key.Command.TimeConflict));
 
+            if (IsDuplicated(command))
+                return Result.Fail(Localization.Get(Resources.Key.Command.RecordDuplicated));
+
             var price = this.Prices.Find(command.Id);
 
             if (price == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
 
-            if (HasTerm(command.Category))
+            if (!HasTerm(command.Category))
             {
-                command.StartDate = new DateTime(2000, 1, 1);
-                command.DueDate = new DateTime(2099, 12, 31);
+                command.StartDate = this.min;
+                command.DueDate = this.max;
             }
 
             price.Category = command.Category;
@@ -108,7 +117,10 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         private bool HasConflict(ProductPriceCommand command)
         {
-            var price = this.Prices.Find(e => e.ProductId == command.ProductId && e.Category == command.Category && e.Id != command.Id);
+            if (!HasTerm(command.Category))
+                return false;
+
+            var price = this.Prices.Find(e => e.ProductId == command.ProductId && e.Category == command.Category && e.Grade == command.Grade && e.Id != command.Id);
 
             if (price == null)
                 return false;
@@ -118,6 +130,14 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 return true;
 
             return false;
+        }
+
+        private bool IsDuplicated(ProductPriceCommand command)
+        {
+            if (HasTerm(command.Category))
+                return false;
+
+            return this.Prices.Exist(e => e.ProductId == command.ProductId && e.Category == command.Category && e.Grade == command.Grade && e.Id != command.Id);
         }
 
         private bool HasTerm(PriceCategory category)

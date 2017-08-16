@@ -30,7 +30,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
         {
             var prices = this.Prices.Get(e => e.ProductId == condition.ProductId);
 
-            var collection = prices.OrderBy(e => e.Category).Select(price => new ProductPriceModel
+            var collection = prices.OrderByDescending(e => e.Category).ThenBy(e => e.Grade).Select(price => new ProductPriceModel
             {
                 Id = price.Id,
                 Amount = price.Amount,

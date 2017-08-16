@@ -60,6 +60,7 @@ namespace IDI.Central.Domain.Localization
 								public const string ProductNotExisting = "product-not-existing";
 								public const string RecordNotExisting = "record-not-existing";
 								public const string TimeConflict = "time-conflict";
+								public const string RecordDuplicated = "record-duplicated";
 								public const string InvalidCategory = "invalid-category";
 								}
 
