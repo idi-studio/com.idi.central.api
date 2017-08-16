@@ -42,8 +42,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             {
                 ProductId = command.ProductId,
                 Category = command.Category,
-                StartDate = command.StartDate,
-                DueDate = command.DueDate,
+                StartDate = command.StartDate.Date,
+                DueDate = command.DueDate.Date.AddTicks(new TimeSpan(23,59,59).Ticks),
                 Amount = command.Amount,
                 Grade = command.Grade,
                 Enabled = command.Enabled,
@@ -67,8 +67,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
 
             price.Category = command.Category;
-            price.StartDate = command.StartDate;
-            price.DueDate = command.DueDate;
+            price.StartDate = command.StartDate.Date;
+            price.DueDate = command.DueDate.Date.AddTicks(new TimeSpan(23, 59, 59).Ticks);
             price.Amount = command.Amount;
             price.Grade = command.Grade;
             price.Enabled = command.Enabled;

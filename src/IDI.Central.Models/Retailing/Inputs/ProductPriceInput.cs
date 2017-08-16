@@ -7,7 +7,7 @@ namespace IDI.Central.Models.Retailing
 {
     public class ProductPriceInput : IInput
     {
-        [JsonProperty("product-id")]
+        [JsonProperty("productid")]
         public Guid ProductId { get; set; }
 
         [JsonProperty("category")]
@@ -19,10 +19,10 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("grade")]
         public int Grade { get; set; } = 0;
 
-        [JsonProperty("start-date")]
+        [JsonProperty("startdate")]
         public DateTime StartDate { get; set; }
 
-        [JsonProperty("due-date")]
+        [JsonProperty("duedate")]
         public DateTime DueDate { get; set; }
 
         [JsonProperty("active")]

@@ -18,7 +18,7 @@ namespace IDI.Central.Controllers
         {
             var condition = new QueryProductPricesCondition { ProductId = id };
 
-            return ServiceLocator.QueryProcessor.Execute<QueryProductPricesCondition, Collection<ProductPriceModel>>();
+            return ServiceLocator.QueryProcessor.Execute<QueryProductPricesCondition, Collection<ProductPriceModel>>(condition);
         }
     }
 }
