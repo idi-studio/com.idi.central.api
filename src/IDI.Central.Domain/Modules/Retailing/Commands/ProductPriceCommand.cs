@@ -38,12 +38,18 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (HasConflict(command))
                 return Result.Fail(Localization.Get(Resources.Key.Command.TimeConflict));
 
+            if (HasTerm(command.Category))
+            {
+                command.StartDate = new DateTime(2000, 1, 1);
+                command.DueDate = new DateTime(2099, 12, 31);
+            }
+
             var price = new ProductPrice
             {
                 ProductId = command.ProductId,
                 Category = command.Category,
                 StartDate = command.StartDate.Date,
-                DueDate = command.DueDate.Date.AddTicks(new TimeSpan(23,59,59).Ticks),
+                DueDate = command.DueDate.Date.AddTicks(new TimeSpan(23, 59, 59).Ticks),
                 Amount = command.Amount,
                 Grade = command.Grade,
                 Enabled = command.Enabled,
@@ -65,6 +71,12 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
             if (price == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
+
+            if (HasTerm(command.Category))
+            {
+                command.StartDate = new DateTime(2000, 1, 1);
+                command.DueDate = new DateTime(2099, 12, 31);
+            }
 
             price.Category = command.Category;
             price.StartDate = command.StartDate.Date;
@@ -106,6 +118,18 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 return true;
 
             return false;
+        }
+
+        private bool HasTerm(PriceCategory category)
+        {
+            switch (category)
+            {
+                case PriceCategory.Discount:
+                case PriceCategory.VIP:
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }
