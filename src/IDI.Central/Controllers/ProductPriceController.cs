@@ -5,6 +5,7 @@ using IDI.Central.Models.Retailing;
 using IDI.Central.Providers;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
+using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,8 +22,8 @@ namespace IDI.Central.Controllers
             {
                 ProductId = input.ProductId,
                 Category = input.Category,
-                StartDate = input.StartDate,
-                DueDate = input.DueDate,
+                StartDate = input.StartDate.AsDate(),
+                DueDate = input.DueDate.AsDate(),
                 Amount = input.Amount,
                 Grade = input.Grade,
                 Enabled = input.Enabled,
@@ -42,8 +43,8 @@ namespace IDI.Central.Controllers
                 Id = id,
                 ProductId = input.ProductId,
                 Category = input.Category,
-                StartDate = input.StartDate,
-                DueDate = input.DueDate,
+                StartDate = input.StartDate.AsDate(),
+                DueDate = input.DueDate.AsDate(),
                 Amount = input.Amount,
                 Grade = input.Grade,
                 Enabled = input.Enabled,

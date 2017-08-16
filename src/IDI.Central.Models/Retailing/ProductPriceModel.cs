@@ -13,17 +13,26 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("category")]
         public PriceCategory Category { get; set; }
 
+        [JsonProperty("categoryname")]
+        public string CategoryName { get; set; }
+
         [JsonProperty("amount")]
         public decimal Amount { get; set; }
 
         [JsonProperty("grade")]
         public int Grade { get; set; }
 
+        //[JsonProperty("start")]
+        //public string Start { get; set; }
+
         [JsonProperty("startdate")]
-        public DateTime StartDate { get; set; }
+        public string StartDate { get; set; }
+
+        //[JsonProperty("due")]
+        //public string Due { get; set; }
 
         [JsonProperty("duedate")]
-        public DateTime DueDate { get; set; }
+        public string DueDate { get; set; }
 
         [JsonProperty("pid")]
         public Guid ProductId { get; set; }
