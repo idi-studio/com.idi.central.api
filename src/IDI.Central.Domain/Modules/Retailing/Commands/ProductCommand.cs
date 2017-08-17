@@ -66,7 +66,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (product == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.ProductNotExisting));
 
-            if (command.OnShelf && product.Prices.Any(p => p.Category == Central.Common.PriceCategory.Selling))
+            if (command.OnShelf && !product.Prices.Any(p => p.Category == Central.Common.PriceCategory.Selling && p.Enabled))
                 return Result.Fail(Localization.Get(Resources.Key.Command.RequiredSellingPrice));
 
             product.Name = command.Name.TrimContiguousSpaces();
