@@ -32,7 +32,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                 Code = product.Code,
                 Description = product.Tags.To<List<Tag>>().AsString(),
                 Tags = product.Tags.To<List<Tag>>(),
-                Enabled = product.Enabled
+                Enabled = product.Enabled,
+                OnShelf = product.OnShelf
             };
 
             return Result.Success(model);

@@ -24,5 +24,8 @@ namespace IDI.Central.Models.Retailing
 
         [JsonProperty("active")]
         public bool Enabled { get; set; } = true;
+
+        [JsonProperty("onshelf")]
+        public bool OnShelf { get; set; } = false;
     }
 }

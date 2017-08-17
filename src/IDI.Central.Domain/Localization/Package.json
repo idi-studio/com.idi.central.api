@@ -457,6 +457,18 @@
 },
 {
     "language": "chs",
+    "name": "required-selling-price",
+    "value": "未设定销售价!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "required-selling-price",
+    "value": "Selling price required.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "model",
     "value": "型号",
     "prefix": "tag"
@@ -585,6 +597,18 @@
     "language": "en",
     "name": "desc",
     "value": "Description",
+    "prefix": "tag"
+},
+{
+    "language": "chs",
+    "name": "manufacturer",
+    "value": "制造商",
+    "prefix": "tag"
+},
+{
+    "language": "en",
+    "name": "manufacturer",
+    "value": "mfrs.",
     "prefix": "tag"
 },
 {

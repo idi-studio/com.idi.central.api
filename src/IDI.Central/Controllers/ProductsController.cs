@@ -25,6 +25,7 @@ namespace IDI.Central.Controllers
                 Code = input.Code,
                 Tags = input.Tags.ToJson(),
                 Enabled = input.Enabled,
+                OnShelf = input.OnShelf,
                 Mode = CommandMode.Create,
                 Group = Constants.VerificationGroup.Create,
             };
@@ -50,6 +51,7 @@ namespace IDI.Central.Controllers
                 Code = input.Code,
                 Tags = input.Tags.ToJson(),
                 Enabled = input.Enabled,
+                OnShelf = input.OnShelf,
                 Mode = CommandMode.Update,
                 Group = Constants.VerificationGroup.Update,
             };

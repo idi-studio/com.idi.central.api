@@ -23,14 +23,15 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
         {
             var products = this.Products.Get();
 
-            var collection = products.OrderBy(r => r.Name).Select(r => new ProductModel
+            var collection = products.OrderBy(product => product.Name).Select(product => new ProductModel
             {
-                Id = r.Id,
-                Name = r.Name,
-                Code = r.Code,
-                Description = r.Tags.To<List<Tag>>().AsString(),
-                Tags = r.Tags.To<List<Tag>>(),
-                Enabled = r.Enabled
+                Id = product.Id,
+                Name = product.Name,
+                Code = product.Code,
+                Description = product.Tags.To<List<Tag>>().AsString(),
+                Tags = product.Tags.To<List<Tag>>(),
+                Enabled = product.Enabled,
+                OnShelf = product.OnShelf
             }).ToList();
 
             return Result.Success(new Collection<ProductModel>(collection));

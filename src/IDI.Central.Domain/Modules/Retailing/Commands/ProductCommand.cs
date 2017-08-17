@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Core.Common;
@@ -25,6 +26,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
         public string Tags { get; set; }
 
         public bool Enabled { get; set; }
+
+        public bool OnShelf { get; set; }
     }
 
     public class ProductCommandHandler : CommandHandler<ProductCommand>
@@ -39,10 +42,11 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
             var product = new Product
             {
-                Name = command.Name,
+                Name = command.Name.TrimContiguousSpaces(),
                 Code = command.Code,
                 Tags = command.Tags,
                 Enabled = command.Enabled,
+                OnShelf = false
             };
 
             this.Products.Add(product);
@@ -57,15 +61,19 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (this.Products.Exist(e => e.Code == command.Code && e.Id != command.Id))
                 return Result.Fail(Localization.Get(Resources.Key.Command.ProductCodeDuplicated));
 
-            var product = this.Products.Find(command.Id);
+            var product = this.Products.Find(command.Id, p => p.Prices);
 
             if (product == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.ProductNotExisting));
 
-            product.Name = command.Name;
+            if (command.OnShelf && product.Prices.Any(p => p.Category == Central.Common.PriceCategory.Selling))
+                return Result.Fail(Localization.Get(Resources.Key.Command.RequiredSellingPrice));
+
+            product.Name = command.Name.TrimContiguousSpaces();
             product.Code = command.Code;
             product.Tags = command.Tags;
             product.Enabled = command.Enabled;
+            product.OnShelf = command.OnShelf;
 
             this.Products.Update(product);
             this.Products.Context.Commit();

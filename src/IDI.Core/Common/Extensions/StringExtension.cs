@@ -2,6 +2,7 @@
 using System.Linq;
 using System.ComponentModel;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace IDI.Core.Common
 {
@@ -40,6 +41,11 @@ namespace IDI.Core.Common
         public static string[] Split(this string value, string separator)
         {
             return value.Split(new string[] { separator }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        public static string TrimContiguousSpaces(this string input)
+        {
+            return Regex.Replace(input.Trim(), "\\s+", " ");
         }
     }
 }

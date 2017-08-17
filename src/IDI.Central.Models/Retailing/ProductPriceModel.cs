@@ -22,14 +22,8 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("grade")]
         public int Grade { get; set; }
 
-        //[JsonProperty("start")]
-        //public string Start { get; set; }
-
         [JsonProperty("startdate")]
         public string StartDate { get; set; }
-
-        //[JsonProperty("due")]
-        //public string Due { get; set; }
 
         [JsonProperty("duedate")]
         public string DueDate { get; set; }

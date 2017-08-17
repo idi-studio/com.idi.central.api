@@ -22,6 +22,8 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
 
         public bool Enabled { get; set; } = true;
 
+        public bool OnShelf  { get; set; } = false;
+
         public List<ProductPrice> Prices { get; set; }
 
     }

@@ -62,6 +62,7 @@ namespace IDI.Central.Domain.Localization
 								public const string TimeConflict = "time-conflict";
 								public const string RecordDuplicated = "record-duplicated";
 								public const string InvalidCategory = "invalid-category";
+								public const string RequiredSellingPrice = "required-selling-price";
 								}
 
 						public class Tag {
@@ -76,6 +77,7 @@ namespace IDI.Central.Domain.Localization
 								public const string Color = "color";
 								public const string Year = "year";
 								public const string Desc = "desc";
+								public const string Manufacturer = "manufacturer";
 								}
 
 						public class PriceCategory {
