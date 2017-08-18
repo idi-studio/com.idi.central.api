@@ -66,8 +66,6 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         private string GenerateSerialNumber(OrderCategory category, DateTime timestamp)
         {
-            var count = this.Orders.Count(e => e.Category == category && e.Date == timestamp.Date);
-
             string prefix = string.Empty;
 
             switch (category)
@@ -79,17 +77,17 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                     prefix = "POO-";
                     break;
                 case OrderCategory.StockIn:
-                    prefix = "SI-";
+                    prefix = "SIN-";
                     break;
                 case OrderCategory.StockOut:
-                    prefix = "SO-";
+                    prefix = "SOT-";
                     break;
                 default:
                     prefix = string.Empty;
                     break;
             }
 
-            return $"{prefix}{timestamp.ToString("yyMMdd")}{count.ToString("D6")}";
+            return $"{prefix}{timestamp.ToString("yyMMdd")}{timestamp.TimeOfDay.Ticks.ToString("x8")}".ToUpper();
         }
     }
 }
