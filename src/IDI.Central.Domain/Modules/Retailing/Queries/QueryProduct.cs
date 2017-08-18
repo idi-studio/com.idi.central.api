@@ -29,7 +29,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
             {
                 Id = product.Id,
                 Name = product.Name,
-                Code = product.Code,
+                QRCode = product.QRCode,
                 Description = product.Tags.To<List<Tag>>().AsString(),
                 Tags = product.Tags.To<List<Tag>>(),
                 Enabled = product.Enabled,

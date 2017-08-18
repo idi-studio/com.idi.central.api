@@ -10,7 +10,7 @@ namespace IDI.Central.Models.Retailing
         public string Name { get; set; } = "";
 
         [JsonProperty("code")]
-        public string Code { get; set; } = "";
+        public string QRCode { get; set; } = "";
 
         [JsonProperty("tags")]
         public List<Tag> Tags { get; set; } = new List<Tag>();

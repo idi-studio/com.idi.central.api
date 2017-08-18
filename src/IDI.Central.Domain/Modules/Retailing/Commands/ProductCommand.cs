@@ -37,13 +37,13 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         protected override Result Create(ProductCommand command)
         {
-            if (this.Products.Exist(e => e.Code == command.Code))
+            if (this.Products.Exist(e => e.QRCode == command.Code))
                 return Result.Fail(Localization.Get(Resources.Key.Command.ProductCodeDuplicated));
 
             var product = new Product
             {
                 Name = command.Name.TrimContiguousSpaces(),
-                Code = command.Code,
+                QRCode = command.Code,
                 Tags = command.Tags,
                 Enabled = command.Enabled,
                 OnShelf = false
@@ -58,7 +58,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         protected override Result Update(ProductCommand command)
         {
-            if (this.Products.Exist(e => e.Code == command.Code && e.Id != command.Id))
+            if (this.Products.Exist(e => e.QRCode == command.Code && e.Id != command.Id))
                 return Result.Fail(Localization.Get(Resources.Key.Command.ProductCodeDuplicated));
 
             var product = this.Products.Find(command.Id, p => p.Prices);
@@ -70,7 +70,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 return Result.Fail(Localization.Get(Resources.Key.Command.RequiredSellingPrice));
 
             product.Name = command.Name.TrimContiguousSpaces();
-            product.Code = command.Code;
+            product.QRCode = command.Code;
             product.Tags = command.Tags;
             product.Enabled = command.Enabled;
             product.OnShelf = command.OnShelf;

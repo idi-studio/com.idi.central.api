@@ -12,13 +12,9 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
 
         [Required]
         [StringLength(50)]
-        public string Code { get; set; }
+        public string QRCode { get; set; }
 
         public string Tags { get; set; }
-
-        public string Price { get; set; }
-
-        public string Picture { get; set; }
 
         public bool Enabled { get; set; } = true;
 

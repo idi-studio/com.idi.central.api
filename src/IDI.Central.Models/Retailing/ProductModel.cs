@@ -14,7 +14,7 @@ namespace IDI.Central.Models.Retailing
         public string Name { get; set; }
 
         [JsonProperty("code")]
-        public string Code { get; set; }
+        public string QRCode { get; set; }
 
         [JsonProperty("description")]
         public string Description { get; set; }
