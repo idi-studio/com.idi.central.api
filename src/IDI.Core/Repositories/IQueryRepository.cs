@@ -11,6 +11,8 @@ namespace IDI.Core.Repositories
 
         bool Exist(Expression<Func<TAggregateRoot, bool>> condition);
 
+        int Count(Expression<Func<TAggregateRoot, bool>> condition);
+
         TAggregateRoot Find(Guid key);
 
         TAggregateRoot Find(Guid key, params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths);

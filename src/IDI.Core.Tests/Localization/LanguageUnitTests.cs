@@ -1,5 +1,5 @@
 ﻿using IDI.Core.Localization;
-using IDI.Core.Tests.Utils;
+using IDI.Core.Tests.TestUtils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IDI.Core.Tests.Localization

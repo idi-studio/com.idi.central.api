@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;
-using IDI.Core.Tests.Utils;
-using IDI.Core.Tests.Utils.Commands;
+using IDI.Core.Tests.TestUtils;
+using IDI.Core.Tests.TestUtils.Commands;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IDI.Core.Tests.Infrastructure.Commands

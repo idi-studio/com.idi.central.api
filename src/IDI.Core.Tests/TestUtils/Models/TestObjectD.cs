@@ -1,7 +1,7 @@
 ﻿using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.Verification.Attributes;
 
-namespace IDI.Core.Tests.Utils.Models
+namespace IDI.Core.Tests.TestUtils.Models
 {
     public class TestObjectD : Command
     {

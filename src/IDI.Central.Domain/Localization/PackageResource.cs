@@ -57,12 +57,14 @@ namespace IDI.Central.Domain.Localization
 								public const string RegisterSuccess = "register-success";
 								public const string PasswordMismatch = "password-mismatch";
 								public const string ProductCodeDuplicated = "product-code-duplicated";
+								public const string OrderExists = "order-exists";
 								public const string ProductNotExisting = "product-not-existing";
 								public const string RecordNotExisting = "record-not-existing";
 								public const string TimeConflict = "time-conflict";
 								public const string RecordDuplicated = "record-duplicated";
 								public const string InvalidCategory = "invalid-category";
 								public const string InvalidProduct = "invalid-product";
+								public const string InvalidCustomer = "invalid-customer";
 								public const string RequiredSellingPrice = "required-selling-price";
 								public const string OperationNonsupport = "operation-nonsupport";
 								}

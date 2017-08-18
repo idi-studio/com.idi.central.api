@@ -2,7 +2,7 @@
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.Verification.Attributes;
 
-namespace IDI.Core.Tests.Utils.Commands
+namespace IDI.Core.Tests.TestUtils.Commands
 {
     public class ChangeFieldCommand : Command
     {

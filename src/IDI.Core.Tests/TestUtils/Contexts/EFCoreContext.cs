@@ -1,7 +1,7 @@
-﻿using IDI.Core.Tests.Utils.AggregateRoots;
+﻿using IDI.Core.Tests.TestUtils.AggregateRoots;
 using Microsoft.EntityFrameworkCore;
 
-namespace IDI.Core.Tests.Utils.Contexts
+namespace IDI.Core.Tests.TestUtils.Contexts
 {
     public class EFCoreContext : DbContext
     {

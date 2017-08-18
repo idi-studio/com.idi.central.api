@@ -397,6 +397,18 @@
 },
 {
     "language": "chs",
+    "name": "order-exists",
+    "value": "订单已存在!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "order-exists",
+    "value": "The order already exists.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "product-not-existing",
     "value": "产品不存在!",
     "prefix": "command"
@@ -465,6 +477,18 @@
     "language": "en",
     "name": "invalid-product",
     "value": "Invalid Product.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "invalid-customer",
+    "value": "无效的客户!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "invalid-customer",
+    "value": "Invalid Customer.",
     "prefix": "command"
 },
 {

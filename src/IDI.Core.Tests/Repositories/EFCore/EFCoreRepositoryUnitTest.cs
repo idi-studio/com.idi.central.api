@@ -1,6 +1,6 @@
 ﻿using IDI.Core.Infrastructure;
-using IDI.Core.Tests.Utils;
-using IDI.Core.Tests.Utils.Contexts;
+using IDI.Core.Tests.TestUtils;
+using IDI.Core.Tests.TestUtils.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

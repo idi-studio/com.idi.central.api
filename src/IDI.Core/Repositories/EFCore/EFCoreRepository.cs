@@ -54,6 +54,10 @@ namespace IDI.Core.Repositories.EFCore
         {
             return efContext.Context.Set<TAggregateRoot>().Any(condition);
         }
+        protected override int DoCount(Expression<Func<TAggregateRoot, bool>> condition)
+        {
+            return efContext.Context.Set<TAggregateRoot>().Count(condition);
+        }
         protected override List<TAggregateRoot> DoGet()
         {
             return efContext.Context.Set<TAggregateRoot>().ToList();

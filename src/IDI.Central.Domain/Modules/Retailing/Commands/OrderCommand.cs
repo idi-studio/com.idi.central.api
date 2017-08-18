@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
@@ -20,8 +18,6 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
         public string Remark { get; set; }
 
         public Guid CustomerId { get; set; }
-
-        public List<OrderItemCommand> Items { get; set; }
     }
 
     public class OrderCommandHandler : CommandHandler<OrderCommand>
@@ -29,65 +25,71 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
         [Injection]
         public IRepository<Order> Orders { get; set; }
 
+        [Injection]
+        public IRepository<Customer> Customers { get; set; }
+
         protected override Result Create(OrderCommand command)
         {
-            //if (this.Products.Exist(e => e.QRCode == command.Code))
-            //    return Result.Fail(Localization.Get(Resources.Key.Command.ProductCodeDuplicated));
+            if (this.Orders.Exist(e => e.Id == command.Id))
+                return Result.Fail(Localization.Get(Resources.Key.Command.OrderExists));
 
-            //var product = new Product
-            //{
-            //    Name = command.Name.TrimContiguousSpaces(),
-            //    QRCode = command.Code,
-            //    Tags = command.Tags,
-            //    Enabled = command.Enabled,
-            //    OnShelf = false
-            //};
+            if (!this.Customers.Exist(e => e.Id == command.CustomerId))
+                return Result.Fail(Localization.Get(Resources.Key.Command.InvalidCustomer));
 
-            //this.Products.Add(product);
-            //this.Products.Context.Commit();
-            //this.Products.Context.Dispose();
+            DateTime timestamp = DateTime.Now;
+
+            var order = new Order
+            {
+                CustomerId = command.CustomerId,
+                Category = command.Category,
+                Date = timestamp,
+                Remark = command.Remark,
+                SN = GenerateSerialNumber(command.Category, timestamp)
+            };
+
+            this.Orders.Add(order);
+            this.Orders.Context.Commit();
+            this.Orders.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess));
         }
 
         protected override Result Update(OrderCommand command)
         {
-            //if (this.Products.Exist(e => e.QRCode == command.Code && e.Id != command.Id))
-            //    return Result.Fail(Localization.Get(Resources.Key.Command.ProductCodeDuplicated));
-
-            //var product = this.Products.Find(command.Id, p => p.Prices);
-
-            //if (product == null)
-            //    return Result.Fail(Localization.Get(Resources.Key.Command.ProductNotExisting));
-
-            //if (command.OnShelf && !product.Prices.Any(p => p.Category == Central.Common.PriceCategory.Selling && p.Enabled))
-            //    return Result.Fail(Localization.Get(Resources.Key.Command.RequiredSellingPrice));
-
-            //product.Name = command.Name.TrimContiguousSpaces();
-            //product.QRCode = command.Code;
-            //product.Tags = command.Tags;
-            //product.Enabled = command.Enabled;
-            //product.OnShelf = command.OnShelf;
-
-            //this.Products.Update(product);
-            //this.Products.Context.Commit();
-            //this.Products.Context.Dispose();
-
-            return Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
+            return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
         }
 
         protected override Result Delete(OrderCommand command)
         {
-            //var product = this.Products.Find(command.Id);
+            return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
+        }
 
-            //if (product == null)
-            //    return Result.Fail(Localization.Get(Resources.Key.Command.ProductNotExisting));
+        private string GenerateSerialNumber(OrderCategory category, DateTime timestamp)
+        {
+            var count = this.Orders.Count(e => e.Category == category && e.Date == timestamp.Date);
 
-            //this.Products.Remove(product);
-            //this.Products.Context.Commit();
-            //this.Products.Context.Dispose();
+            string prefix = string.Empty;
 
-            return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
+            switch (category)
+            {
+                case OrderCategory.Sales:
+                    prefix = "SOO-";
+                    break;
+                case OrderCategory.Purchase:
+                    prefix = "POO-";
+                    break;
+                case OrderCategory.StockIn:
+                    prefix = "SI-";
+                    break;
+                case OrderCategory.StockOut:
+                    prefix = "SO-";
+                    break;
+                default:
+                    prefix = string.Empty;
+                    break;
+            }
+
+            return $"{prefix}{timestamp.ToString("yyMMdd")}{count.ToString("D6")}";
         }
     }
 }

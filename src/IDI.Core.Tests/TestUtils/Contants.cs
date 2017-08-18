@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace IDI.Core.Tests.Utils
+namespace IDI.Core.Tests.TestUtils
 {
     public class Contants
     {

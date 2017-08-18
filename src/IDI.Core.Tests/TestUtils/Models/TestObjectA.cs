@@ -1,11 +1,12 @@
 ﻿using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.Verification.Attributes;
 
-namespace IDI.Core.Tests.Utils.Models
+namespace IDI.Core.Tests.TestUtils.Models
 {
-    public class TestObjectB : Command
+    public class TestObjectA : Command
     {
-        [StringLength("测试字段", MinLength = 5, MaxLength = 10)]
+        [RequiredField("测试字段")]
         public string Field { get; set; }
+
     }
 }

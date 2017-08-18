@@ -35,6 +35,10 @@ namespace IDI.Core.Repositories
         {
             return this.DoExist(condition);
         }
+        public int Count(Expression<Func<TAggregateRoot, bool>> condition)
+        {
+            return this.DoCount(condition);
+        }
         public TAggregateRoot Find(Guid key)
         {
             return this.DoFind(key);
@@ -86,6 +90,7 @@ namespace IDI.Core.Repositories
         protected abstract void DoRemove(TAggregateRoot aggregateRoot);
         protected abstract void DoUpdate(TAggregateRoot aggregateRoot);
         protected abstract bool DoExist(Expression<Func<TAggregateRoot, bool>> condition);
+        protected abstract int DoCount(Expression<Func<TAggregateRoot, bool>> condition);
         protected abstract TAggregateRoot DoFind(Guid key);
         protected abstract TAggregateRoot DoFind(Guid key, params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths);
         protected abstract TAggregateRoot DoFind(Expression<Func<TAggregateRoot, bool>> condition);

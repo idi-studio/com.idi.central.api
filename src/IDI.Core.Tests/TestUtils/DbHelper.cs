@@ -2,7 +2,7 @@
 using System.Data.SqlClient;
 using IDI.Core.Common;
 
-namespace IDI.Core.Tests.Utils
+namespace IDI.Core.Tests.TestUtils
 {
     public static class DbHelper
     {
