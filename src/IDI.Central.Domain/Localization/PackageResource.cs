@@ -62,7 +62,9 @@ namespace IDI.Central.Domain.Localization
 								public const string TimeConflict = "time-conflict";
 								public const string RecordDuplicated = "record-duplicated";
 								public const string InvalidCategory = "invalid-category";
+								public const string InvalidProduct = "invalid-product";
 								public const string RequiredSellingPrice = "required-selling-price";
+								public const string OperationNonsupport = "operation-nonsupport";
 								}
 
 						public class Tag {

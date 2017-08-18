@@ -39,7 +39,9 @@
   <item prefix="command" name="time-conflict" en="Time conflict." chs="时间冲突!" />
   <item prefix="command" name="record-duplicated" en="Record duplicated." chs="记录重复!" />
   <item prefix="command" name="invalid-category" en="Invalid Category." chs="无效的类别!" />
+  <item prefix="command" name="invalid-product" en="Invalid Product." chs="无效的产品!" />
   <item prefix="command" name="required-selling-price" en="Selling price required." chs="未设定售价!" />
+  <item prefix="command" name="operation-nonsupport" en="This operation is not supported." chs="不支持该项操作!" />
 
 
   <item prefix="tag" name="model" en="Model" chs="型号" />

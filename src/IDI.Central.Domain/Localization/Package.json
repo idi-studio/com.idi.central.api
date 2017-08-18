@@ -457,14 +457,38 @@
 },
 {
     "language": "chs",
+    "name": "invalid-product",
+    "value": "无效的产品!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "invalid-product",
+    "value": "Invalid Product.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "required-selling-price",
-    "value": "未设定销售价!",
+    "value": "未设定售价!",
     "prefix": "command"
 },
 {
     "language": "en",
     "name": "required-selling-price",
     "value": "Selling price required.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "operation-nonsupport",
+    "value": "不支持该项操作!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "operation-nonsupport",
+    "value": "This operation is not supported.",
     "prefix": "command"
 },
 {
