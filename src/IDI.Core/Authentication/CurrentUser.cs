@@ -15,7 +15,7 @@ namespace IDI.Core.Authentication
     {
         private readonly IHttpContextAccessor accessor;
         private readonly ClaimsPrincipal principal;
-        private ISession session => accessor.HttpContext.Session;
+        //private ISession session => accessor.HttpContext.Session;
 
         public bool IsAuthenticated
         {
@@ -45,18 +45,18 @@ namespace IDI.Core.Authentication
         {
             accessor = httpContextAccessor;
 
-            byte[] value;
+            //byte[] value;
 
-            ClaimsPrincipal principal = null;
+            //ClaimsPrincipal principal = null;
 
-            if (session != null && session.TryGetValue("current-user", out value))
-            {
-                using (var stream = new MemoryStream(value))
-                using (var reader = new BinaryReader(stream))
-                {
-                    principal = new ClaimsPrincipal(reader);
-                }
-            }
+            //if (session != null && session.TryGetValue("current-user", out value))
+            //{
+            //    using (var stream = new MemoryStream(value))
+            //    using (var reader = new BinaryReader(stream))
+            //    {
+            //        principal = new ClaimsPrincipal(reader);
+            //    }
+            //}
         }
     }
 }
