@@ -1,21 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Localization\Package.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Localization\Package.json">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Package.tt</DependentUpon>
-      <Generator>TextTemplatingFileGenerator</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\IDI.Central.Common\IDI.Central.Common.csproj" />
@@ -24,13 +11,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Localization\Package.json">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Package.tt</DependentUpon>
+    </None>
     <None Update="Localization\Package.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Package.json</LastGenOutput>
     </None>
     <None Update="Localization\PackageResource.tt">
-      <LastGenOutput>PackageResource.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PackageResource.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
@@ -40,9 +32,9 @@
 
   <ItemGroup>
     <Compile Update="Localization\PackageResource.cs">
-      <DependentUpon>PackageResource.tt</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DependentUpon>PackageResource.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 

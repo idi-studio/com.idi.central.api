@@ -37,7 +37,7 @@ namespace IDI.Central
             services.AddSqlServer<CentralContext>(Configuration.GetConnectionString("DefaultConnection"));
 
             // Inject an implementation of ISwaggerProvider with defaulted settings applied  
-            services.AddSwaggerGen();
+            //services.AddSwaggerGen();
 
             #region 跨域
             var urls = Configuration["Cores"].Split(',');
@@ -66,16 +66,20 @@ namespace IDI.Central
 
             app.UseTokenAuthentication<ApplicationAuthenticationProvider>();
 
+            #region Swashbuckle
             // Enable middleware to serve generated Swagger as a JSON endpoint  
-            app.UseSwagger();
+            //app.UseSwagger();
 
             // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)  
-            app.UseSwaggerUi();
+            //app.UseSwaggerUI();
+            #endregion
+
 
             app.UseStaticFiles();
 
             app.UseCors(Constants.Policy.AllowCorsDomain);
 
+            //app.UseSession();
             app.UseMvc();
             //app.UseMvc(routes =>
             //{
@@ -83,6 +87,7 @@ namespace IDI.Central
             //});
             app.UseLanguagePackage<PackageCentral>();
             app.UseLocalization<Localization>();
+           
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using IDI.Core.Authentication;
 using IDI.Core.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -12,16 +13,25 @@ namespace IDI.Core.Repositories.EFCore
     {
         private readonly IEFCoreRepositoryContext efContext;
 
-        public EFCoreRepository(IRepositoryContext context)
-            : base(context)
+        private readonly ICurrentUser currentUser;
+
+        public EFCoreRepository(IRepositoryContext context, ICurrentUser user) : base(context)
         {
             if (context is IEFCoreRepositoryContext)
                 this.efContext = context as IEFCoreRepositoryContext;
+
+            this.currentUser = user;
         }
 
         #region Protected Methods
         protected override void DoAdd(TAggregateRoot aggregateRoot)
         {
+            if (currentUser != null)
+            {
+                aggregateRoot.CreatedBy = currentUser.Name;
+                aggregateRoot.LastUpdatedBy = currentUser.Name;
+            }
+
             efContext.RegisterNew(aggregateRoot);
         }
         protected override void DoRemove(TAggregateRoot aggregateRoot)
@@ -30,6 +40,12 @@ namespace IDI.Core.Repositories.EFCore
         }
         protected override void DoUpdate(TAggregateRoot aggregateRoot)
         {
+            if (currentUser != null)
+            {
+                aggregateRoot.LastUpdatedAt = DateTime.Now;
+                aggregateRoot.LastUpdatedBy = currentUser.Name;
+            }
+
             efContext.RegisterModified(aggregateRoot);
         }
         protected override TAggregateRoot DoFind(Guid key)

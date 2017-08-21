@@ -38,7 +38,7 @@ namespace IDI.Central.Providers
 
             try
             {
-                var claimsPrincipal = hanlder.ValidateToken(token, validationParameters, out validatedToken);
+                var claims = hanlder.ValidateToken(token, validationParameters, out validatedToken);
 
                 return base.OnActionExecutionAsync(context, next);
             }

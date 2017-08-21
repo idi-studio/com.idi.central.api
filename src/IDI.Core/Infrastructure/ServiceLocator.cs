@@ -1,8 +1,10 @@
 ﻿using System;
+using IDI.Core.Authentication;
 using IDI.Core.Infrastructure.Messaging;
 using IDI.Core.Infrastructure.Utils;
 using IDI.Core.Repositories;
 using IDI.Core.Repositories.EFCore;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -59,6 +61,8 @@ namespace IDI.Core.Infrastructure
                     services.AddSingleton<ICommandBus, CommandBus>();
                     services.AddSingleton<IQueryBuilder, QueryBuilder>();
                     services.AddSingleton<IQueryProcessor, QueryProcessor>();
+                    services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
+                    services.AddScoped<ICurrentUser, CurrentUser>();
 
                     isInitialized = true;
 

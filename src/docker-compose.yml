@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  idi.central:
+    image: idi.central
+    build:
+      context: ./IDI.Central
+      dockerfile: Dockerfile
