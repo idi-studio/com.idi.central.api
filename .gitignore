@@ -20,3 +20,5 @@
 /src/IDI.Central.Domain/*.user
 /src/IDI.Central.Common/bin
 /src/IDI.Central.Common/obj
+/IDI.Core.Tests/bin
+/IDI.Core.Tests/obj
