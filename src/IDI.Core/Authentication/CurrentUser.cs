@@ -22,8 +22,8 @@ namespace IDI.Core.Authentication
         private readonly IHttpContextAccessor accessor;
         private readonly ClaimsPrincipal principal;
 
-        public bool IsAuthenticated { get => principal.Identity.IsAuthenticated; }
-        public string Name => principal.Identity.Name;
+        public bool IsAuthenticated => principal.Identity?.IsAuthenticated ?? false;
+        public string Name => principal.Identity?.Name ?? string.Empty;
         public string Role => principal.Claims.Get(ClaimTypes.Role);
         public string Gender => principal.Claims.Get(ClaimTypes.Gender);
         public string NameIdentifier => principal.Claims.Get(ClaimTypes.NameIdentifier);

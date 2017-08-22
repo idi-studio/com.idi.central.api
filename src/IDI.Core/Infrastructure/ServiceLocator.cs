@@ -93,32 +93,6 @@ namespace IDI.Core.Infrastructure
             return ServiceProvider.GetService(serviceType).InjectedProperties();
         }
 
-        //public static void AddScoped<TService, TImplementation>()
-        //     where TService : class
-        //     where TImplementation : class, TService
-        //{
-        //    services.AddScoped<TService, TImplementation>();
-        //}
-
-        //public static void AddScoped(Type serviceType, Type implementationType)
-        //{
-        //    services.AddScoped(serviceType, implementationType);
-        //}
-
-        //public static void AddSingleton<TService, TImplementation>()
-        //    where TService : class
-        //    where TImplementation : class, TService
-        //{
-        //    services.AddSingleton<TService, TImplementation>();
-        //}
-
-        //public static void AddTransient<TService, TImplementation>()
-        //    where TService : class
-        //    where TImplementation : class, TService
-        //{
-        //    services.AddTransient<TService, TImplementation>();
-        //}
-
         public static void AddDbContext<TContext>(Action<DbContextOptionsBuilder> optionsAction = null) where TContext : DbContext
         {
             services.AddEntityFrameworkSqlServer().AddDbContext<TContext>(optionsAction: optionsAction);
