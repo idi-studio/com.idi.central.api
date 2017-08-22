@@ -5,7 +5,6 @@ using IDI.Central.Domain.Modules.Retailing.Queries;
 using IDI.Central.Models.Retailing;
 using IDI.Central.Providers;
 using IDI.Core.Common;
-using IDI.Core.Common.Basetypes;
 using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +14,7 @@ namespace IDI.Central.Controllers
     [Route("api/order"), ApplicationAuthorize]
     public class OrderController : Controller
     {
-        //POST: api/orders
+        //POST: api/order
         [HttpPost]
         public Result Post([FromBody]OrderInput input)
         {
@@ -31,16 +30,16 @@ namespace IDI.Central.Controllers
             return ServiceLocator.CommandBus.Send(command);
         }
 
-        // GET: api/orders
-        [HttpGet]
-        public Result<Collection<OrderModel>> Get()
+        // GET: api/order/list
+        [HttpGet("list")]
+        public Result<Set<OrderModel>> List()
         {
             var condition = new QueryOrdersCondition { Category = OrderCategory.Sales, Deadline = DateTime.Now.AddMonths(-3) };
 
-            return ServiceLocator.QueryProcessor.Execute<QueryOrdersCondition, Collection<OrderModel>>(condition);
+            return ServiceLocator.QueryProcessor.Execute<QueryOrdersCondition, Set<OrderModel>>(condition);
         }
 
-        // Put: api/orders
+        // Put: api/order
         [HttpPut("{id}")]
         public Result Put(Guid id, [FromBody]OrderInput input)
         {
@@ -57,7 +56,7 @@ namespace IDI.Central.Controllers
             return ServiceLocator.CommandBus.Send(command);
         }
 
-        // GET api/orders/{id}
+        // GET api/order/{id}
         [HttpGet("{id}")]
         public Result<OrderModel> Get(Guid id)
         {
@@ -66,7 +65,7 @@ namespace IDI.Central.Controllers
             return ServiceLocator.QueryProcessor.Execute<QueryOrderCondition, OrderModel>(condition);
         }
 
-        // DELETE api/orders/{id}
+        // DELETE api/order/{id}
         [HttpDelete("{id}")]
         public Result Delete(Guid id)
         {

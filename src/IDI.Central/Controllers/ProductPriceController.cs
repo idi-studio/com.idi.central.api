@@ -72,5 +72,14 @@ namespace IDI.Central.Controllers
 
             return ServiceLocator.CommandBus.Send(command);
         }
+
+        // GET: api/product/price/list/{id}
+        [HttpGet("list/{id}")]
+        public Result<Set<ProductPriceModel>> List(Guid id)
+        {
+            var condition = new QueryProductPricesCondition { ProductId = id };
+
+            return ServiceLocator.QueryProcessor.Execute<QueryProductPricesCondition, Set<ProductPriceModel>>(condition);
+        }
     }
 }

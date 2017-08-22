@@ -4,7 +4,6 @@ using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Central.Models.Retailing;
 using IDI.Core.Common;
-using IDI.Core.Common.Basetypes;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
@@ -18,7 +17,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
         public Guid ProductId { get; set; }
     }
 
-    public class QueryProductPrices : Query<QueryProductPricesCondition, Collection<ProductPriceModel>>
+    public class QueryProductPrices : Query<QueryProductPricesCondition, Set<ProductPriceModel>>
     {
         [Injection]
         public ILocalization Localization { get; set; }
@@ -26,7 +25,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
         [Injection]
         public IQueryRepository<ProductPrice> Prices { get; set; }
 
-        public override Result<Collection<ProductPriceModel>> Execute(QueryProductPricesCondition condition)
+        public override Result<Set<ProductPriceModel>> Execute(QueryProductPricesCondition condition)
         {
             var prices = this.Prices.Get(e => e.ProductId == condition.ProductId);
 
@@ -43,7 +42,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                 Enabled = price.Enabled
             }).ToList();
 
-            return Result.Success(new Collection<ProductPriceModel>(collection));
+            return Result.Success(new Set<ProductPriceModel>(collection));
         }
     }
 }

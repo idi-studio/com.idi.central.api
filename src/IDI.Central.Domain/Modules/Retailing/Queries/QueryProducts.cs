@@ -4,7 +4,6 @@ using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Central.Models.Retailing;
 using IDI.Core.Common;
-using IDI.Core.Common.Basetypes;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
@@ -14,12 +13,12 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
 {
     public class QueryProductsCondition : Condition { }
 
-    public class QueryProducts : Query<QueryProductsCondition, Collection<ProductModel>>
+    public class QueryProducts : Query<QueryProductsCondition, Set<ProductModel>>
     {
         [Injection]
         public IQueryRepository<Product> Products { get; set; }
 
-        public override Result<Collection<ProductModel>> Execute(QueryProductsCondition condition)
+        public override Result<Set<ProductModel>> Execute(QueryProductsCondition condition)
         {
             var products = this.Products.Get();
 
@@ -34,7 +33,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                 OnShelf = product.OnShelf
             }).ToList();
 
-            return Result.Success(new Collection<ProductModel>(collection));
+            return Result.Success(new Set<ProductModel>(collection));
         }
     }
 }

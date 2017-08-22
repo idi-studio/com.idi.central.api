@@ -4,7 +4,6 @@ using IDI.Central.Domain.Modules.Retailing.Queries;
 using IDI.Central.Models.Retailing;
 using IDI.Central.Providers;
 using IDI.Core.Common;
-using IDI.Core.Common.Basetypes;
 using IDI.Core.Common.Enums;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure;
@@ -12,10 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IDI.Central.Controllers
 {
-    [Route("api/products"), ApplicationAuthorize]
-    public class ProductsController : Controller
+    [Route("api/product"), ApplicationAuthorize]
+    public class ProductController : Controller
     {
-        //POST: api/products
+        //POST: api/product
         [HttpPost]
         public Result Post([FromBody]ProductInput input)
         {
@@ -33,14 +32,14 @@ namespace IDI.Central.Controllers
             return ServiceLocator.CommandBus.Send(command);
         }
 
-        // GET: api/products
-        [HttpGet]
-        public Result<Collection<ProductModel>> Get()
+        // GET: api/product/list
+        [HttpGet("list")]
+        public Result<Set<ProductModel>> List()
         {
-            return ServiceLocator.QueryProcessor.Execute<QueryProductsCondition, Collection<ProductModel>>();
+            return ServiceLocator.QueryProcessor.Execute<QueryProductsCondition, Set<ProductModel>>();
         }
 
-        // Put: api/products
+        // Put: api/product
         [HttpPut("{id}")]
         public Result Put(Guid id, [FromBody]ProductInput input)
         {
@@ -59,7 +58,7 @@ namespace IDI.Central.Controllers
             return ServiceLocator.CommandBus.Send(command);
         }
 
-        // GET api/products/{id}
+        // GET api/product/{id}
         [HttpGet("{id}")]
         public Result<ProductModel> Get(Guid id)
         {
@@ -68,7 +67,7 @@ namespace IDI.Central.Controllers
             return ServiceLocator.QueryProcessor.Execute<QueryProductCondition, ProductModel>(condition);
         }
 
-        // DELETE api/products/{id}
+        // DELETE api/product/{id}
         [HttpDelete("{id}")]
         public Result Delete(Guid id)
         {

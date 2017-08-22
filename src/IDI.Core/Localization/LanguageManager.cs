@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using IDI.Core.Common;
-using IDI.Core.Common.Basetypes;
 using IDI.Core.Localization.Packages;
 
 namespace IDI.Core.Localization
