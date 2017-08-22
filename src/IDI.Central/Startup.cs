@@ -1,4 +1,5 @@
-﻿using IDI.Central.Domain;
+﻿using System;
+using IDI.Central.Domain;
 using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Localization.Packages;
 using IDI.Central.Providers;
@@ -31,6 +32,11 @@ namespace IDI.Central
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+
             // Add framework services.
             services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
@@ -74,12 +80,11 @@ namespace IDI.Central
             app.UseSwaggerUi();
             #endregion
 
-
             app.UseStaticFiles();
 
             app.UseCors(Constants.Policy.AllowCorsDomain);
 
-            //app.UseSession();
+            app.UseSession();
             app.UseMvc();
             //app.UseMvc(routes =>
             //{

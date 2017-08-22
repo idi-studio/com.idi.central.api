@@ -38,7 +38,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
                 Name = user.UserName,
                 NameIdentifier = user.Id.ToString(),
                 Role = userRoles.Select(r => r.Role.Name).JoinToString(","),
-                Gender = user.Profile.Gender
+                Gender = user.Profile.Gender.ToString()
             };
 
             return Result.Success(identity);

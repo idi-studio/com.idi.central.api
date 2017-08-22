@@ -17,7 +17,8 @@ namespace IDI.Central.Providers
 
         protected override List<Claim> GenerateClientIdentity(string clientId, string clientSecret)
         {
-            return new List<Claim> {
+            return new List<Claim>
+            {
                 new Claim(ClaimTypes.AuthenticationMethod, Constants.AuthenticationMethod.ClientCredentials, ClaimValueTypes.String),
                 new Claim(ClaimTypes.NameIdentifier, clientId, ClaimValueTypes.String)
             };

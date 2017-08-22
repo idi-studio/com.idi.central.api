@@ -26,5 +26,10 @@
             public const string CreateOrUpdate = "Create,Update";
             public const string Delete = "Delete";
         }
+
+        public class SessionKey
+        {
+            public const string CurrentUser = "CURRENT-USER";
+        }
     }
 }

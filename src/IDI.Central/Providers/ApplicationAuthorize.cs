@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using IDI.Core.Authentication;
 using IDI.Core.Common;
@@ -38,7 +40,9 @@ namespace IDI.Central.Providers
 
             try
             {
-                var claims = hanlder.ValidateToken(token, validationParameters, out validatedToken);
+                var claimsPrincipal = hanlder.ValidateToken(token, validationParameters, out validatedToken);
+
+                context.HttpContext.Session.Set(Constants.SessionKey.CurrentUser, new UserIdentity(claimsPrincipal));
 
                 return base.OnActionExecutionAsync(context, next);
             }

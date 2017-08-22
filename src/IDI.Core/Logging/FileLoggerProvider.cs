@@ -30,7 +30,7 @@ namespace IDI.Core.Logging
 
             public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
             {
-                File.AppendAllText(@"d:\logs\log.txt", formatter(state, exception));
+                //File.AppendAllText(@"d:\logs\log.txt", formatter(state, exception));
                 Console.WriteLine(formatter(state, exception));
 
                 //var path = GetFilePath();

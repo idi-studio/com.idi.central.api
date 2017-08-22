@@ -26,10 +26,10 @@ namespace IDI.Core.Repositories.EFCore
         #region Protected Methods
         protected override void DoAdd(TAggregateRoot aggregateRoot)
         {
-            if (currentUser != null)
+            if (currentUser != null && currentUser.IsAuthenticated)
             {
-                aggregateRoot.CreatedBy = currentUser.Name;
-                aggregateRoot.LastUpdatedBy = currentUser.Name;
+                aggregateRoot.CreatedBy = currentUser.Identity.Name;
+                aggregateRoot.LastUpdatedBy = currentUser.Identity.Name;
             }
 
             efContext.RegisterNew(aggregateRoot);
@@ -40,10 +40,10 @@ namespace IDI.Core.Repositories.EFCore
         }
         protected override void DoUpdate(TAggregateRoot aggregateRoot)
         {
-            if (currentUser != null)
+            if (currentUser != null && currentUser.IsAuthenticated)
             {
                 aggregateRoot.LastUpdatedAt = DateTime.Now;
-                aggregateRoot.LastUpdatedBy = currentUser.Name;
+                aggregateRoot.LastUpdatedBy = currentUser.Identity.Name;
             }
 
             efContext.RegisterModified(aggregateRoot);
