@@ -28,8 +28,8 @@ namespace IDI.Core.Repositories.EFCore
         {
             if (currentUser != null && currentUser.IsAuthenticated)
             {
-                aggregateRoot.CreatedBy = currentUser.Identity.Name;
-                aggregateRoot.LastUpdatedBy = currentUser.Identity.Name;
+                aggregateRoot.CreatedBy = currentUser.Name;
+                aggregateRoot.LastUpdatedBy = currentUser.Name;
             }
 
             efContext.RegisterNew(aggregateRoot);
@@ -43,7 +43,7 @@ namespace IDI.Core.Repositories.EFCore
             if (currentUser != null && currentUser.IsAuthenticated)
             {
                 aggregateRoot.LastUpdatedAt = DateTime.Now;
-                aggregateRoot.LastUpdatedBy = currentUser.Identity.Name;
+                aggregateRoot.LastUpdatedBy = currentUser.Name;
             }
 
             efContext.RegisterModified(aggregateRoot);

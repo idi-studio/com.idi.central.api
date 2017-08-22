@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using IDI.Core.Authentication;
 using IDI.Core.Authentication.TokenAuthentication;
 using IDI.Core.Infrastructure;
@@ -29,16 +32,21 @@ namespace IDI.Core.Common.Extensions
             app.UseMiddleware<TTokenAuthenticationMiddleware>(options ?? ApplicationAuthenticationOptions.TokenOptions());
         }
 
-        public static void UseLanguagePackage<TPackage>(this IApplicationBuilder app) where TPackage: Package
+        public static void UseLanguagePackage<TPackage>(this IApplicationBuilder app) where TPackage : Package
         {
             var package = Activator.CreateInstance<TPackage>();
 
             LanguageManager.Instance.Load(package);
         }
 
-        public static void UseLocalization<TLocalization>(this IApplicationBuilder app) where TLocalization: ILocalization
+        public static void UseLocalization<TLocalization>(this IApplicationBuilder app) where TLocalization : ILocalization
         {
             ServiceLocator.Services.AddSingleton(typeof(ILocalization), typeof(TLocalization));
+        }
+
+        public static string Get(this IEnumerable<Claim> claims, string type)
+        {
+            return claims.FirstOrDefault(e => e.Type == type)?.Value ?? string.Empty;
         }
     }
 }

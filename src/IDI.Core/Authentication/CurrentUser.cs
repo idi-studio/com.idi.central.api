@@ -1,4 +1,4 @@
-﻿using IDI.Core.Common;
+﻿using System.Security.Claims;
 using IDI.Core.Common.Extensions;
 using Microsoft.AspNetCore.Http;
 
@@ -8,29 +8,38 @@ namespace IDI.Core.Authentication
     {
         bool IsAuthenticated { get; }
 
-        UserIdentity Identity { get; }
+        string NameIdentifier { get; }
+
+        string Name { get; }
+
+        string Role { get; }
+
+        string Gender { get; }
     }
 
     public class CurrentUser : ICurrentUser
     {
         private readonly IHttpContextAccessor accessor;
-        private ISession session => accessor.HttpContext.Session;
+        private readonly ClaimsPrincipal principal;
 
-        public bool IsAuthenticated
-        {
-            get
-            {
-                return this.Identity != null;
-            }
-        }
-
-        public UserIdentity Identity { get; private set; }
+        public bool IsAuthenticated { get => principal.Identity.IsAuthenticated; }
+        public string Name => principal.Identity.Name;
+        public string Role => principal.Claims.Get(ClaimTypes.Role);
+        public string Gender => principal.Claims.Get(ClaimTypes.Gender);
+        public string NameIdentifier => principal.Claims.Get(ClaimTypes.NameIdentifier);
 
         public CurrentUser(IHttpContextAccessor httpContextAccessor)
         {
             accessor = httpContextAccessor;
 
-            this.Identity = session.Get<UserIdentity>(Constants.SessionKey.CurrentUser);
+            if (accessor.HttpContext != null)
+            {
+                this.principal = accessor.HttpContext.User;
+            }
+            else
+            {
+                this.principal = new ClaimsPrincipal();
+            }
         }
     }
 }

@@ -40,9 +40,7 @@ namespace IDI.Central.Providers
 
             try
             {
-                var claimsPrincipal = hanlder.ValidateToken(token, validationParameters, out validatedToken);
-
-                context.HttpContext.Session.Set(Constants.SessionKey.CurrentUser, new UserIdentity(claimsPrincipal));
+                context.HttpContext.User = hanlder.ValidateToken(token, validationParameters, out validatedToken);
 
                 return base.OnActionExecutionAsync(context, next);
             }
