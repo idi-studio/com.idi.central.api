@@ -24,9 +24,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDI.Central.Models", "IDI.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDI.Core", "IDI.Core\IDI.Core.csproj", "{BB81EFB9-CBA7-4E66-B13F-5388BAA73A42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDI.Central.Domain.Tests", "IDI.Central.Domain.Tests\IDI.Central.Domain.Tests.csproj", "{72860904-7907-45A1-B169-F7975A9E352E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDI.Central.Domain.Tests", "IDI.Central.Domain.Tests\IDI.Central.Domain.Tests.csproj", "{72860904-7907-45A1-B169-F7975A9E352E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDI.Central.Tests", "IDI.Central.Tests\IDI.Central.Tests.csproj", "{FDC724EA-4538-4628-87C3-8C4C10CFC163}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDI.Central.Tests", "IDI.Central.Tests\IDI.Central.Tests.csproj", "{FDC724EA-4538-4628-87C3-8C4C10CFC163}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDI.Core.Tests", "IDI.Core.Tests\IDI.Core.Tests.csproj", "{A523DF45-2142-42D9-88A8-D5ECA7A72DE3}"
 EndProject

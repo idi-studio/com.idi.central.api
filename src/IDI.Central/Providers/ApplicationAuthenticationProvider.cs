@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Central.Domain.Modules.Administration.Queries;
-using IDI.Core.Authentication;
+using IDI.Central.Models.Administration;
 using IDI.Core.Authentication.TokenAuthentication;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;

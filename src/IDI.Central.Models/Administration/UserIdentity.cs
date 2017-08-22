@@ -1,6 +1,6 @@
 ﻿using IDI.Core.Infrastructure.Queries;
 
-namespace IDI.Core.Authentication
+namespace IDI.Central.Models.Administration
 {
     public class UserIdentity : IQueryResult
     {

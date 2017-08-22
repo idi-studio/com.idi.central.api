@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
-using IDI.Core.Authentication;
+using IDI.Central.Models.Administration;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
