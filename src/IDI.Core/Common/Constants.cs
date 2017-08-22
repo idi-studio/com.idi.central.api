@@ -18,15 +18,6 @@
             public const string AllowCorsDomain = "AllowCorsDomain";
         }
 
-        public class VerificationGroup
-        {
-            public const string Default = "Default";
-            public const string Create = "Create";
-            public const string Update = "Update";
-            public const string CreateOrUpdate = "Create,Update";
-            public const string Delete = "Delete";
-        }
-
         public class SessionKey
         {
             public const string CurrentUser = "CURRENT-USER";

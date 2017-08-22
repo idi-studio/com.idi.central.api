@@ -1,5 +1,4 @@
 ﻿using System;
-using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.Verification;
 
@@ -11,7 +10,7 @@ namespace IDI.Core.Infrastructure.Commands
 
         public CommandMode Mode { get; set; } = CommandMode.None;
 
-        public string Group { get; set; } = Constants.VerificationGroup.Default;
+        public VerificationGroup Group { get; set; } = VerificationGroup.Default;
 
         public int Version { get; private set; }
 

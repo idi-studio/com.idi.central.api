@@ -3,6 +3,7 @@ using System.Linq;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Core.Common;
+using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Verification.Attributes;
@@ -14,15 +15,15 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
     {
         public Guid Id { get; set; }
 
-        [RequiredField(Resources.Key.DisplayName.ProductName, Group = Constants.VerificationGroup.CreateOrUpdate)]
-        [StringLength(Resources.Key.DisplayName.ProductName, MaxLength = 50, Group = Constants.VerificationGroup.CreateOrUpdate)]
+        [RequiredField(Resources.Key.DisplayName.ProductName, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [StringLength(Resources.Key.DisplayName.ProductName, MaxLength = 50, Group = VerificationGroup.Create | VerificationGroup.Update)]
         public string Name { get; set; }
 
-        [RequiredField(Resources.Key.DisplayName.ProductCode, Group = Constants.VerificationGroup.CreateOrUpdate)]
-        [StringLength(Resources.Key.DisplayName.ProductCode, MaxLength = 50, Group = Constants.VerificationGroup.CreateOrUpdate)]
+        [RequiredField(Resources.Key.DisplayName.ProductCode, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [StringLength(Resources.Key.DisplayName.ProductCode, MaxLength = 50, Group = VerificationGroup.Create | VerificationGroup.Update)]
         public string Code { get; set; }
 
-        [RequiredField(Resources.Key.DisplayName.ProductTags, Group = Constants.VerificationGroup.CreateOrUpdate)]
+        [RequiredField(Resources.Key.DisplayName.ProductTags, Group = VerificationGroup.Create | VerificationGroup.Update)]
         public string Tags { get; set; }
 
         public bool Enabled { get; set; }

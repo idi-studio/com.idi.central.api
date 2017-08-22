@@ -26,7 +26,7 @@ namespace IDI.Central.Controllers
                 Enabled = input.Enabled,
                 OnShelf = input.OnShelf,
                 Mode = CommandMode.Create,
-                Group = Constants.VerificationGroup.Create,
+                Group = VerificationGroup.Create,
             };
 
             return ServiceLocator.CommandBus.Send(command);
@@ -52,7 +52,7 @@ namespace IDI.Central.Controllers
                 Enabled = input.Enabled,
                 OnShelf = input.OnShelf,
                 Mode = CommandMode.Update,
-                Group = Constants.VerificationGroup.Update,
+                Group = VerificationGroup.Update,
             };
 
             return ServiceLocator.CommandBus.Send(command);
@@ -71,7 +71,7 @@ namespace IDI.Central.Controllers
         [HttpDelete("{id}")]
         public Result Delete(Guid id)
         {
-            var command = new ProductCommand { Id = id, Mode = CommandMode.Delete, Group = Constants.VerificationGroup.Delete };
+            var command = new ProductCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
 
             return ServiceLocator.CommandBus.Send(command);
         }

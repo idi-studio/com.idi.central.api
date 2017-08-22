@@ -1,5 +1,5 @@
 ﻿using System;
-using IDI.Core.Common;
+using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.Verification;
 
 namespace IDI.Core.Infrastructure.Queries
@@ -8,7 +8,7 @@ namespace IDI.Core.Infrastructure.Queries
     {
         public Guid UniqueId { get; private set; }
 
-        public string Group { get; set; } = Constants.VerificationGroup.Default;
+        public VerificationGroup Group { get; set; } = VerificationGroup.Default;
 
         public Condition()
         {

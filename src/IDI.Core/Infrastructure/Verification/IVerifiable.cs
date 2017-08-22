@@ -1,7 +1,9 @@
-﻿namespace IDI.Core.Infrastructure.Verification
+﻿using IDI.Core.Common.Enums;
+
+namespace IDI.Core.Infrastructure.Verification
 {
     public interface IVerifiable
     {
-        string Group { get; set; }
+        VerificationGroup Group { get; set; }
     }
 }
