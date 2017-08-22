@@ -56,6 +56,10 @@ namespace IDI.Central.Providers
             {
                 return context.HttpContext.TokenInvalid();
             }
+            //catch (Exception)
+            //{
+            //    return context.HttpContext.InternalServerError();
+            //}
         }
     }
 
@@ -81,5 +85,12 @@ namespace IDI.Central.Providers
             context.Response.StatusCode = StatusCodes.Status401Unauthorized;
             return context.Response.WriteAsync(Result.Fail("TokenInvalid", code: "401").ToJson());
         }
+
+        //public static Task InternalServerError(this HttpContext context)
+        //{
+        //    context.Response.ContentType = "application/json";
+        //    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+        //    return context.Response.WriteAsync(Result.Fail("InternalServerError", code: "500").ToJson());
+        //}
     }
 }

@@ -27,7 +27,7 @@ namespace IDI.Core.Infrastructure.Messaging
             List<string> errors;
 
             if (!condition.IsValid(out errors))
-                return Result.Fail<TQueryResut>("查询条件验证失败!", details: errors);
+                return Result.Fail<TQueryResut>("查询条件验证失败!").Attach("errors", errors);
 
             var query = _queryBuilder.GetQuery<TCondition, TQueryResut>();
 

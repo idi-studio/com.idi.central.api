@@ -23,7 +23,7 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
         [StringLength(200)]
         public string Remark { get; set; }
 
-        public Guid CustomerId { get; set; }
+        public Guid? CustomerId { get; set; }
 
         public Customer Customer { get; set; }
     }

@@ -30,7 +30,7 @@ namespace IDI.Central.Models.Retailing
         public string Remark { get; set; }
 
         [JsonProperty("customerid")]
-        public Guid CustomerId { get; set; }
+        public Guid? CustomerId { get; set; }
 
         [JsonProperty("items")]
         public List<OrderItemModel> Items { get; set; }

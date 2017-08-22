@@ -17,7 +17,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         public string Remark { get; set; }
 
-        public Guid CustomerId { get; set; }
+        public Guid? CustomerId { get; set; }
     }
 
     public class OrderCommandHandler : CommandHandler<OrderCommand>
@@ -30,10 +30,10 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         protected override Result Create(OrderCommand command)
         {
-            if (this.Orders.Exist(e => e.Id == command.Id))
-                return Result.Fail(Localization.Get(Resources.Key.Command.OrderExists));
+            //if (this.Orders.Exist(e => e.Id == command.Id))
+            //    return Result.Fail(Localization.Get(Resources.Key.Command.OrderExists));
 
-            if (!this.Customers.Exist(e => e.Id == command.CustomerId))
+            if (command.CustomerId.HasValue && !this.Customers.Exist(e => e.Id == command.CustomerId))
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidCustomer));
 
             DateTime timestamp = DateTime.Now;
@@ -51,7 +51,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             this.Orders.Context.Commit();
             this.Orders.Context.Dispose();
 
-            return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess));
+            return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess)).Attach("oid", order.Id);
         }
 
         protected override Result Update(OrderCommand command)

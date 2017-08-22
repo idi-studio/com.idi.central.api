@@ -14,66 +14,73 @@ namespace IDI.Core.Common
         public string Code { get; set; } = "200";
 
         [JsonProperty("message")]
-        public string Message { get; set; }
+        public string Message { get; set; } = string.Empty;
 
         [JsonProperty("details")]
-        public Dictionary<string, object> Details { get; set; }
+        public Dictionary<string, object> Details { get; set; } = new Dictionary<string, object>();
 
         public Result()
         {
             this.Details = new Dictionary<string, object>();
         }
 
-        public static Result Success(string message, List<string> details = null)
+        public static Result Success(string message)
         {
-            return new Result { Status = ResultStatus.Success, Code = "200", Message = message, Details = new Dictionary<string, object> { { "info", details ?? new List<string>() } } };
+            return new Result { Status = ResultStatus.Success, Code = "200", Message = message };
         }
 
-        public static Result<T> Success<T>(T data, string message = "", List<string> details = null)
+        public static Result<T> Success<T>(T data, string message = "")
         {
-            return new Result<T> { Data = data, Status = ResultStatus.Success, Code = "200", Message = message, Details = new Dictionary<string, object> { { "info", details ?? new List<string>() } } };
+            return new Result<T> { Data = data, Status = ResultStatus.Success, Code = "200", Message = message };
         }
 
-        public static Result Fail(string message, string code = "400", List<string> details = null)
+        public static Result Fail(string message, string code = "400")
         {
-            return new Result { Status = ResultStatus.Fail, Message = message, Code = code, Details = new Dictionary<string, object> { { "info", details ?? new List<string>() } } };
+            return new Result { Status = ResultStatus.Fail, Message = message, Code = code };
         }
 
-        public static Result<T> Fail<T>(string message, string code = "400", List<string> details = null)
+        public static Result<T> Fail<T>(string message, string code = "400")
         {
-            return new Result<T> { Status = ResultStatus.Fail, Message = message, Code = code, Details = new Dictionary<string, object> { { "info", details ?? new List<string>() } } };
+            return new Result<T> { Status = ResultStatus.Fail, Message = message, Code = code };
         }
 
-        public static Result Error(string message, string code = "500", List<string> details = null)
+        public static Result Error(string message, string code = "500")
         {
-            return new Result { Status = ResultStatus.Error, Message = message, Code = code, Details = new Dictionary<string, object> { { "info", details ?? new List<string>() } } };
+            return new Result { Status = ResultStatus.Error, Message = message, Code = code };
         }
 
         public static Result Error(Exception exception)
         {
-            return new Result
-            {
-                Status = ResultStatus.Error,
-                Message = exception.Message,
-                Code = "500",
-                Details = new Dictionary<string, object> { { "StackTrace", exception.StackTrace } }
-            };
+            var result = new Result { Status = ResultStatus.Error, Message = exception.Message, Code = "500" };
+
+            result.Details.Add("stacktrace", exception.StackTrace);
+
+            return result;
         }
 
-        public static Result<T> Error<T>(string message, List<string> details = null)
+        public static Result<T> Error<T>(string message, List<string> errors = null)
         {
-            return new Result<T> { Status = ResultStatus.Error, Message = message, Code = "500", Details = new Dictionary<string, object> { { "info", details ?? new List<string>() } } };
+            var result = new Result<T> { Status = ResultStatus.Error, Message = message, Code = "500" };
+
+            result.Details.Add("errors", errors ?? new List<string>());
+
+            return result;
         }
 
         public static Result<T> Error<T>(Exception exception)
         {
-            return new Result<T>
-            {
-                Status = ResultStatus.Error,
-                Code = "500",
-                Message = exception.Message,
-                Details = new Dictionary<string, object> { { "StackTrace", exception.StackTrace } }
-            };
+            var result = new Result<T> { Status = ResultStatus.Error, Code = "500", Message = exception.Message };
+
+            result.Details.Add("stacktrace", exception.StackTrace);
+
+            return result;
+        }
+
+        public Result Attach(string key, object value)
+        {
+            this.Details.Add(key, value);
+
+            return this;
         }
     }
 
@@ -81,5 +88,12 @@ namespace IDI.Core.Common
     {
         [JsonProperty("data")]
         public T Data { get; set; }
+
+        public new Result<T> Attach(string key, object value)
+        {
+            this.Details.Add(key, value);
+
+            return this;
+        }
     }
 }

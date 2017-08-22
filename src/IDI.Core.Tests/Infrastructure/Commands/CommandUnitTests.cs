@@ -30,11 +30,11 @@ namespace IDI.Core.Tests.Infrastructure.Commands
             Assert.AreEqual("命令参数验证失败!", result.Message);
             Assert.AreEqual(1, result.Details.Count);
 
-            var info = result.Details["info"] as List<string>;
+            var errors = result.Details["errors"] as List<string>;
 
-            Assert.AreEqual(2, info.Count);
-            Assert.AreEqual("'测试字段'必填!", info[0]);
-            Assert.AreEqual("'测试字段'最多5到10个字符!", info[1]);
+            Assert.AreEqual(2, errors.Count);
+            Assert.AreEqual("'测试字段'必填!", errors[0]);
+            Assert.AreEqual("'测试字段'最多5到10个字符!", errors[1]);
         }
 
         [TestMethod]
@@ -46,11 +46,11 @@ namespace IDI.Core.Tests.Infrastructure.Commands
             Assert.AreEqual(ResultStatus.Error, result.Status);
             Assert.AreEqual("未找到任何相关命令处理器!", result.Message);
             Assert.AreEqual(1, result.Details.Count);
-            Assert.IsTrue(result.Details.ContainsKey("info"));
+            Assert.IsTrue(result.Details.ContainsKey("errors"));
 
-            var info = result.Details["info"] as List<string>;
+            var errors = result.Details["errors"] as List<string>;
 
-            Assert.AreEqual(0, info.Count);  
+            Assert.AreEqual(0, errors.Count);  
         }
 
         [TestMethod]

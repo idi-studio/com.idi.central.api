@@ -1,17 +1,15 @@
 ﻿using System;
-using IDI.Central.Common.Enums;
 using IDI.Core.Common;
+using Newtonsoft.Json;
 
 namespace IDI.Central.Models.Retailing
 {
     public class OrderInput : IInput
     {
-        public Guid Id { get; set; }
+        [JsonProperty("remark")]
+        public string Remark { get; set; } = string.Empty;
 
-        public OrderCategory Category { get; set; }
-
-        public string Remark { get; set; }
-
-        public Guid CustomerId { get; set; }
+        [JsonProperty("cid")]
+        public Guid? CustomerId { get; set; }
     }
 }
