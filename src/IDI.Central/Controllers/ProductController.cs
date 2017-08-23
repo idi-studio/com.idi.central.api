@@ -39,6 +39,13 @@ namespace IDI.Central.Controllers
             return ServiceLocator.QueryProcessor.Execute<QueryProductSetCondition, Set<ProductModel>>();
         }
 
+        // GET: api/product/selling
+        [HttpGet("selling")]
+        public Result<Set<ProductSellModel>> Selling()
+        {
+            return ServiceLocator.QueryProcessor.Execute<QueryProductSellSetCondition, Set<ProductSellModel>>();
+        }
+
         // Put: api/product
         [HttpPut("{id}")]
         public Result Put(Guid id, [FromBody]ProductInput input)
