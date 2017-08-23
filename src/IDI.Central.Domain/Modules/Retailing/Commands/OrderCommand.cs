@@ -70,7 +70,18 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         protected override Result Delete(OrderCommand command)
         {
-            return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
+            var order = this.Orders.Find(command.Id);
+
+            if (order == null)
+                return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
+
+            this.Orders.Remove(order);
+            this.Orders.Context.Commit();
+            this.Orders.Context.Dispose();
+
+            return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
+
+            //return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
         }
 
         private string GenerateSerialNumber(OrderCategory category, DateTime timestamp)

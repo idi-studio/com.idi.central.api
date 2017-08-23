@@ -9,10 +9,10 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("id")]
         public Guid Id { get; set; }
 
-        [JsonProperty("orderid")]
+        [JsonProperty("oid")]
         public Guid OrderId { get; set; }
 
-        [JsonProperty("productid")]
+        [JsonProperty("pid")]
         public Guid ProductId { get; set; }
 
         [JsonProperty("name")]
@@ -21,8 +21,8 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("unitprice")]
         public decimal UnitPrice { get; set; }
 
-        [JsonProperty("readjustunitprice")]
-        public decimal? ReadjustUnitPrice { get; set; }
+        [JsonProperty("newunitprice")]
+        public decimal? NewUnitPrice { get; set; }
 
         [JsonProperty("qty")]
         public decimal Quantity { get; set; }

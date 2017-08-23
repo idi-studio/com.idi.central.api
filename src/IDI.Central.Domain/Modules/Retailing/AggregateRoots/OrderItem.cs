@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
@@ -12,7 +11,7 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
 
         public decimal UnitPrice { get; set; }
 
-        public decimal? ReadjustUnitPrice { get; set; }
+        public decimal? NewUnitPrice { get; set; }
 
         public decimal Quantity { get; set; }
 

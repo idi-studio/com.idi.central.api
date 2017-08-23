@@ -41,7 +41,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                     ProductId = e.ProductId,
                     ProductName = e.Product != null ? e.Product.Name : "N/A",
                     Quantity = e.Quantity,
-                    ReadjustUnitPrice = e.ReadjustUnitPrice,
+                    NewUnitPrice = e.NewUnitPrice,
                     UnitPrice = e.UnitPrice
                 }).ToList()
             };

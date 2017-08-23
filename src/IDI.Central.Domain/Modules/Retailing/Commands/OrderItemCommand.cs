@@ -18,7 +18,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         public decimal UnitPrice { get; set; }
 
-        public decimal? ReadjustUnitPrice { get; set; }
+        public decimal? NewUnitPrice { get; set; }
 
         public decimal Quantity { get; set; }
     }
@@ -52,7 +52,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 ProductId = command.ProductId,
                 Quantity = command.Quantity,
                 UnitPrice = command.UnitPrice,
-                ReadjustUnitPrice = command.ReadjustUnitPrice,
+                NewUnitPrice = command.NewUnitPrice,
             };
 
             this.OrderItems.Add(item);
@@ -82,7 +82,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             item.ProductId = command.ProductId;
             item.Quantity = command.Quantity;
             item.UnitPrice = command.UnitPrice;
-            item.ReadjustUnitPrice = command.ReadjustUnitPrice;
+            item.NewUnitPrice = command.NewUnitPrice;
 
             this.OrderItems.Update(item);
             this.OrderItems.Context.Commit();
