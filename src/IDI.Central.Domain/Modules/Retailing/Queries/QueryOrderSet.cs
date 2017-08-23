@@ -8,25 +8,29 @@ using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
+using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Retailing.Queries
 {
-    public class QueryOrdersCondition : Condition
+    public class QueryOrderSetCondition : Condition
     {
         public OrderCategory Category { get; set; }
 
         public DateTime Deadline { get; set; }
     }
 
-    public class QueryOrders : Query<QueryOrdersCondition, Set<OrderModel>>
+    public class QueryOrderSet : Query<QueryOrderSetCondition, Set<OrderModel>>
     {
+        [Injection]
+        public ILocalization Localization { get; set; }
+
         [Injection]
         public IQueryRepository<Order> Orders { get; set; }
 
-        public override Result<Set<OrderModel>> Execute(QueryOrdersCondition condition)
+        public override Result<Set<OrderModel>> Execute(QueryOrderSetCondition condition)
         {
-            var orders = this.Orders.Get(e => e.Category == condition.Category && e.Date <= condition.Deadline);
+            var orders = this.Orders.Get(e => e.Category == condition.Category && e.Date >= condition.Deadline);
 
             var collection = orders.OrderBy(e => e.Date).Select(e => new OrderModel
             {
@@ -36,7 +40,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                 Date = e.Date.AsLongDate(),
                 SN = e.SN,
                 Status = e.Status,
-                StatusDesc = e.Status.ToString(),
+                StatusDesc = Localization.Get(e.Status),
                 Remark = e.Remark,
                 Items = new List<OrderItemModel>()
             }).ToList();

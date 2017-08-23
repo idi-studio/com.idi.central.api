@@ -34,9 +34,9 @@ namespace IDI.Central.Controllers
         [HttpGet("list")]
         public Result<Set<OrderModel>> List()
         {
-            var condition = new QueryOrdersCondition { Category = OrderCategory.Sales, Deadline = DateTime.Now.AddMonths(-3) };
+            var condition = new QueryOrderSetCondition { Category = OrderCategory.Sales, Deadline = DateTime.Now.AddMonths(-3) };
 
-            return ServiceLocator.QueryProcessor.Execute<QueryOrdersCondition, Set<OrderModel>>(condition);
+            return ServiceLocator.QueryProcessor.Execute<QueryOrderSetCondition, Set<OrderModel>>(condition);
         }
 
         // Put: api/order

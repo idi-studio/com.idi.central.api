@@ -36,7 +36,7 @@ namespace IDI.Central.Controllers
         [HttpGet("list")]
         public Result<Set<ProductModel>> List()
         {
-            return ServiceLocator.QueryProcessor.Execute<QueryProductsCondition, Set<ProductModel>>();
+            return ServiceLocator.QueryProcessor.Execute<QueryProductSetCondition, Set<ProductModel>>();
         }
 
         // Put: api/product

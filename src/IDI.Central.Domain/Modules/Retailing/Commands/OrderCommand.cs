@@ -30,9 +30,6 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         protected override Result Create(OrderCommand command)
         {
-            //if (this.Orders.Exist(e => e.Id == command.Id))
-            //    return Result.Fail(Localization.Get(Resources.Key.Command.OrderExists));
-
             if (command.CustomerId.HasValue && !this.Customers.Exist(e => e.Id == command.CustomerId))
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidCustomer));
 
@@ -44,6 +41,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 Category = command.Category,
                 Date = timestamp,
                 Remark = command.Remark,
+                Status = OrderStatus.Pending,
                 SN = GenerateSerialNumber(command.Category, timestamp)
             };
 
@@ -56,7 +54,18 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         protected override Result Update(OrderCommand command)
         {
-            return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
+            var order = this.Orders.Find(command.Id);
+
+            if (order == null)
+                return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
+
+            order.Remark = command.Remark;
+
+            this.Orders.Update(order);
+            this.Orders.Context.Commit();
+            this.Orders.Context.Dispose();
+
+            return Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
         }
 
         protected override Result Delete(OrderCommand command)

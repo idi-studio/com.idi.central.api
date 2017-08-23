@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace IDI.Core.Localization
             Load(new PackageCore());
         }
 
-        public enum Category
+        public enum Language
         {
             [Description("chs")]
             SimplifiedChinese,
@@ -30,7 +31,7 @@ namespace IDI.Core.Localization
             English
         }
 
-        private string GetValue(string prefix, string name, Category category = Category.English)
+        private string GetValue(string prefix, string name, Language category = Language.English)
         {
             var item = items.FirstOrDefault(e => e.Prefix == prefix && e.Name == name && e.Language == category.Description());
 
@@ -51,17 +52,17 @@ namespace IDI.Core.Localization
 
         public string Get(string prefix, string name)
         {
-            Category category;
+            Language category;
 
             string culture = (CultureInfo.DefaultThreadCurrentUICulture ?? CultureInfo.CurrentCulture).Name;
 
             switch (culture)
             {
                 case "zh-CN":
-                    category = Category.SimplifiedChinese;
+                    category = Language.SimplifiedChinese;
                     break;
                 default:
-                    category = Category.English;
+                    category = Language.English;
                     break;
             }
 
@@ -75,21 +76,33 @@ namespace IDI.Core.Localization
 
         public List<PackageItem> GetAll(string prefix)
         {
-            Category category;
+            Language category;
 
             string culture = (CultureInfo.DefaultThreadCurrentUICulture ?? CultureInfo.CurrentCulture).Name;
 
             switch (culture)
             {
                 case "zh-CN":
-                    category = Category.SimplifiedChinese;
+                    category = Language.SimplifiedChinese;
                     break;
                 default:
-                    category = Category.English;
+                    category = Language.English;
                     break;
             }
 
             return this.items.Where(e => e.Prefix == prefix && e.Language == category.Description()).ToList();
+        }
+
+        public string Get<T>(T value) where T : struct
+        {
+            var type = value.GetType();
+
+            if (!type.IsEnum)
+                throw new ArgumentException("The value must be an enum type.");
+
+            string name = Enum.GetName(type, value);
+
+            return Get(type.Name, name);
         }
     }
 }

@@ -14,7 +14,6 @@ namespace IDI.Central.Domain.Localization
         {
 		    			public const string COMMAND = "command";
 						public const string DISPLAY_NAME = "display-name";
-						public const string PRICE_CATEGORY = "price-category";
 						public const string TAG = "tag";
 			        }
 
@@ -82,15 +81,6 @@ namespace IDI.Central.Domain.Localization
 								public const string Year = "year";
 								public const string Desc = "desc";
 								public const string Manufacturer = "manufacturer";
-								}
-
-						public class PriceCategory {
-								public const string Cost = "cost";
-								public const string Purchase = "purchase";
-								public const string Original = "original";
-								public const string Selling = "selling";
-								public const string Discount = "discount";
-								public const string Vip = "vip";
 								}
 
 					}

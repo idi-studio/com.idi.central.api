@@ -14,7 +14,7 @@ namespace IDI.Central.Controllers
         [HttpGet("list")]
         public Result<Set<Tag>> List()
         {
-            return ServiceLocator.QueryProcessor.Execute<QueryTagsCondition, Set<Tag>>();
+            return ServiceLocator.QueryProcessor.Execute<QueryTagSetCondition, Set<Tag>>();
         }
     }
 }

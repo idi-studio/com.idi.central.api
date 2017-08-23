@@ -77,9 +77,9 @@ namespace IDI.Central.Controllers
         [HttpGet("list/{id}")]
         public Result<Set<ProductPriceModel>> List(Guid id)
         {
-            var condition = new QueryProductPricesCondition { ProductId = id };
+            var condition = new QueryProductPriceSetCondition { ProductId = id };
 
-            return ServiceLocator.QueryProcessor.Execute<QueryProductPricesCondition, Set<ProductPriceModel>>(condition);
+            return ServiceLocator.QueryProcessor.Execute<QueryProductPriceSetCondition, Set<ProductPriceModel>>(condition);
         }
     }
 }

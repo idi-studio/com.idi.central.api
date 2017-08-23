@@ -11,14 +11,14 @@ using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Retailing.Queries
 {
-    public class QueryProductsCondition : Condition { }
+    public class QueryProductSetCondition : Condition { }
 
-    public class QueryProducts : Query<QueryProductsCondition, Set<ProductModel>>
+    public class QueryProductSet : Query<QueryProductSetCondition, Set<ProductModel>>
     {
         [Injection]
         public IQueryRepository<Product> Products { get; set; }
 
-        public override Result<Set<ProductModel>> Execute(QueryProductsCondition condition)
+        public override Result<Set<ProductModel>> Execute(QueryProductSetCondition condition)
         {
             var products = this.Products.Get();
 

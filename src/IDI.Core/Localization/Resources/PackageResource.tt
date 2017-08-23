@@ -14,7 +14,7 @@
 <#
 	var path = Host.ResolvePath("language-package.xml");  
 	var doc = XDocument.Load(path);
-	var items = doc.Root.Elements("item");
+	var items = doc.Root.Elements("item").Where(item=>item.Attribute("enum")==null);
 	var prefixes=items.Select(item=>item.Attribute("prefix").Value).Distinct().OrderBy(e=>e).ToList();
 	var groups=items.Select(item=>new {Prefix=item.Attribute("prefix").Value, Name=item.Attribute("name").Value, }).GroupBy(g=>g.Prefix);
 #>

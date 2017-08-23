@@ -25,6 +25,6 @@
         /// <summary>
         /// 交易成功
         /// </summary>
-        SuccessTrade = 32
+        Traded = 32
     }
 }

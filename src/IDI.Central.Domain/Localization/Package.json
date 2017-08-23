@@ -661,74 +661,146 @@
 },
 {
     "language": "chs",
-    "name": "cost",
+    "name": "Cost",
     "value": "成本价",
-    "prefix": "price-category"
+    "prefix": "PriceCategory"
 },
 {
     "language": "en",
-    "name": "cost",
+    "name": "Cost",
     "value": "Cost",
-    "prefix": "price-category"
+    "prefix": "PriceCategory"
 },
 {
     "language": "chs",
-    "name": "purchase",
+    "name": "Purchase",
     "value": "采购价",
-    "prefix": "price-category"
+    "prefix": "PriceCategory"
 },
 {
     "language": "en",
-    "name": "purchase",
+    "name": "Purchase",
     "value": "Purchase",
-    "prefix": "price-category"
+    "prefix": "PriceCategory"
 },
 {
     "language": "chs",
-    "name": "original",
+    "name": "Original",
     "value": "原价",
-    "prefix": "price-category"
+    "prefix": "PriceCategory"
 },
 {
     "language": "en",
-    "name": "original",
+    "name": "Original",
     "value": "Original",
-    "prefix": "price-category"
+    "prefix": "PriceCategory"
 },
 {
     "language": "chs",
-    "name": "selling",
+    "name": "Selling",
     "value": "现价",
-    "prefix": "price-category"
+    "prefix": "PriceCategory"
 },
 {
     "language": "en",
-    "name": "selling",
+    "name": "Selling",
     "value": "Selling",
-    "prefix": "price-category"
+    "prefix": "PriceCategory"
 },
 {
     "language": "chs",
-    "name": "discount",
+    "name": "Discount",
     "value": "折扣价",
-    "prefix": "price-category"
+    "prefix": "PriceCategory"
 },
 {
     "language": "en",
-    "name": "discount",
+    "name": "Discount",
     "value": "Discount",
-    "prefix": "price-category"
+    "prefix": "PriceCategory"
 },
 {
     "language": "chs",
-    "name": "vip",
+    "name": "VIP",
     "value": "会员价",
-    "prefix": "price-category"
+    "prefix": "PriceCategory"
 },
 {
     "language": "en",
-    "name": "vip",
+    "name": "VIP",
     "value": "VIP",
-    "prefix": "price-category"
+    "prefix": "PriceCategory"
+},
+{
+    "language": "chs",
+    "name": "Invalid",
+    "value": "无效",
+    "prefix": "OrderStatus"
+},
+{
+    "language": "en",
+    "name": "Invalid",
+    "value": "Invalid",
+    "prefix": "OrderStatus"
+},
+{
+    "language": "chs",
+    "name": "Pending",
+    "value": "待付款",
+    "prefix": "OrderStatus"
+},
+{
+    "language": "en",
+    "name": "Pending",
+    "value": "Pending",
+    "prefix": "OrderStatus"
+},
+{
+    "language": "chs",
+    "name": "Paid",
+    "value": "已付款",
+    "prefix": "OrderStatus"
+},
+{
+    "language": "en",
+    "name": "Paid",
+    "value": "Paid",
+    "prefix": "OrderStatus"
+},
+{
+    "language": "chs",
+    "name": "Shipped",
+    "value": "已发货",
+    "prefix": "OrderStatus"
+},
+{
+    "language": "en",
+    "name": "Shipped",
+    "value": "Shipped",
+    "prefix": "OrderStatus"
+},
+{
+    "language": "chs",
+    "name": "Received",
+    "value": "已收货",
+    "prefix": "OrderStatus"
+},
+{
+    "language": "en",
+    "name": "Received",
+    "value": "Received",
+    "prefix": "OrderStatus"
+},
+{
+    "language": "chs",
+    "name": "Traded",
+    "value": "交易成功",
+    "prefix": "OrderStatus"
+},
+{
+    "language": "en",
+    "name": "Traded",
+    "value": "Traded",
+    "prefix": "OrderStatus"
 }]
  

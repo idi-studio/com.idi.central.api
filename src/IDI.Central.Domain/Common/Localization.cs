@@ -16,6 +16,11 @@ namespace IDI.Central.Domain.Common
             return LanguageManager.Instance.Get(prefix, name);
         }
 
+        public string Get<T>(T value) where T : struct
+        {
+            return LanguageManager.Instance.Get(value);
+        }
+
         public List<PackageItem> GetAll(string prefix)
         {
             return LanguageManager.Instance.GetAll(prefix);

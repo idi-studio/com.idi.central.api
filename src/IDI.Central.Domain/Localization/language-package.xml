@@ -59,11 +59,18 @@
   <item prefix="tag" name="desc" en="Description" chs="描述" />
   <item prefix="tag" name="manufacturer" en="mfrs." chs="制造商" />
 
-  <item prefix="price-category" name="cost" en="Cost" chs="成本价" />
-  <item prefix="price-category" name="purchase" en="Purchase" chs="采购价" />
-  <item prefix="price-category" name="original" en="Original" chs="原价" />
-  <item prefix="price-category" name="selling" en="Selling" chs="现价" />
-  <item prefix="price-category" name="discount" en="Discount" chs="折扣价" />
-  <item prefix="price-category" name="vip" en="VIP" chs="会员价" />
+  <item prefix="PriceCategory" enum="true" name="Cost" en="Cost" chs="成本价" />
+  <item prefix="PriceCategory" enum="true" name="Purchase" en="Purchase" chs="采购价" />
+  <item prefix="PriceCategory" enum="true" name="Original" en="Original" chs="原价" />
+  <item prefix="PriceCategory" enum="true" name="Selling" en="Selling" chs="现价" />
+  <item prefix="PriceCategory" enum="true" name="Discount" en="Discount" chs="折扣价" />
+  <item prefix="PriceCategory" enum="true" name="VIP" en="VIP" chs="会员价" />
+
+  <item prefix="OrderStatus" enum="true" name="Invalid" en="Invalid" chs="无效" />
+  <item prefix="OrderStatus" enum="true" name="Pending" en="Pending" chs="待付款" />
+  <item prefix="OrderStatus" enum="true" name="Paid" en="Paid" chs="已付款" />
+  <item prefix="OrderStatus" enum="true" name="Shipped" en="Shipped" chs="已发货" />
+  <item prefix="OrderStatus" enum="true" name="Received" en="Received" chs="已收货" />
+  <item prefix="OrderStatus" enum="true" name="Traded" en="Traded" chs="交易成功" />
 
 </items>

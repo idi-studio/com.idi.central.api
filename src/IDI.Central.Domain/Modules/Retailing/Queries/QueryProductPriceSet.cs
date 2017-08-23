@@ -12,12 +12,12 @@ using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Retailing.Queries
 {
-    public class QueryProductPricesCondition : Condition
+    public class QueryProductPriceSetCondition : Condition
     {
         public Guid ProductId { get; set; }
     }
 
-    public class QueryProductPrices : Query<QueryProductPricesCondition, Set<ProductPriceModel>>
+    public class QueryProductPriceSet : Query<QueryProductPriceSetCondition, Set<ProductPriceModel>>
     {
         [Injection]
         public ILocalization Localization { get; set; }
@@ -25,7 +25,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
         [Injection]
         public IQueryRepository<ProductPrice> Prices { get; set; }
 
-        public override Result<Set<ProductPriceModel>> Execute(QueryProductPricesCondition condition)
+        public override Result<Set<ProductPriceModel>> Execute(QueryProductPriceSetCondition condition)
         {
             var prices = this.Prices.Get(e => e.ProductId == condition.ProductId);
 
@@ -34,7 +34,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                 Id = price.Id,
                 Amount = price.Amount,
                 Category = price.Category,
-                CategoryName = Localization.Get(Resources.Prefix.PRICE_CATEGORY, price.Category.ToString()),
+                CategoryName = Localization.Get(price.Category),
                 DueDate = price.DueDate.AsLongDate(),
                 Grade = price.Grade,
                 ProductId = price.ProductId,

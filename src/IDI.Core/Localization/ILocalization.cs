@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace IDI.Core.Localization
 {
@@ -7,6 +8,8 @@ namespace IDI.Core.Localization
         string Get(string prefix, string name);
 
         string Get(string name);
+
+        string Get<T>(T value) where T : struct;
 
         List<PackageItem> GetAll(string prefix);
     }

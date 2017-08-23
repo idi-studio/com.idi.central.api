@@ -33,7 +33,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                 Id = price.Id,
                 Amount = price.Amount,
                 Category = price.Category,
-                CategoryName = Localization.Get(Resources.Prefix.PRICE_CATEGORY, price.Category.ToString()),
+                CategoryName = Localization.Get(price.Category),
                 DueDate = price.DueDate.AsLongDate(),
                 Grade = price.Grade,
                 ProductId = price.ProductId,
