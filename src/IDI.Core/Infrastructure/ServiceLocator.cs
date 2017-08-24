@@ -95,7 +95,8 @@ namespace IDI.Core.Infrastructure
 
         public static void AddDbContext<TContext>(Action<DbContextOptionsBuilder> optionsAction = null) where TContext : DbContext
         {
-            services.AddEntityFrameworkSqlServer().AddDbContext<TContext>(optionsAction: optionsAction);
+            services.AddDbContextPool<TContext>(optionsAction: optionsAction);
+            //services.AddEntityFrameworkSqlServer().AddDbContext<TContext>(optionsAction: optionsAction);
             services.AddScoped<DbContext, TContext>();
             services.AddScoped<IRepositoryContext, EFCoreRepositoryContext>();
             services.AddScoped<IEFCoreRepositoryContext, EFCoreRepositoryContext>();
