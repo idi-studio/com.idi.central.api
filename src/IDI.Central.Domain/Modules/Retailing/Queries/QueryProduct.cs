@@ -19,7 +19,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
     public class QueryProduct : Query<QueryProductCondition, ProductModel>
     {
         [Injection]
-        public IQueryRepository<Product> Products { get; set; }
+        public IQueryableRepository<Product> Products { get; set; }
 
         public override Result<ProductModel> Execute(QueryProductCondition condition)
         {

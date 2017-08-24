@@ -51,8 +51,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             };
 
             this.Products.Add(product);
-            this.Products.Context.Commit();
-            this.Products.Context.Dispose();
+            this.Products.Commit();
+            //this.Products.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess));
         }
@@ -62,7 +62,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (this.Products.Exist(e => e.QRCode == command.Code && e.Id != command.Id))
                 return Result.Fail(Localization.Get(Resources.Key.Command.ProductCodeDuplicated));
 
-            var product = this.Products.Find(command.Id, p => p.Prices);
+            var product = this.Products.Include(p => p.Prices).Find(command.Id);
 
             if (product == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.ProductNotExisting));
@@ -77,8 +77,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             product.OnShelf = command.OnShelf;
 
             this.Products.Update(product);
-            this.Products.Context.Commit();
-            this.Products.Context.Dispose();
+            this.Products.Commit();
+            //this.Products.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
         }
@@ -91,8 +91,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 return Result.Fail(Localization.Get(Resources.Key.Command.ProductNotExisting));
 
             this.Products.Remove(product);
-            this.Products.Context.Commit();
-            this.Products.Context.Dispose();
+            this.Products.Commit();
+            //this.Products.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
         }

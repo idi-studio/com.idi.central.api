@@ -41,7 +41,7 @@ namespace IDI.Core.Tests.Repositories.EFCore
 
             var repository = ServiceLocator.GetService<IRepository<Blog>>();
 
-            var blogs = repository.Get(b => b.Posts);
+            var blogs = repository.Include(b => b.Posts).Get();
 
             Assert.IsNotNull(blogs);
             Assert.AreEqual(blogCount, blogs.Count);
@@ -79,7 +79,7 @@ namespace IDI.Core.Tests.Repositories.EFCore
 
             var repository = ServiceLocator.GetService<IRepository<Blog>>();
 
-            var blogs = repository.Get(b => b.Url == "http://www.cnblogs.com/?id=1", b => b.Posts);
+            var blogs = repository.Include(e => e.Posts).Get(b => b.Url == "http://www.cnblogs.com/?id=1");
 
             Assert.IsNotNull(blogs);
             Assert.AreEqual(1, blogs.Count);

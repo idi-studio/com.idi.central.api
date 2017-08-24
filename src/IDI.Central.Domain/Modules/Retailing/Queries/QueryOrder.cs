@@ -7,6 +7,7 @@ using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
 using IDI.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace IDI.Central.Domain.Modules.Retailing.Queries
 {
@@ -18,11 +19,11 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
     public class QueryOrder : Query<QueryOrderCondition, OrderModel>
     {
         [Injection]
-        public IQueryRepository<Order> Orders { get; set; }
+        public IQueryableRepository<Order> Orders { get; set; }
 
         public override Result<OrderModel> Execute(QueryOrderCondition condition)
         {
-            var order = this.Orders.Find(e => e.Id == condition.Id, e => e.Items);
+            var order = this.Orders.Include(e => e.Items).AlsoInclude(a => a.Product).Find(condition.Id);
 
             var model = new OrderModel
             {

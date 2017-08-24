@@ -18,11 +18,11 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
     public class QueryMyProfile : Query<QueryMyProfileCondition, MyProfile>
     {
         [Injection]
-        public IQueryRepository<User> Users { get; set; }
+        public IQueryableRepository<User> Users { get; set; }
 
         public override Result<MyProfile> Execute(QueryMyProfileCondition condition)
         {
-            var user = this.Users.Find(u => u.UserName == condition.UserName, u => u.Profile);
+            var user = this.Users.Include(e => e.Profile).Find(u => u.UserName == condition.UserName);
 
             var profile = new MyProfile
             {

@@ -57,8 +57,8 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             };
 
             this.Users.Add(user);
-            this.Users.Context.Commit();
-            this.Users.Context.Dispose();
+            this.Users.Commit();
+            //this.Users.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.RegisterSuccess));
         }

@@ -100,7 +100,7 @@ namespace IDI.Core.Infrastructure
             services.AddScoped<IRepositoryContext, EFCoreRepositoryContext>();
             services.AddScoped<IEFCoreRepositoryContext, EFCoreRepositoryContext>();
             services.AddScoped(typeof(IRepository<>), typeof(EFCoreRepository<>));
-            services.AddScoped(typeof(IQueryRepository<>), typeof(EFCoreRepository<>));
+            services.AddScoped(typeof(IQueryableRepository<>), typeof(EFCoreRepository<>));
         }
     }
 }

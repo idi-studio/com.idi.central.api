@@ -38,7 +38,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 
         public Result Execute(UserAuthorizeCommand command)
         {
-            var user = this.Users.Find(e => e.UserName == command.UserName, e => e.UserRoles);
+            var user = this.Users.Include(e => e.UserRoles).Find(e => e.UserName == command.UserName);
 
             if (user == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidUser));
@@ -55,8 +55,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             user.UserRoles.AddRange(additionRoles);
 
             this.Users.Update(user);
-            this.Users.Context.Commit();
-            this.Users.Context.Dispose();
+            this.Users.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.AuthenticationSuccess));
         }

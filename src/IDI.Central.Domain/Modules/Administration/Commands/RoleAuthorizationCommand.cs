@@ -38,7 +38,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 
         public Result Execute(RoleAuthorizationCommand command)
         {
-            var role = this.Roles.Find(r => r.Name == command.RoleName, r => r.RolePrivileges);
+            var role = this.Roles.Include(e => e.RolePrivileges).Find(r => r.Name == command.RoleName);
 
             if (role == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidRole));
@@ -55,8 +55,8 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             role.RolePrivileges.AddRange(additionPrivileges);
 
             this.Roles.Update(role);
-            this.Roles.Context.Commit();
-            this.Roles.Context.Dispose();
+            this.Roles.Commit();
+            //this.Roles.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.RoleAuthorizationSuccess));
         }

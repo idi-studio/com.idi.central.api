@@ -40,7 +40,7 @@ namespace IDI.Core.Tests.Repositories.EFCore
 
             var repository = ServiceLocator.GetService<IRepository<Blog>>();
 
-            var blog = repository.Find(Contants.DbOperations.InsertBlog.PK.ToGuid(), b => b.Posts);
+            var blog = repository.Include(e => e.Posts).Find(Contants.DbOperations.InsertBlog.PK.ToGuid());
 
             Assert.IsNotNull(blog);
             Assert.AreEqual(2, blog.Posts.Count);
@@ -76,7 +76,7 @@ namespace IDI.Core.Tests.Repositories.EFCore
 
             var repository = ServiceLocator.GetService<IRepository<Blog>>();
 
-            var blog = repository.Find(b => b.Url == Contants.DbOperations.InsertBlog.URL, b => b.Posts);
+            var blog = repository.Include(e => e.Posts).Find(b => b.Url == Contants.DbOperations.InsertBlog.URL);
 
             Assert.IsNotNull(blog);
             Assert.AreEqual(2, blog.Posts.Count);

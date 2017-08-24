@@ -20,8 +20,8 @@ namespace IDI.Core.Tests.Repositories.EFCore
             var repository = ServiceLocator.GetService<IRepository<Blog>>();
 
             repository.Add(blog);
-            repository.Context.Commit();
-            repository.Context.Dispose();
+            repository.Commit();
+            //repository.Context.Dispose();
 
             Assert.AreEqual(expected: 1, actual: DbHelper.ReadRecordCount(Contants.Tables.Blogs));
             Assert.AreEqual(expected: 2, actual: DbHelper.ReadRecordCount(Contants.Tables.Posts));
@@ -39,7 +39,7 @@ namespace IDI.Core.Tests.Repositories.EFCore
 
             var repository = ServiceLocator.GetService<IRepository<Blog>>();
 
-            var blog = repository.Find(Contants.DbOperations.InsertBlog.PK.ToGuid(), b => b.Posts);
+            var blog = repository.Include(e => e.Posts).Find(Contants.DbOperations.InsertBlog.PK.ToGuid());
 
             Assert.IsNotNull(blog);
             Assert.AreEqual(2, blog.Posts.Count);
@@ -47,7 +47,7 @@ namespace IDI.Core.Tests.Repositories.EFCore
             blog.Posts.Add(new Post { Title = "TestTitle3", Content = "TestContent3" });
 
             repository.Update(blog);
-            repository.Context.Commit();
+            repository.Commit();
 
             Assert.AreEqual(expected: 1, actual: DbHelper.ReadRecordCount(Contants.Tables.Blogs));
             Assert.AreEqual(expected: 3, actual: DbHelper.ReadRecordCount(Contants.Tables.Posts));
@@ -65,7 +65,7 @@ namespace IDI.Core.Tests.Repositories.EFCore
 
             var repository = ServiceLocator.GetService<IRepository<Blog>>();
 
-            var blog = repository.Find(Contants.DbOperations.InsertBlog.PK.ToGuid(), b => b.Posts);
+            var blog = repository.Include(e => e.Posts).Find(Contants.DbOperations.InsertBlog.PK.ToGuid());
 
             Assert.IsNotNull(blog);
             Assert.AreEqual(2, blog.Posts.Count);
@@ -73,7 +73,7 @@ namespace IDI.Core.Tests.Repositories.EFCore
             blog.Posts.RemoveAt(1);
 
             repository.Update(blog);
-            repository.Context.Commit();
+            repository.Commit();
 
             Assert.AreEqual(expected: 1, actual: DbHelper.ReadRecordCount(Contants.Tables.Blogs));
             Assert.AreEqual(expected: 1, actual: DbHelper.ReadRecordCount(Contants.Tables.Posts));
@@ -91,7 +91,7 @@ namespace IDI.Core.Tests.Repositories.EFCore
 
             var repository = ServiceLocator.GetService<IRepository<Blog>>();
 
-            var blog = repository.Find(Contants.DbOperations.InsertBlog.PK.ToGuid(), b => b.Posts);
+            var blog = repository.Include(e => e.Posts).Find(Contants.DbOperations.InsertBlog.PK.ToGuid());
 
             Assert.IsNotNull(blog);
             Assert.AreEqual(2, blog.Posts.Count);
@@ -103,12 +103,12 @@ namespace IDI.Core.Tests.Repositories.EFCore
             blog.Posts[0].Content = newContent;
 
             repository.Update(blog);
-            repository.Context.Commit();
+            repository.Commit();
 
             Assert.AreEqual(expected: 1, actual: DbHelper.ReadRecordCount(Contants.Tables.Blogs));
             Assert.AreEqual(expected: 2, actual: DbHelper.ReadRecordCount(Contants.Tables.Posts));
 
-            var newBlog = repository.Find(Contants.DbOperations.InsertBlog.PK.ToGuid(), b => b.Posts);
+            var newBlog = repository.Include(e => e.Posts).Find(Contants.DbOperations.InsertBlog.PK.ToGuid());
 
             Assert.IsNotNull(newBlog);
             Assert.AreEqual(newURL, newBlog.Url);

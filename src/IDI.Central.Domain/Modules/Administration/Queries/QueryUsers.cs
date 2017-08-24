@@ -13,11 +13,11 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
     public class QueryUsers : Query<QueryUsersCondition, Set<UserModel>>
     {
         [Injection]
-        public IQueryRepository<User> Users { get; set; }
+        public IQueryableRepository<User> Users { get; set; }
 
         public override Result<Set<UserModel>> Execute(QueryUsersCondition condition)
         {
-            var users = this.Users.Get(u => u.Profile);
+            var users = this.Users.Include(e => e.Profile).Get();
 
             var collection = users.OrderBy(r => r.UserName).Select(r => new UserModel
             {

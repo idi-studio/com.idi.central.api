@@ -23,26 +23,26 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
         public ILocalization Localization { get; set; }
 
         [Injection]
-        public IQueryRepository<Menu> Menus { get; set; }
+        public IQueryableRepository<Menu> Menus { get; set; }
 
         [Injection]
-        public IQueryRepository<User> Users { get; set; }
+        public IQueryableRepository<User> Users { get; set; }
 
         [Injection]
-        public IQueryRepository<RolePrivilege> RolePrivilegeRepository { get; set; }
+        public IQueryableRepository<RolePrivilege> RolePrivileges { get; set; }
 
         public override Result<Sidebar> Execute(QuerySidebarCondition condition)
         {
-            var user = this.Users.Find(e => e.UserName == condition.UserName, e => e.Profile, e => e.UserRoles);
+            var user = this.Users.Include(e => e.Profile).Include(e => e.UserRoles).Find(e => e.UserName == condition.UserName);
 
             if (user == null)
                 return Result.Fail<Sidebar>(Localization.Get(Resources.Key.Command.InvalidUser));
 
             var userRoles = user.UserRoles.Select(e => e.RoleId).ToList();
 
-            var privileges = this.RolePrivilegeRepository.Get(e => userRoles.Contains(e.RoleId), e => e.Privilege).Select(e => e.Privilege).ToList();
+            var privileges = this.RolePrivileges.Include(e=>e.Privilege).Get(e => userRoles.Contains(e.RoleId)).Select(e => e.Privilege).ToList();
 
-            var menus = this.Menus.Get(e => e.Module);
+            var menus = this.Menus.Include(e=>e.Module).Get();
             menus = menus.Where(e => e.IsAuthorized(privileges)).ToList();
 
             var sidebar = new Sidebar

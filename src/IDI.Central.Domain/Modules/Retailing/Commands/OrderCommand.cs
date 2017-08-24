@@ -46,8 +46,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             };
 
             this.Orders.Add(order);
-            this.Orders.Context.Commit();
-            this.Orders.Context.Dispose();
+            this.Orders.Commit();
+            //this.Orders.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess)).Attach("oid", order.Id);
         }
@@ -62,8 +62,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             order.Remark = command.Remark;
 
             this.Orders.Update(order);
-            this.Orders.Context.Commit();
-            this.Orders.Context.Dispose();
+            this.Orders.Commit();
+            //this.Orders.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
         }
@@ -76,8 +76,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
 
             this.Orders.Remove(order);
-            this.Orders.Context.Commit();
-            this.Orders.Context.Dispose();
+            this.Orders.Commit();
+            //this.Orders.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
 

@@ -16,7 +16,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
     public class QueryProductSet : Query<QueryProductSetCondition, Set<ProductModel>>
     {
         [Injection]
-        public IQueryRepository<Product> Products { get; set; }
+        public IQueryableRepository<Product> Products { get; set; }
 
         public override Result<Set<ProductModel>> Execute(QueryProductSetCondition condition)
         {

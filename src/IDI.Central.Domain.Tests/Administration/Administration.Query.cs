@@ -16,9 +16,9 @@ namespace IDI.Central.Domain.Tests
             Administration_DataInitializationCommand();
 
             var query = new QuerySidebar();
-            query.Menus = ServiceLocator.GetService<IQueryRepository<Menu>>();
-            query.RolePrivilegeRepository = ServiceLocator.GetService<IQueryRepository<RolePrivilege>>();
-            query.Users = ServiceLocator.GetService<IQueryRepository<User>>();
+            query.Menus = ServiceLocator.GetService<IQueryableRepository<Menu>>();
+            query.RolePrivileges = ServiceLocator.GetService<IQueryableRepository<RolePrivilege>>();
+            query.Users = ServiceLocator.GetService<IQueryableRepository<User>>();
 
             var result = query.Execute(new QuerySidebarCondition { UserName = "administrator" });
 

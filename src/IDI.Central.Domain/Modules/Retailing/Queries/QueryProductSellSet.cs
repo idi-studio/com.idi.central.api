@@ -16,11 +16,11 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
     public class QueryProductSellSet : Query<QueryProductSellSetCondition, Set<ProductSellModel>>
     {
         [Injection]
-        public IQueryRepository<Product> Products { get; set; }
+        public IQueryableRepository<Product> Products { get; set; }
 
         public override Result<Set<ProductSellModel>> Execute(QueryProductSellSetCondition condition)
         {
-            var products = this.Products.Get(e => e.OnShelf && e.Enabled, e => e.Prices);
+            var products = this.Products.Include(e => e.Prices).Get(e => e.OnShelf && e.Enabled);
 
             var collection = products.OrderBy(product => product.Name).Select(product => new ProductSellModel
             {

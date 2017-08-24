@@ -22,8 +22,8 @@ namespace IDI.Core.Tests.Repositories.EFCore
             var repository = ServiceLocator.GetService<IRepository<User>>();
 
             repository.Add(user);
-            repository.Context.Commit();
-            repository.Context.Dispose();
+            repository.Commit();
+            //repository.Context.Dispose();
 
             int actual = DbHelper.ReadRecordCount(Contants.Tables.Users);
 
@@ -46,11 +46,11 @@ namespace IDI.Core.Tests.Repositories.EFCore
 
             user.Password = "654321";
             repository.Update(user);
-            repository.Context.Commit();
+            repository.Commit();
 
             User user2 = repository.Find(new Guid(Contants.DbOperations.InsertUser.PK));
 
-            repository.Context.Dispose();
+            //repository.Context.Dispose();
 
             Assert.IsNotNull(user2);
             Assert.AreEqual(user.UserName, user2.UserName);
@@ -72,8 +72,8 @@ namespace IDI.Core.Tests.Repositories.EFCore
             Assert.IsNotNull(user);
 
             repository.Remove(user);
-            repository.Context.Commit();
-            repository.Context.Dispose();
+            repository.Commit();
+            //repository.Context.Dispose();
 
             actual = DbHelper.ReadRecordCount(Contants.Tables.Users);
             Assert.AreEqual(expected: 0, actual: actual);

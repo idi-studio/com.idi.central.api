@@ -37,8 +37,8 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             var role = new Role { Name = command.RoleName };
 
             this.Roles.Add(role);
-            this.Roles.Context.Commit();
-            this.Roles.Context.Dispose();
+            this.Roles.Commit();
+            //this.Roles.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess));
         }

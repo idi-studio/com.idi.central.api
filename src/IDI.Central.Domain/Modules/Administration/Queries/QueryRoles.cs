@@ -13,7 +13,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
     public class QueryRoles : Query<QueryRolesCondition, Set<RoleModel>>
     {
         [Injection]
-        public IQueryRepository<Role> Roles { get; set; }
+        public IQueryableRepository<Role> Roles { get; set; }
 
         public override Result<Set<RoleModel>> Execute(QueryRolesCondition condition)
         {

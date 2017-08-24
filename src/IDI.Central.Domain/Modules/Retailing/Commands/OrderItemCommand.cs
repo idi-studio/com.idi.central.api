@@ -56,8 +56,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             };
 
             this.OrderItems.Add(item);
-            this.OrderItems.Context.Commit();
-            this.OrderItems.Context.Dispose();
+            this.OrderItems.Commit();
+            //this.OrderItems.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess));
         }
@@ -85,8 +85,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             item.NewUnitPrice = command.NewUnitPrice;
 
             this.OrderItems.Update(item);
-            this.OrderItems.Context.Commit();
-            this.OrderItems.Context.Dispose();
+            this.OrderItems.Commit();
+            //this.OrderItems.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
         }
@@ -104,8 +104,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 return Result.Fail(Localization.Get(Resources.Key.Command.ProductNotExisting));
 
             this.OrderItems.Remove(item);
-            this.OrderItems.Context.Commit();
-            this.OrderItems.Context.Dispose();
+            this.OrderItems.Commit();
+            //this.OrderItems.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
         }

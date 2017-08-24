@@ -48,19 +48,19 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 
             this.Modules.Add(command.Seed.Modules.Administration);
             this.Modules.Add(command.Seed.Modules.Sales);
-            this.Modules.Context.Commit();
+            this.Modules.Commit();
 
             this.Users.Add(command.Seed.Users.Administrator);
-            this.Users.Context.Commit();
+            this.Users.Commit();
 
             this.Roles.Add(command.Seed.Roles.Users);
-            this.Roles.Context.Commit();
+            this.Roles.Commit();
 
             this.Clients.Add(command.Seed.Clients.Central);
-            this.Clients.Context.Commit();
+            this.Clients.Commit();
 
             command.Seed.Products.iPhones.ForEach(e => this.Products.Add(e));
-            this.Products.Context.Commit();
+            this.Products.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.SystemDataInitializeSuccess));
         }

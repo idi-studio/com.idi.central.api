@@ -62,8 +62,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             };
 
             this.Prices.Add(price);
-            this.Prices.Context.Commit();
-            this.Prices.Context.Dispose();
+            this.Prices.Commit();
+            //this.Prices.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess));
         }
@@ -95,8 +95,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             price.Enabled = command.Enabled;
 
             this.Prices.Update(price);
-            this.Prices.Context.Commit();
-            this.Prices.Context.Dispose();
+            this.Prices.Commit();
+            //this.Prices.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
         }
@@ -109,8 +109,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
 
             this.Prices.Remove(price);
-            this.Prices.Context.Commit();
-            this.Prices.Context.Dispose();
+            this.Prices.Commit();
+            //this.Prices.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
         }

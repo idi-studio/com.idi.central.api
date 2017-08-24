@@ -18,7 +18,7 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
 
         public OrderStatus Status { get; set; }
 
-        public List<OrderItem> Items { get; set; }
+        public IEnumerable<OrderItem> Items { get; set; }
 
         [StringLength(200)]
         public string Remark { get; set; }

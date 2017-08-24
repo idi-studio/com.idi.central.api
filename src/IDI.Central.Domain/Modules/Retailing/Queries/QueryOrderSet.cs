@@ -26,7 +26,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
         public ILocalization Localization { get; set; }
 
         [Injection]
-        public IQueryRepository<Order> Orders { get; set; }
+        public IQueryableRepository<Order> Orders { get; set; }
 
         public override Result<Set<OrderModel>> Execute(QueryOrderSetCondition condition)
         {

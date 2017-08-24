@@ -22,7 +22,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
         public ILocalization Localization { get; set; }
 
         [Injection]
-        public IQueryRepository<ProductPrice> Prices { get; set; }
+        public IQueryableRepository<ProductPrice> Prices { get; set; }
 
         public override Result<ProductPriceModel> Execute(QueryProductPriceCondition condition)
         {
