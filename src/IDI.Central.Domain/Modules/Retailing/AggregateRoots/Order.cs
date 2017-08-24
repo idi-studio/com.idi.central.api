@@ -18,13 +18,13 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
 
         public OrderStatus Status { get; set; }
 
-        public IEnumerable<OrderItem> Items { get; set; }
-
         [StringLength(200)]
         public string Remark { get; set; }
 
         public Guid? CustomerId { get; set; }
 
         public Customer Customer { get; set; }
+
+        public List<OrderItem> Items { get; set; } = new List<OrderItem>();
     }
 }

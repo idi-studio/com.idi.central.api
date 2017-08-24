@@ -127,7 +127,7 @@ namespace IDI.Core.Repositories
             return new IncludableQueryableRepository<TAggregateRoot, TProperty>(repository.ThenInclude(navigationPropertyPath));
         }
 
-        public static IIncludableQueryableRepository<TAggregateRoot, TProperty> AlsoInclude<TAggregateRoot, TPreviousProperty, TProperty>(this IIncludableQueryableRepository<TAggregateRoot, IEnumerable<TPreviousProperty>> repository,
+        public static IIncludableQueryableRepository<TAggregateRoot, TProperty> AlsoInclude<TAggregateRoot, TPreviousProperty, TProperty>(this IIncludableQueryableRepository<TAggregateRoot, List<TPreviousProperty>> repository,
             Expression<Func<TPreviousProperty, TProperty>> navigationPropertyPath) where TAggregateRoot : AggregateRoot
         {
             return new IncludableQueryableRepository<TAggregateRoot, TProperty>(repository.ThenInclude(navigationPropertyPath));
