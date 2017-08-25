@@ -11,8 +11,6 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
 
         public decimal UnitPrice { get; set; }
 
-        public decimal? NewUnitPrice { get; set; }
-
         public decimal Quantity { get; set; }
 
         public Order Order { get; set; }

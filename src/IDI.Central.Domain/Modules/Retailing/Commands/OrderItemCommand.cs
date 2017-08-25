@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Core.Common;
@@ -17,8 +18,6 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
         public Guid ProductId { get; set; }
 
         public decimal UnitPrice { get; set; }
-
-        public decimal? NewUnitPrice { get; set; }
 
         public decimal Quantity { get; set; }
     }
@@ -41,23 +40,33 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (!product.Valid())
                 return Result.Fail(message: Localization.Get(Resources.Key.Command.InvalidProduct));
 
-            var order = this.Orders.Find(command.OrderId);
+            var order = this.Orders.Include(e => e.Items).Find(command.OrderId);
 
             if (!order.AllowModifyItem())
                 return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
 
-            var item = new OrderItem
-            {
-                OrderId = command.OrderId,
-                ProductId = command.ProductId,
-                Quantity = command.Quantity,
-                UnitPrice = command.UnitPrice,
-                NewUnitPrice = command.NewUnitPrice,
-            };
+            var oldItem = order.Items.FirstOrDefault(e => e.ProductId == command.ProductId);
 
-            this.OrderItems.Add(item);
-            this.OrderItems.Commit();
-            //this.OrderItems.Context.Dispose();
+            if (oldItem != null)
+            {
+                oldItem.Quantity += command.Quantity;
+
+                this.OrderItems.Update(oldItem);
+                this.OrderItems.Commit();
+            }
+            else
+            {
+                var item = new OrderItem
+                {
+                    OrderId = command.OrderId,
+                    ProductId = command.ProductId,
+                    Quantity = command.Quantity,
+                    UnitPrice = command.UnitPrice,
+                };
+
+                this.OrderItems.Add(item);
+                this.OrderItems.Commit();
+            }
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess));
         }
@@ -82,7 +91,6 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             item.ProductId = command.ProductId;
             item.Quantity = command.Quantity;
             item.UnitPrice = command.UnitPrice;
-            item.NewUnitPrice = command.NewUnitPrice;
 
             this.OrderItems.Update(item);
             this.OrderItems.Commit();
@@ -93,19 +101,16 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         protected override Result Delete(OrderItemCommand command)
         {
-            var order = this.Orders.Find(command.OrderId);
-
-            if (!order.AllowModifyItem())
-                return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
-
-            var item = this.OrderItems.Find(command.Id);
+            var item = this.OrderItems.Include(e=>e.Order).Find(command.Id);
 
             if (item == null)
-                return Result.Fail(Localization.Get(Resources.Key.Command.ProductNotExisting));
+                return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
+
+            if (!item.Order.AllowModifyItem())
+                return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
 
             this.OrderItems.Remove(item);
             this.OrderItems.Commit();
-            //this.OrderItems.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
         }

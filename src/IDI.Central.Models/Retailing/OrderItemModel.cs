@@ -21,9 +21,6 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("unitprice")]
         public decimal UnitPrice { get; set; }
 
-        [JsonProperty("newunitprice")]
-        public decimal? NewUnitPrice { get; set; }
-
         [JsonProperty("qty")]
         public decimal Quantity { get; set; }
 
