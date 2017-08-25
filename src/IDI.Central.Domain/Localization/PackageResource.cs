@@ -66,6 +66,9 @@ namespace IDI.Central.Domain.Localization
 								public const string InvalidCustomer = "invalid-customer";
 								public const string RequiredSellingPrice = "required-selling-price";
 								public const string OperationNonsupport = "operation-nonsupport";
+								public const string NoFileUpload = "no-file-upload";
+								public const string SupportedExtension = "supported-extension";
+								public const string FileMaxSizeLimit = "file-max-size-limit";
 								}
 
 						public class Tag {

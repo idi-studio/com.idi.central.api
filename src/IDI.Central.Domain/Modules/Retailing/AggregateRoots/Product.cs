@@ -20,6 +20,8 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
 
         public bool OnShelf  { get; set; } = false;
 
-        public List<ProductPrice> Prices { get; set; }
+        public List<ProductPrice> Prices { get; set; } = new List<ProductPrice>();
+
+        public List<ProductPicture> Pictures { get; set; } = new List<ProductPicture>();
     }
 }

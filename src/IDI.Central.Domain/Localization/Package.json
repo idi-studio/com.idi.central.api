@@ -517,6 +517,42 @@
 },
 {
     "language": "chs",
+    "name": "no-file-upload",
+    "value": "未上传任何文件!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "no-file-upload",
+    "value": "No file(s) to upload.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "supported-extension",
+    "value": "支持的文件格式:{0}",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "supported-extension",
+    "value": "Supported file extension: {0}.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "file-max-size-limit",
+    "value": "文件最大不能超过{0}!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "file-max-size-limit",
+    "value": "The file size cannot exceed {0}.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "model",
     "value": "型号",
     "prefix": "tag"

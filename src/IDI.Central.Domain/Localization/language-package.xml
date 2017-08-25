@@ -44,7 +44,9 @@
   <item prefix="command" name="invalid-customer" en="Invalid Customer." chs="无效的客户!" />
   <item prefix="command" name="required-selling-price" en="Selling price required." chs="未设定售价!" />
   <item prefix="command" name="operation-nonsupport" en="This operation is not supported." chs="不支持该项操作!" />
-
+  <item prefix="command" name="no-file-upload" en="No file(s) to upload." chs="未上传任何文件!" />
+  <item prefix="command" name="supported-extension" en="Supported file extension: {0}." chs="支持的文件格式:{0}" />
+  <item prefix="command" name="file-max-size-limit" en="The file size cannot exceed {0}." chs="文件最大不能超过{0}!" />
 
   <item prefix="tag" name="model" en="Model" chs="型号" />
   <item prefix="tag" name="spec" en="Spec" chs="规格" />
