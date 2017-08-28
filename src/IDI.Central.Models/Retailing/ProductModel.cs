@@ -20,7 +20,10 @@ namespace IDI.Central.Models.Retailing
         public string Description { get; set; }
 
         [JsonProperty("tags")]
-        public List<Tag> Tags { get; set; }
+        public List<Tag> Tags { get; set; } = new List<Tag>();
+
+        [JsonProperty("images")]
+        public List<ProductImageModel> Images { get; set; } = new List<ProductImageModel>();
 
         [JsonProperty("active")]
         public bool Enabled { get; set; } = true;

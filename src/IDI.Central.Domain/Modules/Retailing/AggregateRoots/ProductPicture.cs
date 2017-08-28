@@ -11,6 +11,10 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
         public string Name { get; set; }
 
         [Required]
+        [StringLength(50)]
+        public string FileName { get; set; }
+
+        [Required]
         [StringLength(10)]
         public string Extension { get; set; }
 

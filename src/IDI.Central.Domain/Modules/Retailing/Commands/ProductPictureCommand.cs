@@ -50,6 +50,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 var picture = new ProductPicture
                 {
                     Name = file.Name,
+                    FileName = file.FileName,
                     Extension = Path.GetExtension(file.FileName),
                 };
 

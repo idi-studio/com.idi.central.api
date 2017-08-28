@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
@@ -23,7 +24,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
 
         public override Result<ProductModel> Execute(QueryProductCondition condition)
         {
-            var product = this.Products.Find(condition.Id);
+            var product = this.Products.Include(e => e.Pictures).Find(condition.Id);
 
             var model = new ProductModel
             {
@@ -33,7 +34,14 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                 Description = product.Tags.To<List<Tag>>().AsString(),
                 Tags = product.Tags.To<List<Tag>>(),
                 Enabled = product.Enabled,
-                OnShelf = product.OnShelf
+                OnShelf = product.OnShelf,
+                Images = product.Pictures.Select(e => new ProductImageModel
+                {
+                    Id = e.Id,
+                    ProductId = e.ProductId,
+                    Name = e.Name,
+                    FileName = e.Name
+                }).ToList(),
             };
 
             return Result.Success(model);
