@@ -1,6 +1,6 @@
-﻿using IDI.Central.Domain.Modules.Retailing.Commands;
+﻿using System;
 using System.Linq;
-using IDI.Central.Models.Retailing;
+using IDI.Central.Domain.Modules.Retailing.Commands;
 using IDI.Central.Providers;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
@@ -14,11 +14,11 @@ namespace IDI.Central.Controllers
     {
         //POST: api/product/picture
         [HttpPost]
-        public Result Post([FromBody]ProductPictureInput input)
+        public Result Post()
         {
             var command = new ProductPictureCommand
             {
-                ProductId = input.ProductId,
+                ProductId = this.HttpContext.Request.Form["pid"].ToString().ToGuid(),
                 Files = this.HttpContext.Request.Form.Files.ToList(),
                 Mode = CommandMode.Create,
                 Group = VerificationGroup.Create,

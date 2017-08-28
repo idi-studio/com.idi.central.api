@@ -23,7 +23,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
     public class ProductPictureCommandHandler : CommandHandler<ProductPictureCommand>
     {
-        private readonly string[] extensions = { "png", "jpg", "jpge" };
+        private readonly string[] extensions = { ".png", ".jpg", ".jpge" };
         private readonly long maximum = 800;
 
         [Injection]
@@ -37,7 +37,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (command.Files.Count == 0)
                 return Result.Fail(Localization.Get(Resources.Key.Command.NoFileUpload));
 
-            if (!this.Products.Exist(e => e.Id == command.Id))
+            if (!this.Products.Exist(e => e.Id == command.ProductId))
                 return Result.Fail(Localization.Get(Resources.Key.Command.ProductNotExisting));
 
             foreach (var file in command.Files)
@@ -47,11 +47,14 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 if (size > maximum)
                     return Result.Fail(Localization.Get(Resources.Key.Command.FileMaxSizeLimit).ToFormat($"{maximum} KB"));
 
+                var extension = Path.GetExtension(file.FileName);
+
                 var picture = new ProductPicture
                 {
-                    Name = file.Name,
-                    FileName = file.FileName,
-                    Extension = Path.GetExtension(file.FileName),
+                    Name = file.Name.Replace(extension, ""),
+                    FileName = file.FileName.ToLower(),
+                    Extension = extension,
+                    ProductId = command.ProductId
                 };
 
                 if (!extensions.Any(e => e == picture.Extension))
