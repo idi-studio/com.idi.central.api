@@ -47,5 +47,10 @@ namespace IDI.Core.Common
         {
             return Regex.Replace(input.Trim(), "\\s+", " ");
         }
+
+        public static string AsBase64(this byte[] data, string contentType)
+        {
+            return $"data:{contentType};base64,{Convert.ToBase64String(data)}";
+        }
     }
 }

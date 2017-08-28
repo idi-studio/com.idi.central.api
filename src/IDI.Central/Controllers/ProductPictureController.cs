@@ -26,5 +26,14 @@ namespace IDI.Central.Controllers
 
             return ServiceLocator.CommandBus.Send(command);
         }
+
+        // DELETE api/product/picture/{id}
+        [HttpDelete("{id}")]
+        public Result Delete(Guid id)
+        {
+            var command = new ProductPictureCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
+
+            return ServiceLocator.CommandBus.Send(command);
+        }
     }
 }

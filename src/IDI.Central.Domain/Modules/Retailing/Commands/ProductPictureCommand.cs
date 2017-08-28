@@ -51,9 +51,10 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
                 var picture = new ProductPicture
                 {
-                    Name = file.Name.Replace(extension, ""),
+                    Name = file.Name.Replace(extension, string.Empty),
                     FileName = file.FileName.ToLower(),
                     Extension = extension,
+                    ContentType = file.ContentType,
                     ProductId = command.ProductId
                 };
 
@@ -63,7 +64,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 using (var ms = new MemoryStream())
                 {
                     file.CopyTo(ms);
-                    picture.Image = ms.GetBuffer();
+                    picture.Data = ms.GetBuffer();
                     ms.Flush();
                 }
 

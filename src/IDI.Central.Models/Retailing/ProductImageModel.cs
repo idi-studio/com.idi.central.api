@@ -17,5 +17,8 @@ namespace IDI.Central.Models.Retailing
 
         [JsonProperty("filename")]
         public string FileName { get; set; }
+
+        [JsonProperty("data")]
+        public string Data { get; set; }
     }
 }

@@ -18,7 +18,11 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
         [StringLength(10)]
         public string Extension { get; set; }
 
-        public byte[] Image { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string ContentType { get; set; }
+
+        public byte[] Data { get; set; }
 
         public Guid ProductId { get; set; }
 
