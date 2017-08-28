@@ -47,8 +47,7 @@ namespace IDI.Central.Controllers
             {
                 Id = id,
                 Category = OrderCategory.Sales,
-                //Remark = input.Remark,
-                //CustomerId = input.CustomerId,
+                Remark = input.Remark,
                 Mode = CommandMode.Update,
                 Group = VerificationGroup.Update,
             };
