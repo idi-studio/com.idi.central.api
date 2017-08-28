@@ -20,5 +20,8 @@ namespace IDI.Central.Models.Retailing
 
         [JsonProperty("data")]
         public string Data { get; set; }
+
+        [JsonProperty("date")]
+        public string Date { get; set; }
     }
 }

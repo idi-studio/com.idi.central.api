@@ -41,6 +41,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                     ProductId = e.ProductId,
                     Name = e.Name,
                     FileName = e.Name,
+                    Date = e.CreatedAt.AsLongDate(),
                     Data = e.Data.AsBase64(e.ContentType)
                 }).ToList(),
             };
