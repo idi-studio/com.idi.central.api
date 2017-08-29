@@ -850,5 +850,41 @@
     "name": "Traded",
     "value": "Traded",
     "prefix": "OrderStatus"
+},
+{
+    "language": "chs",
+    "name": "Cover",
+    "value": "封面",
+    "prefix": "PictureCategory"
+},
+{
+    "language": "en",
+    "name": "Cover",
+    "value": "Cover",
+    "prefix": "PictureCategory"
+},
+{
+    "language": "chs",
+    "name": "Exhibition",
+    "value": "展示",
+    "prefix": "PictureCategory"
+},
+{
+    "language": "en",
+    "name": "Exhibition",
+    "value": "Exhibition",
+    "prefix": "PictureCategory"
+},
+{
+    "language": "chs",
+    "name": "Advertisement",
+    "value": "广告",
+    "prefix": "PictureCategory"
+},
+{
+    "language": "en",
+    "name": "Advertisement",
+    "value": "Advertisement",
+    "prefix": "PictureCategory"
 }]
  

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using IDI.Central.Common;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
@@ -9,6 +10,8 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
+
+        public ImageCategory Category { get; set; }
 
         [Required]
         [StringLength(50)]

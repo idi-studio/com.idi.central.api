@@ -40,7 +40,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                     Id = e.Id,
                     ProductId = e.ProductId,
                     Name = e.Name,
-                    FileName = e.Name,
+                    Category = e.Category,
+                    FileName = e.FileName,
                     Date = e.CreatedAt.AsLongDate(),
                     Data = e.Data.AsBase64(e.ContentType)
                 }).ToList(),

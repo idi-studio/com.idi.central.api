@@ -1,4 +1,5 @@
 ﻿using System;
+using IDI.Central.Common;
 using IDI.Core.Infrastructure.Queries;
 using Newtonsoft.Json;
 
@@ -11,6 +12,9 @@ namespace IDI.Central.Models.Retailing
 
         [JsonProperty("pid")]
         public Guid ProductId { get; set; }
+
+        [JsonProperty("category")]
+        public ImageCategory Category { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }

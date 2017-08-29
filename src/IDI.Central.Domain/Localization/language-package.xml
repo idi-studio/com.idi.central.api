@@ -76,4 +76,8 @@
   <item prefix="OrderStatus" enum="true" name="Received" en="Received" chs="已收货" />
   <item prefix="OrderStatus" enum="true" name="Traded" en="Traded" chs="交易成功" />
 
+  <item prefix="ImageCategory" enum="true" name="Cover" en="Cover" chs="封面" />
+  <item prefix="ImageCategory" enum="true" name="Picture" en="Picture" chs="图片" />
+  <item prefix="ImageCategory" enum="true" name="Advertisement" en="AD" chs="广告" />
+  
 </items>
