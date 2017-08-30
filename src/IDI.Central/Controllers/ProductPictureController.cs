@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using IDI.Central.Common;
 using IDI.Central.Domain.Modules.Retailing.Commands;
 using IDI.Central.Models.Retailing;
 using IDI.Central.Providers;
@@ -21,6 +22,7 @@ namespace IDI.Central.Controllers
             {
                 ProductId = this.HttpContext.Request.Form["pid"].ToString().ToGuid(),
                 Files = this.HttpContext.Request.Form.Files.ToList(),
+                Category = ImageCategory.Picture,
                 Mode = CommandMode.Create,
                 Group = VerificationGroup.Create,
             };

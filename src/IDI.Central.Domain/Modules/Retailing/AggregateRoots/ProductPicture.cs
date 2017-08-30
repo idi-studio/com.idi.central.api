@@ -11,6 +11,8 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
         [StringLength(50)]
         public string Name { get; set; }
 
+        public int Sequence { get; set; }
+
         public ImageCategory Category { get; set; }
 
         [Required]

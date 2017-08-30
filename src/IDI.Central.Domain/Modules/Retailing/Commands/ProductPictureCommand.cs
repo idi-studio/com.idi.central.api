@@ -40,8 +40,12 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (command.Files.Count == 0)
                 return Result.Fail(Localization.Get(Resources.Key.Command.NoFileUpload));
 
-            if (!this.Products.Exist(e => e.Id == command.ProductId))
+            var product = this.Products.Include(e => e.Pictures).Find(command.ProductId);
+
+            if (product == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.ProductNotExisting));
+
+            int sequence = product.Pictures.Count == 0 ? 0 : product.Pictures.Max(e => e.Sequence);
 
             foreach (var file in command.Files)
             {
@@ -54,6 +58,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
                 var picture = new ProductPicture
                 {
+                    Sequence = sequence + 1,
                     Name = file.Name.Replace(extension, string.Empty),
                     FileName = file.FileName.ToLower(),
                     Extension = extension,
@@ -73,6 +78,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 }
 
                 this.Pictures.Add(picture);
+                sequence += 1;
             }
 
             this.Pictures.Commit();

@@ -39,12 +39,13 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                 {
                     Id = e.Id,
                     ProductId = e.ProductId,
+                    Sequence = e.Sequence,
                     Name = e.Name,
                     Category = e.Category,
                     FileName = e.FileName,
                     Date = e.CreatedAt.AsLongDate(),
                     Data = e.Data.AsBase64(e.ContentType)
-                }).ToList(),
+                }).OrderBy(e=>e.Category).ThenBy(e=>e.Sequence).ToList(),
             };
 
             return Result.Success(model);
