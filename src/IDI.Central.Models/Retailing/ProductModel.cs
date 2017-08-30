@@ -23,7 +23,7 @@ namespace IDI.Central.Models.Retailing
         public List<Tag> Tags { get; set; } = new List<Tag>();
 
         [JsonProperty("images")]
-        public List<ProductImageModel> Images { get; set; } = new List<ProductImageModel>();
+        public List<ProductPictureModel> Pictures { get; set; } = new List<ProductPictureModel>();
 
         [JsonProperty("active")]
         public bool Enabled { get; set; } = true;

@@ -35,7 +35,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                 Tags = product.Tags.To<List<Tag>>(),
                 Enabled = product.Enabled,
                 OnShelf = product.OnShelf,
-                Images = product.Pictures.Select(e => new ProductImageModel
+                Pictures = product.Pictures.Select(e => new ProductPictureModel
                 {
                     Id = e.Id,
                     ProductId = e.ProductId,

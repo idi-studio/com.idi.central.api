@@ -19,6 +19,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         public Guid ProductId { get; set; }
 
+        public int Sequence { get; set; }
+
         public ImageCategory Category { get; set; }
 
         public List<IFormFile> Files { get; set; } = new List<IFormFile>();
@@ -93,6 +95,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (picture == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
 
+            picture.Sequence = command.Sequence;
             picture.Category = command.Category;
 
             this.Pictures.Update(picture);

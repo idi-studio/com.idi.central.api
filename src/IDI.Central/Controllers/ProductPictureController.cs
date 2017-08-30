@@ -32,13 +32,12 @@ namespace IDI.Central.Controllers
 
         // Put: api/product/picture
         [HttpPut("{id}")]
-        public Result Put(Guid id, [FromBody]ProductPictureInput input)
+        public Result Put(Guid id, [FromBody]ProductPictureBatchInput input)
         {
-            var command = new ProductPictureCommand
+            var command = new ProductPictureBatchCommand
             {
-                Id = id,
-                Category = input.Category,
-                ProductId = input.ProductId,
+                ProductId = id,
+                Pictures = input.Pictures,
                 Mode = CommandMode.Update,
                 Group = VerificationGroup.Update,
             };
