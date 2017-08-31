@@ -17,7 +17,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         public OrderCategory Category { get; set; }
 
-        [StringLength(Resources.Key.DisplayName.Remark, MaxLength = 200, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [StringLength(MaxLength = 200, Group = VerificationGroup.Create | VerificationGroup.Update)]
         public string Remark { get; set; }
 
         public Guid? CustomerId { get; set; }

@@ -9,7 +9,7 @@
 
   <item prefix="command" name="command-mode-nonsupport" en="Unsupported command mode." chs="不支持的命令模式!" />
 
-  <item prefix="Language" enum="true" name="SimplifiedChinese" en="Chinese(Simplified)" chs="简体中文" />
-  <item prefix="Language" enum="true" name="TraditionalChinese" en="Chinese(Traditional)" chs="繁体中文" />
-  <item prefix="Language" enum="true" name="English" en="English" chs="英文" />
+  <item prefix="Language" cs="false" name="SimplifiedChinese" en="Chinese(Simplified)" chs="简体中文" />
+  <item prefix="Language" cs="false" name="TraditionalChinese" en="Chinese(Traditional)" chs="繁体中文" />
+  <item prefix="Language" cs="false" name="English" en="English" chs="英文" />
 </items>

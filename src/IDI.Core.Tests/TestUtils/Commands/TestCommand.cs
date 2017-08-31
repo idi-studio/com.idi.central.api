@@ -6,8 +6,8 @@ namespace IDI.Core.Tests.TestUtils.Commands
 {
     public class TestCommand : Command
     {
-        [RequiredField("测试字段")]
-        [StringLength("测试字段", MinLength = 5, MaxLength = 10)]
+        [RequiredField(DisplayName = "测试字段")]
+        [StringLength(DisplayName = "测试字段", MinLength = 5, MaxLength = 10)]
         public string Field { get; set; }
 
         public TestCommand(string field)

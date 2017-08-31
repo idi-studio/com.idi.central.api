@@ -11,13 +11,13 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 {
     public class RoleCreationCommand : Command
     {
-        [RequiredField(Resources.Key.DisplayName.Role)]
-        [StringLength(Resources.Key.DisplayName.Role, MaxLength = 20)]
-        public string RoleName { get; private set; }
+        [RequiredField]
+        [StringLength(MaxLength = 20)]
+        public string Role { get; private set; }
 
-        public RoleCreationCommand(string rolename)
+        public RoleCreationCommand(string role)
         {
-            this.RoleName = rolename;
+            this.Role = role;
         }
     }
 
@@ -31,14 +31,13 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 
         public Result Execute(RoleCreationCommand command)
         {
-            if (this.Roles.Exist(e => e.Name == command.RoleName))
+            if (this.Roles.Exist(e => e.Name == command.Role))
                 return Result.Fail(Localization.Get(Resources.Key.Command.RoleExists));
 
-            var role = new Role { Name = command.RoleName };
+            var role = new Role { Name = command.Role };
 
             this.Roles.Add(role);
             this.Roles.Commit();
-            //this.Roles.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess));
         }

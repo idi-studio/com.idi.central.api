@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
-  <item prefix="display-name" name="client-id" en="Client ID" chs="客户端编号" />
-  <item prefix="display-name" name="secret-key" en="Secret Key" chs="安全码" />
-  <item prefix="display-name" name="role" en="Role" chs="角色" />
-  <item prefix="display-name" name="username" en="UserName" chs="用户名" />
-  <item prefix="display-name" name="password" en="Password" chs="密码" />
-  <item prefix="display-name" name="user" en="User" chs="用户" />
-  <item prefix="display-name" name="confirm-password" en="Confirm Password" chs="确认密码" />
-  <item prefix="display-name" name="product-name" en="Product Name" chs="产品名称" />
-  <item prefix="display-name" name="product-code" en="Product Code" chs="产品编码" />
-  <item prefix="display-name" name="product-tags" en="Product Tags" chs="产品标签" />
-  <item prefix="display-name" name="remark" en="Remark" chs="备注" />
-  <item prefix="display-name" name="save-path" en="SavePath" chs="存储路径" />
-  <item prefix="display-name" name="domain" en="Domain" chs="域名" />
+  <item prefix="display-name" cs="false" name="clientid" en="Client ID" chs="客户端编号" />
+  <item prefix="display-name" cs="false" name="secretkey" en="Secret Key" chs="安全码" />
+  <item prefix="display-name" cs="false" name="role" en="Role" chs="角色" />
+  <item prefix="display-name" cs="false" name="username" en="UserName" chs="用户名" />
+  <item prefix="display-name" cs="false" name="password" en="Password" chs="密码" />
+  <item prefix="display-name" cs="false" name="user" en="User" chs="用户" />
+  <item prefix="display-name" cs="false" name="confirmpassword" en="Confirm Password" chs="确认密码" />
+  <item prefix="display-name" cs="false" name="name" en="Name" chs="名称" />
+  <item prefix="display-name" cs="false" name="rqcode" en="RQCode" chs="二维码" />
+  <item prefix="display-name" cs="false" name="tags" en="Tags" chs="标签" />
+  <item prefix="display-name" cs="false" name="remark" en="Remark" chs="备注" />
+  <item prefix="display-name" cs="false" name="savepath" en="SavePath" chs="存储路径" />
+  <item prefix="display-name" cs="false" name="domain" en="Domain" chs="域名" />
 
   <item prefix="command" name="invalid-username-or-password" en="Invalid username or password." chs="无效的用户名或密码!" />
   <item prefix="command" name="authentication-success" en="Authentication successfully." chs="认证成功!" />
@@ -64,22 +64,22 @@
   <item prefix="tag" name="desc" en="Description" chs="描述" />
   <item prefix="tag" name="manufacturer" en="mfrs." chs="制造商" />
 
-  <item prefix="PriceCategory" enum="true" name="Cost" en="Cost" chs="成本价" />
-  <item prefix="PriceCategory" enum="true" name="Purchase" en="Purchase" chs="采购价" />
-  <item prefix="PriceCategory" enum="true" name="Original" en="Original" chs="原价" />
-  <item prefix="PriceCategory" enum="true" name="Selling" en="Selling" chs="现价" />
-  <item prefix="PriceCategory" enum="true" name="Discount" en="Discount" chs="折扣价" />
-  <item prefix="PriceCategory" enum="true" name="VIP" en="VIP" chs="会员价" />
+  <item prefix="PriceCategory" cs="false" name="Cost" en="Cost" chs="成本价" />
+  <item prefix="PriceCategory" cs="false" name="Purchase" en="Purchase" chs="采购价" />
+  <item prefix="PriceCategory" cs="false" name="Original" en="Original" chs="原价" />
+  <item prefix="PriceCategory" cs="false" name="Selling" en="Selling" chs="现价" />
+  <item prefix="PriceCategory" cs="false" name="Discount" en="Discount" chs="折扣价" />
+  <item prefix="PriceCategory" cs="false" name="VIP" en="VIP" chs="会员价" />
 
-  <item prefix="OrderStatus" enum="true" name="Invalid" en="Invalid" chs="无效" />
-  <item prefix="OrderStatus" enum="true" name="Pending" en="Pending" chs="待付款" />
-  <item prefix="OrderStatus" enum="true" name="Paid" en="Paid" chs="已付款" />
-  <item prefix="OrderStatus" enum="true" name="Shipped" en="Shipped" chs="已发货" />
-  <item prefix="OrderStatus" enum="true" name="Received" en="Received" chs="已收货" />
-  <item prefix="OrderStatus" enum="true" name="Traded" en="Traded" chs="交易成功" />
+  <item prefix="OrderStatus" cs="false" name="Invalid" en="Invalid" chs="无效" />
+  <item prefix="OrderStatus" cs="false" name="Pending" en="Pending" chs="待付款" />
+  <item prefix="OrderStatus" cs="false" name="Paid" en="Paid" chs="已付款" />
+  <item prefix="OrderStatus" cs="false" name="Shipped" en="Shipped" chs="已发货" />
+  <item prefix="OrderStatus" cs="false" name="Received" en="Received" chs="已收货" />
+  <item prefix="OrderStatus" cs="false" name="Traded" en="Traded" chs="交易成功" />
 
-  <item prefix="ImageCategory" enum="true" name="Cover" en="Cover" chs="封面" />
-  <item prefix="ImageCategory" enum="true" name="Picture" en="Picture" chs="图片" />
-  <item prefix="ImageCategory" enum="true" name="Advertisement" en="AD" chs="广告" />
+  <item prefix="ImageCategory" cs="false" name="Cover" en="Cover" chs="封面" />
+  <item prefix="ImageCategory" cs="false" name="Picture" en="Picture" chs="图片" />
+  <item prefix="ImageCategory" cs="false" name="Advertisement" en="AD" chs="广告" />
   
 </items>

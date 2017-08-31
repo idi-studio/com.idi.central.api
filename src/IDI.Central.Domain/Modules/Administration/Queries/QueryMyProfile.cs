@@ -11,7 +11,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
 {
     public class QueryMyProfileCondition : Condition
     {
-        [RequiredField(Resources.Key.DisplayName.Username)]
+        [RequiredField]
         public string UserName { get; set; }
     }
 

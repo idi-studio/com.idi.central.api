@@ -70,5 +70,41 @@
     "name": "command-mode-nonsupport",
     "value": "Unsupported command mode.",
     "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "SimplifiedChinese",
+    "value": "简体中文",
+    "prefix": "Language"
+},
+{
+    "language": "en",
+    "name": "SimplifiedChinese",
+    "value": "Chinese(Simplified)",
+    "prefix": "Language"
+},
+{
+    "language": "chs",
+    "name": "TraditionalChinese",
+    "value": "繁体中文",
+    "prefix": "Language"
+},
+{
+    "language": "en",
+    "name": "TraditionalChinese",
+    "value": "Chinese(Traditional)",
+    "prefix": "Language"
+},
+{
+    "language": "chs",
+    "name": "English",
+    "value": "英文",
+    "prefix": "Language"
+},
+{
+    "language": "en",
+    "name": "English",
+    "value": "English",
+    "prefix": "Language"
 }]
  

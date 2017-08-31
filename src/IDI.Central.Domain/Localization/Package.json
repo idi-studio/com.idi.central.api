@@ -1,25 +1,25 @@
 ﻿ 
 [{
     "language": "chs",
-    "name": "client-id",
+    "name": "clientid",
     "value": "客户端编号",
     "prefix": "display-name"
 },
 {
     "language": "en",
-    "name": "client-id",
+    "name": "clientid",
     "value": "Client ID",
     "prefix": "display-name"
 },
 {
     "language": "chs",
-    "name": "secret-key",
+    "name": "secretkey",
     "value": "安全码",
     "prefix": "display-name"
 },
 {
     "language": "en",
-    "name": "secret-key",
+    "name": "secretkey",
     "value": "Secret Key",
     "prefix": "display-name"
 },
@@ -73,50 +73,50 @@
 },
 {
     "language": "chs",
-    "name": "confirm-password",
+    "name": "confirmpassword",
     "value": "确认密码",
     "prefix": "display-name"
 },
 {
     "language": "en",
-    "name": "confirm-password",
+    "name": "confirmpassword",
     "value": "Confirm Password",
     "prefix": "display-name"
 },
 {
     "language": "chs",
-    "name": "product-name",
-    "value": "产品名称",
+    "name": "name",
+    "value": "名称",
     "prefix": "display-name"
 },
 {
     "language": "en",
-    "name": "product-name",
-    "value": "Product Name",
+    "name": "name",
+    "value": "Name",
     "prefix": "display-name"
 },
 {
     "language": "chs",
-    "name": "product-code",
-    "value": "产品编码",
+    "name": "rqcode",
+    "value": "二维码",
     "prefix": "display-name"
 },
 {
     "language": "en",
-    "name": "product-code",
-    "value": "Product Code",
+    "name": "rqcode",
+    "value": "RQCode",
     "prefix": "display-name"
 },
 {
     "language": "chs",
-    "name": "product-tags",
-    "value": "产品标签",
+    "name": "tags",
+    "value": "标签",
     "prefix": "display-name"
 },
 {
     "language": "en",
-    "name": "product-tags",
-    "value": "Product Tags",
+    "name": "tags",
+    "value": "Tags",
     "prefix": "display-name"
 },
 {
@@ -133,13 +133,13 @@
 },
 {
     "language": "chs",
-    "name": "save-path",
+    "name": "savepath",
     "value": "存储路径",
     "prefix": "display-name"
 },
 {
     "language": "en",
-    "name": "save-path",
+    "name": "savepath",
     "value": "SavePath",
     "prefix": "display-name"
 },

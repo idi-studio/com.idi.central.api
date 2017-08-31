@@ -1,18 +1,18 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using IDI.Central.Domain.Common;
+using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Central.Models.Retailing;
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
-using IDI.Core.Repositories;
 using IDI.Core.Infrastructure.Verification.Attributes;
-using IDI.Central.Domain.Localization;
-using System.IO;
-using System.Threading.Tasks;
+using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Retailing.Queries
 {
@@ -20,10 +20,10 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
     {
         public Guid Id { get; set; }
 
-        [RequiredField(Resources.Key.DisplayName.SavePath)]
+        [RequiredField]
         public string Domain { get; set; }
 
-        [RequiredField(Resources.Key.DisplayName.SavePath)]
+        [RequiredField]
         public string SavePath { get; set; }
     }
 

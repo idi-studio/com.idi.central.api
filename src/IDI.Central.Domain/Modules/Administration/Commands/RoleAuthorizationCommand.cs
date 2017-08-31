@@ -13,14 +13,14 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 {
     public class RoleAuthorizationCommand : Command
     {
-        [RequiredField(Resources.Key.DisplayName.Role)]
-        public string RoleName { get; private set; }
+        [RequiredField]
+        public string Role { get; private set; }
 
         public Guid[] Privileges { get; private set; }
 
-        public RoleAuthorizationCommand(string rolename, Guid[] privileges)
+        public RoleAuthorizationCommand(string role, Guid[] privileges)
         {
-            this.RoleName = rolename;
+            this.Role = role;
             this.Privileges = privileges;
         }
     }
@@ -38,7 +38,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 
         public Result Execute(RoleAuthorizationCommand command)
         {
-            var role = this.Roles.Include(e => e.RolePrivileges).Find(r => r.Name == command.RoleName);
+            var role = this.Roles.Include(e => e.RolePrivileges).Find(r => r.Name == command.Role);
 
             if (role == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidRole));

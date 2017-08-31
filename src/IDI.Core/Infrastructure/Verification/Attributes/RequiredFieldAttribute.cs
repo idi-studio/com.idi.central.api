@@ -14,13 +14,11 @@ namespace IDI.Core.Infrastructure.Verification.Attributes
     {
         public string DisplayName { get; set; }
 
-        public RequiredFieldAttribute(string displayName)
-        {
-            this.DisplayName = displayName;
-        }
+        public RequiredFieldAttribute() { }
 
         public override ValidationResult IsValid(ValidationContext context)
         {
+            string propertyName = context.Property.Name;
             object propertyValue = context.Property.GetValue(context.Instance, null);
 
             propertyValue = propertyValue ?? "";
@@ -31,7 +29,7 @@ namespace IDI.Core.Infrastructure.Verification.Attributes
             }
             else
             {
-                string displayName = LanguageManager.Instance.Get(Resources.Prefix.DISPLAY_NAME, this.DisplayName);
+                string displayName = LanguageManager.Instance.Get(Resources.Prefix.DISPLAY_NAME, this.DisplayName?? propertyName);
 
                 return new ValidationResult(LanguageManager.Instance.Get(Resources.Prefix.VERIFICATION, Resources.Key.Verification.Required).ToFormat(displayName));
             }

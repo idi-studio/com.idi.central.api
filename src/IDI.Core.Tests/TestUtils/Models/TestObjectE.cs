@@ -5,7 +5,7 @@ namespace IDI.Core.Tests.TestUtils.Models
 {
     internal class TestObjectE : Command
     {
-        [StringLength("测试字段")]
+        [StringLength(DisplayName = "测试字段")]
         public string Field { get; set; }
     }
 }

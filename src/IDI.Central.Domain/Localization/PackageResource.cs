@@ -13,28 +13,11 @@ namespace IDI.Central.Domain.Localization
         public class Prefix
         {
 		    			public const string COMMAND = "command";
-						public const string DISPLAY_NAME = "display-name";
 						public const string TAG = "tag";
 			        }
 
 		public class Key 
 		{
-						public class DisplayName {
-								public const string ClientId = "client-id";
-								public const string SecretKey = "secret-key";
-								public const string Role = "role";
-								public const string Username = "username";
-								public const string Password = "password";
-								public const string User = "user";
-								public const string ConfirmPassword = "confirm-password";
-								public const string ProductName = "product-name";
-								public const string ProductCode = "product-code";
-								public const string ProductTags = "product-tags";
-								public const string Remark = "remark";
-								public const string SavePath = "save-path";
-								public const string Domain = "domain";
-								}
-
 						public class Command {
 								public const string InvalidUsernameOrPassword = "invalid-username-or-password";
 								public const string AuthenticationSuccess = "authentication-success";

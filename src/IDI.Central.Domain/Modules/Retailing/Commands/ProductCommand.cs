@@ -15,15 +15,15 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
     {
         public Guid Id { get; set; }
 
-        [RequiredField(Resources.Key.DisplayName.ProductName, Group = VerificationGroup.Create | VerificationGroup.Update)]
-        [StringLength(Resources.Key.DisplayName.ProductName, MaxLength = 50, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [StringLength(MaxLength = 50, Group = VerificationGroup.Create | VerificationGroup.Update)]
         public string Name { get; set; }
 
-        [RequiredField(Resources.Key.DisplayName.ProductCode, Group = VerificationGroup.Create | VerificationGroup.Update)]
-        [StringLength(Resources.Key.DisplayName.ProductCode, MaxLength = 50, Group = VerificationGroup.Create | VerificationGroup.Update)]
-        public string Code { get; set; }
+        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [StringLength(MaxLength = 50, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        public string QRCode { get; set; }
 
-        [RequiredField(Resources.Key.DisplayName.ProductTags, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
         public string Tags { get; set; }
 
         public bool Enabled { get; set; }
@@ -38,13 +38,13 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         protected override Result Create(ProductCommand command)
         {
-            if (this.Products.Exist(e => e.QRCode == command.Code))
+            if (this.Products.Exist(e => e.QRCode == command.QRCode))
                 return Result.Fail(Localization.Get(Resources.Key.Command.ProductCodeDuplicated));
 
             var product = new Product
             {
                 Name = command.Name.TrimContiguousSpaces(),
-                QRCode = command.Code,
+                QRCode = command.QRCode,
                 Tags = command.Tags,
                 Enabled = command.Enabled,
                 OnShelf = false
@@ -52,14 +52,13 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
             this.Products.Add(product);
             this.Products.Commit();
-            //this.Products.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess));
         }
 
         protected override Result Update(ProductCommand command)
         {
-            if (this.Products.Exist(e => e.QRCode == command.Code && e.Id != command.Id))
+            if (this.Products.Exist(e => e.QRCode == command.QRCode && e.Id != command.Id))
                 return Result.Fail(Localization.Get(Resources.Key.Command.ProductCodeDuplicated));
 
             var product = this.Products.Include(p => p.Prices).Find(command.Id);
@@ -71,7 +70,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 return Result.Fail(Localization.Get(Resources.Key.Command.RequiredSellingPrice));
 
             product.Name = command.Name.TrimContiguousSpaces();
-            product.QRCode = command.Code;
+            product.QRCode = command.QRCode;
             product.Tags = command.Tags;
             product.Enabled = command.Enabled;
             product.OnShelf = command.OnShelf;

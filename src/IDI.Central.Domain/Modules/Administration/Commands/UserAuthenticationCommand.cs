@@ -11,10 +11,10 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 {
     public class UserAuthenticationCommand : Command
     {
-        [RequiredField(Resources.Key.DisplayName.Username)]
+        [RequiredField]
         public string UserName { get; private set; }
 
-        [RequiredField(Resources.Key.DisplayName.Password)]
+        [RequiredField]
         public string Password { get; private set; }
 
         public UserAuthenticationCommand(string username, string password)

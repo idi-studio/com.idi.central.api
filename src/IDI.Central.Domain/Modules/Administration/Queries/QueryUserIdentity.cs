@@ -12,7 +12,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
 {
     public class QueryUserIdentityCondition : Condition
     {
-        [RequiredField(Resources.Key.DisplayName.Username)]
+        [RequiredField]
         public string UserName { get; set; }
     }
 

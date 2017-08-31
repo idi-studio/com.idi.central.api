@@ -28,7 +28,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         public List<IFormFile> Files { get; set; } = new List<IFormFile>();
 
-        [RequiredField(Resources.Key.DisplayName.SavePath, Group = VerificationGroup.Create)]
+        [RequiredField(Group = VerificationGroup.Create)]
         public string SavePath { get; set; }
     }
 

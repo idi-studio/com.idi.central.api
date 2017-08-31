@@ -13,7 +13,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 {
     public class UserAuthorizeCommand : Command
     {
-        [RequiredField(Resources.Key.DisplayName.User)]
+        [RequiredField]
         public string UserName { get; private set; }
 
         public Guid[] Roles { get; private set; }

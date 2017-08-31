@@ -11,10 +11,10 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 {
     public class ClientAuthenticationCommand : Command
     {
-        [RequiredField(Resources.Key.DisplayName.ClientId)]
+        [RequiredField]
         public string ClientId { get; private set; }
 
-        [RequiredField(Resources.Key.DisplayName.SecretKey)]
+        [RequiredField]
         public string SecretKey { get; private set; }
 
         public ClientAuthenticationCommand(string clientId, string secretKey)

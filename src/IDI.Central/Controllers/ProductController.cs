@@ -30,7 +30,7 @@ namespace IDI.Central.Controllers
             var command = new ProductCommand
             {
                 Name = input.Name,
-                Code = input.QRCode,
+                QRCode = input.QRCode,
                 Tags = input.Tags.ToJson(),
                 Enabled = input.Enabled,
                 OnShelf = input.OnShelf,
@@ -63,7 +63,7 @@ namespace IDI.Central.Controllers
             {
                 Id = id,
                 Name = input.Name,
-                Code = input.QRCode,
+                QRCode = input.QRCode,
                 Tags = input.Tags.ToJson(),
                 Enabled = input.Enabled,
                 OnShelf = input.OnShelf,

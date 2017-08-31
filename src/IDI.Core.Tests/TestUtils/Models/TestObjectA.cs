@@ -5,7 +5,7 @@ namespace IDI.Core.Tests.TestUtils.Models
 {
     public class TestObjectA : Command
     {
-        [RequiredField("测试字段")]
+        [RequiredField(DisplayName = "测试字段")]
         public string Field { get; set; }
 
     }
