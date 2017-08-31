@@ -2,7 +2,7 @@
 
 namespace IDI.Central.Models.Retailing
 {
-    public class Tag
+    public class TagModel
     {
         [JsonProperty("key")]
         public string Key { get; set; }

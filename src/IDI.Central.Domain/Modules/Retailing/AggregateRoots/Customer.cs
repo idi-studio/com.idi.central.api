@@ -11,6 +11,9 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
         [StringLength(30)]
         public string Name { get; set; }
 
+        [StringLength(20)]
+        public string Phone { get; set; }
+
         public int Grade { get; set; }
 
         public List<ShippingAddress> Shippings { get; set; }

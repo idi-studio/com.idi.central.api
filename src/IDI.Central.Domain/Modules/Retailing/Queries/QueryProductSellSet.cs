@@ -27,8 +27,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                 Id = product.Id,
                 Name = product.Name,
                 QRCode = product.QRCode,
-                Description = product.Tags.To<List<Tag>>().AsString(),
-                Tags = product.Tags.To<List<Tag>>(),
+                Description = product.Tags.To<List<TagModel>>().AsString(),
+                Tags = product.Tags.To<List<TagModel>>(),
                 Prices = product.SellingPrices()
             }).ToList();
 

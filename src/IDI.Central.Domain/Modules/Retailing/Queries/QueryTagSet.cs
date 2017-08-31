@@ -10,16 +10,16 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
 {
     public class QueryTagSetCondition : Condition { }
 
-    public class QueryTagSet : Query<QueryTagSetCondition, Set<Tag>>
+    public class QueryTagSet : Query<QueryTagSetCondition, Set<TagModel>>
     {
         [Injection]
         public ILocalization Localization { get; set; }
 
-        public override Result<Set<Tag>> Execute(QueryTagSetCondition condition)
+        public override Result<Set<TagModel>> Execute(QueryTagSetCondition condition)
         {
-            var items = this.Localization.GetAll(Resources.Prefix.TAG).Select(item => new Tag { Key = item.Name, Name = item.Value, Value = string.Empty });
+            var items = this.Localization.GetAll(Resources.Prefix.TAG).Select(item => new TagModel { Key = item.Name, Name = item.Value, Value = string.Empty });
 
-            return Result.Success(new Set<Tag>(items));
+            return Result.Success(new Set<TagModel>(items));
         }
     }
 }

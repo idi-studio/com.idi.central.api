@@ -12,9 +12,9 @@ namespace IDI.Central.Controllers
     {
         // GET: api/tag/list
         [HttpGet("list")]
-        public Result<Set<Tag>> List()
+        public Result<Set<TagModel>> List()
         {
-            return ServiceLocator.QueryProcessor.Execute<QueryTagSetCondition, Set<Tag>>();
+            return ServiceLocator.QueryProcessor.Execute<QueryTagSetCondition, Set<TagModel>>();
         }
     }
 }

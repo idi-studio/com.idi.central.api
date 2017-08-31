@@ -13,7 +13,7 @@ namespace IDI.Central.Models.Retailing
         public string QRCode { get; set; } = "";
 
         [JsonProperty("tags")]
-        public List<Tag> Tags { get; set; } = new List<Tag>();
+        public List<TagModel> Tags { get; set; } = new List<TagModel>();
 
         [JsonProperty("active")]
         public bool Enabled { get; set; }

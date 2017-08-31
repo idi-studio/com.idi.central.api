@@ -20,7 +20,7 @@ namespace IDI.Central.Models.Retailing
         public string Description { get; set; }
 
         [JsonProperty("tags")]
-        public List<Tag> Tags { get; set; }
+        public List<TagModel> Tags { get; set; }
 
         [JsonProperty("prices")]
         public IDictionary<string,decimal> Prices { get; set; }
