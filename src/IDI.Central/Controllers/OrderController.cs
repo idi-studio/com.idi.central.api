@@ -3,7 +3,7 @@ using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Modules.Retailing.Commands;
 using IDI.Central.Domain.Modules.Retailing.Queries;
 using IDI.Central.Models.Retailing;
-using IDI.Central.Providers;
+using IDI.Central.Core;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure;

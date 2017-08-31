@@ -3,7 +3,7 @@ using System.Linq;
 using IDI.Central.Common;
 using IDI.Central.Domain.Modules.Retailing.Commands;
 using IDI.Central.Models.Retailing;
-using IDI.Central.Providers;
+using IDI.Central.Core;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure;

@@ -1,7 +1,7 @@
 ﻿using IDI.Central.Domain;
 using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Localization.Packages;
-using IDI.Central.Providers;
+using IDI.Central.Core;
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
 using Microsoft.AspNetCore.Builder;

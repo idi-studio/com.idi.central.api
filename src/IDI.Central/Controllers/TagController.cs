@@ -1,6 +1,6 @@
 ﻿using IDI.Central.Domain.Modules.Retailing.Queries;
 using IDI.Central.Models.Retailing;
-using IDI.Central.Providers;
+using IDI.Central.Core;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
