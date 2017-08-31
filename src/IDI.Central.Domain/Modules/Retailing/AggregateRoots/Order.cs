@@ -25,6 +25,8 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
 
         public Customer Customer { get; set; }
 
+        public ShippingAddress Shipping { get; set; }
+
         public List<OrderItem> Items { get; set; } = new List<OrderItem>();
     }
 }
