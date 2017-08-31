@@ -7,6 +7,7 @@ using IDI.Central.Providers;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IDI.Central.Controllers
@@ -16,10 +17,11 @@ namespace IDI.Central.Controllers
     {
         //POST: api/product/picture
         [HttpPost]
-        public Result Post()
+        public Result Post([FromServices]IHostingEnvironment env)
         {
             var command = new ProductPictureCommand
             {
+                SavePath = env.WebRootPath,
                 ProductId = this.HttpContext.Request.Form["pid"].ToString().ToGuid(),
                 Files = this.HttpContext.Request.Form.Files.ToList(),
                 Category = ImageCategory.Picture,

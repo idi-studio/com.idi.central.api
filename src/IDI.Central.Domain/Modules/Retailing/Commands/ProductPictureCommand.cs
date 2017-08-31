@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using IDI.Central.Common;
+using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Core.Common;
+using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Infrastructure.Verification.Attributes;
 using IDI.Core.Repositories;
 using Microsoft.AspNetCore.Http;
 
@@ -24,10 +27,14 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
         public ImageCategory Category { get; set; }
 
         public List<IFormFile> Files { get; set; } = new List<IFormFile>();
+
+        [RequiredField(Resources.Key.DisplayName.SavePath, Group = VerificationGroup.Create)]
+        public string SavePath { get; set; }
     }
 
     public class ProductPictureCommandHandler : CommandHandler<ProductPictureCommand>
     {
+        private readonly string[] types = { "image/jpeg", "image/png" };
         private readonly string[] extensions = { ".png", ".jpg", ".jpge" };
         private readonly long maximum = 800;
 
@@ -56,30 +63,24 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 if (size > maximum)
                     return Result.Fail(Localization.Get(Resources.Key.Command.FileMaxSizeLimit).ToFormat($"{maximum} KB"));
 
-                var extension = Path.GetExtension(file.FileName);
+                if (!types.Any(e => e == file.ContentType))
+                    return Result.Fail(Localization.Get(Resources.Key.Command.SupportedExtension).ToFormat(extensions.JoinToString(",")));
 
                 var picture = new ProductPicture
                 {
                     Sequence = sequence + 1,
-                    Name = file.Name.Replace(extension, string.Empty),
+                    Name = Path.GetFileNameWithoutExtension(file.FileName),
                     FileName = file.FileName.ToLower(),
-                    Extension = extension,
+                    Extension = Path.GetExtension(file.FileName),
                     ContentType = file.ContentType,
                     Category = command.Category,
                     ProductId = command.ProductId
                 };
 
-                if (!extensions.Any(e => e == picture.Extension))
-                    return Result.Fail(Localization.Get(Resources.Key.Command.SupportedExtension).ToFormat(extensions.JoinToString(",")));
-
-                using (var ms = new MemoryStream())
-                {
-                    file.CopyTo(ms);
-                    picture.Data = ms.GetBuffer();
-                    ms.Flush();
-                }
+                Save(picture, command.SavePath, file);
 
                 this.Pictures.Add(picture);
+
                 sequence += 1;
             }
 
@@ -115,6 +116,17 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             this.Pictures.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
+        }
+
+        private void Save(ProductPicture picture, string savePath, IFormFile file)
+        {
+            var path = Path.Combine(savePath, "assets", "images", picture.ResourceName());
+
+            using (var stream = new FileStream(path, FileMode.CreateNew))
+            {
+                file.CopyTo(stream);
+                stream.Flush();
+            }
         }
     }
 }

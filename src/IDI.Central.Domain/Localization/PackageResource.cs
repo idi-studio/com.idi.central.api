@@ -31,6 +31,7 @@ namespace IDI.Central.Domain.Localization
 								public const string ProductCode = "product-code";
 								public const string ProductTags = "product-tags";
 								public const string Remark = "remark";
+								public const string SavePath = "save-path";
 								}
 
 						public class Command {

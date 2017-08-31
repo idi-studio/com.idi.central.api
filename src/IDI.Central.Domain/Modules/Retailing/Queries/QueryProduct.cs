@@ -44,8 +44,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                     Category = e.Category,
                     FileName = e.FileName,
                     Date = e.CreatedAt.AsLongDate(),
-                    Data = e.Data.AsBase64(e.ContentType)
-                }).OrderBy(e=>e.Category).ThenBy(e=>e.Sequence).ToList(),
+                    URL = $"http://localhost:50963/assets/images/{e.ResourceName()}"
+                }).OrderBy(e => e.Category).ThenBy(e => e.Sequence).ToList(),
             };
 
             return Result.Success(model);

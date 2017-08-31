@@ -133,6 +133,18 @@
 },
 {
     "language": "chs",
+    "name": "save-path",
+    "value": "存储路径",
+    "prefix": "display-name"
+},
+{
+    "language": "en",
+    "name": "save-path",
+    "value": "SavePath",
+    "prefix": "display-name"
+},
+{
+    "language": "chs",
     "name": "invalid-username-or-password",
     "value": "无效的用户名或密码!",
     "prefix": "command"
@@ -855,36 +867,36 @@
     "language": "chs",
     "name": "Cover",
     "value": "封面",
-    "prefix": "PictureCategory"
+    "prefix": "ImageCategory"
 },
 {
     "language": "en",
     "name": "Cover",
     "value": "Cover",
-    "prefix": "PictureCategory"
+    "prefix": "ImageCategory"
 },
 {
     "language": "chs",
-    "name": "Exhibition",
-    "value": "展示",
-    "prefix": "PictureCategory"
+    "name": "Picture",
+    "value": "图片",
+    "prefix": "ImageCategory"
 },
 {
     "language": "en",
-    "name": "Exhibition",
-    "value": "Exhibition",
-    "prefix": "PictureCategory"
+    "name": "Picture",
+    "value": "Picture",
+    "prefix": "ImageCategory"
 },
 {
     "language": "chs",
     "name": "Advertisement",
     "value": "广告",
-    "prefix": "PictureCategory"
+    "prefix": "ImageCategory"
 },
 {
     "language": "en",
     "name": "Advertisement",
-    "value": "Advertisement",
-    "prefix": "PictureCategory"
+    "value": "AD",
+    "prefix": "ImageCategory"
 }]
  
