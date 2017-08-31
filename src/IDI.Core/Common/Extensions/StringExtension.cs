@@ -52,5 +52,10 @@ namespace IDI.Core.Common
         {
             return $"data:{contentType};base64,{Convert.ToBase64String(data)}";
         }
+
+        public static string AsCode(this Guid guid)
+        {
+            return guid.ToString("N").ToUpper();
+        }
     }
 }

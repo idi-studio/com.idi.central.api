@@ -29,8 +29,4 @@
     <ProjectReference Include="..\IDI.Core\IDI.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\assets\images\" />
-  </ItemGroup>
-
 </Project>

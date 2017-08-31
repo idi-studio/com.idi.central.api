@@ -120,12 +120,23 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         private void Save(ProductPicture picture, string savePath, IFormFile file)
         {
-            var path = Path.Combine(savePath, "assets", "images", picture.ResourceName());
+            var path = Path.Combine(savePath, "assets", "images", "products", picture.ProductId.AsCode());
 
-            using (var stream = new FileStream(path, FileMode.CreateNew))
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            var filename = Path.Combine(path, picture.AssetName());
+
+            using (var stream = new FileStream(filename, FileMode.CreateNew))
+            using (var memory = new MemoryStream())
             {
                 file.CopyTo(stream);
+                file.CopyTo(memory);
+
+                picture.Data = memory.GetBuffer();
+
                 stream.Flush();
+                memory.Flush();
             }
         }
     }

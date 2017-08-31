@@ -288,7 +288,7 @@ namespace IDI.Central.Domain.Modules.Administration
                 }.ToJson() },
             };
 
-            this.iPhones.ForEach(e => e.QRCode = Guid.NewGuid().ToString("N").ToUpper());
+            this.iPhones.ForEach(e => e.QRCode = Guid.NewGuid().AsCode());
         }
     }
 

@@ -15,6 +15,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
     public class QueryProductCondition : Condition
     {
         public Guid Id { get; set; }
+
+        public string Domain { get; set; }
     }
 
     public class QueryProduct : Query<QueryProductCondition, ProductModel>
@@ -25,6 +27,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
         public override Result<ProductModel> Execute(QueryProductCondition condition)
         {
             var product = this.Products.Include(e => e.Pictures).Find(condition.Id);
+
+            var url = $"{condition.Domain}/assets/images/products";
 
             var model = new ProductModel
             {
@@ -44,7 +48,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                     Category = e.Category,
                     FileName = e.FileName,
                     Date = e.CreatedAt.AsLongDate(),
-                    URL = $"http://localhost:50963/assets/images/{e.ResourceName()}"
+                    URL = $"{url}/{e.ProductId.AsCode()}/{e.AssetName()}"
                 }).OrderBy(e => e.Category).ThenBy(e => e.Sequence).ToList(),
             };
 

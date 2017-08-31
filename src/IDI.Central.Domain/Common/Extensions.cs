@@ -13,9 +13,9 @@ namespace IDI.Central.Domain.Common
             return tags.Select(tag => { return $"{tag.Name}:{tag.Value}"; }).JoinToString(",");
         }
 
-        public static string ResourceName(this ProductPicture picture)
+        public static string AssetName(this ProductPicture picture)
         {
-            return $"{picture.Id.ToString().ToUpper()}{picture.Extension}";
+            return $"{picture.Id.AsCode()}{picture.Extension}";
         }
     }
 }

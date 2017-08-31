@@ -8,12 +8,21 @@ using IDI.Core.Common.Enums;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace IDI.Central.Controllers
 {
     [Route("api/product"), ApplicationAuthorize]
     public class ProductController : Controller
     {
+        public readonly ApplicationOptions options;
+
+        public ProductController(IOptionsSnapshot<ApplicationOptions> options)
+        {
+            this.options = options.Value;
+        }
+
         //POST: api/product
         [HttpPost]
         public Result Post([FromBody]ProductInput input)
@@ -69,7 +78,11 @@ namespace IDI.Central.Controllers
         [HttpGet("{id}")]
         public Result<ProductModel> Get(Guid id)
         {
-            var condition = new QueryProductCondition { Id = id };
+            var condition = new QueryProductCondition
+            {
+                Id = id,
+                Domain = this.options.Domain
+            };
 
             return ServiceLocator.QueryProcessor.Execute<QueryProductCondition, ProductModel>(condition);
         }

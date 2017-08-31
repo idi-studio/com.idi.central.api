@@ -49,6 +49,8 @@ namespace IDI.Central
             services.AddCors(options => options.AddPolicy(Constants.Policy.AllowCorsDomain, builder => builder.WithOrigins(urls).AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin().AllowCredentials()));
             services.Configure<MvcOptions>(options => { options.Filters.Add(new CorsAuthorizationFilterFactory(Constants.Policy.AllowCorsDomain)); });
             #endregion
+
+            services.Configure<ApplicationOptions>(Configuration.GetSection("API"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,7 +85,6 @@ namespace IDI.Central
 
             app.UseCors(Constants.Policy.AllowCorsDomain);
 
-            //app.UseSession();
             app.UseMvc();
             //app.UseMvc(routes =>
             //{
