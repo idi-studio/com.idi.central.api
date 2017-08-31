@@ -7,8 +7,8 @@ using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
 namespace IDI.Central.Controllers
@@ -76,12 +76,13 @@ namespace IDI.Central.Controllers
 
         // GET api/product/{id}
         [HttpGet("{id}")]
-        public Result<ProductModel> Get(Guid id)
+        public Result<ProductModel> Get(Guid id, [FromServices]IHostingEnvironment env)
         {
             var condition = new QueryProductCondition
             {
                 Id = id,
-                Domain = this.options.Domain
+                Domain = this.options.Domain,
+                SavePath = env.WebRootPath
             };
 
             return ServiceLocator.QueryProcessor.Execute<QueryProductCondition, ProductModel>(condition);

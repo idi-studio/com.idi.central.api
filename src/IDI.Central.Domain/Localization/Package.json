@@ -145,6 +145,18 @@
 },
 {
     "language": "chs",
+    "name": "domain",
+    "value": "域名",
+    "prefix": "display-name"
+},
+{
+    "language": "en",
+    "name": "domain",
+    "value": "Domain",
+    "prefix": "display-name"
+},
+{
+    "language": "chs",
     "name": "invalid-username-or-password",
     "value": "无效的用户名或密码!",
     "prefix": "command"
