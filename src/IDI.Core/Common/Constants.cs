@@ -22,5 +22,12 @@
         {
             public const string CurrentUser = "CURRENT-USER";
         }
+
+        public class LoggerCategory
+        {
+            public const string Info = "Info";
+            public const string Debug = "Debug";
+            public const string Error = "Error";
+        }
     }
 }

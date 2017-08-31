@@ -49,9 +49,9 @@ namespace IDI.Core.Common
             return new Result { Status = ResultStatus.Error, Message = message, Code = code };
         }
 
-        public static Result Error(Exception exception)
+        public static Result Error(Exception exception, string message = null)
         {
-            var result = new Result { Status = ResultStatus.Error, Message = exception.Message, Code = "500" };
+            var result = new Result { Status = ResultStatus.Error, Message = message ?? exception.Message, Code = "500" };
 
             result.Details.Add("stacktrace", exception.StackTrace);
 

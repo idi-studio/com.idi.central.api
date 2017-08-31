@@ -61,8 +61,8 @@ namespace IDI.Core.Infrastructure
                     services.AddSingleton<ICommandBus, CommandBus>();
                     services.AddSingleton<IQueryBuilder, QueryBuilder>();
                     services.AddSingleton<IQueryProcessor, QueryProcessor>();
-                    services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
-                    services.AddScoped<ICurrentUser, CurrentUser>();
+                    services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+                    services.AddTransient<ICurrentUser, CurrentUser>();
 
                     isInitialized = true;
 
@@ -96,12 +96,11 @@ namespace IDI.Core.Infrastructure
         public static void AddDbContext<TContext>(Action<DbContextOptionsBuilder> optionsAction = null) where TContext : DbContext
         {
             services.AddDbContextPool<TContext>(optionsAction: optionsAction);
-            //services.AddEntityFrameworkSqlServer().AddDbContext<TContext>(optionsAction: optionsAction);
             services.AddScoped<DbContext, TContext>();
             services.AddScoped<IRepositoryContext, EFCoreRepositoryContext>();
             services.AddScoped<IEFCoreRepositoryContext, EFCoreRepositoryContext>();
-            services.AddScoped(typeof(IRepository<>), typeof(EFCoreRepository<>));
-            services.AddScoped(typeof(IQueryableRepository<>), typeof(EFCoreRepository<>));
+            services.AddTransient(typeof(IRepository<>), typeof(EFCoreRepository<>));
+            services.AddTransient(typeof(IQueryableRepository<>), typeof(EFCoreRepository<>));
         }
     }
 }

@@ -48,5 +48,48 @@ namespace IDI.Core.Common.Extensions
         {
             return claims.FirstOrDefault(e => e.Type == type)?.Value ?? string.Empty;
         }
+
+        public static string AsJson(this HttpRequest request)
+        {
+            if (request == null)
+                return string.Empty;
+
+            var dic = new Dictionary<string, string>();
+            dic.Add("scheme", request.Scheme);
+            dic.Add("method", request.Method);
+            dic.Add("path", request.Path);
+            dic.Add("form", request.GetFormAsJson());
+            dic.Add("files", request.GetFileAsJson());
+
+            return dic.ToJson();
+        }
+
+        private static string GetFormAsJson(this HttpRequest request)
+        {
+            try
+            {
+                var form = request.Form;
+
+                return form.Keys.Select(key => new KeyValuePair<string, string>(key, form[key])).ToJson();
+            }
+            catch (InvalidOperationException)
+            {
+                return string.Empty;
+            }
+        }
+
+        private static string GetFileAsJson(this HttpRequest request)
+        {
+            try
+            {
+                var files = request.Form.Files;
+
+                return files.Select(file => new { name = file.Name, type = file.ContentType, size = string.Format("{0:N2} KB", file.Length / 1024) }).ToJson();
+            }
+            catch (InvalidOperationException)
+            {
+                return string.Empty;
+            }
+        }
     }
 }

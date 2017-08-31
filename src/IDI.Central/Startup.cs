@@ -31,13 +31,9 @@ namespace IDI.Central
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddSession(options =>
-            //{
-            //    options.IdleTimeout = TimeSpan.FromMinutes(30);
-            //});
-
             // Add framework services.
-            services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+                .AddMvcOptions(options => options.Filters.Add<ApplicationExceptionAttribute>());
 
             services.AddSqlServer<CentralContext>(Configuration.GetConnectionString("DefaultConnection"));
 
@@ -92,7 +88,7 @@ namespace IDI.Central
             //});
             app.UseLanguagePackage<PackageCentral>();
             app.UseLocalization<Localization>();
-           
+
         }
     }
 }
