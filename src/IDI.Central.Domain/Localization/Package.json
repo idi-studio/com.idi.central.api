@@ -529,6 +529,18 @@
 },
 {
     "language": "chs",
+    "name": "phone-num-registered",
+    "value": "电话号码已登记!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "phone-num-registered",
+    "value": "The phone number has been registered.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "required-selling-price",
     "value": "未设定售价!",
     "prefix": "command"

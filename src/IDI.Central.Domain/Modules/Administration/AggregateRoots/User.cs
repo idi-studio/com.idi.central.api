@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
@@ -18,6 +18,10 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
         [Required]
         [StringLength(256)]
         public string Password { get; set; }
+
+        public bool IsLocked { get; set; } = false;
+
+        public DateTime? LockTime { get; set; }
 
         public bool IsActive { get; set; } = true;
 

@@ -16,7 +16,10 @@ namespace IDI.Central.Domain.Modules.Retailing
             modelBuilder.Entity<OrderItem>().ToTable("OrderItems");
             modelBuilder.Entity<ShippingAddress>().ToTable("Addresses");
 
-            //One to Many
+            //One-to-one
+            modelBuilder.Entity<Customer>().HasOne(e => e.User).WithOne().HasForeignKey<Customer>(e => e.UserId).IsRequired(false);
+
+            //One-to-Many
             modelBuilder.Entity<Product>().HasMany(e => e.Prices).WithOne(e => e.Product).HasForeignKey(e => e.ProductId);
             modelBuilder.Entity<Product>().HasMany(e => e.Pictures).WithOne(e => e.Product).HasForeignKey(e => e.ProductId);
             modelBuilder.Entity<Order>().HasMany(e => e.Items).WithOne(e => e.Order).HasForeignKey(e => e.OrderId);

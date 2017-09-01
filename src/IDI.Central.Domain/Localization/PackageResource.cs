@@ -50,6 +50,7 @@ namespace IDI.Central.Domain.Localization
 								public const string InvalidCategory = "invalid-category";
 								public const string InvalidProduct = "invalid-product";
 								public const string InvalidCustomer = "invalid-customer";
+								public const string PhoneNumRegistered = "phone-num-registered";
 								public const string RequiredSellingPrice = "required-selling-price";
 								public const string OperationNonsupport = "operation-nonsupport";
 								public const string NoFileUpload = "no-file-upload";

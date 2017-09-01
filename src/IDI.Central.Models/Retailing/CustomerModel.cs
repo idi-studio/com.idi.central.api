@@ -20,9 +20,12 @@ namespace IDI.Central.Models.Retailing
         public int Grade { get; set; }
 
         [JsonProperty("phone")]
-        public string Phone { get; set; }
+        public string PhoneNum { get; set; }
+
+        [JsonProperty("verified")]
+        public bool Verified { get; set; }
 
         [JsonProperty("date")]
-        public string date { get; set; }
+        public string Date { get; set; }
     }
 }

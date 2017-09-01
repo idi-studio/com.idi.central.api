@@ -15,7 +15,7 @@ namespace IDI.Central.Domain.Modules.Administration
     {
         public Module Administration { get; private set; }
 
-        public Module Sales { get; private set; }
+        public Module Retailing { get; private set; }
 
         public ModuleCollection()
         {
@@ -25,8 +25,8 @@ namespace IDI.Central.Domain.Modules.Administration
             this.Administration.NewPage(sn: 30, name: "Role", controller: "role", action: "administration", privilege: true);
             this.Administration.NewPage(sn: 40, name: "User", controller: "user", action: "administration", privilege: true);
 
-            this.Sales = new Module { SN = 20, Name = "Order", Code = "SMM", Description = "Sales", Icon = "fa fa-tasks" };
-            this.Sales.NewPage(sn: 10, name: "Order", controller: "order", action: "index", privilege: true);
+            this.Retailing = new Module { SN = 20, Name = "Order", Code = "SMM", Description = "Sales", Icon = "fa fa-tasks" };
+            this.Retailing.NewPage(sn: 10, name: "Order", controller: "order", action: "index", privilege: true);
         }
     }
 
@@ -34,12 +34,15 @@ namespace IDI.Central.Domain.Modules.Administration
     {
         public Role Administrators { get; private set; }
 
-        public Role Users { get; private set; }
+        public Role Staffs { get; private set; }
+
+        public Role Customers { get; private set; }
 
         public RoleCollection()
         {
-            this.Administrators = new Role { Name = "Administrators", Descrition = "The administrator of system." };
-            this.Users = new Role { Name = "Users", Descrition = "The user of system.", IsActive = false };
+            this.Administrators = new Role { Name = Central.Common.Constants.Roles.Administrators, Descrition = "The administrator of system." };
+            this.Staffs = new Role { Name = Central.Common.Constants.Roles.Staffs, Descrition = "The staff of system." };
+            this.Customers = new Role { Name = Central.Common.Constants.Roles.Customers, Descrition = "The customer of system." };
         }
     }
 
@@ -310,7 +313,9 @@ namespace IDI.Central.Domain.Modules.Administration
             this.Users.Administrator.Authorize(this.Roles.Administrators);
 
             //RoleModules
-            this.Roles.Administrators.Authorize(this.Modules.Administration, this.Modules.Sales);
+            this.Roles.Administrators.Authorize(this.Modules.Administration, this.Modules.Retailing);
+            this.Roles.Staffs.Authorize(this.Modules.Retailing);
+            //this.Roles.Customers.Authorize(this.Modules.Retailing);
         }
     }
 

@@ -45,6 +45,7 @@
   <item prefix="command" name="invalid-category" en="Invalid Category." chs="无效的类别!" />
   <item prefix="command" name="invalid-product" en="Invalid Product." chs="无效的产品!" />
   <item prefix="command" name="invalid-customer" en="Invalid Customer." chs="无效的客户!" />
+  <item prefix="command" name="phone-num-registered" en="The phone number has been registered." chs="电话号码已登记!" />
   <item prefix="command" name="required-selling-price" en="Selling price required." chs="未设定售价!" />
   <item prefix="command" name="operation-nonsupport" en="This operation is not supported." chs="不支持该项操作!" />
   <item prefix="command" name="no-file-upload" en="No file(s) to upload." chs="未上传任何文件!" />

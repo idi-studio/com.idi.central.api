@@ -47,13 +47,14 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
                 return Result.Success(message: Localization.Get(Resources.Key.Command.SystemDataInitialized));
 
             this.Modules.Add(command.Seed.Modules.Administration);
-            this.Modules.Add(command.Seed.Modules.Sales);
+            this.Modules.Add(command.Seed.Modules.Retailing);
             this.Modules.Commit();
 
             this.Users.Add(command.Seed.Users.Administrator);
             this.Users.Commit();
 
-            this.Roles.Add(command.Seed.Roles.Users);
+            this.Roles.Add(command.Seed.Roles.Staffs);
+            this.Roles.Add(command.Seed.Roles.Customers);
             this.Roles.Commit();
 
             this.Clients.Add(command.Seed.Clients.Central);

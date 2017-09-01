@@ -16,7 +16,7 @@ namespace IDI.Central.Domain.Modules.Administration
             modelBuilder.Entity<UserRole>().HasKey(ur => new { ur.UserId, ur.RoleId });
             modelBuilder.Entity<UserRole>().HasOne(ur => ur.User).WithMany(user => user.UserRoles).HasForeignKey(ur => ur.UserId);
             modelBuilder.Entity<UserRole>().HasOne(ur => ur.Role).WithMany(role => role.UserRoles).HasForeignKey(ur => ur.RoleId);
-            modelBuilder.Entity<User>().HasOne(u => u.Profile).WithOne(p => p.User).HasForeignKey<UserProfile>(p => p.UserId);
+            modelBuilder.Entity<User>().HasOne(u => u.Profile).WithOne().HasForeignKey<UserProfile>(p => p.UserId);
             modelBuilder.Entity<Client>();
         }
     }
