@@ -10,11 +10,13 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
 
         public decimal Amount { get; set; }
 
-        public int Grade { get; set; } = 0;
+        public int GradeFrom { get; set; }
 
-        public DateTime StartDate { get; set; }
+        public int GradeTo { get; set; }
 
-        public DateTime DueDate { get; set; }
+        public DateTime PeriodStart  { get; set; }
+
+        public DateTime PeriodEnd { get; set; }
 
         public bool Enabled { get; set; }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using IDI.Central.Common;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
+using IDI.Central.Models.Retailing;
 
 namespace IDI.Central.Domain.Modules.Retailing
 {
@@ -17,17 +18,30 @@ namespace IDI.Central.Domain.Modules.Retailing
             return product.Enabled && product.OnShelf;
         }
 
-        public static IDictionary<string, decimal> SellingPrices(this Product product)
+        public static List<PriceModel> PriceList(this Product product)
         {
+            var list = new List<PriceModel>();
+
             if (product == null)
-                return new Dictionary<string, decimal>();
+                return list;
 
             var current = DateTime.Now;
-            var category = PriceCategory.Discount | PriceCategory.Selling | PriceCategory.VIP;
+            var category = PriceCategory.Discount | PriceCategory.Selling;
 
-            var prices = product.Prices.Where(e => e.Enabled && e.StartDate <= current && e.DueDate >= current && category.HasFlag(e.Category));
+            var prices = product.Prices.Where(e => e.Enabled && e.PeriodStart <= current && e.PeriodEnd >= current && category.HasFlag(e.Category));
 
-            return prices.ToDictionary(e => e.Category == PriceCategory.VIP ? $"{e.Category}-{e.Grade}" : $"{e.Category}", e => e.Amount);
+            foreach (var price in prices)
+            {
+                list.AddRange(Enumerable.Range(price.GradeFrom, price.GradeTo - price.GradeFrom + 1)
+                    .Select(grade => new PriceModel
+                    {
+                        Category = price.Category,
+                        Amount = price.Amount,
+                        Grade = grade
+                    }));
+            }
+
+            return list;
         }
 
         public static bool AllowModifyItem(this Order order)

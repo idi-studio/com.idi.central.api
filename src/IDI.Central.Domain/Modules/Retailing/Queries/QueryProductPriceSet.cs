@@ -29,16 +29,17 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
         {
             var prices = this.Prices.Get(e => e.ProductId == condition.ProductId);
 
-            var collection = prices.OrderByDescending(e => e.Category).ThenBy(e => e.Grade).Select(price => new ProductPriceModel
+            var collection = prices.OrderByDescending(e => e.Category).ThenBy(e => e.GradeFrom).Select(price => new ProductPriceModel
             {
                 Id = price.Id,
                 Amount = price.Amount,
                 Category = price.Category,
                 CategoryName = Localization.Get(price.Category),
-                DueDate = price.DueDate.AsLongDate(),
-                Grade = price.Grade,
+                PeriodStart = price.PeriodStart.AsLongDate(),
+                PeriodEnd = price.PeriodEnd.AsLongDate(),
+                GradeFrom = price.GradeFrom,
+                GradeTo = price.GradeTo,
                 ProductId = price.ProductId,
-                StartDate = price.StartDate.AsLongDate(),
                 Enabled = price.Enabled
             }).ToList();
 

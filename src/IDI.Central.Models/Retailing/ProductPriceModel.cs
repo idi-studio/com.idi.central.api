@@ -20,13 +20,16 @@ namespace IDI.Central.Models.Retailing
         public decimal Amount { get; set; }
 
         [JsonProperty("grade")]
-        public int Grade { get; set; }
+        public int GradeFrom { get; set; }
+
+        [JsonProperty("gradeto")]
+        public int GradeTo { get; set; }
 
         [JsonProperty("startdate")]
-        public string StartDate { get; set; }
+        public string PeriodStart { get; set; }
 
         [JsonProperty("duedate")]
-        public string DueDate { get; set; }
+        public string PeriodEnd { get; set; }
 
         [JsonProperty("pid")]
         public Guid ProductId { get; set; }

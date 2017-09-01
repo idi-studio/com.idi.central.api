@@ -23,6 +23,6 @@ namespace IDI.Central.Models.Retailing
         public List<TagModel> Tags { get; set; }
 
         [JsonProperty("prices")]
-        public IDictionary<string,decimal> Prices { get; set; }
+        public List<PriceModel> Prices { get; set; }
     }
 }

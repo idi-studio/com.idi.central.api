@@ -29,7 +29,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                 QRCode = product.QRCode,
                 Description = product.Tags.To<List<TagModel>>().AsString(),
                 Tags = product.Tags.To<List<TagModel>>(),
-                Prices = product.SellingPrices()
+                Prices = product.PriceList()
             }).ToList();
 
             return Result.Success(new Set<ProductSellModel>(collection));

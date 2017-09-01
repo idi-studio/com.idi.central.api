@@ -34,10 +34,11 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                 Amount = price.Amount,
                 Category = price.Category,
                 CategoryName = Localization.Get(price.Category),
-                DueDate = price.DueDate.AsLongDate(),
-                Grade = price.Grade,
+                PeriodEnd = price.PeriodEnd.AsLongDate(),
+                PeriodStart = price.PeriodStart.AsLongDate(),
+                GradeFrom = price.GradeFrom,
+                GradeTo = price.GradeTo,
                 ProductId = price.ProductId,
-                StartDate = price.StartDate.AsLongDate(),
                 Enabled = price.Enabled
             };
 

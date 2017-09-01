@@ -17,7 +17,10 @@ namespace IDI.Central.Models.Retailing
         public decimal Amount { get; set; }
 
         [JsonProperty("grade")]
-        public int Grade { get; set; } = 0;
+        public int GradeFrom { get; set; }
+
+        [JsonProperty("gradeto")]
+        public int GradeTo { get; set; }
 
         [JsonProperty("startdate")]
         public string StartDate { get; set; }

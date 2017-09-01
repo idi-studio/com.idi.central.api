@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using IDI.Central.Common;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
@@ -17,11 +18,13 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         public decimal Amount { get; set; }
 
-        public int Grade { get; set; } = 0;
+        public int GradeFrom { get; set; }
 
-        public DateTime StartDate { get; set; }
+        public int GradeTo { get; set; }
 
-        public DateTime DueDate { get; set; }
+        public DateTime PeriodStart { get; set; }
+
+        public DateTime PeriodEnd { get; set; }
 
         public Guid ProductId { get; set; }
 
@@ -46,24 +49,24 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
             if (!HasTerm(command.Category))
             {
-                command.StartDate = this.min;
-                command.DueDate = this.max;
+                command.PeriodStart = this.min;
+                command.PeriodEnd = this.max;
             }
 
             var price = new ProductPrice
             {
                 ProductId = command.ProductId,
                 Category = command.Category,
-                StartDate = command.StartDate.Date,
-                DueDate = command.DueDate.Date.AddTicks(new TimeSpan(23, 59, 59).Ticks),
+                PeriodStart = command.PeriodStart.Date,
+                PeriodEnd = command.PeriodEnd.Date.AddTicks(new TimeSpan(23, 59, 59).Ticks),
                 Amount = command.Amount,
-                Grade = command.Grade,
+                GradeFrom = command.GradeFrom,
+                GradeTo = command.GradeTo,
                 Enabled = command.Enabled,
             };
 
             this.Prices.Add(price);
             this.Prices.Commit();
-            //this.Prices.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess));
         }
@@ -83,20 +86,20 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
             if (!HasTerm(command.Category))
             {
-                command.StartDate = this.min;
-                command.DueDate = this.max;
+                command.PeriodStart = this.min;
+                command.PeriodEnd = this.max;
             }
 
             price.Category = command.Category;
-            price.StartDate = command.StartDate.Date;
-            price.DueDate = command.DueDate.Date.AddTicks(new TimeSpan(23, 59, 59).Ticks);
+            price.PeriodStart = command.PeriodStart.Date;
+            price.PeriodEnd = command.PeriodEnd.Date.AddTicks(new TimeSpan(23, 59, 59).Ticks);
             price.Amount = command.Amount;
-            price.Grade = command.Grade;
+            price.GradeFrom = command.GradeFrom;
+            price.GradeTo = command.GradeTo;
             price.Enabled = command.Enabled;
 
             this.Prices.Update(price);
             this.Prices.Commit();
-            //this.Prices.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
         }
@@ -110,7 +113,6 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
             this.Prices.Remove(price);
             this.Prices.Commit();
-            //this.Prices.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
         }
@@ -120,16 +122,16 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (!HasTerm(command.Category))
                 return false;
 
-            var price = this.Prices.Find(e => e.ProductId == command.ProductId && e.Category == command.Category && e.Grade == command.Grade && e.Id != command.Id);
+            var prices = this.Prices.Get(e => e.ProductId == command.ProductId && e.Category == command.Category && e.Id != command.Id);
 
-            if (price == null)
+            if (prices.Count == 0)
                 return false;
 
             //（S2 <= E1）AND (S1 <= E2）
-            if (price.StartDate <= command.DueDate && command.StartDate <= price.DueDate)
-                return true;
+            prices = prices.Where(price => price.PeriodStart <= command.PeriodEnd && command.PeriodStart <= price.PeriodEnd).ToList();
+            prices = prices.Where(price => price.GradeFrom <= command.GradeTo && command.GradeFrom <= price.GradeTo).ToList();
 
-            return false;
+            return prices.Count > 0;
         }
 
         private bool IsDuplicated(ProductPriceCommand command)
@@ -137,7 +139,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (HasTerm(command.Category))
                 return false;
 
-            return this.Prices.Exist(e => e.ProductId == command.ProductId && e.Category == command.Category && e.Grade == command.Grade && e.Id != command.Id);
+            return this.Prices.Exist(e => e.ProductId == command.ProductId && e.Category == command.Category && e.Id != command.Id);
         }
 
         private bool HasTerm(PriceCategory category)
@@ -145,7 +147,6 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             switch (category)
             {
                 case PriceCategory.Discount:
-                case PriceCategory.VIP:
                     return true;
                 default:
                     return false;
