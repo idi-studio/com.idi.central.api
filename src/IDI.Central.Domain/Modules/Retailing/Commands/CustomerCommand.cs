@@ -70,7 +70,13 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 Password = Cryptography.Encrypt(Guid.NewGuid().AsCode(), salt),
                 IsLocked = true,
                 LockTime = DateTime.MaxValue,
-                Profile = new UserProfile { Name = command.Name, Gender = command.Gender, PhoneNum = command.PhoneNum }
+                Profile = new UserProfile
+                {
+                    Name = command.Name,
+                    Gender = command.Gender,
+                    PhoneNum = command.PhoneNum,
+                    Photo = $"{command.Gender.ToString().ToLower()}.png"
+                }
             };
 
             this.Customers.Add(customer);
@@ -99,6 +105,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             {
                 customer.User.Profile.Gender = command.Gender;
                 customer.User.Profile.PhoneNum = command.PhoneNum;
+                customer.User.Profile.Photo = $"{command.Gender.ToString().ToLower()}.png";
 
                 this.Profiles.Update(customer.User.Profile);
                 this.Profiles.Commit();
