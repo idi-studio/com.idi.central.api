@@ -67,7 +67,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             {
                 UserName = $"cust{command.PhoneNum}",
                 Salt = salt,
-                Password = Cryptography.Encrypt(Guid.NewGuid().AsCode(), salt),
+                Password = Cryptography.Encrypt(command.PhoneNum.Substring(2, command.PhoneNum.Length - 3), salt),
                 IsLocked = true,
                 LockTime = DateTime.MaxValue,
                 Profile = new UserProfile
@@ -126,6 +126,9 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
             this.Customers.Remove(customer);
             this.Customers.Commit();
+
+            this.Users.Remove(customer.User);
+            this.Users.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
         }
