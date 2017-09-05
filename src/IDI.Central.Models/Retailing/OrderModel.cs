@@ -29,8 +29,8 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("remark")]
         public string Remark { get; set; }
 
-        [JsonProperty("customerid")]
-        public Guid? CustomerId { get; set; }
+        [JsonProperty("custid")]
+        public Guid CustomerId { get; set; }
 
         [JsonProperty("items")]
         public List<OrderItemModel> Items { get; set; }

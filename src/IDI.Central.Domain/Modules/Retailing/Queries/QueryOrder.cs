@@ -29,7 +29,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
             {
                 Id = order.Id,
                 Category = order.Category,
-                CustomerId = order.CustomerId,
+                CustomerId = order.CustomerId.HasValue ? order.CustomerId.Value : Guid.Empty,
                 Date = order.Date.AsLongDate(),
                 SN = order.SN,
                 Status = order.Status,

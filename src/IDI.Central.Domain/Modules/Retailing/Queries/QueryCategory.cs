@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IDI.Central.Domain.Localization;
 using IDI.Core.Common;
-using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
-using IDI.Core.Localization;
 
 namespace IDI.Central.Domain.Modules.Retailing.Queries
 {
@@ -16,9 +14,6 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
 
     public class QueryCategory : Query<QueryCategoryCondition, Set<KeyValuePair<int, string>>>
     {
-        [Injection]
-        public ILocalization Localization { get; set; }
-
         public override Result<Set<KeyValuePair<int, string>>> Execute(QueryCategoryCondition condition)
         {
             string prefix = condition.EnumType;

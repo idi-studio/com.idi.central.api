@@ -6,7 +6,6 @@ using IDI.Core.Common;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
 using IDI.Core.Infrastructure.Verification.Attributes;
-using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Queries
@@ -19,9 +18,6 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
 
     public class QuerySidebar : Query<QuerySidebarCondition, Sidebar>
     {
-        [Injection]
-        public ILocalization Localization { get; set; }
-
         [Injection]
         public IQueryableRepository<Menu> Menus { get; set; }
 

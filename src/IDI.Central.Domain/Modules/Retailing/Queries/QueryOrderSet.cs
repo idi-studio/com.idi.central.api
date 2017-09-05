@@ -23,9 +23,6 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
     public class QueryOrderSet : Query<QueryOrderSetCondition, Set<OrderModel>>
     {
         [Injection]
-        public ILocalization Localization { get; set; }
-
-        [Injection]
         public IQueryableRepository<Order> Orders { get; set; }
 
         public override Result<Set<OrderModel>> Execute(QueryOrderSetCondition condition)
@@ -36,7 +33,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
             {
                 Id = e.Id,
                 Category = e.Category,
-                CustomerId = e.CustomerId,
+                CustomerId = e.CustomerId.HasValue ? e.CustomerId.Value : Guid.Empty,
                 Date = e.Date.AsLongDate(),
                 SN = e.SN,
                 Status = e.Status,
