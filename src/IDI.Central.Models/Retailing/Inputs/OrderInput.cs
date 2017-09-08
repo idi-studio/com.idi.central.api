@@ -9,7 +9,7 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("remark")]
         public string Remark { get; set; } = string.Empty;
 
-        [JsonProperty("cid")]
+        [JsonProperty("custid")]
         public Guid? CustomerId { get; set; }
     }
 }

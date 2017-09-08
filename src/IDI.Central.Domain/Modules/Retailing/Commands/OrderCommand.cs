@@ -57,10 +57,16 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         protected override Result Update(OrderCommand command)
         {
+            if (command.CustomerId.HasValue && !this.Customers.Exist(e => e.Id == command.CustomerId))
+                return Result.Fail(Localization.Get(Resources.Key.Command.InvalidCustomer));
+
             var order = this.Orders.Find(command.Id);
 
             if (order == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
+
+            if (command.CustomerId.HasValue)
+                order.CustomerId = command.CustomerId;
 
             order.Remark = command.Remark;
 
