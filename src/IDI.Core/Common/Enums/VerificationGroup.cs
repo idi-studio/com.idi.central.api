@@ -9,6 +9,7 @@ namespace IDI.Core.Common.Enums
         Create=2,
         Update=4,
         Delete=8,
-        Query=16
+        Query=16,
+        Upload = 32
     }
 }

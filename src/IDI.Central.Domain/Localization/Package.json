@@ -397,6 +397,30 @@
 },
 {
     "language": "chs",
+    "name": "upload-success",
+    "value": "上传成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "upload-success",
+    "value": "Upload successfully.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "upload-fail",
+    "value": "上传失败!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "upload-fail",
+    "value": "Upload failed.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "register-success",
     "value": "注册成功!",
     "prefix": "command"
@@ -501,6 +525,18 @@
     "language": "en",
     "name": "invalid-category",
     "value": "Invalid category.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "invalid-order",
+    "value": "无效的订单!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "invalid-order",
+    "value": "Invalid order.",
     "prefix": "command"
 },
 {

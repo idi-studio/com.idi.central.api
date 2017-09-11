@@ -50,7 +50,6 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
             this.Orders.Add(order);
             this.Orders.Commit();
-            //this.Orders.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess)).Attach("oid", order.Id);
         }
@@ -72,7 +71,6 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
             this.Orders.Update(order);
             this.Orders.Commit();
-            //this.Orders.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
         }
@@ -86,11 +84,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
             this.Orders.Remove(order);
             this.Orders.Commit();
-            //this.Orders.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
-
-            //return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
         }
 
         private string GenerateSerialNumber(OrderCategory category, DateTime timestamp)

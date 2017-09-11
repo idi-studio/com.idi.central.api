@@ -10,6 +10,5 @@
         StockOut = 8,
         //入库单 - SIO
         StockIn = 16,
-
     }
 }

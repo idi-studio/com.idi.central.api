@@ -34,6 +34,8 @@
   <item prefix="command" name="update-fail" en="Update failed." chs="更新失败!" />
   <item prefix="command" name="delete-success" en="Delete successfully." chs="删除成功!" />
   <item prefix="command" name="delete-fail" en="Delete failed." chs="删除失败!" />
+  <item prefix="command" name="upload-success" en="Upload successfully." chs="上传成功!" />
+  <item prefix="command" name="upload-fail" en="Upload failed." chs="上传失败!" />
   <item prefix="command" name="register-success" en="Registration successfully." chs="注册成功!" />
   <item prefix="command" name="password-mismatch" en="Passwords does not match." chs="两次密码不一致!" />
   <item prefix="command" name="product-code-duplicated" en="Product code duplicated." chs="产品编码重复!" />
@@ -43,6 +45,7 @@
   <item prefix="command" name="time-conflict" en="Time conflict." chs="时间冲突!" />
   <item prefix="command" name="record-duplicated" en="Record duplicated." chs="记录重复!" />
   <item prefix="command" name="invalid-category" en="Invalid category." chs="无效的类别!" />
+  <item prefix="command" name="invalid-order" en="Invalid order." chs="无效的订单!" />
   <item prefix="command" name="invalid-product" en="Invalid product." chs="无效的产品!" />
   <item prefix="command" name="invalid-product-price" en="Invalid product price." chs="无效的产品价格!" />
   <item prefix="command" name="invalid-customer" en="Invalid Customer." chs="无效的客户!" />

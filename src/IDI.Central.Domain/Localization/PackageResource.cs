@@ -39,6 +39,8 @@ namespace IDI.Central.Domain.Localization
 								public const string UpdateFail = "update-fail";
 								public const string DeleteSuccess = "delete-success";
 								public const string DeleteFail = "delete-fail";
+								public const string UploadSuccess = "upload-success";
+								public const string UploadFail = "upload-fail";
 								public const string RegisterSuccess = "register-success";
 								public const string PasswordMismatch = "password-mismatch";
 								public const string ProductCodeDuplicated = "product-code-duplicated";
@@ -48,6 +50,7 @@ namespace IDI.Central.Domain.Localization
 								public const string TimeConflict = "time-conflict";
 								public const string RecordDuplicated = "record-duplicated";
 								public const string InvalidCategory = "invalid-category";
+								public const string InvalidOrder = "invalid-order";
 								public const string InvalidProduct = "invalid-product";
 								public const string InvalidProductPrice = "invalid-product-price";
 								public const string InvalidCustomer = "invalid-customer";
