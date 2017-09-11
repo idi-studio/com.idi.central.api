@@ -37,7 +37,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         protected override Result Create(VoucherCommand command)
         {
-            var order = this.Orders.Include(e => e.Items).Find(e => e.Id == command.OrderId && e.Status == OrderStatus.Pending);
+            var order = this.Orders.Include(e => e.Items).Find(e => e.Id == command.OrderId && e.Status == OrderStatus.Confirmed);
 
             if (order == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidOrder));
@@ -47,12 +47,16 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
             DateTime timestamp = DateTime.Now;
 
+            var amount = order.Items.Sum(e => e.UnitPrice * e.Quantity);
+
             var voucher = new Voucher
             {
                 TN = GenerateTransactionNumber(timestamp),
                 Date = timestamp,
                 OrderId = order.Id,
-                OrderAmount = order.Items.Sum(e => e.UnitPrice * e.Quantity)
+                PayMethod = PayMethod.Other,
+                OrderAmount = amount,
+                PayAmount = amount
             };
 
             this.Vouchers.Add(voucher);
