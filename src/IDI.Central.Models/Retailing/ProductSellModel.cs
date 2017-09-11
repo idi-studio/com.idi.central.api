@@ -22,7 +22,7 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("tags")]
         public List<TagModel> Tags { get; set; }
 
-        [JsonProperty("prices")]
-        public List<PriceModel> Prices { get; set; }
+        [JsonProperty("price")]
+        public PriceModel Price { get; set; }
     }
 }

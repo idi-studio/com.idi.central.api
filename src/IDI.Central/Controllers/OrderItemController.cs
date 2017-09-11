@@ -21,7 +21,7 @@ namespace IDI.Central.Controllers
                 OrderId = input.OrderId,
                 ProductId = input.ProductId,
                 Quantity = input.Quantity,
-                UnitPrice = input.UnitPrice,
+                PriceId = input.PriceId,
                 Mode = CommandMode.Create,
                 Group = VerificationGroup.Create,
             };
@@ -39,7 +39,7 @@ namespace IDI.Central.Controllers
                 OrderId = input.OrderId,
                 ProductId = input.ProductId,
                 Quantity = input.Quantity,
-                UnitPrice = input.UnitPrice,
+                PriceId = input.PriceId,
                 Mode = CommandMode.Update,
                 Group = VerificationGroup.Update,
             };

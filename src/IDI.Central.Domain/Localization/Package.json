@@ -500,7 +500,7 @@
 {
     "language": "en",
     "name": "invalid-category",
-    "value": "Invalid Category.",
+    "value": "Invalid category.",
     "prefix": "command"
 },
 {
@@ -512,7 +512,19 @@
 {
     "language": "en",
     "name": "invalid-product",
-    "value": "Invalid Product.",
+    "value": "Invalid product.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "invalid-product-price",
+    "value": "无效的产品价格!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "invalid-product-price",
+    "value": "Invalid product price.",
     "prefix": "command"
 },
 {

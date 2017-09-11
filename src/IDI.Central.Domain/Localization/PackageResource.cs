@@ -49,6 +49,7 @@ namespace IDI.Central.Domain.Localization
 								public const string RecordDuplicated = "record-duplicated";
 								public const string InvalidCategory = "invalid-category";
 								public const string InvalidProduct = "invalid-product";
+								public const string InvalidProductPrice = "invalid-product-price";
 								public const string InvalidCustomer = "invalid-customer";
 								public const string PhoneNumRegistered = "phone-num-registered";
 								public const string RequiredSellingPrice = "required-selling-price";

@@ -1,8 +1,8 @@
 ﻿using System;
+using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Retailing.Commands;
 using IDI.Central.Domain.Modules.Retailing.Queries;
 using IDI.Central.Models.Retailing;
-using IDI.Central.Core;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Common.Extensions;
@@ -49,10 +49,12 @@ namespace IDI.Central.Controllers
         }
 
         // GET: api/product/selling
-        [HttpGet("selling")]
-        public Result<Set<ProductSellModel>> Selling()
+        [HttpGet("selling/{id}")]
+        public Result<Set<ProductSellModel>> Selling(Guid id)
         {
-            return ServiceLocator.QueryProcessor.Execute<QueryProductSellSetCondition, Set<ProductSellModel>>();
+            var condition = new QueryProductSellSetCondition { CustomerId = id };
+
+            return ServiceLocator.QueryProcessor.Execute<QueryProductSellSetCondition, Set<ProductSellModel>>(condition);
         }
 
         // Put: api/product

@@ -17,7 +17,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         public Guid ProductId { get; set; }
 
-        public decimal UnitPrice { get; set; }
+        public Guid PriceId { get; set; }
 
         public decimal Quantity { get; set; }
     }
@@ -33,6 +33,9 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
         [Injection]
         public IRepository<OrderItem> OrderItems { get; set; }
 
+        [Injection]
+        public IRepository<ProductPrice> Prices { get; set; }
+
         protected override Result Create(OrderItemCommand command)
         {
             var product = this.Products.Find(command.ProductId);
@@ -45,7 +48,12 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (!order.AllowModifyItem())
                 return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
 
-            var oldItem = order.Items.FirstOrDefault(e => e.ProductId == command.ProductId);
+            var price = this.Prices.Find(command.PriceId);
+
+            if (price == null)
+                return Result.Fail(message: Localization.Get(Resources.Key.Command.InvalidProductPrice));
+
+            var oldItem = order.Items.FirstOrDefault(e => e.ProductId == command.ProductId && e.UnitPrice == price.Amount);
 
             if (oldItem != null)
             {
@@ -61,7 +69,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                     OrderId = command.OrderId,
                     ProductId = command.ProductId,
                     Quantity = command.Quantity,
-                    UnitPrice = command.UnitPrice,
+                    UnitPrice = price.Amount,
                 };
 
                 this.OrderItems.Add(item);
@@ -83,6 +91,11 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (!order.AllowModifyItem())
                 return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
 
+            var price = this.Prices.Find(command.PriceId);
+
+            if (price == null)
+                return Result.Fail(message: Localization.Get(Resources.Key.Command.InvalidProductPrice));
+
             var item = this.OrderItems.Find(e => e.Id == command.Id && e.OrderId == command.OrderId);
 
             if (item == null)
@@ -90,18 +103,17 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
             item.ProductId = command.ProductId;
             item.Quantity = command.Quantity;
-            item.UnitPrice = command.UnitPrice;
+            item.UnitPrice = price.Amount;
 
             this.OrderItems.Update(item);
             this.OrderItems.Commit();
-            //this.OrderItems.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
         }
 
         protected override Result Delete(OrderItemCommand command)
         {
-            var item = this.OrderItems.Include(e=>e.Order).Find(command.Id);
+            var item = this.OrderItems.Include(e => e.Order).Find(command.Id);
 
             if (item == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));

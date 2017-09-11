@@ -18,30 +18,35 @@ namespace IDI.Central.Domain.Modules.Retailing
             return product.Enabled && product.OnShelf;
         }
 
-        public static List<PriceModel> PriceList(this Product product)
+        public static PriceModel FavorablePrice(this Product product, int custGrade)
         {
-            var list = new List<PriceModel>();
-
             if (product == null)
-                return list;
+                throw new ArgumentNullException("product");
+
+            if (product.Prices.Count == 0)
+                return null;
 
             var current = DateTime.Now;
             var category = PriceCategory.Discount | PriceCategory.Selling;
 
             var prices = product.Prices.Where(e => e.Enabled && e.PeriodStart <= current && e.PeriodEnd >= current && category.HasFlag(e.Category));
 
+            var list = new List<PriceModel>();
+
             foreach (var price in prices)
             {
-                list.AddRange(Enumerable.Range(price.GradeFrom, price.GradeTo - price.GradeFrom + 1)
-                    .Select(grade => new PriceModel
-                    {
-                        Category = price.Category,
-                        Amount = price.Amount,
-                        Grade = grade
-                    }));
+                var temp = Enumerable.Range(price.GradeFrom, price.GradeTo - price.GradeFrom + 1).Select(grade => new PriceModel
+                {
+                    Id = price.Id,
+                    Category = price.Category,
+                    Amount = price.Amount,
+                    Grade = grade
+                }).Where(e => e.Grade <= custGrade);
+
+                list.AddRange(temp);
             }
 
-            return list;
+            return list.OrderBy(e => e.Amount).FirstOrDefault();
         }
 
         public static bool AllowModifyItem(this Order order)

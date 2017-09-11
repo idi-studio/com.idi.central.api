@@ -12,8 +12,8 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("pid")]
         public Guid ProductId { get; set; }
 
-        [JsonProperty("unitprice")]
-        public decimal UnitPrice { get; set; }
+        [JsonProperty("priceid")]
+        public Guid PriceId { get; set; }
 
         [JsonProperty("qty")]
         public decimal Quantity { get; set; }
