@@ -1,8 +1,7 @@
-﻿using IDI.Core.Infrastructure;
+﻿using System;
+using IDI.Core.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Globalization;
 
 namespace IDI.Central.Domain.Tests
 {
@@ -11,15 +10,20 @@ namespace IDI.Central.Domain.Tests
     {
         private const string connectionString = @"Server=localhost; Database=com.idi.central;User Id = sa; Password = p@55w0rd;";
 
+        protected bool reset = true;
+
         [TestInitialize]
         public void Init()
         {
             ServiceLocator.AddDbContext<CentralContext>(options => options.UseSqlServer(connectionString, o => o.UseRowNumberForPaging()));
 
-            using (var context = ServiceLocator.GetService<CentralContext>())
+            if (reset)
             {
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
+                using (var context = ServiceLocator.GetService<CentralContext>())
+                {
+                    context.Database.EnsureDeleted();
+                    context.Database.EnsureCreated();
+                }
             }
         }
 

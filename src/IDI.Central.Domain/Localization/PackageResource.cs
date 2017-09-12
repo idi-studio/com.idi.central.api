@@ -26,8 +26,10 @@ namespace IDI.Central.Domain.Localization
 								public const string ClientDisabled = "client-disabled";
 								public const string ClientAuthenticationFail = "client-authentication-fail";
 								public const string ClientAuthenticationSuccess = "client-authentication-success";
-								public const string SystemDataInitialized = "system-data-initialized";
-								public const string SystemDataInitializeSuccess = "system-data-initialize-success";
+								public const string SysDbInitialized = "sys-db-initialized";
+								public const string SysDbInitSuccess = "sys-db-init-success";
+								public const string SysDataInitialized = "sys-data-initialized";
+								public const string SysDataInitSuccess = "sys-data-init-success";
 								public const string InvalidRole = "invalid-role";
 								public const string RoleAuthorizationSuccess = "role-authorization-success";
 								public const string UserAuthorizationSuccess = "user-authorization-success";
@@ -76,6 +78,10 @@ namespace IDI.Central.Domain.Localization
 								public const string Year = "year";
 								public const string Desc = "desc";
 								public const string Manufacturer = "manufacturer";
+								public const string Processor = "processor";
+								public const string Memory = "memory";
+								public const string Display = "display";
+								public const string Storage = "storage";
 								}
 
 					}

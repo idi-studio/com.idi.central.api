@@ -13,7 +13,7 @@ namespace IDI.Central.Domain.Tests
         [TestMethod]
         public void Administration_SidebarQuery()
         {
-            Administration_DataInitializationCommand();
+            Administration_DatabaseInitalCommand();
 
             var query = new QuerySidebar();
             query.Menus = ServiceLocator.GetService<IQueryableRepository<Menu>>();

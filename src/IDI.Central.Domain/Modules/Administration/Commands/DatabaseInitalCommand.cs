@@ -1,6 +1,5 @@
 ﻿using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
-using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
@@ -9,17 +8,17 @@ using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Commands
 {
-    public class DataInitializationCommand : Command
+    public class DatabaseInitalCommand : Command
     {
         public Seed Seed { get; private set; }
 
-        public DataInitializationCommand()
+        public DatabaseInitalCommand()
         {
             this.Seed = new Seed();
         }
     }
 
-    public class DataInitializationCommandHandler : ICommandHandler<DataInitializationCommand>
+    public class DatabaseInitalCommandHandler : ICommandHandler<DatabaseInitalCommand>
     {
         [Injection]
         public ILocalization Localization { get; set; }
@@ -36,15 +35,12 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
         [Injection]
         public IRepository<Client> Clients { get; set; }
 
-        [Injection]
-        public IRepository<Product> Products { get; set; }
-
-        public Result Execute(DataInitializationCommand command)
+        public Result Execute(DatabaseInitalCommand command)
         {
             bool initialized = this.Modules.Exist(e => e.Code == command.Seed.Modules.Administration.Code);
 
             if (initialized)
-                return Result.Success(message: Localization.Get(Resources.Key.Command.SystemDataInitialized));
+                return Result.Success(message: Localization.Get(Resources.Key.Command.SysDbInitialized));
 
             this.Modules.Add(command.Seed.Modules.Administration);
             this.Modules.Add(command.Seed.Modules.Retailing);
@@ -60,10 +56,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             this.Clients.Add(command.Seed.Clients.Central);
             this.Clients.Commit();
 
-            command.Seed.Products.iPhones.ForEach(e => this.Products.Add(e));
-            this.Products.Commit();
-
-            return Result.Success(message: Localization.Get(Resources.Key.Command.SystemDataInitializeSuccess));
+            return Result.Success(message: Localization.Get(Resources.Key.Command.SysDbInitSuccess));
         }
     }
 }

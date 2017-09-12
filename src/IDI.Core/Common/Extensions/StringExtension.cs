@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
@@ -8,8 +8,8 @@ namespace IDI.Core.Common
 {
     public static class StringExtension
     {
-        public static Guid ToGuid(this string g)
-            => new Guid(g);
+        public static Guid ToGuid(this string value)
+            => new Guid(value);
 
         public static bool IsNull(this string value)
             => string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value);

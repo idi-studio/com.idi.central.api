@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using IDI.Central.Common;
+using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Domain.Modules.Administration.Commands;
-using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;
 using IDI.Core.Repositories;
@@ -14,20 +14,19 @@ namespace IDI.Central.Domain.Tests
     public partial class AdministrationUnitTests : IntegrationTests
     {
         [TestMethod]
-        public void Administration_DataInitializationCommand()
+        public void Administration_DatabaseInitalCommand()
         {
-            var hanlder = new DataInitializationCommandHandler();
+            var hanlder = new DatabaseInitalCommandHandler();
             hanlder.Localization = new Common.Localization();
             hanlder.Users = ServiceLocator.GetService<IRepository<User>>();
             hanlder.Roles = ServiceLocator.GetService<IRepository<Role>>();
             hanlder.Modules = ServiceLocator.GetService<IRepository<Module>>();
             hanlder.Clients = ServiceLocator.GetService<IRepository<Client>>();
-            hanlder.Products = ServiceLocator.GetService<IRepository<Product>>();
 
-            var result = hanlder.Execute(new DataInitializationCommand());
+            var result = hanlder.Execute(new DatabaseInitalCommand());
 
             Assert.AreEqual(ResultStatus.Success, result.Status);
-            Assert.AreEqual("system-data-initialize-success", result.Message);
+            Assert.AreEqual(Resources.Key.Command.SysDbInitSuccess, result.Message);
 
             TestData(context =>
             {
