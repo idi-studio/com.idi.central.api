@@ -649,6 +649,18 @@
 },
 {
     "language": "chs",
+    "name": "pls-confirm-order",
+    "value": "请确认订单!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "pls-confirm-order",
+    "value": "Please confirm the order.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "model",
     "value": "型号",
     "prefix": "tag"

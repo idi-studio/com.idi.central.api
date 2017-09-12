@@ -37,10 +37,13 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         protected override Result Create(VoucherCommand command)
         {
-            var order = this.Orders.Include(e => e.Items).Find(e => e.Id == command.OrderId && e.Status == OrderStatus.Confirmed);
+            var order = this.Orders.Include(e => e.Items).Find(e => e.Id == command.OrderId);
 
             if (order == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidOrder));
+
+            if (order.Status != OrderStatus.Confirmed)
+                return Result.Fail(Localization.Get(Resources.Key.Command.PlsConfirmOrder));
 
             if (this.Vouchers.Exist(e => e.OrderId == command.OrderId))
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidOrder));
