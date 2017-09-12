@@ -38,10 +38,14 @@
   <item prefix="command" name="delete-fail" en="Delete failed." chs="删除失败!" />
   <item prefix="command" name="upload-success" en="Upload successfully." chs="上传成功!" />
   <item prefix="command" name="upload-fail" en="Upload failed." chs="上传失败!" />
+  <item prefix="command" name="operation-nonsupport" en="This operation is not supported." chs="不支持该项操作!" />
+  <item prefix="command" name="operation-fail" en="Operation failed." chs="操作失败!" />
+  <item prefix="command" name="operation-success" en="Operation successfully." chs="操作成功!" />
   <item prefix="command" name="register-success" en="Registration successfully." chs="注册成功!" />
   <item prefix="command" name="password-mismatch" en="Passwords does not match." chs="两次密码不一致!" />
   <item prefix="command" name="product-code-duplicated" en="Product code duplicated." chs="产品编码重复!" />
   <item prefix="command" name="order-exists" en="The order already exists." chs="订单已存在!" />
+  <item prefix="command" name="order-updated" en="Order updated." chs="订单更新!" />
   <item prefix="command" name="product-not-existing" en="Cannot found this product." chs="产品不存在!" />
   <item prefix="command" name="record-not-existing" en="Record does not exist." chs="记录不存在!" />
   <item prefix="command" name="time-conflict" en="Time conflict." chs="时间冲突!" />
@@ -53,7 +57,6 @@
   <item prefix="command" name="invalid-customer" en="Invalid Customer." chs="无效的客户!" />
   <item prefix="command" name="phone-num-registered" en="The phone number has been registered." chs="电话号码已登记!" />
   <item prefix="command" name="required-selling-price" en="Selling price required." chs="未设定售价!" />
-  <item prefix="command" name="operation-nonsupport" en="This operation is not supported." chs="不支持该项操作!" />
   <item prefix="command" name="no-file-upload" en="No file(s) to upload." chs="未上传任何文件!" />
   <item prefix="command" name="supported-extension" en="Supported file extension: {0}." chs="支持的文件格式:{0}" />
   <item prefix="command" name="file-max-size-limit" en="The file size cannot exceed {0}." chs="文件最大不能超过{0}!" />

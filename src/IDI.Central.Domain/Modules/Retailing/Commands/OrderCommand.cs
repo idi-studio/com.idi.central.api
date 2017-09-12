@@ -17,6 +17,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         public OrderCategory Category { get; set; }
 
+        public OrderStatus Status { get; set; }
+
         [StringLength(MaxLength = 200, Group = VerificationGroup.Create | VerificationGroup.Update)]
         public string Remark { get; set; }
 
@@ -59,20 +61,12 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (command.CustomerId.HasValue && !this.Customers.Exist(e => e.Id == command.CustomerId))
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidCustomer));
 
-            var order = this.Orders.Find(command.Id);
+            var order = this.Orders.Include(e => e.Items).Find(command.Id);
 
             if (order == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
 
-            if (command.CustomerId.HasValue)
-                order.CustomerId = command.CustomerId;
-
-            order.Remark = command.Remark;
-
-            this.Orders.Update(order);
-            this.Orders.Commit();
-
-            return Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
+            return Handle(order, command);
         }
 
         protected override Result Delete(OrderCommand command)
@@ -86,6 +80,63 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             this.Orders.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
+        }
+
+        private Result Handle(Order order, OrderCommand command)
+        {
+            bool processed = false;
+
+            Result result;
+
+            processed &= Save(order, command, out result);
+
+            processed &= Confirm(order, command, out result);
+
+            return processed ? result : Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
+        }
+
+        private bool Save(Order order, OrderCommand command, out Result result)
+        {
+            result = null;
+
+            if (order.Status != OrderStatus.Pending && command.Status != OrderStatus.Pending)
+                return false;
+
+            if (command.CustomerId.HasValue)
+                order.CustomerId = command.CustomerId;
+
+            order.Remark = command.Remark;
+
+            this.Orders.Update(order);
+            this.Orders.Commit();
+
+            result = Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
+
+            return true;
+        }
+
+        private bool Confirm(Order order, OrderCommand command, out Result result)
+        {
+            result = null;
+
+            if (order.Status != OrderStatus.Pending && command.Status != OrderStatus.Confirmed)
+                return false;
+
+            if (order.HasItems() && order.HasCustomer())
+            {
+                order.Status = OrderStatus.Confirmed;
+
+                this.Orders.Update(order);
+                this.Orders.Commit();
+
+                result = Result.Success(message: Localization.Get(Resources.Key.Command.OrderUpdated));
+            }
+            else
+            {
+                result = Result.Fail(message: Localization.Get(Resources.Key.Command.OperationFail));
+            }
+
+            return true;
         }
 
         private string GenerateSerialNumber(OrderCategory category, DateTime timestamp)

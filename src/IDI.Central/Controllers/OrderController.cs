@@ -48,6 +48,7 @@ namespace IDI.Central.Controllers
                 Id = id,
                 Category = OrderCategory.Sales,
                 CustomerId = input.CustomerId,
+                Status = input.Status,
                 Remark = input.Remark,
                 Mode = CommandMode.Update,
                 Group = VerificationGroup.Update,

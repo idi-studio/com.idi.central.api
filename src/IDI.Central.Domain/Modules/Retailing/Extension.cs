@@ -59,5 +59,21 @@ namespace IDI.Central.Domain.Modules.Retailing
 
             return false;
         }
+
+        public static bool HasItems(this Order order)
+        {
+            if (order == null)
+                return false;
+
+            return order.Items.Count > 0;
+        }
+
+        public static bool HasCustomer(this Order order)
+        {
+            if (order == null)
+                return false;
+
+            return order.CustomerId.HasValue && order.Customer != null;
+        }
     }
 }

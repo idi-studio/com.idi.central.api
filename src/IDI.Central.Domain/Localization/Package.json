@@ -445,6 +445,42 @@
 },
 {
     "language": "chs",
+    "name": "operation-nonsupport",
+    "value": "不支持该项操作!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "operation-nonsupport",
+    "value": "This operation is not supported.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "operation-fail",
+    "value": "操作失败!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "operation-fail",
+    "value": "Operation failed.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "operation-success",
+    "value": "操作成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "operation-success",
+    "value": "Operation successfully.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "register-success",
     "value": "注册成功!",
     "prefix": "command"
@@ -489,6 +525,18 @@
     "language": "en",
     "name": "order-exists",
     "value": "The order already exists.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "order-updated",
+    "value": "订单更新!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "order-updated",
+    "value": "Order updated.",
     "prefix": "command"
 },
 {
@@ -621,18 +669,6 @@
     "language": "en",
     "name": "required-selling-price",
     "value": "Selling price required.",
-    "prefix": "command"
-},
-{
-    "language": "chs",
-    "name": "operation-nonsupport",
-    "value": "不支持该项操作!",
-    "prefix": "command"
-},
-{
-    "language": "en",
-    "name": "operation-nonsupport",
-    "value": "This operation is not supported.",
     "prefix": "command"
 },
 {

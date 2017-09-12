@@ -43,10 +43,14 @@ namespace IDI.Central.Domain.Localization
 								public const string DeleteFail = "delete-fail";
 								public const string UploadSuccess = "upload-success";
 								public const string UploadFail = "upload-fail";
+								public const string OperationNonsupport = "operation-nonsupport";
+								public const string OperationFail = "operation-fail";
+								public const string OperationSuccess = "operation-success";
 								public const string RegisterSuccess = "register-success";
 								public const string PasswordMismatch = "password-mismatch";
 								public const string ProductCodeDuplicated = "product-code-duplicated";
 								public const string OrderExists = "order-exists";
+								public const string OrderUpdated = "order-updated";
 								public const string ProductNotExisting = "product-not-existing";
 								public const string RecordNotExisting = "record-not-existing";
 								public const string TimeConflict = "time-conflict";
@@ -58,7 +62,6 @@ namespace IDI.Central.Domain.Localization
 								public const string InvalidCustomer = "invalid-customer";
 								public const string PhoneNumRegistered = "phone-num-registered";
 								public const string RequiredSellingPrice = "required-selling-price";
-								public const string OperationNonsupport = "operation-nonsupport";
 								public const string NoFileUpload = "no-file-upload";
 								public const string SupportedExtension = "supported-extension";
 								public const string FileMaxSizeLimit = "file-max-size-limit";
