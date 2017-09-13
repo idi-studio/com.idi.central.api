@@ -14,7 +14,6 @@ namespace IDI.Central.Controllers
     [Route("api/order"), ApplicationAuthorize]
     public class OrderController : Controller
     {
-        //POST: api/order
         [HttpPost]
         public Result Post([FromBody]OrderInput input)
         {
@@ -30,7 +29,6 @@ namespace IDI.Central.Controllers
             return ServiceLocator.CommandBus.Send(command);
         }
 
-        // GET: api/order/list
         [HttpGet("list")]
         public Result<Set<OrderModel>> List()
         {
@@ -39,7 +37,6 @@ namespace IDI.Central.Controllers
             return ServiceLocator.QueryProcessor.Execute<QueryOrderSetCondition, Set<OrderModel>>(condition);
         }
 
-        // Put: api/order
         [HttpPut("{id}")]
         public Result Put(Guid id, [FromBody]OrderInput input)
         {
@@ -50,6 +47,21 @@ namespace IDI.Central.Controllers
                 CustomerId = input.CustomerId,
                 Status = input.Status,
                 Remark = input.Remark,
+                Mode = CommandMode.Update,
+                Group = VerificationGroup.Update,
+            };
+
+            return ServiceLocator.CommandBus.Send(command);
+        }
+
+        [HttpPut("confirm/{id}")]
+        public Result Confirm(Guid id)
+        {
+            var command = new OrderCommand
+            {
+                Id = id,
+                Category = OrderCategory.Sales,
+                Status = OrderStatus.Confirmed,
                 Mode = CommandMode.Update,
                 Group = VerificationGroup.Update,
             };

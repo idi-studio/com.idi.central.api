@@ -19,10 +19,17 @@ namespace IDI.Central.Domain.Localization
 		public class Key 
 		{
 						public class Command {
-								public const string InvalidUsernameOrPassword = "invalid-username-or-password";
 								public const string AuthenticationSuccess = "authentication-success";
+								public const string InvalidUsernameOrPassword = "invalid-username-or-password";
 								public const string InvalidClient = "invalid-client";
 								public const string InvalidUser = "invalid-user";
+								public const string InvalidRole = "invalid-role";
+								public const string InvalidCategory = "invalid-category";
+								public const string InvalidOrder = "invalid-order";
+								public const string InvalidProduct = "invalid-product";
+								public const string InvalidProductPrice = "invalid-product-price";
+								public const string InvalidCustomer = "invalid-customer";
+								public const string IncompletedOrder = "incompleted-order";
 								public const string ClientDisabled = "client-disabled";
 								public const string ClientAuthenticationFail = "client-authentication-fail";
 								public const string ClientAuthenticationSuccess = "client-authentication-success";
@@ -30,10 +37,10 @@ namespace IDI.Central.Domain.Localization
 								public const string SysDbInitSuccess = "sys-db-init-success";
 								public const string SysDataInitialized = "sys-data-initialized";
 								public const string SysDataInitSuccess = "sys-data-init-success";
-								public const string InvalidRole = "invalid-role";
 								public const string RoleAuthorizationSuccess = "role-authorization-success";
-								public const string UserAuthorizationSuccess = "user-authorization-success";
 								public const string RoleExists = "role-exists";
+								public const string UserAuthorizationSuccess = "user-authorization-success";
+								public const string UserRegisterSuccess = "user-register-success";
 								public const string UsernameRegistered = "username-registered";
 								public const string CreateSuccess = "create-success";
 								public const string CreateFail = "create-fail";
@@ -46,20 +53,15 @@ namespace IDI.Central.Domain.Localization
 								public const string OperationNonsupport = "operation-nonsupport";
 								public const string OperationFail = "operation-fail";
 								public const string OperationSuccess = "operation-success";
-								public const string RegisterSuccess = "register-success";
 								public const string PasswordMismatch = "password-mismatch";
 								public const string ProductCodeDuplicated = "product-code-duplicated";
-								public const string OrderExists = "order-exists";
-								public const string OrderUpdated = "order-updated";
 								public const string ProductNotExisting = "product-not-existing";
 								public const string RecordNotExisting = "record-not-existing";
-								public const string TimeConflict = "time-conflict";
 								public const string RecordDuplicated = "record-duplicated";
-								public const string InvalidCategory = "invalid-category";
-								public const string InvalidOrder = "invalid-order";
-								public const string InvalidProduct = "invalid-product";
-								public const string InvalidProductPrice = "invalid-product-price";
-								public const string InvalidCustomer = "invalid-customer";
+								public const string TimeConflict = "time-conflict";
+								public const string OrderExists = "order-exists";
+								public const string OrderUpdated = "order-updated";
+								public const string OrderConfirmed = "order-confirmed";
 								public const string PhoneNumRegistered = "phone-num-registered";
 								public const string RequiredSellingPrice = "required-selling-price";
 								public const string NoFileUpload = "no-file-upload";

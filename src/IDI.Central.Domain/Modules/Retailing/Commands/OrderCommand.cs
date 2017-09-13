@@ -61,7 +61,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (command.CustomerId.HasValue && !this.Customers.Exist(e => e.Id == command.CustomerId))
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidCustomer));
 
-            var order = this.Orders.Include(e => e.Items).Find(command.Id);
+            var order = this.Orders.Include(e => e.Items).Include(e => e.Customer).Find(command.Id);
 
             if (order == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
@@ -84,23 +84,19 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         private Result Handle(Order order, OrderCommand command)
         {
-            bool processed = false;
+            var result = Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
 
-            Result result;
+            Save(order, command, ref result);
 
-            processed &= Save(order, command, out result);
+            Confirm(order, command, ref result);
 
-            processed &= Confirm(order, command, out result);
-
-            return processed ? result : Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
+            return result;
         }
 
-        private bool Save(Order order, OrderCommand command, out Result result)
+        private void Save(Order order, OrderCommand command, ref Result result)
         {
-            result = null;
-
-            if (order.Status != OrderStatus.Pending && command.Status != OrderStatus.Pending)
-                return false;
+            if (!(order.Status == OrderStatus.Pending && command.Status == OrderStatus.Pending))
+                return;
 
             if (command.CustomerId.HasValue)
                 order.CustomerId = command.CustomerId;
@@ -111,32 +107,25 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             this.Orders.Commit();
 
             result = Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
-
-            return true;
         }
 
-        private bool Confirm(Order order, OrderCommand command, out Result result)
+        private void Confirm(Order order, OrderCommand command, ref Result result)
         {
-            result = null;
+            if (!(order.Status == OrderStatus.Pending && command.Status == OrderStatus.Confirmed))
+                return;
 
-            if (order.Status != OrderStatus.Pending && command.Status != OrderStatus.Confirmed)
-                return false;
-
-            if (order.HasItems() && order.HasCustomer())
+            if (!(order.HasItems() && order.HasCustomer()))
             {
-                order.Status = OrderStatus.Confirmed;
-
-                this.Orders.Update(order);
-                this.Orders.Commit();
-
-                result = Result.Success(message: Localization.Get(Resources.Key.Command.OrderUpdated));
-            }
-            else
-            {
-                result = Result.Fail(message: Localization.Get(Resources.Key.Command.OperationFail));
+                result = Result.Fail(message: Localization.Get(Resources.Key.Command.IncompletedOrder));
+                return;
             }
 
-            return true;
+            order.Status = OrderStatus.Confirmed;
+
+            this.Orders.Update(order);
+            this.Orders.Commit();
+
+            result = Result.Success(message: Localization.Get(Resources.Key.Command.OrderConfirmed));
         }
 
         private string GenerateSerialNumber(OrderCategory category, DateTime timestamp)

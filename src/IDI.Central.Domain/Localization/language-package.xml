@@ -14,10 +14,17 @@
   <item prefix="display-name" cs="false" name="savepath" en="SavePath" chs="存储路径" />
   <item prefix="display-name" cs="false" name="domain" en="Domain" chs="域名" />
 
-  <item prefix="command" name="invalid-username-or-password" en="Invalid username or password." chs="无效的用户名或密码!" />
   <item prefix="command" name="authentication-success" en="Authentication successfully." chs="认证成功!" />
+  <item prefix="command" name="invalid-username-or-password" en="Invalid username or password." chs="无效的用户名或密码!" />
   <item prefix="command" name="invalid-client" en="Invalid client." chs="无效的客户端!" />
   <item prefix="command" name="invalid-user" en="Invalid user." chs="无效的用户!" />
+  <item prefix="command" name="invalid-role" en="Invalid Role." chs="无效的角色!" />
+  <item prefix="command" name="invalid-category" en="Invalid category." chs="无效的类别!" />
+  <item prefix="command" name="invalid-order" en="Invalid order." chs="无效的订单!" />
+  <item prefix="command" name="invalid-product" en="Invalid product." chs="无效的产品!" />
+  <item prefix="command" name="invalid-product-price" en="Invalid product price." chs="无效的产品价格!" />
+  <item prefix="command" name="invalid-customer" en="Invalid customer." chs="无效的客户!" />
+  <item prefix="command" name="incompleted-order" en="Incompleted order." chs="订单信息不完整!" />
   <item prefix="command" name="client-disabled" en="The client has been disabled." chs="该客户端已被禁用!" />
   <item prefix="command" name="client-authentication-fail" en="Client authentication failed." chs="客户端认证失败!" />
   <item prefix="command" name="client-authentication-success" en="Client authentication successfully." chs="客户端认证成功!" />
@@ -25,10 +32,11 @@
   <item prefix="command" name="sys-db-init-success" en="The system database initialized successfully!" chs="系统数据库初始化成功!" />
   <item prefix="command" name="sys-data-initialized" en="System data has been initialized!" chs="系统数据已初始化!" />
   <item prefix="command" name="sys-data-init-success" en="The system data initialized successfully!" chs="系统数据初始化成功!" />
-  <item prefix="command" name="invalid-role" en="Invalid Role." chs="无效的角色!" />
+ 
   <item prefix="command" name="role-authorization-success" en="Role authorization successfully." chs="角色授权成功!" />
-  <item prefix="command" name="user-authorization-success" en="User authorization successfully." chs="用户授权成功!" />
   <item prefix="command" name="role-exists" en="The role already exists." chs="角色已存在!" />
+  <item prefix="command" name="user-authorization-success" en="User authorization successfully." chs="用户授权成功!" />
+  <item prefix="command" name="user-register-success" en="Registration successfully." chs="注册成功!" />
   <item prefix="command" name="username-registered" en="The username has been registered." chs="该用户名已被注册!" />
   <item prefix="command" name="create-success" en="Create success." chs="创建成功!" />
   <item prefix="command" name="create-fail" en="Create failure." chs="创建失败!" />
@@ -41,20 +49,15 @@
   <item prefix="command" name="operation-nonsupport" en="This operation is not supported." chs="不支持该项操作!" />
   <item prefix="command" name="operation-fail" en="Operation failed." chs="操作失败!" />
   <item prefix="command" name="operation-success" en="Operation successfully." chs="操作成功!" />
-  <item prefix="command" name="register-success" en="Registration successfully." chs="注册成功!" />
   <item prefix="command" name="password-mismatch" en="Passwords does not match." chs="两次密码不一致!" />
   <item prefix="command" name="product-code-duplicated" en="Product code duplicated." chs="产品编码重复!" />
-  <item prefix="command" name="order-exists" en="The order already exists." chs="订单已存在!" />
-  <item prefix="command" name="order-updated" en="Order updated." chs="订单更新!" />
   <item prefix="command" name="product-not-existing" en="Cannot found this product." chs="产品不存在!" />
   <item prefix="command" name="record-not-existing" en="Record does not exist." chs="记录不存在!" />
-  <item prefix="command" name="time-conflict" en="Time conflict." chs="时间冲突!" />
   <item prefix="command" name="record-duplicated" en="Record duplicated." chs="记录重复!" />
-  <item prefix="command" name="invalid-category" en="Invalid category." chs="无效的类别!" />
-  <item prefix="command" name="invalid-order" en="Invalid order." chs="无效的订单!" />
-  <item prefix="command" name="invalid-product" en="Invalid product." chs="无效的产品!" />
-  <item prefix="command" name="invalid-product-price" en="Invalid product price." chs="无效的产品价格!" />
-  <item prefix="command" name="invalid-customer" en="Invalid Customer." chs="无效的客户!" />
+  <item prefix="command" name="time-conflict" en="Time conflict." chs="时间冲突!" />
+  <item prefix="command" name="order-exists" en="The order already exists." chs="订单已存在!" />
+  <item prefix="command" name="order-updated" en="Order updated." chs="订单更新!" />
+  <item prefix="command" name="order-confirmed" en="Order confirmed." chs="订单确认成功!" />
   <item prefix="command" name="phone-num-registered" en="The phone number has been registered." chs="电话号码已登记!" />
   <item prefix="command" name="required-selling-price" en="Selling price required." chs="未设定售价!" />
   <item prefix="command" name="no-file-upload" en="No file(s) to upload." chs="未上传任何文件!" />
