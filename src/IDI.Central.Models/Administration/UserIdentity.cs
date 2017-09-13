@@ -2,7 +2,7 @@
 
 namespace IDI.Central.Models.Administration
 {
-    public class UserIdentity : IQueryResult
+    public class UserIdentity : IModel
     {
         public string NameIdentifier { get; set; }
 

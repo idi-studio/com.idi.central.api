@@ -17,7 +17,7 @@ namespace IDI.Core.Infrastructure.Messaging
         }
 
         public Result<TQueryResut> Execute<TCondition, TQueryResut>(TCondition condition) where TCondition : Condition
-            where TQueryResut : IQueryResult
+            where TQueryResut : IModel
         {
             condition = condition ?? Activator.CreateInstance<TCondition>();
 

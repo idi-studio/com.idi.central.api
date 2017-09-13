@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace IDI.Central.Models.Administration
 {
-    public class MyProfile : IQueryResult
+    public class MyProfile : IModel
     {
         [JsonProperty("id")]
         public Guid Id { get; set; }

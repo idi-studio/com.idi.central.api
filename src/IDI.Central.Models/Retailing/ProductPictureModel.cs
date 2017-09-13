@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace IDI.Central.Models.Retailing
 {
-    public class ProductPictureModel : IQueryResult
+    public class ProductPictureModel : IModel
     {
         [JsonProperty("id")]
         public Guid Id { get; set; }

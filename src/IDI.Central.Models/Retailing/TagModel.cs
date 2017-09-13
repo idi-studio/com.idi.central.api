@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using IDI.Core.Infrastructure.Queries;
+using Newtonsoft.Json;
 
 namespace IDI.Central.Models.Retailing
 {
-    public class TagModel
+    public class TagModel : IModel
     {
         [JsonProperty("key")]
         public string Key { get; set; }

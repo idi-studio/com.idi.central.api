@@ -9,7 +9,7 @@ namespace IDI.Core.Infrastructure.Utils
     public class QueryBuilder : IQueryBuilder
     {
         public IQuery<TCondition, TQueryResult> GetQuery<TCondition, TQueryResult>() where TCondition : Condition
-            where TQueryResult : IQueryResult
+            where TQueryResult : IModel
         {
             var queries = GetQueryTypes<TCondition, TQueryResult>().ToList();
 
@@ -17,7 +17,7 @@ namespace IDI.Core.Infrastructure.Utils
         }
 
         private IEnumerable<Type> GetQueryTypes<TCondition, TQueryResult>() where TCondition : Condition
-             where TQueryResult : IQueryResult
+             where TQueryResult : IModel
         {
             var queries = typeof(TCondition).GetTypeInfo().Assembly.GetExportedTypes()
                 .Where(t => t.GetInterfaces().Any(a => a.GetTypeInfo().IsGenericType && a.GetGenericTypeDefinition() == typeof(IQuery<,>)))

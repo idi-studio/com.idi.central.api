@@ -5,7 +5,7 @@ using IDI.Core.Infrastructure.Queries;
 
 namespace IDI.Central.Models.Administration
 {
-    public class Sidebar : IQueryResult
+    public class Sidebar : IModel
     {
         public UserProfile Profile { get; set; }
 
