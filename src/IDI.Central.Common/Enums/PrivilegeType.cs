@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IDI.Central.Common
+namespace IDI.Central.Common.Enums
 {
     [Flags]
     public enum PrivilegeType : int

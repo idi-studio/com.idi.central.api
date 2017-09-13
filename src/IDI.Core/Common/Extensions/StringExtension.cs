@@ -50,6 +50,12 @@ namespace IDI.Core.Common
 
         public static string AsBase64(this byte[] data, string contentType)
         {
+            if (contentType.IsNull())
+                return string.Empty;
+
+            if (data == null || (data != null && data.Length == 0))
+                return string.Empty;
+
             return $"data:{contentType};base64,{Convert.ToBase64String(data)}";
         }
 

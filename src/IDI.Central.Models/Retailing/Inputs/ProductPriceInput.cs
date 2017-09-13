@@ -1,5 +1,5 @@
 ﻿using System;
-using IDI.Central.Common;
+using IDI.Central.Common.Enums;
 using IDI.Core.Common;
 using Newtonsoft.Json;
 

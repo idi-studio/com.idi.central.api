@@ -18,7 +18,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
         {
             string prefix = condition.EnumType;
 
-            Type enumType = Type.GetType($"IDI.Central.Common.{condition.EnumType},IDI.Central.Common");
+            Type enumType = Type.GetType($"IDI.Central.Common.Enums.{condition.EnumType},IDI.Central.Common");
 
             if (enumType == null)
                 return Result.Fail<Set<KeyValuePair<int, string>>>(Localization.Get(Resources.Key.Command.InvalidCategory));

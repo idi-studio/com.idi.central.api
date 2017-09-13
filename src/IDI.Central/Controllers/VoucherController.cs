@@ -2,6 +2,7 @@
 using System.Linq;
 using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Retailing.Commands;
+using IDI.Central.Domain.Modules.Retailing.Queries;
 using IDI.Central.Models.Retailing;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
@@ -13,13 +14,13 @@ namespace IDI.Central.Controllers
     [Route("api/vchr"), ApplicationAuthorize]
     public class VoucherController : Controller
     {
-        //[HttpGet("{id}")]
-        //public Result<VoucherModel> Get(Guid id)
-        //{
-        //    var condition = new QueryVoucherCondition {  Id = id };
+        [HttpGet("{id}")]
+        public Result<VoucherModel> Get(Guid id)
+        {
+            var condition = new QueryVoucherCondition { Id = id };
 
-        //    return ServiceLocator.QueryProcessor.Execute<QueryVoucherCondition, VoucherModel>(condition);
-        //}
+            return ServiceLocator.QueryProcessor.Execute<QueryVoucherCondition, VoucherModel>(condition);
+        }
 
         //[HttpGet("list")]
         //public Result<Set<VoucherModel>> List()

@@ -1,4 +1,5 @@
 ﻿using System;
+using IDI.Central.Common;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;

@@ -99,5 +99,11 @@
   <item prefix="ImageCategory" cs="false" name="Cover" en="Cover" chs="封面" />
   <item prefix="ImageCategory" cs="false" name="Picture" en="Picture" chs="图片" />
   <item prefix="ImageCategory" cs="false" name="Advertisement" en="AD" chs="广告" />
-  
+
+  <item prefix="PayMethod" cs="false" name="Other" en="Other" chs="其它" />
+  <item prefix="PayMethod" cs="false" name="Wechat" en="Wechat" chs="微信" />
+  <item prefix="PayMethod" cs="false" name="Alipay" en="Alipay" chs="支付宝" />
+  <item prefix="PayMethod" cs="false" name="CreditCard" en="CreditCard" chs="信用卡" />
+  <item prefix="PayMethod" cs="false" name="Cash" en="Cash" chs="现金" />
+
 </items>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using IDI.Central.Common;
 using IDI.Central.Common.Enums;
 using IDI.Core.Domain;
 

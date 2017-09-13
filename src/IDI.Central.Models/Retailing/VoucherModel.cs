@@ -10,14 +10,14 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("id")]
         public Guid Id { get; set; }
 
-        [JsonProperty("transno")]
-        public string TransNo { get; set; }
+        [JsonProperty("tn")]
+        public string TN { get; set; }
 
         [JsonProperty("oid")]
         public Guid OrderId { get; set; }
 
-        [JsonProperty("orderno")]
-        public string OrderNo { get; set; }
+        [JsonProperty("sn")]
+        public string SN { get; set; }
 
         [JsonProperty("paymethod")]
         public PayMethod PayMethod { get; set; }
@@ -31,7 +31,7 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("orderamount")]
         public decimal OrderAmount { get; set; }
 
-        [JsonProperty("document")]
+        [JsonProperty("doc")]
         public string Document { get; set; }
 
         [JsonProperty("remark")]

@@ -1114,5 +1114,65 @@
     "name": "Advertisement",
     "value": "AD",
     "prefix": "ImageCategory"
+},
+{
+    "language": "chs",
+    "name": "Other",
+    "value": "其它",
+    "prefix": "PayMethod"
+},
+{
+    "language": "en",
+    "name": "Other",
+    "value": "Other",
+    "prefix": "PayMethod"
+},
+{
+    "language": "chs",
+    "name": "Wechat",
+    "value": "微信",
+    "prefix": "PayMethod"
+},
+{
+    "language": "en",
+    "name": "Wechat",
+    "value": "Wechat",
+    "prefix": "PayMethod"
+},
+{
+    "language": "chs",
+    "name": "Alipay",
+    "value": "支付宝",
+    "prefix": "PayMethod"
+},
+{
+    "language": "en",
+    "name": "Alipay",
+    "value": "Alipay",
+    "prefix": "PayMethod"
+},
+{
+    "language": "chs",
+    "name": "CreditCard",
+    "value": "信用卡",
+    "prefix": "PayMethod"
+},
+{
+    "language": "en",
+    "name": "CreditCard",
+    "value": "CreditCard",
+    "prefix": "PayMethod"
+},
+{
+    "language": "chs",
+    "name": "Cash",
+    "value": "现金",
+    "prefix": "PayMethod"
+},
+{
+    "language": "en",
+    "name": "Cash",
+    "value": "Cash",
+    "prefix": "PayMethod"
 }]
  

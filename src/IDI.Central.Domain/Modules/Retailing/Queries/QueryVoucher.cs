@@ -30,13 +30,13 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
             var model = new VoucherModel
             {
                 Id = voucher.Id,
-                TransNo = voucher.TN,
+                TN = voucher.TN,
                 PayAmount = voucher.PayAmount,
                 PayMethod = voucher.PayMethod,
                 Date = voucher.Date.AsLongDate(),
                 OrderAmount = voucher.OrderAmount,
                 OrderId = voucher.OrderId,
-                OrderNo = voucher.Order.SN,
+                SN = voucher.Order.SN,
                 Remark = voucher.Remark,
                 Document = voucher.Document.AsBase64(voucher.ContentType),
             };

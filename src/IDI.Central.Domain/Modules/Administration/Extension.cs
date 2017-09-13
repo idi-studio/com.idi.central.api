@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using IDI.Central.Common;
+using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 
 namespace IDI.Central.Domain.Modules.Administration
