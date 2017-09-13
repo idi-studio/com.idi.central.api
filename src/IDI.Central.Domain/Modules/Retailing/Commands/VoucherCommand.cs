@@ -29,6 +29,10 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
     public class VoucherCommandHandler : CommandHandler<VoucherCommand>
     {
+        private readonly string[] types = { "image/jpeg", "image/png" };
+        private readonly string[] extensions = { ".png", ".jpg", ".jpge" };
+        private readonly long maximum = 800;
+
         [Injection]
         public IRepository<Order> Orders { get; set; }
 
@@ -104,6 +108,14 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (voucher == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
 
+            long size = command.File.Length / 1024;
+
+            if (size > maximum)
+                return Result.Fail(Localization.Get(Resources.Key.Command.FileMaxSizeLimit).ToFormat($"{maximum} KB"));
+
+            if (!types.Any(e => e == command.File.ContentType))
+                return Result.Fail(Localization.Get(Resources.Key.Command.SupportedExtension).ToFormat(extensions.JoinToString(",")));
+
             Save(voucher, command.File);
 
             this.Vouchers.Update(voucher);
@@ -136,6 +148,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             {
                 file.CopyTo(memory);
 
+                voucher.ContentType = file.ContentType;
                 voucher.Document = memory.GetBuffer();
 
                 memory.Flush();

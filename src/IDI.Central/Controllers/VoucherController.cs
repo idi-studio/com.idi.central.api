@@ -62,12 +62,12 @@ namespace IDI.Central.Controllers
             return ServiceLocator.CommandBus.Send(command);
         }
 
-        [HttpPut("attach/{id}")]
-        public Result Upload(Guid id)
+        [HttpPost("attach")]
+        public Result Attach()
         {
             var command = new VoucherCommand
             {
-                Id = id,
+                Id = this.HttpContext.Request.Form["vchrid"].ToString().ToGuid(),
                 File = this.HttpContext.Request.Form.Files.FirstOrDefault(),
                 Mode = CommandMode.Upload,
                 Group = VerificationGroup.Upload,
