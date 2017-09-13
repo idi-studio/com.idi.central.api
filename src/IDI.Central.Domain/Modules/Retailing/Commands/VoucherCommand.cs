@@ -37,35 +37,37 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         protected override Result Create(VoucherCommand command)
         {
-            var order = this.Orders.Include(e => e.Items).Find(e => e.Id == command.OrderId);
+            var voucher = this.Vouchers.Find(e => e.OrderId == command.OrderId);
 
-            if (order == null)
-                return Result.Fail(Localization.Get(Resources.Key.Command.InvalidOrder));
-
-            if (order.Status != OrderStatus.Confirmed)
-                return Result.Fail(Localization.Get(Resources.Key.Command.PlsConfirmOrder));
-
-            if (this.Vouchers.Exist(e => e.OrderId == command.OrderId))
-                return Result.Fail(Localization.Get(Resources.Key.Command.InvalidOrder));
-
-            DateTime timestamp = DateTime.Now;
-
-            var amount = order.Items.Sum(e => e.UnitPrice * e.Quantity);
-
-            var voucher = new Voucher
+            if (voucher == null)
             {
-                TN = GenerateTransactionNumber(timestamp),
-                Date = timestamp,
-                OrderId = order.Id,
-                PayMethod = PayMethod.Other,
-                OrderAmount = amount,
-                PayAmount = amount
-            };
+                var order = this.Orders.Include(e => e.Items).Find(e => e.Id == command.OrderId);
 
-            this.Vouchers.Add(voucher);
-            this.Vouchers.Commit();
+                if (order == null)
+                    return Result.Fail(Localization.Get(Resources.Key.Command.InvalidOrder));
 
-            return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess));
+                if (order.Status != OrderStatus.Confirmed)
+                    return Result.Fail(Localization.Get(Resources.Key.Command.PlsConfirmOrder));
+
+                DateTime timestamp = DateTime.Now;
+
+                var amount = order.Items.Sum(e => e.UnitPrice * e.Quantity);
+
+                voucher = new Voucher
+                {
+                    TN = GenerateTransactionNumber(timestamp),
+                    Date = timestamp,
+                    OrderId = order.Id,
+                    PayMethod = PayMethod.Other,
+                    OrderAmount = amount,
+                    PayAmount = amount
+                };
+
+                this.Vouchers.Add(voucher);
+                this.Vouchers.Commit();
+            }
+
+            return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess)).Attach("vchrid", voucher.Id);
         }
 
         protected override Result Update(VoucherCommand command)

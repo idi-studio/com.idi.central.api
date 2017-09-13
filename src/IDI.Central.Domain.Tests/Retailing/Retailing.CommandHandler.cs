@@ -24,6 +24,7 @@ namespace IDI.Central.Domain.Tests
             var hanlder = new RetailingInitalCommandHandler();
             hanlder.Localization = new Common.Localization();
             hanlder.Products = ServiceLocator.GetService<IRepository<Product>>();
+            hanlder.Customers = ServiceLocator.GetService<IRepository<Customer>>();
 
             var result = hanlder.Execute(new RetailingInitalCommand());
 

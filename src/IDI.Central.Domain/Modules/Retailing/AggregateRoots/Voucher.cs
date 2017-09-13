@@ -19,6 +19,9 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
 
         public byte[] Document { get; set; }
 
+        [StringLength(50)]
+        public string ContentType { get; set; }
+
         [StringLength(200)]
         public string Remark { get; set; }
 

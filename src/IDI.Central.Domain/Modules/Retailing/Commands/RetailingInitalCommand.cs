@@ -26,11 +26,17 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
         [Injection]
         public IRepository<Product> Products { get; set; }
 
+        [Injection]
+        public IRepository<Customer> Customers { get; set; }
+
         public Result Execute(RetailingInitalCommand command)
         {
             command.Seed.Products.iPhones.ForEach(e => this.Products.Add(e));
             command.Seed.Products.Others.ForEach(e => this.Products.Add(e));
             this.Products.Commit();
+
+            command.Seed.Customers.Customers.ForEach(e => this.Customers.Add(e));
+            this.Customers.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.SysDataInitSuccess));
         }

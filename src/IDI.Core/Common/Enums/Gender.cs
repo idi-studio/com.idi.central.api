@@ -1,6 +1,6 @@
 ﻿namespace IDI.Core.Common
 {
-    public enum Gender
+    public enum Gender : int
     {
         Unknown = -1,
         Female = 0,
