@@ -7,10 +7,10 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
     {
         [Required]
         [StringLength(30)]
-        public string Name { get; set; }
+        public string Receiver { get; set; }
 
         [StringLength(20)]
-        public string Phone { get; set; }
+        public string ContactNo { get; set; }
 
         public bool Primary { get; set; }
     }
