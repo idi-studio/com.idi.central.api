@@ -26,6 +26,7 @@ namespace IDI.Central.Domain.Modules.Retailing
             modelBuilder.Entity<Product>().HasMany(e => e.Pictures).WithOne(e => e.Product).HasForeignKey(e => e.ProductId);
             modelBuilder.Entity<Order>().HasMany(e => e.Items).WithOne(e => e.Order).HasForeignKey(e => e.OrderId);
             modelBuilder.Entity<Customer>().HasMany(e => e.Orders).WithOne(e => e.Customer).HasForeignKey(e => e.CustomerId).IsRequired(false);
+            modelBuilder.Entity<Customer>().HasMany(e => e.Shippings).WithOne(e => e.Customer).HasForeignKey(e => e.CustomerId).IsRequired();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
@@ -12,7 +13,9 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
         [StringLength(20)]
         public string ContactNo { get; set; }
 
-        public bool Primary { get; set; }
+        public Guid CustomerId { get; set; }
+
+        public Customer Customer { get; set; }
     }
 
     public class Address : AggregateRoot

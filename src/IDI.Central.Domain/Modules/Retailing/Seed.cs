@@ -188,6 +188,22 @@ namespace IDI.Central.Domain.Modules.Retailing
                         Photo = $"{gender.ToString().ToLower()}.png"
                     }
                 };
+
+                var shipping = new ShippingAddress
+                {
+                    CustomerId = customers[index].Id,
+                    Receiver = name,
+                    ContactNo = phone,
+                    Province = "四川",
+                    City = "成都",
+                    Area = "高新区",
+                    Street = "天府四街",
+                    Detail = "天府软件园C区",
+                    Postcode = "610041"
+                };
+
+                customers[index].DefaultShippingAddressId = shipping.Id;
+                customers[index].Shippings.Add(shipping);
             }
         }
     }
