@@ -30,7 +30,7 @@ namespace IDI.Central.Controllers
             {
                 Id = input.Id,
                 OrderId = input.OrderId,
-                PayAmount = input.PayAmount,
+                Payment = input.Payment,
                 PayMethod = input.PayMethod,
                 Remark = input.Remark,
                 Mode = CommandMode.Create,
@@ -48,7 +48,7 @@ namespace IDI.Central.Controllers
                 Id = id,
                 OrderId = input.OrderId,
                 Status = input.Status,
-                PayAmount = input.PayAmount,
+                Payment = input.Payment,
                 PayMethod = input.PayMethod,
                 Remark = input.Remark,
                 Mode = CommandMode.Update,

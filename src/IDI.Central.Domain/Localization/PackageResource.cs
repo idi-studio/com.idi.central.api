@@ -65,6 +65,7 @@ namespace IDI.Central.Domain.Localization
 								public const string OrderExists = "order-exists";
 								public const string OrderUpdated = "order-updated";
 								public const string OrderConfirmed = "order-confirmed";
+								public const string TradeConfirmed = "trade-confirmed";
 								public const string PhoneNumRegistered = "phone-num-registered";
 								public const string RequiredSellingPrice = "required-selling-price";
 								public const string NoFileUpload = "no-file-upload";

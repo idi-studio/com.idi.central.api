@@ -709,6 +709,18 @@
 },
 {
     "language": "chs",
+    "name": "trade-confirmed",
+    "value": "交易确认成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "trade-confirmed",
+    "value": "Trade confirmed.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "phone-num-registered",
     "value": "电话号码已登记!",
     "prefix": "command"
@@ -812,7 +824,7 @@
 {
     "language": "en",
     "name": "confirmed",
-    "value": "confirmed.",
+    "value": "Confirmed.",
     "prefix": "command"
 },
 {

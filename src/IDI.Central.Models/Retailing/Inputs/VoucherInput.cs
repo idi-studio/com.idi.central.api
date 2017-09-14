@@ -16,8 +16,8 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("paymethod")]
         public PayMethod PayMethod { get; set; }
 
-        [JsonProperty("payamount")]
-        public decimal PayAmount { get; set; }
+        [JsonProperty("payment")]
+        public decimal Payment { get; set; }
 
         [JsonProperty("remark")]
         public string Remark { get; set; }

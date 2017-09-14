@@ -20,7 +20,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         public PayMethod PayMethod { get; set; }
 
-        public decimal PayAmount { get; set; }
+        public decimal Payment { get; set; }
 
         public string Remark { get; set; }
 
@@ -137,14 +137,14 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (!(voucher.Status == TradeStatus.InProcess && command.Status == TradeStatus.InProcess))
                 return;
 
-            if (command.PayAmount <= 0)
+            if (command.Payment <= 0)
             {
                 result = Result.Fail(message: Localization.Get(Resources.Key.Command.InvalidPayment));
                 return;
             }
 
             voucher.PayMethod = command.PayMethod;
-            voucher.Payment = command.PayAmount;
+            voucher.Payment = command.Payment;
             voucher.Remark = command.Remark;
 
             this.Vouchers.Update(voucher);
