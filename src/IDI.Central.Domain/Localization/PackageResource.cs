@@ -29,6 +29,7 @@ namespace IDI.Central.Domain.Localization
 								public const string InvalidProduct = "invalid-product";
 								public const string InvalidProductPrice = "invalid-product-price";
 								public const string InvalidCustomer = "invalid-customer";
+								public const string InvalidPayment = "invalid-payment";
 								public const string IncompletedOrder = "incompleted-order";
 								public const string ClientDisabled = "client-disabled";
 								public const string ClientAuthenticationFail = "client-authentication-fail";
@@ -50,6 +51,8 @@ namespace IDI.Central.Domain.Localization
 								public const string DeleteFail = "delete-fail";
 								public const string UploadSuccess = "upload-success";
 								public const string UploadFail = "upload-fail";
+								public const string SaveSuccess = "save-success";
+								public const string SaveFail = "save-fail";
 								public const string OperationNonsupport = "operation-nonsupport";
 								public const string OperationFail = "operation-fail";
 								public const string OperationSuccess = "operation-success";

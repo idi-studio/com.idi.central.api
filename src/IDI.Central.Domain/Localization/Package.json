@@ -277,6 +277,18 @@
 },
 {
     "language": "chs",
+    "name": "invalid-payment",
+    "value": "无效的支付!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "invalid-payment",
+    "value": "Invalid payment.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "incompleted-order",
     "value": "订单信息不完整!",
     "prefix": "command"
@@ -525,6 +537,30 @@
     "language": "en",
     "name": "upload-fail",
     "value": "Upload failed.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "save-success",
+    "value": "保存成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "save-success",
+    "value": "Save successfully.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "save-fail",
+    "value": "保存失败!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "save-fail",
+    "value": "Save failed.",
     "prefix": "command"
 },
 {

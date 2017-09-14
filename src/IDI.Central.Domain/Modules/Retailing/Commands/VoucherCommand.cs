@@ -31,10 +31,6 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
     public class VoucherCommandHandler : CommandHandler<VoucherCommand>
     {
-        private readonly string[] types = { "image/jpeg", "image/png" };
-        private readonly string[] extensions = { ".png", ".jpg", ".jpge" };
-        private readonly long maximum = 800;
-
         [Injection]
         public IRepository<Order> Orders { get; set; }
 
@@ -67,8 +63,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
                 Date = timestamp,
                 OrderId = order.Id,
                 PayMethod = PayMethod.Other,
-                PayableAmount = amount,
-                PaymentAmount = amount
+                Payable = amount,
+                Payment = amount
             };
 
             this.Vouchers.Add(voucher);
@@ -79,25 +75,17 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
         protected override Result Update(VoucherCommand command)
         {
-            var voucher = this.Vouchers.Find(command.Id);
+            var voucher = this.Vouchers.Include(e => e.Order).Find(command.Id);
 
             if (voucher == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
 
-            bool processed = false;
+            var result = Result.Fail(message: Localization.Get(Resources.Key.Command.OperationFail));
 
-            processed |= Save(voucher, command);
-            processed |= Paid(voucher, command);
+            Save(voucher, command, ref result);
+            Paid(voucher, command, ref result);
 
-            if (processed)
-            {
-                this.Vouchers.Update(voucher);
-                this.Vouchers.Commit();
-
-                return Result.Success(message: Localization.Get(Resources.Key.Command.OperationSuccess));
-            }
-
-            return Result.Success(message: Localization.Get(Resources.Key.Command.OperationFail));
+            return result;
         }
 
         protected override Result Upload(VoucherCommand command)
@@ -112,11 +100,11 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
             long size = command.File.Length / 1024;
 
-            if (size > maximum)
-                return Result.Fail(Localization.Get(Resources.Key.Command.FileMaxSizeLimit).ToFormat($"{maximum} KB"));
+            if (size > Central.Common.Constants.Config.ImageSpec.Maximum)
+                return Result.Fail(Localization.Get(Resources.Key.Command.FileMaxSizeLimit).ToFormat($"{Central.Common.Constants.Config.ImageSpec.Maximum} KB"));
 
-            if (!types.Any(e => e == command.File.ContentType))
-                return Result.Fail(Localization.Get(Resources.Key.Command.SupportedExtension).ToFormat(extensions.JoinToString(",")));
+            if (!Central.Common.Constants.Config.ImageSpec.ContentTypes.Any(e => e == command.File.ContentType))
+                return Result.Fail(Localization.Get(Resources.Key.Command.SupportedExtension).ToFormat(Central.Common.Constants.Config.ImageSpec.Extensions.JoinToString(",")));
 
             Attach(voucher, command.File);
 
@@ -144,26 +132,42 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             return $"{timestamp.ToString("yyMMdd")}{timestamp.TimeOfDay.Ticks.ToString("x8")}".ToUpper();
         }
 
-        private bool Save(Voucher voucher, VoucherCommand command)
+        private void Save(Voucher voucher, VoucherCommand command, ref Result result)
         {
             if (!(voucher.Status == TradeStatus.InProcess && command.Status == TradeStatus.InProcess))
-                return false;
+                return;
+
+            if (command.PayAmount <= 0)
+            {
+                result = Result.Fail(message: Localization.Get(Resources.Key.Command.InvalidPayment));
+                return;
+            }
 
             voucher.PayMethod = command.PayMethod;
-            voucher.PaymentAmount = command.PayAmount;
+            voucher.Payment = command.PayAmount;
             voucher.Remark = command.Remark;
 
-            return true;
+            this.Vouchers.Update(voucher);
+            this.Vouchers.Commit();
+
+            result = Result.Success(message: Localization.Get(Resources.Key.Command.SaveSuccess));
         }
 
-        private bool Paid(Voucher voucher, VoucherCommand command)
+        private void Paid(Voucher voucher, VoucherCommand command, ref Result result)
         {
             if (!(voucher.Status == TradeStatus.InProcess && command.Status == TradeStatus.Success))
-                return false;
+                return;
 
             voucher.Status = TradeStatus.Success;
+            voucher.Order.Status = OrderStatus.Paid;
 
-            return true;
+            this.Vouchers.Update(voucher);
+            this.Vouchers.Commit();
+
+            this.Orders.Update(voucher.Order);
+            this.Orders.Commit();
+
+            result = Result.Success(message: Localization.Get(Resources.Key.Command.Confirmed));
         }
 
         private void Attach(Voucher voucher, IFormFile file)

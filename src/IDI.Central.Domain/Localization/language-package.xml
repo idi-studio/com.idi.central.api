@@ -24,6 +24,7 @@
   <item prefix="command" name="invalid-product" en="Invalid product." chs="无效的产品!" />
   <item prefix="command" name="invalid-product-price" en="Invalid product price." chs="无效的产品价格!" />
   <item prefix="command" name="invalid-customer" en="Invalid customer." chs="无效的客户!" />
+  <item prefix="command" name="invalid-payment" en="Invalid payment." chs="无效的支付!" />
   <item prefix="command" name="incompleted-order" en="Incompleted order." chs="订单信息不完整!" />
   <item prefix="command" name="client-disabled" en="The client has been disabled." chs="该客户端已被禁用!" />
   <item prefix="command" name="client-authentication-fail" en="Client authentication failed." chs="客户端认证失败!" />
@@ -46,6 +47,8 @@
   <item prefix="command" name="delete-fail" en="Delete failed." chs="删除失败!" />
   <item prefix="command" name="upload-success" en="Upload successfully." chs="上传成功!" />
   <item prefix="command" name="upload-fail" en="Upload failed." chs="上传失败!" />
+  <item prefix="command" name="save-success" en="Save successfully." chs="保存成功!" />
+  <item prefix="command" name="save-fail" en="Save failed." chs="保存失败!" />
   <item prefix="command" name="operation-nonsupport" en="This operation is not supported." chs="不支持该项操作!" />
   <item prefix="command" name="operation-fail" en="Operation failed." chs="操作失败!" />
   <item prefix="command" name="operation-success" en="Operation successfully." chs="操作成功!" />

@@ -34,10 +34,6 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
     public class ProductPictureCommandHandler : CommandHandler<ProductPictureCommand>
     {
-        private readonly string[] types = { "image/jpeg", "image/png" };
-        private readonly string[] extensions = { ".png", ".jpg", ".jpge" };
-        private readonly long maximum = 800;
-
         [Injection]
         public IRepository<Product> Products { get; set; }
 
@@ -60,11 +56,11 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             {
                 long size = file.Length / 1024;
 
-                if (size > maximum)
-                    return Result.Fail(Localization.Get(Resources.Key.Command.FileMaxSizeLimit).ToFormat($"{maximum} KB"));
+                if (size > Central.Common.Constants.Config.ImageSpec.Maximum)
+                    return Result.Fail(Localization.Get(Resources.Key.Command.FileMaxSizeLimit).ToFormat($"{Central.Common.Constants.Config.ImageSpec.Maximum} KB"));
 
-                if (!types.Any(e => e == file.ContentType))
-                    return Result.Fail(Localization.Get(Resources.Key.Command.SupportedExtension).ToFormat(extensions.JoinToString(",")));
+                if (!Central.Common.Constants.Config.ImageSpec.ContentTypes.Any(e => e == file.ContentType))
+                    return Result.Fail(Localization.Get(Resources.Key.Command.SupportedExtension).ToFormat(Central.Common.Constants.Config.ImageSpec.Extensions.JoinToString(",")));
 
                 var picture = new ProductPicture
                 {

@@ -15,9 +15,9 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
 
         public DateTime Date { get; set; }
 
-        public decimal PaymentAmount { get; set; }
+        public decimal Payment { get; set; }
 
-        public decimal PayableAmount { get; set; }
+        public decimal Payable { get; set; }
 
         public byte[] Document { get; set; }
 
