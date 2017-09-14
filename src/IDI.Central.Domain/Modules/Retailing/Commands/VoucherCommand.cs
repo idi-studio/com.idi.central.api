@@ -16,6 +16,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
     {
         public Guid Id { get; set; }
 
+        public TradeStatus Status { get; set; }
+
         public PayMethod PayMethod { get; set; }
 
         public decimal PayAmount { get; set; }
@@ -43,33 +45,34 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
         {
             var voucher = this.Vouchers.Find(e => e.OrderId == command.OrderId);
 
-            if (voucher == null)
+            if (voucher != null)
+                return Result.Success(message: Localization.Get(Resources.Key.Command.Success)).Attach("vchrid", voucher.Id);
+
+            var order = this.Orders.Include(e => e.Items).Find(e => e.Id == command.OrderId);
+
+            if (order == null)
+                return Result.Fail(Localization.Get(Resources.Key.Command.InvalidOrder));
+
+            if (order.Status != OrderStatus.Confirmed)
+                return Result.Fail(Localization.Get(Resources.Key.Command.PlsConfirmOrder));
+
+            DateTime timestamp = DateTime.Now;
+
+            var amount = order.Items.Sum(e => e.UnitPrice * e.Quantity);
+
+            voucher = new Voucher
             {
-                var order = this.Orders.Include(e => e.Items).Find(e => e.Id == command.OrderId);
+                TN = GenerateTransNo(timestamp),
+                Status = TradeStatus.InProcess,
+                Date = timestamp,
+                OrderId = order.Id,
+                PayMethod = PayMethod.Other,
+                PayableAmount = amount,
+                PaymentAmount = amount
+            };
 
-                if (order == null)
-                    return Result.Fail(Localization.Get(Resources.Key.Command.InvalidOrder));
-
-                if (order.Status != OrderStatus.Confirmed)
-                    return Result.Fail(Localization.Get(Resources.Key.Command.PlsConfirmOrder));
-
-                DateTime timestamp = DateTime.Now;
-
-                var amount = order.Items.Sum(e => e.UnitPrice * e.Quantity);
-
-                voucher = new Voucher
-                {
-                    TN = GenerateTransactionNumber(timestamp),
-                    Date = timestamp,
-                    OrderId = order.Id,
-                    PayMethod = PayMethod.Other,
-                    OrderAmount = amount,
-                    PayAmount = amount
-                };
-
-                this.Vouchers.Add(voucher);
-                this.Vouchers.Commit();
-            }
+            this.Vouchers.Add(voucher);
+            this.Vouchers.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess)).Attach("vchrid", voucher.Id);
         }
@@ -81,21 +84,20 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (voucher == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
 
-            if (command.File != null)
+            bool processed = false;
+
+            processed |= Save(voucher, command);
+            processed |= Paid(voucher, command);
+
+            if (processed)
             {
-                Save(voucher, command.File);
-            }
-            else
-            {
-                voucher.PayMethod = command.PayMethod;
-                voucher.PayAmount = command.PayAmount;
-                voucher.Remark = command.Remark;
+                this.Vouchers.Update(voucher);
+                this.Vouchers.Commit();
+
+                return Result.Success(message: Localization.Get(Resources.Key.Command.OperationSuccess));
             }
 
-            this.Vouchers.Update(voucher);
-            this.Vouchers.Commit();
-
-            return Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
+            return Result.Success(message: Localization.Get(Resources.Key.Command.OperationFail));
         }
 
         protected override Result Upload(VoucherCommand command)
@@ -116,7 +118,7 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             if (!types.Any(e => e == command.File.ContentType))
                 return Result.Fail(Localization.Get(Resources.Key.Command.SupportedExtension).ToFormat(extensions.JoinToString(",")));
 
-            Save(voucher, command.File);
+            Attach(voucher, command.File);
 
             this.Vouchers.Update(voucher);
             this.Vouchers.Commit();
@@ -137,12 +139,34 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
         }
 
-        private string GenerateTransactionNumber(DateTime timestamp)
+        private string GenerateTransNo(DateTime timestamp)
         {
             return $"{timestamp.ToString("yyMMdd")}{timestamp.TimeOfDay.Ticks.ToString("x8")}".ToUpper();
         }
 
-        private void Save(Voucher voucher, IFormFile file)
+        private bool Save(Voucher voucher, VoucherCommand command)
+        {
+            if (!(voucher.Status == TradeStatus.InProcess && command.Status == TradeStatus.InProcess))
+                return false;
+
+            voucher.PayMethod = command.PayMethod;
+            voucher.PaymentAmount = command.PayAmount;
+            voucher.Remark = command.Remark;
+
+            return true;
+        }
+
+        private bool Paid(Voucher voucher, VoucherCommand command)
+        {
+            if (!(voucher.Status == TradeStatus.InProcess && command.Status == TradeStatus.Success))
+                return false;
+
+            voucher.Status = TradeStatus.Success;
+
+            return true;
+        }
+
+        private void Attach(Voucher voucher, IFormFile file)
         {
             using (var memory = new MemoryStream())
             {

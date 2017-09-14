@@ -745,6 +745,42 @@
 },
 {
     "language": "chs",
+    "name": "success",
+    "value": "成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "success",
+    "value": "Success.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "completed",
+    "value": "完成!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "completed",
+    "value": "Completed.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "confirmed",
+    "value": "已确认!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "confirmed",
+    "value": "confirmed.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "model",
     "value": "型号",
     "prefix": "tag"
@@ -1174,5 +1210,53 @@
     "name": "Cash",
     "value": "Cash",
     "prefix": "PayMethod"
+},
+{
+    "language": "chs",
+    "name": "InProcess",
+    "value": "处理中",
+    "prefix": "TradeStatus"
+},
+{
+    "language": "en",
+    "name": "InProcess",
+    "value": "In-Process",
+    "prefix": "TradeStatus"
+},
+{
+    "language": "chs",
+    "name": "Fail",
+    "value": "交易失败",
+    "prefix": "TradeStatus"
+},
+{
+    "language": "en",
+    "name": "Fail",
+    "value": "Failed",
+    "prefix": "TradeStatus"
+},
+{
+    "language": "chs",
+    "name": "Success",
+    "value": "交易成功",
+    "prefix": "TradeStatus"
+},
+{
+    "language": "en",
+    "name": "Success",
+    "value": "Success",
+    "prefix": "TradeStatus"
+},
+{
+    "language": "chs",
+    "name": "Cancel",
+    "value": "交易取消",
+    "prefix": "TradeStatus"
+},
+{
+    "language": "en",
+    "name": "Cancel",
+    "value": "Cancelled",
+    "prefix": "TradeStatus"
 }]
  

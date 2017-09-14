@@ -68,6 +68,9 @@ namespace IDI.Central.Domain.Localization
 								public const string SupportedExtension = "supported-extension";
 								public const string FileMaxSizeLimit = "file-max-size-limit";
 								public const string PlsConfirmOrder = "pls-confirm-order";
+								public const string Success = "success";
+								public const string Completed = "completed";
+								public const string Confirmed = "confirmed";
 								}
 
 						public class Tag {

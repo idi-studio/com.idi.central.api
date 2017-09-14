@@ -13,8 +13,8 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("tn")]
         public string TN { get; set; }
 
-        [JsonProperty("oid")]
-        public Guid OrderId { get; set; }
+        [JsonProperty("status")]
+        public TradeStatus Status { get; set; }
 
         [JsonProperty("sn")]
         public string SN { get; set; }
@@ -25,16 +25,19 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("date")]
         public string Date { get; set; }
 
-        [JsonProperty("payamount")]
-        public decimal PayAmount { get; set; }
+        [JsonProperty("payment")]
+        public decimal PaymentAmount { get; set; }
 
-        [JsonProperty("orderamount")]
-        public decimal OrderAmount { get; set; }
+        [JsonProperty("payable")]
+        public decimal PayableAmount { get; set; }
 
         [JsonProperty("doc")]
         public string Document { get; set; }
 
         [JsonProperty("remark")]
         public string Remark { get; set; }
+
+        [JsonProperty("oid")]
+        public Guid OrderId { get; set; }
     }
 }

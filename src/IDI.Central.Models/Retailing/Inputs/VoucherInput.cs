@@ -10,6 +10,9 @@ namespace IDI.Central.Models.Retailing
         [JsonProperty("vid")]
         public Guid Id { get; set; }
 
+        [JsonProperty("status")]
+        public TradeStatus Status { get; set; }
+
         [JsonProperty("paymethod")]
         public PayMethod PayMethod { get; set; }
 

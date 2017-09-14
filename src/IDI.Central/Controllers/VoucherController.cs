@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using IDI.Central.Common.Enums;
 using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Retailing.Commands;
 using IDI.Central.Domain.Modules.Retailing.Queries;
@@ -21,12 +22,6 @@ namespace IDI.Central.Controllers
 
             return ServiceLocator.QueryProcessor.Execute<QueryVoucherCondition, VoucherModel>(condition);
         }
-
-        //[HttpGet("list")]
-        //public Result<Set<VoucherModel>> List()
-        //{
-        //    return ServiceLocator.QueryProcessor.Execute<QueryVoucherSetCondition, Set<VoucherModel>>();
-        //}
 
         [HttpPost]
         public Result Post([FromBody]VoucherInput input)
@@ -52,9 +47,24 @@ namespace IDI.Central.Controllers
             {
                 Id = id,
                 OrderId = input.OrderId,
+                Status = input.Status,
                 PayAmount = input.PayAmount,
                 PayMethod = input.PayMethod,
                 Remark = input.Remark,
+                Mode = CommandMode.Update,
+                Group = VerificationGroup.Update,
+            };
+
+            return ServiceLocator.CommandBus.Send(command);
+        }
+
+        [HttpPut("paid/{id}")]
+        public Result Paid(Guid id)
+        {
+            var command = new VoucherCommand
+            {
+                Id = id,
+                Status = TradeStatus.Success,
                 Mode = CommandMode.Update,
                 Group = VerificationGroup.Update,
             };

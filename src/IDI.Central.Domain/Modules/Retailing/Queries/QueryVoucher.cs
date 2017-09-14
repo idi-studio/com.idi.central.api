@@ -31,10 +31,11 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
             {
                 Id = voucher.Id,
                 TN = voucher.TN,
-                PayAmount = voucher.PayAmount,
+                Status = voucher.Status,
+                PaymentAmount = voucher.PaymentAmount,
                 PayMethod = voucher.PayMethod,
                 Date = voucher.Date.AsLongDate(),
-                OrderAmount = voucher.OrderAmount,
+                PayableAmount = voucher.PayableAmount,
                 OrderId = voucher.OrderId,
                 SN = voucher.Order.SN,
                 Remark = voucher.Remark,

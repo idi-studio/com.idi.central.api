@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using IDI.Central.Common;
 using IDI.Central.Common.Enums;
 using IDI.Core.Domain;
 
@@ -10,13 +9,15 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
     {
         public string TN { get; set; }
 
+        public TradeStatus Status { get; set; }
+
         public PayMethod PayMethod { get; set; }
 
         public DateTime Date { get; set; }
 
-        public decimal PayAmount { get; set; }
+        public decimal PaymentAmount { get; set; }
 
-        public decimal OrderAmount { get; set; }
+        public decimal PayableAmount { get; set; }
 
         public byte[] Document { get; set; }
 
