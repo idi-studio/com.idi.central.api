@@ -15,7 +15,7 @@
 
         public class Policy
         {
-            public const string AllowCorsDomain = "AllowCorsDomain";
+            public const string AllowCORSDomain = "AllowCORSDomain";
         }
 
         public class SessionKey

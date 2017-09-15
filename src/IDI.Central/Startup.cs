@@ -40,10 +40,10 @@ namespace IDI.Central
             // Inject an implementation of ISwaggerProvider with defaulted settings applied  
             services.AddSwaggerGen();
 
-            #region Cross Domain
-            var urls = Configuration["Cores"].Split(',');
-            services.AddCors(options => options.AddPolicy(Constants.Policy.AllowCorsDomain, builder => builder.WithOrigins(urls).AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin().AllowCredentials()));
-            services.Configure<MvcOptions>(options => { options.Filters.Add(new CorsAuthorizationFilterFactory(Constants.Policy.AllowCorsDomain)); });
+            #region AllowCORS
+            var urls = Configuration[Constants.Policy.AllowCORSDomain].Split(',');
+            services.AddCors(options => options.AddPolicy(Constants.Policy.AllowCORSDomain, builder => builder.WithOrigins(urls).AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin().AllowCredentials()));
+            services.Configure<MvcOptions>(options => { options.Filters.Add(new CorsAuthorizationFilterFactory(Constants.Policy.AllowCORSDomain)); });
             #endregion
 
             services.Configure<ApplicationOptions>(Configuration.GetSection("API"));
@@ -79,16 +79,13 @@ namespace IDI.Central
 
             app.UseStaticFiles();
 
-            app.UseCors(Constants.Policy.AllowCorsDomain);
+            #region Allow CORS Domain
+            app.UseCors(Constants.Policy.AllowCORSDomain);
+            #endregion
 
             app.UseMvc();
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(name: "default", template: "{controller=Platform}/{action=Login}/{id?}");
-            //});
             app.UseLanguagePackage<PackageCentral>();
             app.UseLocalization<Localization>();
-
         }
     }
 }
