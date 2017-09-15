@@ -35,5 +35,8 @@ namespace IDI.Central.Models.Retailing
 
         [JsonProperty("postcode")]
         public string Postcode { get; set; }
+
+        [JsonProperty("default")]
+        public bool Default { get; set; }
     }
 }

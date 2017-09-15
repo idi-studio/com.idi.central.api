@@ -14,7 +14,7 @@ namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
 
         public int Grade { get; set; }
 
-        public Guid? DefaultShippingAddressId { get; set; }
+        public Guid? DefaultShippingId { get; set; }
 
         public List<ShippingAddress> Shippings { get; set; } = new List<ShippingAddress>();
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Queries;
 using Newtonsoft.Json;
@@ -27,5 +28,8 @@ namespace IDI.Central.Models.Retailing
 
         [JsonProperty("date")]
         public string Date { get; set; }
+
+        [JsonProperty("shippings")]
+        public List<ShippingAddressModel> Shippings { get; set; } = new List<ShippingAddressModel>();
     }
 }

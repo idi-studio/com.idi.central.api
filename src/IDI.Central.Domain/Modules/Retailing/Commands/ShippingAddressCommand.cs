@@ -47,6 +47,8 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
         [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
         [StringLength(MaxLength = 20, Group = VerificationGroup.Create | VerificationGroup.Update)]
         public string Postcode { get; set; }
+
+        public bool Default { get; set; }
     }
 
     public class ShippingCommandHandler : CommandHandler<ShippingAddressCommand>
@@ -80,6 +82,13 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
             this.Shippings.Add(shipping);
             this.Shippings.Commit();
 
+            if (command.Default)
+            {
+                customer.DefaultShippingId = shipping.Id;
+                this.Customers.Update(customer);
+                this.Customers.Commit();
+            }
+
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess));
         }
 
@@ -107,6 +116,13 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
 
             this.Shippings.Update(shipping);
             this.Shippings.Commit();
+
+            if (command.Default && customer.DefaultShippingId != shipping.Id)
+            {
+                customer.DefaultShippingId = shipping.Id;
+                this.Customers.Update(customer);
+                this.Customers.Commit();
+            }
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
         }

@@ -27,6 +27,7 @@ namespace IDI.Central.Controllers
                 Street = input.Street,
                 Detail = input.Detail,
                 Postcode = input.Postcode,
+                Default = input.Default,
                 Mode = CommandMode.Create,
                 Group = VerificationGroup.Create,
             };
@@ -39,7 +40,7 @@ namespace IDI.Central.Controllers
         {
             var command = new ShippingAddressCommand
             {
-                Id = input.Id,
+                Id = id,
                 CustomerId = input.CustomerId,
                 Receiver = input.Receiver,
                 ContactNo = input.ContactNo,
@@ -49,6 +50,7 @@ namespace IDI.Central.Controllers
                 Street = input.Street,
                 Detail = input.Detail,
                 Postcode = input.Postcode,
+                Default = input.Default,
                 Mode = CommandMode.Update,
                 Group = VerificationGroup.Update,
             };

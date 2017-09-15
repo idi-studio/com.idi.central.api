@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Central.Models.Retailing;
 using IDI.Core.Common;
@@ -32,6 +33,21 @@ namespace IDI.Central.Domain.Modules.Retailing.Queries
                 PhoneNum = customer.User.Profile.PhoneNum,
                 Gender = customer.User.Profile.Gender
             };
+
+            model.Shippings = customer.Shippings.Select(e => new ShippingAddressModel
+            {
+                Id = e.Id,
+                CustomerId = e.CustomerId,
+                Receiver = e.Receiver,
+                ContactNo = e.ContactNo,
+                Province = e.Province,
+                City = e.City,
+                Area = e.Area,
+                Street = e.Street,
+                Detail = e.Detail,
+                Postcode = e.Postcode,
+                Default = e.Id == customer.DefaultShippingId
+            }).ToList();
 
             return Result.Success(model);
         }

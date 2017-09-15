@@ -202,7 +202,7 @@ namespace IDI.Central.Domain.Modules.Retailing
                     Postcode = "610041"
                 };
 
-                customers[index].DefaultShippingAddressId = shipping.Id;
+                customers[index].DefaultShippingId = shipping.Id;
                 customers[index].Shippings.Add(shipping);
             }
         }

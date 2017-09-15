@@ -6,7 +6,7 @@ namespace IDI.Central.Models.Retailing.Inputs
 {
     public class ShippingAddressInput : IInput
     {
-        [JsonProperty("id")]
+        [JsonProperty("aid")]
         public Guid Id { get; set; }
 
         [JsonProperty("cid")]
@@ -35,5 +35,8 @@ namespace IDI.Central.Models.Retailing.Inputs
 
         [JsonProperty("postcode")]
         public string Postcode { get; set; }
+
+        [JsonProperty("default")]
+        public bool Default { get; set; }
     }
 }
