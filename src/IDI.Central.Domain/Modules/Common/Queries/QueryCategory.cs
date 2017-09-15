@@ -5,7 +5,7 @@ using IDI.Central.Domain.Localization;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Queries;
 
-namespace IDI.Central.Domain.Modules.Retailing.Queries
+namespace IDI.Central.Domain.Modules.Common.Queries
 {
     public class QueryCategoryCondition : Condition
     {
