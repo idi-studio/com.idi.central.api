@@ -10,20 +10,15 @@ namespace IDI.Central.Domain.Tests
     {
         private const string connectionString = @"Server=localhost; Database=com.idi.central;User Id = sa; Password = p@55w0rd;";
 
-        protected bool reset = true;
-
         [TestInitialize]
         public void Init()
         {
             ServiceLocator.AddDbContext<CentralContext>(options => options.UseSqlServer(connectionString, o => o.UseRowNumberForPaging()));
 
-            if (reset)
+            using (var context = ServiceLocator.GetService<CentralContext>())
             {
-                using (var context = ServiceLocator.GetService<CentralContext>())
-                {
-                    context.Database.EnsureDeleted();
-                    context.Database.EnsureCreated();
-                }
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
             }
         }
 

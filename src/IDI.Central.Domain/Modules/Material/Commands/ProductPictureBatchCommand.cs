@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using IDI.Central.Domain.Localization;
-using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
-using IDI.Central.Models.Retailing;
+using IDI.Central.Domain.Modules.Material.AggregateRoots;
+using IDI.Central.Models.Material;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Repositories;
 
-namespace IDI.Central.Domain.Modules.Retailing.Commands
+namespace IDI.Central.Domain.Modules.Material.Commands
 {
     public class ProductPictureBatchCommand : Command
     {

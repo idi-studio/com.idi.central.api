@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using IDI.Central.Common.Enums;
-using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Core.Common;
@@ -13,32 +12,6 @@ namespace IDI.Central.Domain.Tests
 {
     public partial class AdministrationUnitTests : IntegrationTests
     {
-        [TestMethod]
-        public void Administration_DatabaseInitalCommand()
-        {
-            var hanlder = new DatabaseInitalCommandHandler();
-            hanlder.Localization = new Common.Localization();
-            hanlder.Users = ServiceLocator.GetService<IRepository<User>>();
-            hanlder.Roles = ServiceLocator.GetService<IRepository<Role>>();
-            hanlder.Modules = ServiceLocator.GetService<IRepository<Module>>();
-            hanlder.Clients = ServiceLocator.GetService<IRepository<Client>>();
-
-            var result = hanlder.Execute(new DatabaseInitalCommand());
-
-            Assert.AreEqual(ResultStatus.Success, result.Status);
-            Assert.AreEqual(Resources.Key.Command.SysDbInitSuccess, result.Message);
-
-            TestData(context =>
-            {
-                Assert.AreEqual(1, context.Users.Count());
-                Assert.AreEqual(1, context.UserRoles.Count());
-                Assert.AreEqual(3, context.Roles.Count());
-                Assert.AreEqual(2, context.Modules.Count());
-                Assert.AreEqual(5, context.Menus.Count());
-                Assert.AreEqual(5, context.Privileges.Count());
-            });
-        }
-
         [TestMethod]
         public void Administration_UserRegisterCommand()
         {

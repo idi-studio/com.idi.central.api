@@ -1,7 +1,7 @@
 ﻿using IDI.Core.Infrastructure.Queries;
 using Newtonsoft.Json;
 
-namespace IDI.Central.Models.Retailing
+namespace IDI.Central.Models.Common
 {
     public class TagModel : IModel
     {

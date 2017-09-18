@@ -8,9 +8,6 @@ namespace IDI.Central.Domain.Modules.Retailing
     {
         public override void Create(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>().ToTable("Products");
-            modelBuilder.Entity<ProductPrice>().ToTable("ProductPrices");
-            modelBuilder.Entity<ProductPicture>().ToTable("ProductPictures");
             modelBuilder.Entity<Customer>().ToTable("Customers");
             modelBuilder.Entity<Order>().ToTable("Orders");
             modelBuilder.Entity<OrderItem>().ToTable("OrderItems");
@@ -22,8 +19,6 @@ namespace IDI.Central.Domain.Modules.Retailing
             modelBuilder.Entity<Voucher>().HasOne(e => e.Order).WithOne().HasForeignKey<Voucher>(e => e.OrderId).IsRequired();
 
             //One-to-Many
-            modelBuilder.Entity<Product>().HasMany(e => e.Prices).WithOne(e => e.Product).HasForeignKey(e => e.ProductId);
-            modelBuilder.Entity<Product>().HasMany(e => e.Pictures).WithOne(e => e.Product).HasForeignKey(e => e.ProductId);
             modelBuilder.Entity<Order>().HasMany(e => e.Items).WithOne(e => e.Order).HasForeignKey(e => e.OrderId);
             modelBuilder.Entity<Customer>().HasMany(e => e.Orders).WithOne(e => e.Customer).HasForeignKey(e => e.CustomerId).IsRequired(false);
             modelBuilder.Entity<Customer>().HasMany(e => e.Shippings).WithOne(e => e.Customer).HasForeignKey(e => e.CustomerId).IsRequired();

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using IDI.Central.Common.Enums;
 using IDI.Core.Domain;
 
-namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots
+namespace IDI.Central.Domain.Modules.Material.AggregateRoots
 {
     public class ProductPicture : AggregateRoot
     {

@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using IDI.Central.Domain.Common;
+using IDI.Central.Domain.Modules.Material.AggregateRoots;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
-using IDI.Central.Models.Retailing;
+using IDI.Central.Models.Common;
+using IDI.Central.Models.Material;
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
 using IDI.Core.Repositories;
 
-namespace IDI.Central.Domain.Modules.Retailing.Queries
+namespace IDI.Central.Domain.Modules.Material.Queries
 {
     public class QueryProductSellSetCondition : Condition
     {

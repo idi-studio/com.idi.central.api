@@ -1,8 +1,8 @@
 ﻿using System;
 using IDI.Central.Core;
-using IDI.Central.Domain.Modules.Retailing.Commands;
-using IDI.Central.Domain.Modules.Retailing.Queries;
-using IDI.Central.Models.Retailing;
+using IDI.Central.Domain.Modules.Material.Commands;
+using IDI.Central.Domain.Modules.Material.Queries;
+using IDI.Central.Models.Material;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Common.Extensions;

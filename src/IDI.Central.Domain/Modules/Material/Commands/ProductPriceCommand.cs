@@ -2,13 +2,13 @@
 using System.Linq;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Localization;
-using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
+using IDI.Central.Domain.Modules.Material.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Repositories;
 
-namespace IDI.Central.Domain.Modules.Retailing.Commands
+namespace IDI.Central.Domain.Modules.Material.Commands
 {
     public class ProductPriceCommand : Command
     {

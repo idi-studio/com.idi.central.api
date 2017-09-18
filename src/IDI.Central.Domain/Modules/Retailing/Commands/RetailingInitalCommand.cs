@@ -24,17 +24,10 @@ namespace IDI.Central.Domain.Modules.Retailing.Commands
         public ILocalization Localization { get; set; }
 
         [Injection]
-        public IRepository<Product> Products { get; set; }
-
-        [Injection]
         public IRepository<Customer> Customers { get; set; }
 
         public Result Execute(RetailingInitalCommand command)
         {
-            command.Seed.Products.iPhones.ForEach(e => this.Products.Add(e));
-            command.Seed.Products.Others.ForEach(e => this.Products.Add(e));
-            this.Products.Commit();
-
             command.Seed.Customers.Customers.ForEach(e => this.Customers.Add(e));
             this.Customers.Commit();
 

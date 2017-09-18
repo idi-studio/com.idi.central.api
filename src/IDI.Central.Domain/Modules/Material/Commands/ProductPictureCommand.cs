@@ -5,7 +5,7 @@ using System.Linq;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Localization;
-using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
+using IDI.Central.Domain.Modules.Material.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.Commands;
@@ -14,7 +14,7 @@ using IDI.Core.Infrastructure.Verification.Attributes;
 using IDI.Core.Repositories;
 using Microsoft.AspNetCore.Http;
 
-namespace IDI.Central.Domain.Modules.Retailing.Commands
+namespace IDI.Central.Domain.Modules.Material.Commands
 {
     public class ProductPictureCommand : Command
     {

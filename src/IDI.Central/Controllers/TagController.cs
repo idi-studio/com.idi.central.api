@@ -1,5 +1,5 @@
-﻿using IDI.Central.Domain.Modules.Retailing.Queries;
-using IDI.Central.Models.Retailing;
+﻿using IDI.Central.Domain.Modules.Common.Queries;
+using IDI.Central.Models.Common;
 using IDI.Central.Core;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;

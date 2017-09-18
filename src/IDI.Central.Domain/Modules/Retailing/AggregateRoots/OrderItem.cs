@@ -1,4 +1,5 @@
 ﻿using System;
+using IDI.Central.Domain.Modules.Material.AggregateRoots;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Retailing.AggregateRoots

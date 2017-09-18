@@ -9,27 +9,27 @@ using IDI.Central.Domain.Localization;
 
 namespace IDI.Central.Domain.Tests
 {
-    [TestClass]
-    [TestCategory("Retailing")]
-    public partial class RetailingUnitTests : IntegrationTests
-    {
-        public RetailingUnitTests()
-        {
-            reset = false;
-        }
+    //[TestClass]
+    //[TestCategory("Retailing")]
+    //public partial class RetailingUnitTests : IntegrationTests
+    //{
+    //    public RetailingUnitTests()
+    //    {
+    //        reset = false;
+    //    }
 
-        [TestMethod]
-        public void Retailing_DataInitCommand()
-        {
-            var hanlder = new RetailingInitalCommandHandler();
-            hanlder.Localization = new Common.Localization();
-            hanlder.Products = ServiceLocator.GetService<IRepository<Product>>();
-            hanlder.Customers = ServiceLocator.GetService<IRepository<Customer>>();
+    //    [TestMethod]
+    //    public void Retailing_DataInitCommand()
+    //    {
+    //        var hanlder = new RetailingInitalCommandHandler();
+    //        hanlder.Localization = new Common.Localization();
+    //        hanlder.Products = ServiceLocator.GetService<IRepository<Product>>();
+    //        hanlder.Customers = ServiceLocator.GetService<IRepository<Customer>>();
 
-            var result = hanlder.Execute(new RetailingInitalCommand());
+    //        var result = hanlder.Execute(new RetailingInitalCommand());
 
-            Assert.AreEqual(ResultStatus.Success, result.Status);
-            Assert.AreEqual(Resources.Key.Command.SysDataInitSuccess, result.Message);
-        }
-    }
+    //        Assert.AreEqual(ResultStatus.Success, result.Status);
+    //        Assert.AreEqual(Resources.Key.Command.SysDataInitSuccess, result.Message);
+    //    }
+    //}
 }

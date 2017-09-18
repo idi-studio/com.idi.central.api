@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using IDI.Central.Domain.Localization;
+using IDI.Central.Domain.Modules.Material;
+using IDI.Central.Domain.Modules.Material.AggregateRoots;
 using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using IDI.Central.Models.Common;
 using IDI.Core.Infrastructure.Queries;
 using Newtonsoft.Json;
 
-namespace IDI.Central.Models.Retailing
+namespace IDI.Central.Models.Material
 {
     public class ProductSellModel : IModel
     {
