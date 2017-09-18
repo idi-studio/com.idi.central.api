@@ -2,9 +2,9 @@
 using System.Linq;
 using IDI.Central.Common.Enums;
 using IDI.Central.Core;
-using IDI.Central.Domain.Modules.Retailing.Commands;
-using IDI.Central.Domain.Modules.Retailing.Queries;
-using IDI.Central.Models.Retailing;
+using IDI.Central.Domain.Modules.Sales.Commands;
+using IDI.Central.Domain.Modules.Sales.Queries;
+using IDI.Central.Models.Sales;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure;

@@ -43,7 +43,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
                 return Result.Success(message: Localization.Get(Resources.Key.Command.SysDbInitialized));
 
             this.Modules.Add(command.Seed.Modules.Administration);
-            this.Modules.Add(command.Seed.Modules.Retailing);
+            this.Modules.Add(command.Seed.Modules.Sales);
             this.Modules.Commit();
 
             this.Users.Add(command.Seed.Users.Administrator);

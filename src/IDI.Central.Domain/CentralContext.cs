@@ -23,7 +23,7 @@ namespace IDI.Central.Domain
         {
             new Modules.Administration.Mapping().Create(modelBuilder);
             new Modules.Material.Mapping().Create(modelBuilder);
-            new Modules.Retailing.Mapping().Create(modelBuilder);
+            new Modules.Sales.Mapping().Create(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }

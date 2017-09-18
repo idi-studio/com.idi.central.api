@@ -2,7 +2,9 @@
 using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Material.Commands;
 using IDI.Central.Domain.Modules.Material.Queries;
+using IDI.Central.Domain.Modules.Sales.Queries;
 using IDI.Central.Models.Material;
+using IDI.Central.Models.Sales;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Common.Extensions;
@@ -50,11 +52,11 @@ namespace IDI.Central.Controllers
 
         // GET: api/product/selling
         [HttpGet("selling/{id}")]
-        public Result<Set<ProductSellModel>> Selling(Guid id)
+        public Result<Set<SellModel>> Selling(Guid id)
         {
-            var condition = new QueryProductSellSetCondition { CustomerId = id };
+            var condition = new QuerySellSetCondition { CustomerId = id };
 
-            return ServiceLocator.QueryProcessor.Execute<QueryProductSellSetCondition, Set<ProductSellModel>>(condition);
+            return ServiceLocator.QueryProcessor.Execute<QuerySellSetCondition, Set<SellModel>>(condition);
         }
 
         // Put: api/product

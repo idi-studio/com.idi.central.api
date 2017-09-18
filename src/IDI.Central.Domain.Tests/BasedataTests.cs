@@ -2,8 +2,8 @@
 using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Central.Domain.Modules.Material.AggregateRoots;
 using IDI.Central.Domain.Modules.Material.Commands;
-using IDI.Central.Domain.Modules.Retailing.AggregateRoots;
-using IDI.Central.Domain.Modules.Retailing.Commands;
+using IDI.Central.Domain.Modules.Sales.AggregateRoots;
+using IDI.Central.Domain.Modules.Sales.Commands;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;
 using IDI.Core.Repositories;
@@ -20,7 +20,7 @@ namespace IDI.Central.Domain.Tests
         {
             Assert.AreEqual(ResultStatus.Success, DatabaseInital().Status);
             Assert.AreEqual(ResultStatus.Success, MaterialInital().Status);
-            Assert.AreEqual(ResultStatus.Success, RetailingInital().Status);
+            Assert.AreEqual(ResultStatus.Success, SalesInital().Status);
         }
 
         private Result DatabaseInital()
@@ -35,13 +35,13 @@ namespace IDI.Central.Domain.Tests
             return hanlder.Execute(new DatabaseInitalCommand());
         }
 
-        private Result RetailingInital()
+        private Result SalesInital()
         {
-            var hanlder = new RetailingInitalCommandHandler();
+            var hanlder = new SalesInitalCommandHandler();
             hanlder.Localization = new Common.Localization();
             hanlder.Customers = ServiceLocator.GetService<IRepository<Customer>>();
 
-            return hanlder.Execute(new RetailingInitalCommand());
+            return hanlder.Execute(new SalesInitalCommand());
         }
 
         private Result MaterialInital()

@@ -10,7 +10,9 @@ namespace IDI.Central.Domain.Modules.Administration
     {
         public Module Administration { get; private set; }
 
-        public Module Retailing { get; private set; }
+        public Module Sales { get; private set; }
+
+        public Module Material { get; private set; }
 
         public ModuleCollection()
         {
@@ -20,8 +22,8 @@ namespace IDI.Central.Domain.Modules.Administration
             this.Administration.NewPage(sn: 30, name: "Role", controller: "role", action: "administration", privilege: true);
             this.Administration.NewPage(sn: 40, name: "User", controller: "user", action: "administration", privilege: true);
 
-            this.Retailing = new Module { SN = 20, Name = "Order", Code = "SMM", Description = "Sales", Icon = "fa fa-tasks" };
-            this.Retailing.NewPage(sn: 10, name: "Order", controller: "order", action: "index", privilege: true);
+            this.Sales = new Module { SN = 20, Name = "Order", Code = "SMM", Description = "Sales", Icon = "fa fa-tasks" };
+            this.Sales.NewPage(sn: 10, name: "Order", controller: "order", action: "index", privilege: true);
         }
     }
 
@@ -82,8 +84,8 @@ namespace IDI.Central.Domain.Modules.Administration
             this.Users.Administrator.Authorize(this.Roles.Administrators);
 
             //RoleModules
-            this.Roles.Administrators.Authorize(this.Modules.Administration, this.Modules.Retailing);
-            this.Roles.Staffs.Authorize(this.Modules.Retailing);
+            this.Roles.Administrators.Authorize(this.Modules.Administration, this.Modules.Sales);
+            this.Roles.Staffs.Authorize(this.Modules.Sales);
         }
     }
 
