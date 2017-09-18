@@ -1,9 +1,13 @@
-﻿using IDI.Central.Domain;
+﻿using System.IO;
+using IDI.Central.Core;
+using IDI.Central.Domain;
 using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Localization.Packages;
-using IDI.Central.Core;
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
+using log4net;
+using log4net.Config;
+using log4net.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +20,10 @@ namespace IDI.Central
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration { get; }
+
+        public static ILoggerRepository LoggerRepository { get; set; }
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -23,10 +31,13 @@ namespace IDI.Central
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
-            Configuration = builder.Build();
-        }
 
-        public IConfigurationRoot Configuration { get; }
+            Configuration = builder.Build();
+
+            LoggerRepository = LogManager.CreateRepository("IDI.Central.LoggerRepository");
+
+            XmlConfigurator.Configure(LoggerRepository, new FileInfo("Configs/log4net.config"));
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -52,8 +63,10 @@ namespace IDI.Central
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            //loggerFactory.AddDebug();
+            var log = LogManager.GetLogger(LoggerRepository.Name, typeof(Startup));
+            log.Info("test");
 
             //if (env.IsDevelopment())
             //{
