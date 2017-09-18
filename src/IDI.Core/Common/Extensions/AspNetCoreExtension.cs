@@ -39,10 +39,10 @@ namespace IDI.Core.Common.Extensions
             LanguageManager.Instance.Load(package);
         }
 
-        public static void UseLocalization<TLocalization>(this IApplicationBuilder app) where TLocalization : ILocalization
-        {
-            ServiceLocator.Services.AddSingleton(typeof(ILocalization), typeof(TLocalization));
-        }
+        //public static void UseLocalization<TLocalization>(this IApplicationBuilder app) where TLocalization : ILocalization
+        //{
+        //    ServiceLocator.Services.AddSingleton(typeof(ILocalization), typeof(TLocalization));
+        //}
 
         public static string Get(this IEnumerable<Claim> claims, string type)
         {

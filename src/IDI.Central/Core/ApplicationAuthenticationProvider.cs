@@ -6,6 +6,7 @@ using IDI.Central.Models.Administration;
 using IDI.Core.Authentication.TokenAuthentication;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;
+using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
@@ -13,7 +14,14 @@ namespace IDI.Central.Core
 {
     public class ApplicationAuthenticationProvider : TokenAuthenticationProvider
     {
-        public ApplicationAuthenticationProvider(RequestDelegate next, IOptions<TokenAuthenticationOptions> options) : base(next, options) { }
+        private readonly IQueryProcessor queryProcessor;
+        private readonly ICommandBus commandBus;
+
+        public ApplicationAuthenticationProvider(RequestDelegate next, IOptions<TokenAuthenticationOptions> options) : base(next, options)
+        {
+            this.commandBus = ServiceLocator.GetService<ICommandBus>();
+            this.queryProcessor = ServiceLocator.GetService<IQueryProcessor>();
+        }
 
         protected override List<Claim> GenerateClientIdentity(string clientId, string clientSecret)
         {
@@ -28,7 +36,7 @@ namespace IDI.Central.Core
         {
             var condition = new QueryUserIdentityCondition { UserName = username };
 
-            var result = ServiceLocator.QueryProcessor.Execute<QueryUserIdentityCondition, UserIdentity>(condition);
+            var result = queryProcessor.Execute<QueryUserIdentityCondition, UserIdentity>(condition);
 
             if (result.Status == ResultStatus.Success)
             {
@@ -49,12 +57,12 @@ namespace IDI.Central.Core
 
         protected override Result GrantUserCredential(string username, string password)
         {
-            return ServiceLocator.CommandBus.Send(new UserAuthenticationCommand(username, password));
+            return commandBus.Send(new UserAuthenticationCommand(username, password));
         }
 
         protected override Result GrantClientCredentials(string clientId, string clientSecret)
         {
-            return ServiceLocator.CommandBus.Send(new ClientAuthenticationCommand(clientId, clientSecret));
+            return commandBus.Send(new ClientAuthenticationCommand(clientId, clientSecret));
         }
     }
 }

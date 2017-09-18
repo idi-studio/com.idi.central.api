@@ -8,7 +8,7 @@ using IDI.Central.Models.Sales;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Common.Extensions;
-using IDI.Core.Infrastructure;
+using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -18,11 +18,15 @@ namespace IDI.Central.Controllers
     [Route("api/product"), ApplicationAuthorize]
     public class ProductController : Controller
     {
-        public readonly ApplicationOptions options;
+        private readonly ApplicationOptions options;
+        private readonly ICommandBus commandBus;
+        private readonly IQueryProcessor queryProcessor;
 
-        public ProductController(IOptionsSnapshot<ApplicationOptions> options)
+        public ProductController(IOptionsSnapshot<ApplicationOptions> options, ICommandBus commandBus, IQueryProcessor queryProcessor)
         {
             this.options = options.Value;
+            this.commandBus = commandBus;
+            this.queryProcessor = queryProcessor;
         }
 
         //POST: api/product
@@ -40,14 +44,14 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Create,
             };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         // GET: api/product/list
         [HttpGet("list")]
         public Result<Set<ProductModel>> List()
         {
-            return ServiceLocator.QueryProcessor.Execute<QueryProductSetCondition, Set<ProductModel>>();
+            return queryProcessor.Execute<QueryProductSetCondition, Set<ProductModel>>();
         }
 
         // GET: api/product/selling
@@ -56,7 +60,7 @@ namespace IDI.Central.Controllers
         {
             var condition = new QuerySellSetCondition { CustomerId = id };
 
-            return ServiceLocator.QueryProcessor.Execute<QuerySellSetCondition, Set<SellModel>>(condition);
+            return queryProcessor.Execute<QuerySellSetCondition, Set<SellModel>>(condition);
         }
 
         // Put: api/product
@@ -75,7 +79,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         // GET api/product/{id}
@@ -89,7 +93,7 @@ namespace IDI.Central.Controllers
                 SavePath = env.WebRootPath
             };
 
-            return ServiceLocator.QueryProcessor.Execute<QueryProductCondition, ProductModel>(condition);
+            return queryProcessor.Execute<QueryProductCondition, ProductModel>(condition);
         }
 
         // DELETE api/product/{id}
@@ -98,7 +102,7 @@ namespace IDI.Central.Controllers
         {
             var command = new ProductCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
     }
 }

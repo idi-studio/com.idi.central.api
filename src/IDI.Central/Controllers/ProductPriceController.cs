@@ -1,12 +1,13 @@
 ﻿using System;
+using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Material.Commands;
 using IDI.Central.Domain.Modules.Material.Queries;
 using IDI.Central.Models.Material;
-using IDI.Central.Core;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Common.Extensions;
-using IDI.Core.Infrastructure;
+using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IDI.Central.Controllers
@@ -14,6 +15,15 @@ namespace IDI.Central.Controllers
     [Route("api/product/price"), ApplicationAuthorize]
     public class ProductPriceController : Controller
     {
+        private readonly ICommandBus commandBus;
+        private readonly IQueryProcessor queryProcessor;
+
+        public ProductPriceController(ICommandBus commandBus, IQueryProcessor queryProcessor)
+        {
+            this.commandBus = commandBus;
+            this.queryProcessor = queryProcessor;
+        }
+
         //POST: api/product/price
         [HttpPost]
         public Result Post([FromBody]ProductPriceInput input)
@@ -32,7 +42,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Create,
             };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         // Put: api/product/price
@@ -54,7 +64,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         // GET api/product/price/{id}
@@ -63,7 +73,7 @@ namespace IDI.Central.Controllers
         {
             var condition = new QueryProductPriceCondition { Id = id };
 
-            return ServiceLocator.QueryProcessor.Execute<QueryProductPriceCondition, ProductPriceModel>(condition);
+            return queryProcessor.Execute<QueryProductPriceCondition, ProductPriceModel>(condition);
         }
 
         // DELETE api/product/price/{id}
@@ -72,7 +82,7 @@ namespace IDI.Central.Controllers
         {
             var command = new ProductPriceCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         // GET: api/product/price/list/{id}
@@ -81,7 +91,7 @@ namespace IDI.Central.Controllers
         {
             var condition = new QueryProductPriceSetCondition { ProductId = id };
 
-            return ServiceLocator.QueryProcessor.Execute<QueryProductPriceSetCondition, Set<ProductPriceModel>>(condition);
+            return queryProcessor.Execute<QueryProductPriceSetCondition, Set<ProductPriceModel>>(condition);
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using IDI.Central.Domain.Localization;
-using IDI.Core.Localization;
+using IDI.Core.Localization.Packages;
 
-namespace IDI.Central.Domain.Common
+namespace IDI.Core.Localization
 {
-    public class Localization : ILocalization
+    public class Globalization : ILocalization
     {
         public string Get(string name)
         {

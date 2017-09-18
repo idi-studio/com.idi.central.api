@@ -1,12 +1,12 @@
 ﻿using System;
 using IDI.Central.Common.Enums;
+using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Sales.Commands;
 using IDI.Central.Domain.Modules.Sales.Queries;
 using IDI.Central.Models.Sales;
-using IDI.Central.Core;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
-using IDI.Core.Infrastructure;
+using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IDI.Central.Controllers
@@ -14,6 +14,15 @@ namespace IDI.Central.Controllers
     [Route("api/order"), ApplicationAuthorize]
     public class OrderController : Controller
     {
+        private readonly ICommandBus commandBus;
+        private readonly IQueryProcessor queryProcessor;
+
+        public OrderController(ICommandBus commandBus, IQueryProcessor queryProcessor)
+        {
+            this.commandBus = commandBus;
+            this.queryProcessor = queryProcessor;
+        }
+
         [HttpPost]
         public Result Post([FromBody]OrderInput input)
         {
@@ -26,7 +35,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Create,
             };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         [HttpGet("list")]
@@ -34,7 +43,7 @@ namespace IDI.Central.Controllers
         {
             var condition = new QueryOrderSetCondition { Category = OrderCategory.Sales, Deadline = DateTime.Now.AddMonths(-3) };
 
-            return ServiceLocator.QueryProcessor.Execute<QueryOrderSetCondition, Set<OrderModel>>(condition);
+            return queryProcessor.Execute<QueryOrderSetCondition, Set<OrderModel>>(condition);
         }
 
         [HttpPut("{id}")]
@@ -51,7 +60,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         [HttpPut("confirm/{id}")]
@@ -66,7 +75,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         // GET api/order/{id}
@@ -75,7 +84,7 @@ namespace IDI.Central.Controllers
         {
             var condition = new QueryOrderCondition { Id = id };
 
-            return ServiceLocator.QueryProcessor.Execute<QueryOrderCondition, OrderModel>(condition);
+            return queryProcessor.Execute<QueryOrderCondition, OrderModel>(condition);
         }
 
         // DELETE api/order/{id}
@@ -84,7 +93,7 @@ namespace IDI.Central.Controllers
         {
             var command = new OrderCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
     }
 }

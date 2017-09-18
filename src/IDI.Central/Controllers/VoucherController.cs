@@ -7,7 +7,8 @@ using IDI.Central.Domain.Modules.Sales.Queries;
 using IDI.Central.Models.Sales;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
-using IDI.Core.Infrastructure;
+using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IDI.Central.Controllers
@@ -15,12 +16,21 @@ namespace IDI.Central.Controllers
     [Route("api/vchr"), ApplicationAuthorize]
     public class VoucherController : Controller
     {
+        private readonly ICommandBus commandBus;
+        private readonly IQueryProcessor queryProcessor;
+
+        public VoucherController(ICommandBus commandBus, IQueryProcessor queryProcessor)
+        {
+            this.commandBus = commandBus;
+            this.queryProcessor = queryProcessor;
+        }
+
         [HttpGet("{id}")]
         public Result<VoucherModel> Get(Guid id)
         {
             var condition = new QueryVoucherCondition { Id = id };
 
-            return ServiceLocator.QueryProcessor.Execute<QueryVoucherCondition, VoucherModel>(condition);
+            return queryProcessor.Execute<QueryVoucherCondition, VoucherModel>(condition);
         }
 
         [HttpPost]
@@ -37,7 +47,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Create,
             };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         [HttpPut("{id}")]
@@ -55,7 +65,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         [HttpPut("paid/{id}")]
@@ -69,7 +79,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         [HttpPost("attach")]
@@ -83,7 +93,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Upload,
             };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         [HttpDelete("{id}")]
@@ -91,7 +101,7 @@ namespace IDI.Central.Controllers
         {
             var command = new VoucherCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
     }
 }

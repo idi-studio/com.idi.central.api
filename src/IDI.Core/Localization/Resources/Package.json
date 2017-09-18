@@ -61,14 +61,62 @@
 },
 {
     "language": "chs",
-    "name": "command-mode-nonsupport",
-    "value": "不支持的命令模式!",
+    "name": "command-nonsupport",
+    "value": "不支持的指令!",
     "prefix": "command"
 },
 {
     "language": "en",
-    "name": "command-mode-nonsupport",
-    "value": "Unsupported command mode.",
+    "name": "command-nonsupport",
+    "value": "Command unsupported.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "unknown-command",
+    "value": "未知的指令!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "unknown-command",
+    "value": "Unknown command.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "command-with-invalid-parameter",
+    "value": "指令参数无效!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "command-with-invalid-parameter",
+    "value": "Invalid command parameter(s).",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "command-invalid",
+    "value": "无效的指令!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "command-invalid",
+    "value": "Invalid command.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "command-executed-with-error",
+    "value": "指令执行出错!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "command-executed-with-error",
+    "value": "Command executed with error.",
     "prefix": "command"
 },
 {

@@ -3,7 +3,7 @@ using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Common.Queries;
 using IDI.Central.Models.Common;
 using IDI.Core.Common;
-using IDI.Core.Infrastructure;
+using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IDI.Central.Controllers
@@ -11,12 +11,21 @@ namespace IDI.Central.Controllers
     [Route("api/catg"), ApplicationAuthorize]
     public class CategoryController : Controller
     {
+        private readonly ICommandBus commandBus;
+        private readonly IQueryProcessor queryProcessor;
+
+        public CategoryController(ICommandBus commandBus, IQueryProcessor queryProcessor)
+        {
+            this.commandBus = commandBus;
+            this.queryProcessor = queryProcessor;
+        }
+
         [HttpPost]
         public Result<Set<KeyValuePair<int, string>>> Get([FromBody]CategoryInput input)
         {
             var condition = new QueryCategoryCondition { EnumType = input.EnumType };
 
-            return ServiceLocator.QueryProcessor.Execute<QueryCategoryCondition, Set<KeyValuePair<int, string>>>(condition);
+            return queryProcessor.Execute<QueryCategoryCondition, Set<KeyValuePair<int, string>>>(condition);
         }
     }
 }

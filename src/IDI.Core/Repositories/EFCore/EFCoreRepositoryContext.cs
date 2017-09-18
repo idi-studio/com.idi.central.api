@@ -1,9 +1,4 @@
-﻿using System;
-using IDI.Core.Logging;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace IDI.Core.Repositories.EFCore
 {
@@ -16,9 +11,9 @@ namespace IDI.Core.Repositories.EFCore
         {
             this.efContext = efContext;
 
-            var provider = this.efContext.GetInfrastructure();
-            var loggerFactory = provider.GetService<ILoggerFactory>();
-            loggerFactory.AddProvider(new FileLoggerProvider());
+            //var provider = this.efContext.GetInfrastructure();
+            //var loggerFactory = provider.GetService<ILoggerFactory>();
+            //loggerFactory.AddProvider(new FileLoggerProvider());
 
             efContext.Database.EnsureCreated();
         }

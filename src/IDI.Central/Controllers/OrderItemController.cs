@@ -1,10 +1,11 @@
 ﻿using System;
+using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Sales.Commands;
 using IDI.Central.Models.Sales;
-using IDI.Central.Core;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
-using IDI.Core.Infrastructure;
+using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IDI.Central.Controllers
@@ -12,6 +13,15 @@ namespace IDI.Central.Controllers
     [Route("api/order/item"), ApplicationAuthorize]
     public class OrderItemController : Controller
     {
+        private readonly ICommandBus commandBus;
+        private readonly IQueryProcessor queryProcessor;
+
+        public OrderItemController(ICommandBus commandBus, IQueryProcessor queryProcessor)
+        {
+            this.commandBus = commandBus;
+            this.queryProcessor = queryProcessor;
+        }
+
         //POST: api/order/item
         [HttpPost]
         public Result Post([FromBody]OrderItemInput input)
@@ -26,7 +36,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Create,
             };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         // Put: api/order/item
@@ -44,7 +54,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         // DELETE api/order/item/{id}
@@ -53,7 +63,7 @@ namespace IDI.Central.Controllers
         {
             var command = new OrderItemCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
     }
 }

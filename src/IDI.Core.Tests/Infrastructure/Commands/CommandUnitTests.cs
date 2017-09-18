@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;
+using IDI.Core.Infrastructure.Messaging;
 using IDI.Core.Tests.TestUtils;
 using IDI.Core.Tests.TestUtils.Commands;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,10 +12,17 @@ namespace IDI.Core.Tests.Infrastructure.Commands
     [TestCategory(Contants.TestCategory.Command)]
     public class CommandUnitTests
     {
+        public ICommandBus CommandBus { get; private set; }
+
+        public CommandUnitTests()
+        {
+            this.CommandBus = ServiceLocator.GetService<ICommandBus>();
+        }
+
         [TestMethod]
         public void TestCommandBus_Execute_Fail_ForNullParameter()
         {
-            var result = ServiceLocator.CommandBus.Send(default(TestCommand));
+            var result = this.CommandBus.Send(default(TestCommand));
 
             Assert.AreEqual(ResultStatus.Error, result.Status);
             Assert.AreEqual("命令参数不能为空!", result.Message);
@@ -24,7 +32,7 @@ namespace IDI.Core.Tests.Infrastructure.Commands
         public void TestCommandBus_Execute_Fail_ForInvalidParameter()
         {
             var command = new TestCommand(field: "");
-            var result = ServiceLocator.CommandBus.Send(command);
+            var result = this.CommandBus.Send(command);
 
             Assert.AreEqual(ResultStatus.Fail, result.Status);
             Assert.AreEqual("命令参数验证失败!", result.Message);
@@ -41,7 +49,7 @@ namespace IDI.Core.Tests.Infrastructure.Commands
         public void TestCommandBus_Execute_Fail_ForValidParameter_WithoutCommandHandler()
         {
             var command = new TestCommand(field: "123456");
-            var result = ServiceLocator.CommandBus.Send(command);
+            var result = this.CommandBus.Send(command);
 
             Assert.AreEqual(ResultStatus.Error, result.Status);
             Assert.AreEqual("未找到任何相关命令处理器!", result.Message);
@@ -50,14 +58,14 @@ namespace IDI.Core.Tests.Infrastructure.Commands
 
             var errors = result.Details["errors"] as List<string>;
 
-            Assert.AreEqual(0, errors.Count);  
+            Assert.AreEqual(0, errors.Count);
         }
 
         [TestMethod]
         public void TestCommandBus_Execute_Success_ForValidParameter_WithCommandHandler()
         {
             var command = new ChangeFieldCommand(field: "123456");
-            var result = ServiceLocator.CommandBus.Send(command);
+            var result = this.CommandBus.Send(command);
 
             Assert.AreEqual(ResultStatus.Success, result.Status);
             Assert.AreEqual("执行成功!", result.Message);

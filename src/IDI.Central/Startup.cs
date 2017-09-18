@@ -1,13 +1,10 @@
-﻿using System.IO;
-using IDI.Central.Core;
+﻿using IDI.Central.Core;
 using IDI.Central.Domain;
 using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Localization.Packages;
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
-using log4net;
-using log4net.Config;
-using log4net.Repository;
+using IDI.Core.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -22,8 +19,6 @@ namespace IDI.Central
     {
         public IConfigurationRoot Configuration { get; }
 
-        public static ILoggerRepository LoggerRepository { get; set; }
-
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -33,15 +28,13 @@ namespace IDI.Central
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
-
-            LoggerRepository = LogManager.CreateRepository("IDI.Central.LoggerRepository");
-
-            XmlConfigurator.Configure(LoggerRepository, new FileInfo("Configs/log4net.config"));
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            ServiceLocator.Initialize(services);
+
             // Add framework services.
             services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
                 .AddMvcOptions(options => options.Filters.Add<ApplicationExceptionAttribute>());
@@ -65,8 +58,6 @@ namespace IDI.Central
         {
             //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             //loggerFactory.AddDebug();
-            var log = LogManager.GetLogger(LoggerRepository.Name, typeof(Startup));
-            log.Info("test");
 
             //if (env.IsDevelopment())
             //{
@@ -98,7 +89,6 @@ namespace IDI.Central
 
             app.UseMvc();
             app.UseLanguagePackage<PackageCentral>();
-            app.UseLocalization<Localization>();
         }
     }
 }

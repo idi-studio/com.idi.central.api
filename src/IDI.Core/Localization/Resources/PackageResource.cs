@@ -31,7 +31,11 @@ namespace IDI.Core.Localization.Packages
 								}
 
 						public class Command {
-								public const string CommandModeNonsupport = "command-mode-nonsupport";
+								public const string CommandNonsupport = "command-nonsupport";
+								public const string UnknownCommand = "unknown-command";
+								public const string CommandWithInvalidParameter = "command-with-invalid-parameter";
+								public const string CommandInvalid = "command-invalid";
+								public const string CommandExecutedWithError = "command-executed-with-error";
 								}
 
 					}

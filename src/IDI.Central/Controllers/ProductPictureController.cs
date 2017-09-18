@@ -6,7 +6,8 @@ using IDI.Central.Domain.Modules.Material.Commands;
 using IDI.Central.Models.Material;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
-using IDI.Core.Infrastructure;
+using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +16,15 @@ namespace IDI.Central.Controllers
     [Route("api/product/picture"), ApplicationAuthorize]
     public class ProductPictureController : Controller
     {
+        private readonly ICommandBus commandBus;
+        private readonly IQueryProcessor queryProcessor;
+
+        public ProductPictureController(ICommandBus commandBus, IQueryProcessor queryProcessor)
+        {
+            this.commandBus = commandBus;
+            this.queryProcessor = queryProcessor;
+        }
+
         //POST: api/product/picture
         [HttpPost]
         public Result Post([FromServices]IHostingEnvironment env)
@@ -29,7 +39,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Create,
             };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         // Put: api/product/picture
@@ -44,7 +54,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         // DELETE api/product/picture/{id}
@@ -53,7 +63,7 @@ namespace IDI.Central.Controllers
         {
             var command = new ProductPictureCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
     }
 }

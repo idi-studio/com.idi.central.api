@@ -4,6 +4,7 @@ using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Localization;
 using IDI.Core.Localization.Packages;
+using IDI.Core.Logging;
 
 namespace IDI.Core.Infrastructure.Commands
 {
@@ -15,6 +16,9 @@ namespace IDI.Core.Infrastructure.Commands
     {
         [Injection]
         public ILocalization Localization { get; set; }
+
+        [Injection]
+        public ILogger Logger { get; set; }
 
         public Result Execute(T command)
         {
@@ -35,13 +39,12 @@ namespace IDI.Core.Infrastructure.Commands
                 return Upload(command);
             }
 
-            return Result.Fail(message: Localization.Get(Resources.Key.Command.CommandModeNonsupport));
+            return Result.Fail(message: Localization.Get(Resources.Key.Command.CommandNonsupport));
         }
 
         protected abstract Result Create(T command);
         protected abstract Result Update(T command);
         protected abstract Result Delete(T command);
-
         protected virtual Result Upload(T command)
         {
             throw new NotImplementedException();

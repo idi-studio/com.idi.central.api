@@ -6,7 +6,7 @@ using IDI.Central.Models.Sales;
 using IDI.Central.Models.Sales.Inputs;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
-using IDI.Core.Infrastructure;
+using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IDI.Central.Controllers
@@ -14,18 +14,27 @@ namespace IDI.Central.Controllers
     [Route("api/cust"), ApplicationAuthorize]
     public class CustomerController : Controller
     {
+        private readonly ICommandBus commandBus;
+        private readonly IQueryProcessor queryProcessor;
+
+        public CustomerController(ICommandBus commandBus, IQueryProcessor queryProcessor)
+        {
+            this.commandBus = commandBus;
+            this.queryProcessor = queryProcessor;
+        }
+
         [HttpGet("{id}")]
         public Result<CustomerModel> Get(Guid id)
         {
             var condition = new QueryCustomerCondition {  Id = id };
 
-            return ServiceLocator.QueryProcessor.Execute<QueryCustomerCondition, CustomerModel>(condition);
+            return queryProcessor.Execute<QueryCustomerCondition, CustomerModel>(condition);
         }
 
         [HttpGet("list")]
         public Result<Set<CustomerModel>> List()
         {
-            return ServiceLocator.QueryProcessor.Execute<QueryCustomerSetCondition, Set<CustomerModel>>();
+            return queryProcessor.Execute<QueryCustomerSetCondition, Set<CustomerModel>>();
         }
 
         [HttpPost]
@@ -42,7 +51,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Create,
             };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         [HttpPut("{id}")]
@@ -59,7 +68,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
 
         [HttpDelete("{id}")]
@@ -67,7 +76,7 @@ namespace IDI.Central.Controllers
         {
             var command = new CustomerCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
 
-            return ServiceLocator.CommandBus.Send(command);
+            return commandBus.Send(command);
         }
     }
 }
