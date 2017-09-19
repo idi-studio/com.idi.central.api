@@ -88,8 +88,8 @@ namespace IDI.Core.Infrastructure
             services.AddDbContextPool<TContext>(optionsAction: optionsAction);
             services.AddScoped<DbContext, TContext>();
             services.AddScoped<IRepositoryContext, RepositoryContext>();
-            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
-            services.AddTransient(typeof(IQueryableRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IQueryableRepository<>), typeof(Repository<>));
         }
     }
 }

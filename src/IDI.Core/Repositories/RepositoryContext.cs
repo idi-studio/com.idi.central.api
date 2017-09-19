@@ -47,7 +47,7 @@ namespace IDI.Core.Repositories
         #region IRepositoryContext Members
         public Guid Id { get { return id; } }
 
-        public IQueryable<TAggregateRoot> Set<TAggregateRoot>() where TAggregateRoot : AggregateRoot
+        public IQueryable<TAggregateRoot> Source<TAggregateRoot>() where TAggregateRoot : AggregateRoot
         {
             return context.Set<TAggregateRoot>();
         }

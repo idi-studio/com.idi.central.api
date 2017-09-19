@@ -12,7 +12,7 @@ namespace IDI.Core.Repositories
         private readonly IRepositoryContext context;
         private readonly ICurrentUser user;
 
-        public IQueryable<TAggregateRoot> Source { get { return context.Set<TAggregateRoot>(); } }
+        public IQueryable<TAggregateRoot> Source { get { return context.Source<TAggregateRoot>(); } }
 
         public Repository(IRepositoryContext context, ICurrentUser user)
         {

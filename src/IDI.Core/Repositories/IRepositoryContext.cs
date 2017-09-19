@@ -9,7 +9,7 @@ namespace IDI.Core.Repositories
     {
         Guid Id { get; }
 
-        IQueryable<TAggregateRoot> Set<TAggregateRoot>() where TAggregateRoot : AggregateRoot;
+        IQueryable<TAggregateRoot> Source<TAggregateRoot>() where TAggregateRoot : AggregateRoot;
 
         void Add<TAggregateRoot>(TAggregateRoot aggregateRoot) where TAggregateRoot : AggregateRoot;
 
