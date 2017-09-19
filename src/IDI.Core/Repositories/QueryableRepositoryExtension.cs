@@ -100,16 +100,6 @@ namespace IDI.Core.Repositories
 
         //    return new Page<TAggregateRoot>(totalRecords: total, totalPages: (total + size - 1) / size, pageSize: size, pageNumber: number, items: items);
         //}
-
-        //public QueryableContext<TAggregateRoot> Query()
-        //{
-        //    return new QueryableContext<TAggregateRoot>(queryable);
-        //}
-
-        //public QueryableContext<TAggregateRoot> Query(Expression<Func<TAggregateRoot, bool>> condition)
-        //{
-        //    return new QueryableContext<TAggregateRoot>(queryable.Where(condition));
-        //}
         #endregion
     }
 

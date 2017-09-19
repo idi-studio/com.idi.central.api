@@ -57,20 +57,10 @@ namespace IDI.Core.Repositories.EFCore
         {
             return efContext.Context.Set<TAggregateRoot>().FirstOrDefault(e => e.Id == key);
         }
-        //protected override TAggregateRoot DoFind(Guid key, params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths)
-        //{
-        //    var query = BuidIncludableQuery(navigationPropertyPaths);
-
-        //    return query.FirstOrDefault(e => e.Id == key);
-        //}
         protected override TAggregateRoot DoFind(Expression<Func<TAggregateRoot, bool>> condition)
         {
             return efContext.Context.Set<TAggregateRoot>().FirstOrDefault(condition);
         }
-        //protected override TAggregateRoot DoFind(Expression<Func<TAggregateRoot, bool>> condition, params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths)
-        //{
-        //    return BuidIncludableQuery(navigationPropertyPaths).FirstOrDefault(condition);
-        //}
         protected override bool DoExist(Expression<Func<TAggregateRoot, bool>> condition)
         {
             return efContext.Context.Set<TAggregateRoot>().Any(condition);
@@ -83,53 +73,10 @@ namespace IDI.Core.Repositories.EFCore
         {
             return efContext.Context.Set<TAggregateRoot>().ToList();
         }
-        //protected override List<TAggregateRoot> DoGet(params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths)
-        //{
-        //    return BuidIncludableQuery(navigationPropertyPaths).ToList();
-        //}
         protected override List<TAggregateRoot> DoGet(Expression<Func<TAggregateRoot, bool>> condition)
         {
             return efContext.Context.Set<TAggregateRoot>().Where(condition).ToList();
         }
-        //protected override List<TAggregateRoot> DoGet(Expression<Func<TAggregateRoot, bool>> condition, params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths)
-        //{
-        //    return BuidIncludableQuery(navigationPropertyPaths).Where(condition).ToList();
-        //}
-        //protected override QueryableContext<TAggregateRoot> DoQuery()
-        //{
-        //    var queryable = efContext.Context.Set<TAggregateRoot>();
-
-        //    return new QueryableContext<TAggregateRoot>(queryable);
-        //}
-        //protected override QueryableContext<TAggregateRoot> DoQuery(Expression<Func<TAggregateRoot, bool>> condition)
-        //{
-        //    var queryable = efContext.Context.Set<TAggregateRoot>().Where(condition);
-
-        //    return new QueryableContext<TAggregateRoot>(queryable);
-        //}
-        //protected override QueryableContext<TAggregateRoot> DoQuery(Expression<Func<TAggregateRoot, bool>> condition, params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths)
-        //{
-        //    var queryable = BuidIncludableQuery(navigationPropertyPaths).Where(condition);
-
-        //    return new QueryableContext<TAggregateRoot>(queryable);
-        //}
         #endregion
-
-        //private IIncludableQueryable<TAggregateRoot, dynamic> BuidIncludableQuery(params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths)
-        //{
-        //    var dbset = efContext.Context.Set<TAggregateRoot>();
-
-        //    IIncludableQueryable<TAggregateRoot, dynamic> query = null;
-
-        //    foreach (Expression<Func<TAggregateRoot, dynamic>> navigationPropertyPath in navigationPropertyPaths)
-        //    {
-        //        if (query == null)
-        //            query = dbset.Include(navigationPropertyPath);
-        //        else
-        //            query = query.Include(navigationPropertyPath);
-        //    }
-
-        //    return query;
-        //}
     }
 }
