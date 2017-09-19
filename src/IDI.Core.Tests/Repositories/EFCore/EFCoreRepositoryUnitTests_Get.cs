@@ -20,7 +20,7 @@ namespace IDI.Core.Tests.Repositories.EFCore
             Assert.AreEqual(expected: blogCount, actual: DbHelper.ReadRecordCount(Contants.Tables.Blogs));
             Assert.AreEqual(expected: blogCount * postCount, actual: DbHelper.ReadRecordCount(Contants.Tables.Posts));
 
-            var repository = ServiceLocator.GetService<IRepository<Blog>>();
+            var repository = Runtime.GetService<IRepository<Blog>>();
 
             var blogs = repository.Get();
 
@@ -39,7 +39,7 @@ namespace IDI.Core.Tests.Repositories.EFCore
             Assert.AreEqual(expected: blogCount, actual: DbHelper.ReadRecordCount(Contants.Tables.Blogs));
             Assert.AreEqual(expected: blogCount * postCount, actual: DbHelper.ReadRecordCount(Contants.Tables.Posts));
 
-            var repository = ServiceLocator.GetService<IRepository<Blog>>();
+            var repository = Runtime.GetService<IRepository<Blog>>();
 
             var blogs = repository.Include(b => b.Posts).Get();
 
@@ -58,7 +58,7 @@ namespace IDI.Core.Tests.Repositories.EFCore
             Assert.AreEqual(expected: blogCount, actual: DbHelper.ReadRecordCount(Contants.Tables.Blogs));
             Assert.AreEqual(expected: blogCount * postCount, actual: DbHelper.ReadRecordCount(Contants.Tables.Posts));
 
-            var repository = ServiceLocator.GetService<IRepository<Blog>>();
+            var repository = Runtime.GetService<IRepository<Blog>>();
 
             var blogs = repository.Get(b => b.Url == "http://www.cnblogs.com/?id=1");
 
@@ -77,7 +77,7 @@ namespace IDI.Core.Tests.Repositories.EFCore
             Assert.AreEqual(expected: blogCount, actual: DbHelper.ReadRecordCount(Contants.Tables.Blogs));
             Assert.AreEqual(expected: blogCount * postCount, actual: DbHelper.ReadRecordCount(Contants.Tables.Posts));
 
-            var repository = ServiceLocator.GetService<IRepository<Blog>>();
+            var repository = Runtime.GetService<IRepository<Blog>>();
 
             var blogs = repository.Include(e => e.Posts).Get(b => b.Url == "http://www.cnblogs.com/?id=1");
 

@@ -19,7 +19,7 @@ namespace IDI.Core.Tests.Repositories.EFCore
                 Password = "123456",
             };
 
-            var repository = ServiceLocator.GetService<IRepository<User>>();
+            var repository = Runtime.GetService<IRepository<User>>();
 
             repository.Add(user);
             repository.Commit();
@@ -38,7 +38,7 @@ namespace IDI.Core.Tests.Repositories.EFCore
             int actual = DbHelper.ReadRecordCount(Contants.Tables.Users);
             Assert.AreEqual(expected: 1, actual: actual);
 
-            var repository = ServiceLocator.GetService<IRepository<User>>();
+            var repository = Runtime.GetService<IRepository<User>>();
 
             User user = repository.Find(new Guid(Contants.DbOperations.InsertUser.PK));
 
@@ -65,7 +65,7 @@ namespace IDI.Core.Tests.Repositories.EFCore
             int actual = DbHelper.ReadRecordCount(Contants.Tables.Users);
             Assert.AreEqual(expected: 1, actual: actual);
 
-            var repository = ServiceLocator.GetService<IRepository<User>>();
+            var repository = Runtime.GetService<IRepository<User>>();
 
             User user = repository.Find(new Guid(Contants.DbOperations.InsertUser.PK));
 

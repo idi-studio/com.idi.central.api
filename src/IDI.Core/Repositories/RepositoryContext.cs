@@ -1,100 +1,79 @@
 ﻿using System;
-using System.Collections.Concurrent;
+using System.Linq;
 using IDI.Core.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace IDI.Core.Repositories
 {
-    public abstract class RepositoryContext : IRepositoryContext
+    public class RepositoryContext : IRepositoryContext
     {
-        #region Private Fields
         private readonly Guid id = Guid.NewGuid();
-        private readonly ConcurrentDictionary<object, byte> newCollection = new ConcurrentDictionary<object, byte>();
-        private ConcurrentDictionary<object, byte> modifiedCollection = new ConcurrentDictionary<object, byte>();
-        private ConcurrentDictionary<object, byte> deletedCollection = new ConcurrentDictionary<object, byte>();
+        private readonly DbContext context;
         private volatile bool committed = true;
+        private readonly object sync = new object();
+
+        public RepositoryContext(DbContext context)
+        {
+            this.context = context;
+        }
+
+        #region IUnitOfWork Members
+        public bool Committed
+        {
+            get { return committed; }
+            protected set { committed = value; }
+        }
+        public int Commit()
+        {
+            int affected = 0;
+
+            if (!Committed)
+            {
+                lock (sync)
+                {
+                    affected = context.SaveChanges();
+                }
+                Committed = true;
+            }
+
+            return affected;
+        }
+        public void Rollback()
+        {
+            Committed = false;
+        }
         #endregion
 
-        #region Protected Properties
-        protected ConcurrentDictionary<object, byte> NewCollection
-        {
-            get { return newCollection; }
-        }
-        protected ConcurrentDictionary<object, byte> ModifiedCollection
-        {
-            get { return modifiedCollection; }
-        }
-        protected ConcurrentDictionary<object, byte> DeletedCollection
-        {
-            get { return deletedCollection; }
-        }
-        #endregion
+        #region IRepositoryContext Members
+        public Guid Id { get { return id; } }
 
-        #region Protected Methods
-        protected void ClearRegistrations()
+        public IQueryable<TAggregateRoot> Set<TAggregateRoot>() where TAggregateRoot : AggregateRoot
         {
-            newCollection.Clear();
-            modifiedCollection.Clear();
-            deletedCollection.Clear();
+            return context.Set<TAggregateRoot>();
+        }
+
+        public void Add<TAggregateRoot>(TAggregateRoot aggregateRoot) where TAggregateRoot : AggregateRoot
+        {
+            context.Add(aggregateRoot);
+            this.Committed = false;
+        }
+        public void Update<TAggregateRoot>(TAggregateRoot aggregateRoot) where TAggregateRoot : AggregateRoot
+        {
+            context.Update(aggregateRoot);
+            this.Committed = false;
+        }
+        public void Remove<TAggregateRoot>(TAggregateRoot aggregateRoot) where TAggregateRoot : AggregateRoot
+        {
+            context.Remove(aggregateRoot);
+            this.Committed = false;
         }
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
             {
-                ClearRegistrations();
+                context.Dispose();
             }
         }
-        #endregion
-
-        #region IUnitOfWork Members
-        public virtual bool Committed
-        {
-            get { return committed; }
-            protected set { committed = value; }
-        }
-        public abstract void Commit();
-        public abstract void Rollback();
-        #endregion
-
-        #region IRepositoryContext Members
-        public Guid Id
-        {
-            get { return id; }
-        }
-
-        public virtual void RegisterNew<TAggregateRoot>(TAggregateRoot aggregateRoot) where TAggregateRoot : AggregateRoot
-        {
-            newCollection.AddOrUpdate(aggregateRoot, byte.MinValue, (o, b) => byte.MinValue);
-            Committed = false;
-        }
-
-        public virtual void RegisterModified<TAggregateRoot>(TAggregateRoot aggregateRoot) where TAggregateRoot : AggregateRoot
-        {
-            if (deletedCollection.ContainsKey(aggregateRoot))
-                throw new InvalidOperationException("The object cannot be registered as a modified object since it was marked as deleted.");
-            if (!modifiedCollection.ContainsKey(aggregateRoot) && !(newCollection.ContainsKey(aggregateRoot)))
-                modifiedCollection.AddOrUpdate(aggregateRoot, byte.MinValue, (o, b) => byte.MinValue);
-
-            Committed = false;
-        }
-
-        public virtual void RegisterDeleted<TAggregateRoot>(TAggregateRoot aggregateRoot) where TAggregateRoot : AggregateRoot
-        {
-            var @byte = byte.MinValue;
-            if (newCollection.ContainsKey(aggregateRoot))
-            {
-                newCollection.TryRemove(aggregateRoot, out @byte);
-                return;
-            }
-            var removedFromModified = modifiedCollection.TryRemove(aggregateRoot, out @byte);
-            var addedToDeleted = false;
-            if (!deletedCollection.ContainsKey(aggregateRoot))
-            {
-                deletedCollection.AddOrUpdate(aggregateRoot, byte.MinValue, (o, b) => byte.MinValue);
-                addedToDeleted = true;
-            }
-            committed = !(removedFromModified || addedToDeleted);
-        }
-
         #endregion
 
         public void Dispose()

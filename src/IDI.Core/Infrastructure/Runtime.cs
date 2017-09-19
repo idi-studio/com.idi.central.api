@@ -6,7 +6,6 @@ using IDI.Core.Infrastructure.Utils;
 using IDI.Core.Localization;
 using IDI.Core.Logging;
 using IDI.Core.Repositories;
-using IDI.Core.Repositories.EFCore;
 using log4net;
 using log4net.Config;
 using log4net.Repository;
@@ -16,7 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IDI.Core.Infrastructure
 {
-    public sealed class ServiceLocator
+    public sealed class Runtime
     {
         private static bool initialized;
         private static readonly object aync = new object();
@@ -34,9 +33,9 @@ namespace IDI.Core.Infrastructure
             get { return services; }
         }
 
-        static ServiceLocator() { }
+        static Runtime() { }
 
-        public static void Initialize(IServiceCollection collection)
+        public static void Initialize(IServiceCollection collection = null)
         {
             if (!initialized)
             {
@@ -47,7 +46,7 @@ namespace IDI.Core.Infrastructure
                     var repository = LogManager.CreateRepository("IDI.Core.LoggerRepository");
                     XmlConfigurator.Configure(repository, new FileInfo("Configs/log4net.config"));
 
-                    services.AddSingleton(LogManager.GetLogger(repository.Name, typeof(ServiceLocator)));
+                    services.AddSingleton(LogManager.GetLogger(repository.Name, typeof(Runtime)));
                     services.AddSingleton<ILogger, Log4NetLogger>();
                     services.AddSingleton<ILocalization, Globalization>();
                     services.AddSingleton<ICommandHandlerFactory, CommandHandlerFactory>();
@@ -88,10 +87,9 @@ namespace IDI.Core.Infrastructure
         {
             services.AddDbContextPool<TContext>(optionsAction: optionsAction);
             services.AddScoped<DbContext, TContext>();
-            services.AddScoped<IRepositoryContext, EFCoreRepositoryContext>();
-            services.AddScoped<IEFCoreRepositoryContext, EFCoreRepositoryContext>();
-            services.AddTransient(typeof(IRepository<>), typeof(EFCoreRepository<>));
-            services.AddTransient(typeof(IQueryableRepository<>), typeof(EFCoreRepository<>));
+            services.AddScoped<IRepositoryContext, RepositoryContext>();
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient(typeof(IQueryableRepository<>), typeof(Repository<>));
         }
     }
 }

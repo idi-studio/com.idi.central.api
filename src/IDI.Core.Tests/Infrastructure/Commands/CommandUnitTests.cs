@@ -16,7 +16,7 @@ namespace IDI.Core.Tests.Infrastructure.Commands
 
         public CommandUnitTests()
         {
-            this.CommandBus = ServiceLocator.GetService<ICommandBus>();
+            this.CommandBus = Runtime.GetService<ICommandBus>();
         }
 
         [TestMethod]

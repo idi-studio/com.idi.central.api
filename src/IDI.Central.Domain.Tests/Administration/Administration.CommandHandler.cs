@@ -16,7 +16,7 @@ namespace IDI.Central.Domain.Tests
         public void Administration_UserRegisterCommand()
         {
             var hanlder = new UserRegistrationCommandHandler();
-            hanlder.Users = ServiceLocator.GetService<IRepository<User>>();
+            hanlder.Users = Runtime.GetService<IRepository<User>>();
 
             var result = hanlder.Execute(new UserRegistrationCommand("administrator", "123456", "123456"));
 
@@ -52,8 +52,8 @@ namespace IDI.Central.Domain.Tests
             });
 
             var hanlder = new RoleAuthorizationCommandHandler();
-            hanlder.Roles = ServiceLocator.GetService<IRepository<Role>>();
-            hanlder.Privileges = ServiceLocator.GetService<IRepository<Privilege>>();
+            hanlder.Roles = Runtime.GetService<IRepository<Role>>();
+            hanlder.Privileges = Runtime.GetService<IRepository<Privilege>>();
 
             var result = hanlder.Execute(new RoleAuthorizationCommand(role.Name, new Guid[] { privilege2.Id, privilege3.Id, privilege4.Id }));
 
@@ -93,8 +93,8 @@ namespace IDI.Central.Domain.Tests
             });
 
             var hanlder = new UserAuthorizeCommandHandler();
-            hanlder.Users = ServiceLocator.GetService<IRepository<User>>();
-            hanlder.Roles = ServiceLocator.GetService<IRepository<Role>>();
+            hanlder.Users = Runtime.GetService<IRepository<User>>();
+            hanlder.Roles = Runtime.GetService<IRepository<Role>>();
 
             var result = hanlder.Execute(new UserAuthorizeCommand(user.UserName, new Guid[] { role2.Id, role3.Id, role4.Id }));
 

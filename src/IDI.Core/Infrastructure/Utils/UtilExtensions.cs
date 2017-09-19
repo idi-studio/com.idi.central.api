@@ -19,7 +19,7 @@ namespace IDI.Core.Infrastructure.Utils
             if (constructor == null)
                 return null;
 
-            object[] parameters = constructor.GetParameters().Select(p => ServiceLocator.GetService(p.ParameterType)).ToArray();
+            object[] parameters = constructor.GetParameters().Select(p => Runtime.GetService(p.ParameterType)).ToArray();
 
             object instance = constructor.Invoke(parameters).InjectedProperties();
 
@@ -51,7 +51,7 @@ namespace IDI.Core.Infrastructure.Utils
         {
             var properties = service.GetType().GetProperties().Where(p => p.CanWrite && p.GetCustomAttribute<InjectionAttribute>() != null).ToList();
 
-            properties.ForEach(p => p.SetValue(service, ServiceLocator.GetService(p.PropertyType)));
+            properties.ForEach(p => p.SetValue(service, Runtime.GetService(p.PropertyType)));
         }
     }
 }

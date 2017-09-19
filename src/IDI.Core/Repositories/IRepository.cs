@@ -10,6 +10,6 @@ namespace IDI.Core.Repositories
 
         void Update(TAggregateRoot aggregateRoot);
 
-        void Commit();
+        int Commit();
     }
 }

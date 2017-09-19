@@ -23,7 +23,7 @@ namespace IDI.Core.Common.Extensions
 
         public static void AddSqlServer<TContext>(this IServiceCollection services, string connectionString) where TContext : DbContext
         {
-            ServiceLocator.AddDbContext<TContext>(options => options.UseSqlServer(connectionString, o => o.UseRowNumberForPaging()));
+            Runtime.AddDbContext<TContext>(options => options.UseSqlServer(connectionString, o => o.UseRowNumberForPaging()));
         }
 
         public static void UseTokenAuthentication<TTokenAuthenticationMiddleware>(this IApplicationBuilder app, IOptions<TokenAuthenticationOptions> options = null)

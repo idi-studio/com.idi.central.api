@@ -2,113 +2,78 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using IDI.Core.Authentication;
 using IDI.Core.Domain;
 
 namespace IDI.Core.Repositories
 {
-    public abstract class Repository<TAggregateRoot> : IRepository<TAggregateRoot> where TAggregateRoot : AggregateRoot
+    public class Repository<TAggregateRoot> : IRepository<TAggregateRoot> where TAggregateRoot : AggregateRoot
     {
         private readonly IRepositoryContext context;
+        private readonly ICurrentUser user;
 
-        public IQueryable<TAggregateRoot> Source => this.DoSource();
+        public IQueryable<TAggregateRoot> Source { get { return context.Set<TAggregateRoot>(); } }
 
-        public Repository(IRepositoryContext context)
+        public Repository(IRepositoryContext context, ICurrentUser user)
         {
             this.context = context;
+            this.user = user;
         }
 
         #region IRepository<TAggregateRoot> Members
         public void Add(TAggregateRoot aggregateRoot)
         {
-            this.DoAdd(aggregateRoot);
+            if (user != null && user.IsAuthenticated)
+            {
+                aggregateRoot.CreatedBy = user.Name;
+                aggregateRoot.LastUpdatedBy = user.Name;
+            }
+            context.Add(aggregateRoot);
         }
         public void Remove(TAggregateRoot aggregateRoot)
         {
-            this.DoRemove(aggregateRoot);
+            context.Remove(aggregateRoot);
         }
         public void Update(TAggregateRoot aggregateRoot)
         {
-            this.DoUpdate(aggregateRoot);
+            if (user != null && user.IsAuthenticated)
+            {
+                aggregateRoot.LastUpdatedAt = DateTime.Now;
+                aggregateRoot.LastUpdatedBy = user.Name;
+            }
+            context.Update(aggregateRoot);
         }
-        public void Commit()
+        public int Commit()
         {
-            this.context.Commit();
+            return context.Commit();
         }
         #endregion
 
         #region IQueryableRepository<TAggregateRoot> Members
         public bool Exist(Expression<Func<TAggregateRoot, bool>> condition)
         {
-            return this.DoExist(condition);
+            return Source.Any(condition);
         }
         public int Count(Expression<Func<TAggregateRoot, bool>> condition)
         {
-            return this.DoCount(condition);
+            return Source.Count(condition);
         }
         public TAggregateRoot Find(Guid key)
         {
-            return this.DoFind(key);
+            return Source.FirstOrDefault(e => e.Id == key);
         }
-        //public TAggregateRoot Find(Guid key, params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths)
-        //{
-        //    return this.DoFind(key, navigationPropertyPaths);
-        //}
         public TAggregateRoot Find(Expression<Func<TAggregateRoot, bool>> condition)
         {
-            return this.DoFind(condition);
+            return Source.FirstOrDefault(condition);
         }
-        //public TAggregateRoot Find(Expression<Func<TAggregateRoot, bool>> condition, params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths)
-        //{
-        //    return this.DoFind(condition, navigationPropertyPaths);
-        //}
         public List<TAggregateRoot> Get()
         {
-            return this.DoGet();
+            return Source.ToList();
         }
-        //public List<TAggregateRoot> Get(params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths)
-        //{
-        //    return this.DoGet(navigationPropertyPaths);
-        //}
         public List<TAggregateRoot> Get(Expression<Func<TAggregateRoot, bool>> condition)
         {
-            return this.DoGet(condition);
+            return Source.Where(condition).ToList();
         }
-        //public List<TAggregateRoot> Get(Expression<Func<TAggregateRoot, bool>> condition, params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths)
-        //{
-        //    return this.DoGet(condition, navigationPropertyPaths);
-        //}
-        //public QueryableContext<TAggregateRoot> Query()
-        //{
-        //    return this.DoQuery();
-        //}
-        //public QueryableContext<TAggregateRoot> Query(Expression<Func<TAggregateRoot, bool>> condition)
-        //{
-        //    return this.DoQuery(condition);
-        //}
-        //public QueryableContext<TAggregateRoot> Query(Expression<Func<TAggregateRoot, bool>> condition, params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths)
-        //{
-        //    return this.DoQuery(condition, navigationPropertyPaths);
-        //}
-        #endregion
-
-        #region Protected Methods
-        protected abstract IQueryable<TAggregateRoot> DoSource();
-        protected abstract void DoAdd(TAggregateRoot aggregateRoot);
-        protected abstract void DoRemove(TAggregateRoot aggregateRoot);
-        protected abstract void DoUpdate(TAggregateRoot aggregateRoot);
-        protected abstract bool DoExist(Expression<Func<TAggregateRoot, bool>> condition);
-        protected abstract int DoCount(Expression<Func<TAggregateRoot, bool>> condition);
-        protected abstract TAggregateRoot DoFind(Guid key);
-        //protected abstract TAggregateRoot DoFind(Guid key, params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths);
-        protected abstract TAggregateRoot DoFind(Expression<Func<TAggregateRoot, bool>> condition);
-        //protected abstract TAggregateRoot DoFind(Expression<Func<TAggregateRoot, bool>> condition, params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths);
-        protected abstract List<TAggregateRoot> DoGet();
-        //protected abstract List<TAggregateRoot> DoGet(params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths);
-        protected abstract List<TAggregateRoot> DoGet(Expression<Func<TAggregateRoot, bool>> condition);
-        //protected abstract List<TAggregateRoot> DoGet(Expression<Func<TAggregateRoot, bool>> condition, params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths);
-        //protected abstract QueryableContext<TAggregateRoot> DoQuery();
-        //protected abstract QueryableContext<TAggregateRoot> DoQuery(Expression<Func<TAggregateRoot, bool>> condition);
-        //protected abstract QueryableContext<TAggregateRoot> DoQuery(Expression<Func<TAggregateRoot, bool>> condition, params Expression<Func<TAggregateRoot, dynamic>>[] navigationPropertyPaths);
         #endregion
     }
 }

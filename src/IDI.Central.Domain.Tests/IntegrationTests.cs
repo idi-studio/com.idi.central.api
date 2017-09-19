@@ -13,9 +13,10 @@ namespace IDI.Central.Domain.Tests
         [TestInitialize]
         public void Init()
         {
-            ServiceLocator.AddDbContext<CentralContext>(options => options.UseSqlServer(connectionString, o => o.UseRowNumberForPaging()));
+            Runtime.Initialize();
+            Runtime.AddDbContext<CentralContext>(options => options.UseSqlServer(connectionString, o => o.UseRowNumberForPaging()));
 
-            using (var context = ServiceLocator.GetService<CentralContext>())
+            using (var context = Runtime.GetService<CentralContext>())
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
@@ -24,7 +25,7 @@ namespace IDI.Central.Domain.Tests
 
         protected void TestData(Action<CentralContext> action)
         {
-            using (var context = ServiceLocator.GetService<CentralContext>())
+            using (var context = Runtime.GetService<CentralContext>())
             {
                 action(context);
             }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using IDI.Core.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace IDI.Core.Repositories
 {
@@ -7,10 +9,12 @@ namespace IDI.Core.Repositories
     {
         Guid Id { get; }
 
-        void RegisterNew<TAggregateRoot>(TAggregateRoot aggregateRoot) where TAggregateRoot : AggregateRoot;
+        IQueryable<TAggregateRoot> Set<TAggregateRoot>() where TAggregateRoot : AggregateRoot;
 
-        void RegisterModified<TAggregateRoot>(TAggregateRoot aggregateRoot) where TAggregateRoot : AggregateRoot;
+        void Add<TAggregateRoot>(TAggregateRoot aggregateRoot) where TAggregateRoot : AggregateRoot;
 
-        void RegisterDeleted<TAggregateRoot>(TAggregateRoot aggregateRoot) where TAggregateRoot : AggregateRoot;
+        void Update<TAggregateRoot>(TAggregateRoot aggregateRoot) where TAggregateRoot : AggregateRoot;
+
+        void Remove<TAggregateRoot>(TAggregateRoot aggregateRoot) where TAggregateRoot : AggregateRoot;
     }
 }

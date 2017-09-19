@@ -12,7 +12,7 @@ namespace IDI.Central.Domain.Modules.Logistics
             modelBuilder.Entity<Deliver>().ToTable("Delivers");
 
             //One-to-Many
-            modelBuilder.Entity<Deliver>().HasOne(e => e.Order).WithOne().HasForeignKey<Voucher>(e => e.OrderId).IsRequired();
+            modelBuilder.Entity<Deliver>().HasOne(e => e.Order).WithOne().HasForeignKey<Deliver>(e => e.OrderId).IsRequired();
         }
     }
 }

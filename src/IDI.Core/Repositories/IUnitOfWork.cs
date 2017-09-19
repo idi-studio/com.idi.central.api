@@ -4,7 +4,7 @@
     {
         bool Committed { get; }
 
-        void Commit();
+        int Commit();
 
         void Rollback();
     }

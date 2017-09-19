@@ -19,8 +19,8 @@ namespace IDI.Central.Core
 
         public ApplicationAuthenticationProvider(RequestDelegate next, IOptions<TokenAuthenticationOptions> options) : base(next, options)
         {
-            this.commandBus = ServiceLocator.GetService<ICommandBus>();
-            this.queryProcessor = ServiceLocator.GetService<IQueryProcessor>();
+            this.commandBus = Runtime.GetService<ICommandBus>();
+            this.queryProcessor = Runtime.GetService<IQueryProcessor>();
         }
 
         protected override List<Claim> GenerateClientIdentity(string clientId, string clientSecret)

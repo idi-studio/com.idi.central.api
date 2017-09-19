@@ -28,10 +28,10 @@ namespace IDI.Central.Domain.Tests
         {
             var hanlder = new DatabaseInitalCommandHandler();
             hanlder.Localization = new Globalization();
-            hanlder.Users = ServiceLocator.GetService<IRepository<User>>();
-            hanlder.Roles = ServiceLocator.GetService<IRepository<Role>>();
-            hanlder.Modules = ServiceLocator.GetService<IRepository<Module>>();
-            hanlder.Clients = ServiceLocator.GetService<IRepository<Client>>();
+            hanlder.Users = Runtime.GetService<IRepository<User>>();
+            hanlder.Roles = Runtime.GetService<IRepository<Role>>();
+            hanlder.Modules = Runtime.GetService<IRepository<Module>>();
+            hanlder.Clients = Runtime.GetService<IRepository<Client>>();
 
             return hanlder.Execute(new DatabaseInitalCommand());
         }
@@ -40,7 +40,7 @@ namespace IDI.Central.Domain.Tests
         {
             var hanlder = new SalesInitalCommandHandler();
             hanlder.Localization = new Globalization();
-            hanlder.Customers = ServiceLocator.GetService<IRepository<Customer>>();
+            hanlder.Customers = Runtime.GetService<IRepository<Customer>>();
 
             return hanlder.Execute(new SalesInitalCommand());
         }
@@ -49,7 +49,7 @@ namespace IDI.Central.Domain.Tests
         {
             var hanlder = new MaterialInitalCommandHandler();
             hanlder.Localization = new Globalization();
-            hanlder.Products = ServiceLocator.GetService<IRepository<Product>>();
+            hanlder.Products = Runtime.GetService<IRepository<Product>>();
 
             return hanlder.Execute(new MaterialInitalCommand());
         }
