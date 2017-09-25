@@ -17,13 +17,13 @@ namespace IDI.Central.Domain.Modules.Administration
         public ModuleCollection()
         {
             this.Administration = new Module { SN = 10, Name = "Administration", Code = "ADM", Description = "Administration", Icon = "fa fa-cogs" };
-            this.Administration.NewPage(sn: 10, name: "Dashboard", controller: "platform", action: "dashboard", privilege: true, display: false);
-            this.Administration.NewPage(sn: 20, name: "Settings", controller: "platform", action: "settings", privilege: true);
-            this.Administration.NewPage(sn: 30, name: "Role", controller: "role", action: "administration", privilege: true);
-            this.Administration.NewPage(sn: 40, name: "User", controller: "user", action: "administration", privilege: true);
+            this.Administration.NewPage(sn: 10, name: "Dashboard", controller: "platform", action: "dashboard", permission: true, display: false);
+            this.Administration.NewPage(sn: 20, name: "Settings", controller: "platform", action: "settings", permission: true);
+            this.Administration.NewPage(sn: 30, name: "Role", controller: "role", action: "administration", permission: true);
+            this.Administration.NewPage(sn: 40, name: "User", controller: "user", action: "administration", permission: true);
 
             this.Sales = new Module { SN = 20, Name = "Order", Code = "SMM", Description = "Sales", Icon = "fa fa-tasks" };
-            this.Sales.NewPage(sn: 10, name: "Order", controller: "order", action: "index", privilege: true);
+            this.Sales.NewPage(sn: 10, name: "Order", controller: "order", action: "index", permission: true);
         }
     }
 
@@ -91,7 +91,7 @@ namespace IDI.Central.Domain.Modules.Administration
 
     internal static class SeedDataExtension
     {
-        public static Menu NewPage(this Module module, int sn, string name, string controller, string action, bool display = true, bool privilege = false, Menu parent = null)
+        public static Menu NewPage(this Module module, int sn, string name, string controller, string action, bool display = true, bool permission = false, Menu parent = null)
         {
             var menu = new Menu
             {
@@ -107,34 +107,34 @@ namespace IDI.Central.Domain.Modules.Administration
 
             module.Menus.Add(menu);
 
-            if (privilege)
-                module.NewPrivilege(menu);
+            if (permission)
+                module.NewPermission(menu);
 
             return menu;
         }
 
-        public static Privilege NewPrivilege(this Module module, Menu menu, string name = null)
+        public static Permission NewPermission(this Module module, Menu menu, string name = null)
         {
-            var privilege = new Privilege
+            var permission = new Permission
             {
                 Module = module,
                 Name = string.IsNullOrEmpty(name) ? menu.Name : name,
                 Code = menu.Code,
-                PrivilegeType = PrivilegeType.View
+                PermissionType = PermissionType.View
             };
 
-            module.Privileges.Add(privilege);
+            module.Permissions.Add(permission);
 
-            return privilege;
+            return permission;
         }
 
         public static void Authorize(this Role role, params Module[] modules)
         {
-            role.RolePrivileges.Clear();
-            modules.SelectMany(m => m.Privileges).ToList().ForEach(privilege =>
+            role.RolePermissions.Clear();
+            modules.SelectMany(m => m.Permissions).ToList().ForEach(permission =>
             {
-                if (!role.RolePrivileges.Any(e => e.PrivilegeId == privilege.Id))
-                    role.RolePrivileges.Add(new RolePrivilege { RoleId = role.Id, PrivilegeId = privilege.Id });
+                if (!role.RolePermissions.Any(e => e.PermissionId == permission.Id))
+                    role.RolePermissions.Add(new RolePermission { RoleId = role.Id, PermissionId = permission.Id });
             });
         }
 

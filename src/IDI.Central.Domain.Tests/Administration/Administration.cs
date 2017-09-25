@@ -16,11 +16,11 @@ namespace IDI.Central.Domain.Tests
         {
             var menu = new Menu { ModuleId = Utils.NewGuid(1), Code = "1" };
 
-            Assert.IsFalse(menu.IsAuthorized(new List<Privilege>()));
+            Assert.IsFalse(menu.IsAuthorized(new List<Permission>()));
             Assert.IsFalse(menu.IsAuthorized(null));
-            Assert.IsFalse(menu.IsAuthorized(new List<Privilege> { new Privilege { ModuleId = Utils.NewGuid(1), Code = "0" } }));
-            Assert.IsFalse(menu.IsAuthorized(new List<Privilege> { new Privilege { ModuleId = Utils.NewGuid(2), Code = "1" } }));
-            Assert.IsTrue(menu.IsAuthorized(new List<Privilege> { new Privilege { ModuleId = Utils.NewGuid(1), Code = "1", PrivilegeType = PrivilegeType.View } }));
+            Assert.IsFalse(menu.IsAuthorized(new List<Permission> { new Permission { ModuleId = Utils.NewGuid(1), Code = "0" } }));
+            Assert.IsFalse(menu.IsAuthorized(new List<Permission> { new Permission { ModuleId = Utils.NewGuid(2), Code = "1" } }));
+            Assert.IsTrue(menu.IsAuthorized(new List<Permission> { new Permission { ModuleId = Utils.NewGuid(1), Code = "1", PermissionType = PermissionType.View } }));
         }
     }
 }

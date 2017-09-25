@@ -25,7 +25,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
         public IQueryableRepository<User> Users { get; set; }
 
         [Injection]
-        public IQueryableRepository<RolePrivilege> RolePrivileges { get; set; }
+        public IQueryableRepository<RolePermission> RolePermissions { get; set; }
 
         public override Result<Sidebar> Execute(QuerySidebarCondition condition)
         {
@@ -36,10 +36,10 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
 
             var userRoles = user.UserRoles.Select(e => e.RoleId).ToList();
 
-            var privileges = this.RolePrivileges.Include(e=>e.Privilege).Get(e => userRoles.Contains(e.RoleId)).Select(e => e.Privilege).ToList();
+            var permissions = this.RolePermissions.Include(e=>e.Permission).Get(e => userRoles.Contains(e.RoleId)).Select(e => e.Permission).ToList();
 
             var menus = this.Menus.Include(e=>e.Module).Get();
-            menus = menus.Where(e => e.IsAuthorized(privileges)).ToList();
+            menus = menus.Where(e => e.IsAuthorized(permissions)).ToList();
 
             var sidebar = new Sidebar
             {

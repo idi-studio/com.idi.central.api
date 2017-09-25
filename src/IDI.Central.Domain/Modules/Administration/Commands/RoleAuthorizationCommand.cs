@@ -16,12 +16,12 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
         [RequiredField]
         public string Role { get; private set; }
 
-        public Guid[] Privileges { get; private set; }
+        public Guid[] Permissions { get; private set; }
 
-        public RoleAuthorizationCommand(string role, Guid[] privileges)
+        public RoleAuthorizationCommand(string role, Guid[] permissions)
         {
             this.Role = role;
-            this.Privileges = privileges;
+            this.Permissions = permissions;
         }
     }
 
@@ -34,25 +34,25 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
         public IRepository<Role> Roles { get; set; }
 
         [Injection]
-        public IRepository<Privilege> Privileges { get; set; }
+        public IRepository<Permission> Permissions { get; set; }
 
         public Result Execute(RoleAuthorizationCommand command)
         {
-            var role = this.Roles.Include(e => e.RolePrivileges).Find(r => r.Name == command.Role);
+            var role = this.Roles.Include(e => e.RolePermissions).Find(r => r.Name == command.Role);
 
             if (role == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidRole));
 
-            var recent = command.Privileges.ToList();
-            var current = role.RolePrivileges.Select(e => e.PrivilegeId).ToList();
+            var recent = command.Permissions.ToList();
+            var current = role.RolePermissions.Select(e => e.PermissionId).ToList();
             var deletion = current.Except(recent).ToList();
             var addition = recent.Except(current).ToList();
 
-            role.RolePrivileges.RemoveAll(e => deletion.Contains(e.PrivilegeId));
+            role.RolePermissions.RemoveAll(e => deletion.Contains(e.PermissionId));
 
-            var privileges = this.Privileges.Get(e => addition.Contains(e.Id));
-            var additionPrivileges = privileges.Select(privilege => new RolePrivilege { PrivilegeId = privilege.Id, RoleId = role.Id }).ToList();
-            role.RolePrivileges.AddRange(additionPrivileges);
+            var permissions = this.Permissions.Get(e => addition.Contains(e.Id));
+            var additionPermissions = permissions.Select(permission => new RolePermission { PermissionId = permission.Id, RoleId = role.Id }).ToList();
+            role.RolePermissions.AddRange(additionPermissions);
 
             this.Roles.Update(role);
             this.Roles.Commit();

@@ -33,19 +33,19 @@ namespace IDI.Central.Domain.Tests
         public void Administration_RoleAuthorizationCommand()
         {
             var module = new Module { Name = "Administration", Code = "Administration" };
-            var privilege1 = new Privilege { Id = Utils.NewGuid(1), Name = "privilege1", Code = "action1", PrivilegeType = PrivilegeType.View, Module = module };
-            var privilege2 = new Privilege { Id = Utils.NewGuid(2), Name = "privilege2", Code = "action2", PrivilegeType = PrivilegeType.View, Module = module };
-            var privilege3 = new Privilege { Id = Utils.NewGuid(3), Name = "privilege3", Code = "action3", PrivilegeType = PrivilegeType.View, Module = module };
-            var privilege4 = new Privilege { Id = Utils.NewGuid(4), Name = "privilege4", Code = "action4", PrivilegeType = PrivilegeType.View, Module = module };
+            var privilege1 = new Permission { Id = Utils.NewGuid(1), Name = "privilege1", Code = "action1", PermissionType = PermissionType.View, Module = module };
+            var privilege2 = new Permission { Id = Utils.NewGuid(2), Name = "privilege2", Code = "action2", PermissionType = PermissionType.View, Module = module };
+            var privilege3 = new Permission { Id = Utils.NewGuid(3), Name = "privilege3", Code = "action3", PermissionType = PermissionType.View, Module = module };
+            var privilege4 = new Permission { Id = Utils.NewGuid(4), Name = "privilege4", Code = "action4", PermissionType = PermissionType.View, Module = module };
 
             var role = new Role { Name = "administrator" };
-            role.RolePrivileges.Add(new RolePrivilege { Role = role, Privilege = privilege1 });
-            role.RolePrivileges.Add(new RolePrivilege { Role = role, Privilege = privilege2 });
-            role.RolePrivileges.Add(new RolePrivilege { Role = role, Privilege = privilege3 });
+            role.RolePermissions.Add(new RolePermission { Role = role, Permission = privilege1 });
+            role.RolePermissions.Add(new RolePermission { Role = role, Permission = privilege2 });
+            role.RolePermissions.Add(new RolePermission { Role = role, Permission = privilege3 });
 
             TestData(context =>
             {
-                context.Privileges.AddRange(privilege1, privilege2, privilege3, privilege4);
+                context.Permissions.AddRange(privilege1, privilege2, privilege3, privilege4);
                 context.Roles.Add(role);
                 context.SaveChanges();
                 context.Dispose();
@@ -53,7 +53,7 @@ namespace IDI.Central.Domain.Tests
 
             var hanlder = new RoleAuthorizationCommandHandler();
             hanlder.Roles = Runtime.GetService<IRepository<Role>>();
-            hanlder.Privileges = Runtime.GetService<IRepository<Privilege>>();
+            hanlder.Permissions = Runtime.GetService<IRepository<Permission>>();
 
             var result = hanlder.Execute(new RoleAuthorizationCommand(role.Name, new Guid[] { privilege2.Id, privilege3.Id, privilege4.Id }));
 
@@ -63,12 +63,12 @@ namespace IDI.Central.Domain.Tests
             TestData(context =>
             {
                 Assert.AreEqual(1, context.Modules.Count());
-                Assert.AreEqual(4, context.Privileges.Count());
+                Assert.AreEqual(4, context.Permissions.Count());
                 Assert.AreEqual(1, context.Roles.Count());
-                Assert.AreEqual(3, context.RolePrivileges.Count());
-                Assert.IsTrue(context.RolePrivileges.Any(e => e.PrivilegeId == privilege2.Id));
-                Assert.IsTrue(context.RolePrivileges.Any(e => e.PrivilegeId == privilege3.Id));
-                Assert.IsTrue(context.RolePrivileges.Any(e => e.PrivilegeId == privilege4.Id));
+                Assert.AreEqual(3, context.RolePermissions.Count());
+                Assert.IsTrue(context.RolePermissions.Any(e => e.PermissionId == privilege2.Id));
+                Assert.IsTrue(context.RolePermissions.Any(e => e.PermissionId == privilege3.Id));
+                Assert.IsTrue(context.RolePermissions.Any(e => e.PermissionId == privilege4.Id));
             });
         }
 

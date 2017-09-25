@@ -15,7 +15,7 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
 
         public bool IsActive { get; set; } = true;
 
-        public List<RolePrivilege> RolePrivileges { get; set; } = new List<RolePrivilege>();
+        public List<RolePermission> RolePermissions { get; set; } = new List<RolePermission>();
 
         public List<UserRole> UserRoles { get; set; } = new List<UserRole>();
     }

@@ -23,7 +23,7 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
         [StringLength(100)]
         public string Description { get; set; }
 
-        public List<Privilege> Privileges { get; set; } = new List<Privilege>();
+        public List<Permission> Permissions { get; set; } = new List<Permission>();
 
         public List<Menu> Menus { get; set; } = new List<Menu>();
     }

@@ -9,8 +9,8 @@ namespace IDI.Central.Domain
         public DbSet<Module> Modules { get; set; }
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Client> Clients { get; set; }
-        public DbSet<Privilege> Privileges { get; set; }
-        public DbSet<RolePrivilege> RolePrivileges { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Role> Roles { get; set; }

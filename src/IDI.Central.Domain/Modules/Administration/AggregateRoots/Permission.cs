@@ -6,7 +6,7 @@ using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
 {
-    public class Privilege : AggregateRoot
+    public class Permission : AggregateRoot
     {
         [Required]
         [StringLength(20)]
@@ -16,12 +16,12 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
         [StringLength(50)]
         public string Code { get; set; }
 
-        public PrivilegeType PrivilegeType { get; set; }
+        public PermissionType PermissionType { get; set; }
 
         public Guid ModuleId { get; set; }
 
         public Module Module { get; set; }
 
-        public List<RolePrivilege> RolePrivileges { get; set; } = new List<RolePrivilege>();
+        public List<RolePermission> RolePermissions { get; set; } = new List<RolePermission>();
     }
 }

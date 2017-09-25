@@ -7,12 +7,12 @@ namespace IDI.Central.Domain.Modules.Administration
 {
     public static class Extension
     {
-        public static bool IsAuthorized(this Menu menu, List<Privilege> privileges)
+        public static bool IsAuthorized(this Menu menu, List<Permission> permissions)
         {
-            if (privileges == null || (privileges != null && privileges.Count == 0))
+            if (permissions == null || (permissions != null && permissions.Count == 0))
                 return false;
 
-            if (privileges.Any(p => p.PrivilegeType == PrivilegeType.View && p.ModuleId == menu.ModuleId && p.Code == menu.Code))
+            if (permissions.Any(p => p.PermissionType == PermissionType.View && p.ModuleId == menu.ModuleId && p.Code == menu.Code))
                 return true;
 
             return false;
