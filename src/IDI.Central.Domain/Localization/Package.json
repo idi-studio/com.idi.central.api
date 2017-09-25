@@ -829,6 +829,42 @@
 },
 {
     "language": "chs",
+    "name": "unauthorized",
+    "value": "未经认证的用户!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "unauthorized",
+    "value": "Unauthorized.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "token-expired",
+    "value": "认证已过期!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "token-expired",
+    "value": "Token expired.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "token-invalid",
+    "value": "认证失效!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "token-invalid",
+    "value": "TokenInvalid.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "model",
     "value": "型号",
     "prefix": "tag"

@@ -71,6 +71,9 @@
   <item prefix="command" name="success" en="Success." chs="成功!" />
   <item prefix="command" name="completed" en="Completed." chs="完成!" />
   <item prefix="command" name="confirmed" en="Confirmed." chs="已确认!" />
+  <item prefix="command" name="unauthorized" en="Unauthorized." chs="未经认证的用户!" />
+  <item prefix="command" name="token-expired" en="Token expired." chs="认证已过期!" />
+  <item prefix="command" name="token-invalid" en="TokenInvalid." chs="认证失效!" />
 
   <item prefix="tag" name="model" en="Model" chs="型号" />
   <item prefix="tag" name="spec" en="Spec" chs="规格" />

@@ -75,6 +75,9 @@ namespace IDI.Central.Domain.Localization
 								public const string Success = "success";
 								public const string Completed = "completed";
 								public const string Confirmed = "confirmed";
+								public const string Unauthorized = "unauthorized";
+								public const string TokenExpired = "token-expired";
+								public const string TokenInvalid = "token-invalid";
 								}
 
 						public class Tag {
