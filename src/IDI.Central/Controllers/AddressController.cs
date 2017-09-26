@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IDI.Central.Controllers
 {
     [Route("api/addr"), ApplicationAuthorize]
+    [Module(Common.Constants.Module.Sales)]
     public class AddressController : Controller
     {
         private readonly ICommandBus commandBus;

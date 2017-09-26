@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IDI.Central.Controllers
 {
     [Route("api/order"), ApplicationAuthorize]
+    [Module(Common.Constants.Module.Sales)]
     public class OrderController : Controller
     {
         private readonly ICommandBus commandBus;

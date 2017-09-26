@@ -17,7 +17,17 @@
                 public static readonly string[] Extensions = { ".png", ".jpg", ".jpge" };
                 public const long Maximum = 800;
             }
-           
+        }
+
+        public class Module
+        {
+            public const string Administration = "Administration";
+            public const string Common = "Common";
+            public const string Inventory = "Inventory";
+            public const string Logistics = "Logistics";
+            public const string Material = "Material";
+            public const string Purchase = "Purchase";
+            public const string Sales = "Sales";
         }
     }
 }

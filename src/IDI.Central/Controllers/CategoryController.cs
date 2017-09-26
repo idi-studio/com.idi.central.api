@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IDI.Central.Controllers
 {
     [Route("api/catg"), ApplicationAuthorize]
+    [Module(Common.Constants.Module.Common)]
     public class CategoryController : Controller
     {
         private readonly ICommandBus commandBus;

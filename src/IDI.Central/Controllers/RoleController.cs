@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IDI.Central.Controllers
 {
     [Route("api/role"), ApplicationAuthorize]
+    [Module(Common.Constants.Module.Administration)]
     public class RoleController : Controller
     {
         private readonly ICommandBus commandBus;

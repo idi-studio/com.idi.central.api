@@ -17,6 +17,7 @@ using Microsoft.Extensions.Options;
 namespace IDI.Central.Controllers
 {
     [Route("api/product"), ApplicationAuthorize]
+    [Module(Common.Constants.Module.Common)]
     public class ProductController : Controller
     {
         private readonly ApplicationOptions options;

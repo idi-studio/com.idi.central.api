@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IDI.Central.Controllers
 {
     [Route("api/product/picture"), ApplicationAuthorize]
+    [Module(Common.Constants.Module.Common)]
     public class ProductPictureController : Controller
     {
         private readonly ICommandBus commandBus;
