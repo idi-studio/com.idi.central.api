@@ -4,6 +4,7 @@ using IDI.Central.Domain.Modules.Sales.Commands;
 using IDI.Central.Domain.Modules.Sales.Queries;
 using IDI.Central.Models.Sales;
 using IDI.Central.Models.Sales.Inputs;
+using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.Messaging;
@@ -24,6 +25,7 @@ namespace IDI.Central.Controllers
         }
 
         [HttpGet("{id}")]
+        [Permission("customer", PermissionType.Read)]
         public Result<CustomerModel> Get(Guid id)
         {
             var condition = new QueryCustomerCondition {  Id = id };
@@ -32,12 +34,14 @@ namespace IDI.Central.Controllers
         }
 
         [HttpGet("list")]
+        [Permission("customer", PermissionType.Query)]
         public Result<Set<CustomerModel>> List()
         {
             return queryProcessor.Execute<QueryCustomerSetCondition, Set<CustomerModel>>();
         }
 
         [HttpPost]
+        [Permission("customer", PermissionType.Add)]
         public Result Post([FromBody]CustomerInput input)
         {
             var command = new CustomerCommand
@@ -55,6 +59,7 @@ namespace IDI.Central.Controllers
         }
 
         [HttpPut("{id}")]
+        [Permission("customer", PermissionType.Upload)]
         public Result Put(Guid id, [FromBody]CustomerInput input)
         {
             var command = new CustomerCommand
@@ -72,6 +77,7 @@ namespace IDI.Central.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Permission("customer", PermissionType.Remove)]
         public Result Delete(Guid id)
         {
             var command = new CustomerCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };

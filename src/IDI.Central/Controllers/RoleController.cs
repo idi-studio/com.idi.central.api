@@ -2,8 +2,9 @@
 using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Central.Domain.Modules.Administration.Queries;
 using IDI.Central.Models.Administration;
+using IDI.Core.Authentication;
 using IDI.Core.Common;
-using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,15 +22,15 @@ namespace IDI.Central.Controllers
             this.queryProcessor = queryProcessor;
         }
 
-        // POST: api/role
         [HttpPost]
+        [Permission("role", PermissionType.Add)]
         public Result Post([FromBody]RoleCreationInput input)
         {
             return commandBus.Send(new RoleCreationCommand(input.RoleName));
         }
 
-        // GET: api/role/list
         [HttpGet("list")]
+        [Permission("role", PermissionType.Query)]
         public Result<Set<RoleModel>> List()
         {
             return queryProcessor.Execute<QueryRolesCondition, Set<RoleModel>>();

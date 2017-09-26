@@ -1,7 +1,9 @@
 ﻿using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Administration.Queries;
 using IDI.Central.Models.Administration;
+using IDI.Core.Authentication;
 using IDI.Core.Common;
+using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,8 +21,8 @@ namespace IDI.Central.Controllers
             this.queryProcessor = queryProcessor;
         }
 
-        // GET api/user/profile/{username}
         [HttpGet("{username}")]
+        [Permission("user-profile", PermissionType.Read)]
         public Result<MyProfile> Get(string username)
         {
             var condition = new QueryMyProfileCondition { UserName = username };

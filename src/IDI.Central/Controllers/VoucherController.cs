@@ -5,9 +5,9 @@ using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Sales.Commands;
 using IDI.Central.Domain.Modules.Sales.Queries;
 using IDI.Central.Models.Sales;
+using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
-using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +26,7 @@ namespace IDI.Central.Controllers
         }
 
         [HttpGet("{id}")]
+        [Permission("voucher", PermissionType.Read)]
         public Result<VoucherModel> Get(Guid id)
         {
             var condition = new QueryVoucherCondition { Id = id };
@@ -34,6 +35,7 @@ namespace IDI.Central.Controllers
         }
 
         [HttpPost]
+        [Permission("voucher", PermissionType.Add)]
         public Result Post([FromBody]VoucherInput input)
         {
             var command = new VoucherCommand
@@ -51,6 +53,7 @@ namespace IDI.Central.Controllers
         }
 
         [HttpPut("{id}")]
+        [Permission("voucher", PermissionType.Modify)]
         public Result Put(Guid id, [FromBody]VoucherInput input)
         {
             var command = new VoucherCommand
@@ -69,6 +72,7 @@ namespace IDI.Central.Controllers
         }
 
         [HttpPut("paid/{id}")]
+        [Permission("voucher", PermissionType.Paid)]
         public Result Paid(Guid id)
         {
             var command = new VoucherCommand
@@ -83,6 +87,7 @@ namespace IDI.Central.Controllers
         }
 
         [HttpPost("attach")]
+        [Permission("voucher", PermissionType.Upload)]
         public Result Attach()
         {
             var command = new VoucherCommand
@@ -97,6 +102,7 @@ namespace IDI.Central.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Permission("voucher", PermissionType.Remove)]
         public Result Delete(Guid id)
         {
             var command = new VoucherCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };

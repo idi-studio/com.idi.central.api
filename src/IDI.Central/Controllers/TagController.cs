@@ -1,8 +1,9 @@
 ﻿using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Common.Queries;
 using IDI.Central.Models.Common;
+using IDI.Core.Authentication;
 using IDI.Core.Common;
-using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,8 +21,8 @@ namespace IDI.Central.Controllers
             this.queryProcessor = queryProcessor;
         }
 
-        // GET: api/tag/list
         [HttpGet("list")]
+        [Permission("tag", PermissionType.Query)]
         public Result<Set<TagModel>> List()
         {
             return queryProcessor.Execute<QueryTagSetCondition, Set<TagModel>>();

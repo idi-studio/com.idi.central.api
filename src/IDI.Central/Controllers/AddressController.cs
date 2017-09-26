@@ -2,6 +2,7 @@
 using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Sales.Commands;
 using IDI.Central.Models.Sales.Inputs;
+using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.Messaging;
@@ -22,6 +23,7 @@ namespace IDI.Central.Controllers
         }
 
         [HttpPost]
+        [Permission("address", PermissionType.Add)]
         public Result Post([FromBody]ShippingAddressInput input)
         {
             var command = new ShippingAddressCommand
@@ -45,6 +47,7 @@ namespace IDI.Central.Controllers
         }
 
         [HttpPut("{id}")]
+        [Permission("address", PermissionType.Upload)]
         public Result Put(Guid id, [FromBody]ShippingAddressInput input)
         {
             var command = new ShippingAddressCommand
@@ -68,6 +71,7 @@ namespace IDI.Central.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Permission("address", PermissionType.Remove)]
         public Result Delete(Guid id)
         {
             var command = new ShippingAddressCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };

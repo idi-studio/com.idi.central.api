@@ -4,6 +4,7 @@ using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Sales.Commands;
 using IDI.Central.Domain.Modules.Sales.Queries;
 using IDI.Central.Models.Sales;
+using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.Messaging;
@@ -24,6 +25,7 @@ namespace IDI.Central.Controllers
         }
 
         [HttpPost]
+        [Permission("order", PermissionType.Add)]
         public Result Post([FromBody]OrderInput input)
         {
             var command = new OrderCommand
@@ -39,6 +41,7 @@ namespace IDI.Central.Controllers
         }
 
         [HttpGet("list")]
+        [Permission("order", PermissionType.Query)]
         public Result<Set<OrderModel>> List()
         {
             var condition = new QueryOrderSetCondition { Category = OrderCategory.Sales, Deadline = DateTime.Now.AddMonths(-3) };
@@ -47,6 +50,7 @@ namespace IDI.Central.Controllers
         }
 
         [HttpPut("{id}")]
+        [Permission("order", PermissionType.Modify)]
         public Result Put(Guid id, [FromBody]OrderInput input)
         {
             var command = new OrderCommand
@@ -63,8 +67,9 @@ namespace IDI.Central.Controllers
             return commandBus.Send(command);
         }
 
-        [HttpPut("confirm/{id}")]
-        public Result Confirm(Guid id)
+        [HttpPut("verify/{id}")]
+        [Permission("order", PermissionType.Verify)]
+        public Result Verify(Guid id)
         {
             var command = new OrderCommand
             {
@@ -78,8 +83,8 @@ namespace IDI.Central.Controllers
             return commandBus.Send(command);
         }
 
-        // GET api/order/{id}
         [HttpGet("{id}")]
+        [Permission("order", PermissionType.Read)]
         public Result<OrderModel> Get(Guid id)
         {
             var condition = new QueryOrderCondition { Id = id };
@@ -87,8 +92,8 @@ namespace IDI.Central.Controllers
             return queryProcessor.Execute<QueryOrderCondition, OrderModel>(condition);
         }
 
-        // DELETE api/order/{id}
         [HttpDelete("{id}")]
+        [Permission("order", PermissionType.Remove)]
         public Result Delete(Guid id)
         {
             var command = new OrderCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };

@@ -2,8 +2,9 @@
 using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Central.Domain.Modules.Administration.Queries;
 using IDI.Central.Models.Administration;
+using IDI.Core.Authentication;
 using IDI.Core.Common;
-using IDI.Core.Infrastructure.DependencyInjection;
+using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,15 +22,15 @@ namespace IDI.Central.Controllers
             this.queryProcessor = queryProcessor;
         }
 
-        // POST: api/user
         [HttpPost]
+        [Permission("user", PermissionType.Add)]
         public Result Post([FromBody]UserRegistrationInput input)
         {
             return commandBus.Send(new UserRegistrationCommand(input.UserName, input.Password, input.Confirm));
         }
 
-        // GET: api/user/list
         [HttpGet("list")]
+        [Permission("user", PermissionType.Query)]
         public Result<Set<UserModel>> List()
         {
             return queryProcessor.Execute<QueryUsersCondition, Set<UserModel>>();

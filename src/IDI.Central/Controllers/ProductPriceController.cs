@@ -3,10 +3,10 @@ using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Material.Commands;
 using IDI.Central.Domain.Modules.Material.Queries;
 using IDI.Central.Models.Material;
+using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Common.Extensions;
-using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,8 +24,8 @@ namespace IDI.Central.Controllers
             this.queryProcessor = queryProcessor;
         }
 
-        //POST: api/product/price
         [HttpPost]
+        [Permission("product-price", PermissionType.Add)]
         public Result Post([FromBody]ProductPriceInput input)
         {
             var command = new ProductPriceCommand
@@ -45,8 +45,8 @@ namespace IDI.Central.Controllers
             return commandBus.Send(command);
         }
 
-        // Put: api/product/price
         [HttpPut("{id}")]
+        [Permission("product-price", PermissionType.Modify)]
         public Result Put(Guid id, [FromBody]ProductPriceInput input)
         {
             var command = new ProductPriceCommand
@@ -67,8 +67,8 @@ namespace IDI.Central.Controllers
             return commandBus.Send(command);
         }
 
-        // GET api/product/price/{id}
         [HttpGet("{id}")]
+        [Permission("product-price", PermissionType.Read)]
         public Result<ProductPriceModel> Get(Guid id)
         {
             var condition = new QueryProductPriceCondition { Id = id };
@@ -76,8 +76,8 @@ namespace IDI.Central.Controllers
             return queryProcessor.Execute<QueryProductPriceCondition, ProductPriceModel>(condition);
         }
 
-        // DELETE api/product/price/{id}
         [HttpDelete("{id}")]
+        [Permission("product-price", PermissionType.Remove)]
         public Result Delete(Guid id)
         {
             var command = new ProductPriceCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
@@ -85,8 +85,8 @@ namespace IDI.Central.Controllers
             return commandBus.Send(command);
         }
 
-        // GET: api/product/price/list/{id}
         [HttpGet("list/{id}")]
+        [Permission("product-price", PermissionType.Query)]
         public Result<Set<ProductPriceModel>> List(Guid id)
         {
             var condition = new QueryProductPriceSetCondition { ProductId = id };

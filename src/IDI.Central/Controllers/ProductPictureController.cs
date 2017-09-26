@@ -4,9 +4,9 @@ using IDI.Central.Common.Enums;
 using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Material.Commands;
 using IDI.Central.Models.Material;
+using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
-using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,8 +25,8 @@ namespace IDI.Central.Controllers
             this.queryProcessor = queryProcessor;
         }
 
-        //POST: api/product/picture
         [HttpPost]
+        [Permission("product-picture", PermissionType.Upload)]
         public Result Post([FromServices]IHostingEnvironment env)
         {
             var command = new ProductPictureCommand
@@ -42,8 +42,8 @@ namespace IDI.Central.Controllers
             return commandBus.Send(command);
         }
 
-        // Put: api/product/picture
         [HttpPut("{id}")]
+        [Permission("product-picture", PermissionType.Modify)]
         public Result Put(Guid id, [FromBody]ProductPictureBatchInput input)
         {
             var command = new ProductPictureBatchCommand
@@ -57,8 +57,8 @@ namespace IDI.Central.Controllers
             return commandBus.Send(command);
         }
 
-        // DELETE api/product/picture/{id}
         [HttpDelete("{id}")]
+        [Permission("product-picture", PermissionType.Remove)]
         public Result Delete(Guid id)
         {
             var command = new ProductPictureCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };

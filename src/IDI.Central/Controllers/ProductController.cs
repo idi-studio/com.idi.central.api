@@ -5,6 +5,7 @@ using IDI.Central.Domain.Modules.Material.Queries;
 using IDI.Central.Domain.Modules.Sales.Queries;
 using IDI.Central.Models.Material;
 using IDI.Central.Models.Sales;
+using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Common.Extensions;
@@ -29,8 +30,8 @@ namespace IDI.Central.Controllers
             this.queryProcessor = queryProcessor;
         }
 
-        //POST: api/product
         [HttpPost]
+        [Permission("product", PermissionType.Add)]
         public Result Post([FromBody]ProductInput input)
         {
             var command = new ProductCommand
@@ -47,15 +48,15 @@ namespace IDI.Central.Controllers
             return commandBus.Send(command);
         }
 
-        // GET: api/product/list
         [HttpGet("list")]
+        [Permission("product", PermissionType.Query)]
         public Result<Set<ProductModel>> List()
         {
             return queryProcessor.Execute<QueryProductSetCondition, Set<ProductModel>>();
         }
 
-        // GET: api/product/selling
         [HttpGet("selling/{id}")]
+        [Permission("product", PermissionType.Query)]
         public Result<Set<SellModel>> Selling(Guid id)
         {
             var condition = new QuerySellSetCondition { CustomerId = id };
@@ -63,8 +64,8 @@ namespace IDI.Central.Controllers
             return queryProcessor.Execute<QuerySellSetCondition, Set<SellModel>>(condition);
         }
 
-        // Put: api/product
         [HttpPut("{id}")]
+        [Permission("product", PermissionType.Modify)]
         public Result Put(Guid id, [FromBody]ProductInput input)
         {
             var command = new ProductCommand
@@ -82,8 +83,8 @@ namespace IDI.Central.Controllers
             return commandBus.Send(command);
         }
 
-        // GET api/product/{id}
         [HttpGet("{id}")]
+        [Permission("product", PermissionType.Read)]
         public Result<ProductModel> Get(Guid id, [FromServices]IHostingEnvironment env)
         {
             var condition = new QueryProductCondition
@@ -96,8 +97,8 @@ namespace IDI.Central.Controllers
             return queryProcessor.Execute<QueryProductCondition, ProductModel>(condition);
         }
 
-        // DELETE api/product/{id}
         [HttpDelete("{id}")]
+        [Permission("product", PermissionType.Remove)]
         public Result Delete(Guid id)
         {
             var command = new ProductCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };

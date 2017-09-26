@@ -10,20 +10,32 @@ namespace IDI.Core.Common.Enums
         /// </summary>
         Query = 2,
         /// <summary>
+        /// 读取
+        /// </summary>
+        Read = 4,
+        /// <summary>
         /// 新增
         /// </summary>
-        Add = 4,
+        Add = 8,
         /// <summary>
         /// 修改
         /// </summary>
-        Modify = 8,
+        Modify = 16,
         /// <summary>
         /// 删除
         /// </summary>
-        Remove = 16,
+        Remove = 32,
         /// <summary>
         /// 上传
         /// </summary>
-        Upload = 32
+        Upload = 64,
+        /// <summary>
+        /// 审核
+        /// </summary>
+        Verify = 128,
+        /// <summary>
+        /// 支付
+        /// </summary>
+        Paid = 256
     }
 }

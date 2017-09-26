@@ -2,6 +2,7 @@
 using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Sales.Commands;
 using IDI.Central.Models.Sales;
+using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.DependencyInjection;
@@ -22,8 +23,8 @@ namespace IDI.Central.Controllers
             this.queryProcessor = queryProcessor;
         }
 
-        //POST: api/order/item
         [HttpPost]
+        [Permission("order-item", PermissionType.Add)]
         public Result Post([FromBody]OrderItemInput input)
         {
             var command = new OrderItemCommand
@@ -39,8 +40,8 @@ namespace IDI.Central.Controllers
             return commandBus.Send(command);
         }
 
-        // Put: api/order/item
         [HttpPut("{id}")]
+        [Permission("order-item", PermissionType.Modify)]
         public Result Put(Guid id, [FromBody]OrderItemInput input)
         {
             var command = new OrderItemCommand
@@ -57,8 +58,8 @@ namespace IDI.Central.Controllers
             return commandBus.Send(command);
         }
 
-        // DELETE api/order/item/{id}
         [HttpDelete("{id}")]
+        [Permission("order-item", PermissionType.Remove)]
         public Result Delete(Guid id)
         {
             var command = new OrderItemCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
