@@ -1,15 +1,10 @@
-﻿using System;
-using System.IO;
-using System.Text;
+﻿using System.Text;
 using IDI.Core.Authentication.TokenAuthentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 
 namespace IDI.Core.Authentication
 {
-    public class ApplicationAuthenticationOptions
+    public class AuthenticationOptions
     {
         private static readonly string secretkey = "584556DE-23D4-4CDA-995C-34A3552D8330";
 

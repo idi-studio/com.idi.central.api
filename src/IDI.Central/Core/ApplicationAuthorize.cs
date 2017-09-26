@@ -29,7 +29,7 @@ namespace IDI.Central.Core
 
             SecurityToken validatedToken;
 
-            var options = ApplicationAuthenticationOptions.TokenOptions();
+            var options = AuthenticationOptions.TokenOptions();
 
             var validationParameters = new TokenValidationParameters()
             {

@@ -5,7 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace IDI.Core.Authentication.TokenAuthentication
 {
-    public class TokenAuthenticationOptions : AuthenticationOptions, IOptions<TokenAuthenticationOptions>
+    public class TokenAuthenticationOptions : Microsoft.AspNetCore.Authentication.AuthenticationOptions, IOptions<TokenAuthenticationOptions>
     {
         public string Path { get; set; } = "/api/token";
 
