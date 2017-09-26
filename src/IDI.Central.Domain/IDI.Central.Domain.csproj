@@ -27,9 +27,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Package.json</LastGenOutput>
     </None>
-    <None Update="Localization\PackageResource.tt">
+    <None Update="Localization\Resources.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PackageResource.cs</LastGenOutput>
+      <LastGenOutput>Resources.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
@@ -38,10 +38,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Localization\PackageResource.cs">
+    <Compile Update="Localization\Resources.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>PackageResource.tt</DependentUpon>
+      <DependentUpon>Resources.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 
