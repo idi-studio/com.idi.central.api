@@ -15,7 +15,7 @@ namespace IDI.Central.Tests
         private const string API_TOKEN = "api/token";
 
         [TestMethod]
-        public void Can_GetToken_ByPassword()
+        public void Should_GetToken_ByPassword()
         {
             var json = Post(API_TOKEN, new Dictionary<string, string>
             {
@@ -36,7 +36,7 @@ namespace IDI.Central.Tests
         }
 
         [TestMethod]
-        public void Can_GetToken_ByClientCredentials()
+        public void Should_GetToken_ByClientCredentials()
         {
             var json = Post(API_TOKEN, new Dictionary<string, string> { { "grant_type", Constants.AuthenticationMethod.ClientCredentials } });
 

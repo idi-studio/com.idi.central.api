@@ -17,7 +17,7 @@ namespace IDI.Central.Tests
         }
 
         [TestMethod]
-        public void User_Can_Registration()
+        public void Should_Registration_Success()
         {
             var input = new UserRegistrationInput();
 

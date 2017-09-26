@@ -17,7 +17,7 @@ namespace IDI.Central.Tests
         }
 
         [TestMethod]
-        public void Can_Get_Roles()
+        public void Should_Get_Roles()
         {
             var json = Get("api/roles");
 
