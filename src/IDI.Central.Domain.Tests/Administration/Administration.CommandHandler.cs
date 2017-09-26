@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Core.Common;
+using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure;
 using IDI.Core.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -33,10 +33,10 @@ namespace IDI.Central.Domain.Tests
         public void Administration_RoleAuthorizationCommand()
         {
             var module = new Module { Name = "Administration", Code = "Administration" };
-            var privilege1 = new Permission { Id = Utils.NewGuid(1), Name = "privilege1", Code = "action1", PermissionType = PermissionType.View, Module = module };
-            var privilege2 = new Permission { Id = Utils.NewGuid(2), Name = "privilege2", Code = "action2", PermissionType = PermissionType.View, Module = module };
-            var privilege3 = new Permission { Id = Utils.NewGuid(3), Name = "privilege3", Code = "action3", PermissionType = PermissionType.View, Module = module };
-            var privilege4 = new Permission { Id = Utils.NewGuid(4), Name = "privilege4", Code = "action4", PermissionType = PermissionType.View, Module = module };
+            var privilege1 = new Permission { Id = Utils.NewGuid(1), Name = "privilege1", Code = "action1", Type = PermissionType.Query, Module = module };
+            var privilege2 = new Permission { Id = Utils.NewGuid(2), Name = "privilege2", Code = "action2", Type = PermissionType.Query, Module = module };
+            var privilege3 = new Permission { Id = Utils.NewGuid(3), Name = "privilege3", Code = "action3", Type = PermissionType.Query, Module = module };
+            var privilege4 = new Permission { Id = Utils.NewGuid(4), Name = "privilege4", Code = "action4", Type = PermissionType.Query, Module = module };
 
             var role = new Role { Name = "administrator" };
             role.RolePermissions.Add(new RolePermission { Role = role, Permission = privilege1 });

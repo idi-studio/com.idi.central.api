@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
+using IDI.Core.Common.Enums;
 
 namespace IDI.Central.Domain.Modules.Administration
 {
@@ -12,7 +12,7 @@ namespace IDI.Central.Domain.Modules.Administration
             if (permissions == null || (permissions != null && permissions.Count == 0))
                 return false;
 
-            if (permissions.Any(p => p.PermissionType == PermissionType.View && p.ModuleId == menu.ModuleId && p.Code == menu.Code))
+            if (permissions.Any(p => p.Type == PermissionType.Query && p.ModuleId == menu.ModuleId && p.Code == menu.Code))
                 return true;
 
             return false;

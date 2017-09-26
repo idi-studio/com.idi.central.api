@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using IDI.Central.Common.Enums;
+using IDI.Core.Common.Enums;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
@@ -16,7 +16,7 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
         [StringLength(50)]
         public string Code { get; set; }
 
-        public PermissionType PermissionType { get; set; }
+        public PermissionType Type { get; set; }
 
         public Guid ModuleId { get; set; }
 

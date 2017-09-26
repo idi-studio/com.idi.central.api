@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
+using IDI.Core.Common.Enums;
 
 namespace IDI.Central.Domain.Modules.Administration
 {
@@ -120,7 +120,7 @@ namespace IDI.Central.Domain.Modules.Administration
                 Module = module,
                 Name = string.IsNullOrEmpty(name) ? menu.Name : name,
                 Code = menu.Code,
-                PermissionType = PermissionType.View
+                Type = PermissionType.Query
             };
 
             module.Permissions.Add(permission);

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Modules.Administration;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
+using IDI.Core.Common.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IDI.Central.Domain.Tests
@@ -20,7 +20,7 @@ namespace IDI.Central.Domain.Tests
             Assert.IsFalse(menu.IsAuthorized(null));
             Assert.IsFalse(menu.IsAuthorized(new List<Permission> { new Permission { ModuleId = Utils.NewGuid(1), Code = "0" } }));
             Assert.IsFalse(menu.IsAuthorized(new List<Permission> { new Permission { ModuleId = Utils.NewGuid(2), Code = "1" } }));
-            Assert.IsTrue(menu.IsAuthorized(new List<Permission> { new Permission { ModuleId = Utils.NewGuid(1), Code = "1", PermissionType = PermissionType.View } }));
+            Assert.IsTrue(menu.IsAuthorized(new List<Permission> { new Permission { ModuleId = Utils.NewGuid(1), Code = "1", Type = PermissionType.Query } }));
         }
     }
 }
