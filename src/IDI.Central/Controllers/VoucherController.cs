@@ -15,7 +15,7 @@ namespace IDI.Central.Controllers
 {
     [Route("api/vchr"), ApplicationAuthorize]
     [Module(Common.Constants.Module.Sales)]
-    public class VoucherController : Controller
+    public class VoucherController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;
         private readonly IQueryProcessor queryProcessor;

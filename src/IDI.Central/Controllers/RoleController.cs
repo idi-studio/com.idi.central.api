@@ -12,7 +12,7 @@ namespace IDI.Central.Controllers
 {
     [Route("api/role"), ApplicationAuthorize]
     [Module(Common.Constants.Module.Administration)]
-    public class RoleController : Controller
+    public class RoleController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;
         private readonly IQueryProcessor queryProcessor;

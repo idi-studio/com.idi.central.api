@@ -11,7 +11,7 @@ namespace IDI.Central.Controllers
 {
     [Route("api/tag"), ApplicationAuthorize]
     [Module(Common.Constants.Module.Common)]
-    public class TagController : Controller
+    public class TagController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;
         private readonly IQueryProcessor queryProcessor;

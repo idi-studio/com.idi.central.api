@@ -12,7 +12,7 @@ namespace IDI.Central.Controllers
 {
     [Route("api/addr"), ApplicationAuthorize]
     [Module(Common.Constants.Module.Sales)]
-    public class AddressController : Controller
+    public class AddressController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;
         private readonly IQueryProcessor queryProcessor;

@@ -14,7 +14,7 @@ namespace IDI.Central.Controllers
 {
     [Route("api/product/price"), ApplicationAuthorize]
     [Module(Common.Constants.Module.Common)]
-    public class ProductPriceController : Controller
+    public class ProductPriceController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;
         private readonly IQueryProcessor queryProcessor;

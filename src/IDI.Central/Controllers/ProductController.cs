@@ -18,7 +18,7 @@ namespace IDI.Central.Controllers
 {
     [Route("api/product"), ApplicationAuthorize]
     [Module(Common.Constants.Module.Common)]
-    public class ProductController : Controller
+    public class ProductController : Controller, IAuthorizable
     {
         private readonly ApplicationOptions options;
         private readonly ICommandBus commandBus;

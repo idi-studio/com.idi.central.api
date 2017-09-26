@@ -12,7 +12,7 @@ namespace IDI.Central.Controllers
 {
     [Route("api/catg"), ApplicationAuthorize]
     [Module(Common.Constants.Module.Common)]
-    public class CategoryController : Controller
+    public class CategoryController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;
         private readonly IQueryProcessor queryProcessor;

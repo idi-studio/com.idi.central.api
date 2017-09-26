@@ -11,7 +11,7 @@ namespace IDI.Central.Controllers
 {
     [Route("api/user/profile"), ApplicationAuthorize]
     [Module(Common.Constants.Module.Common)]
-    public class UserProfileController : Controller
+    public class UserProfileController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;
         private readonly IQueryProcessor queryProcessor;

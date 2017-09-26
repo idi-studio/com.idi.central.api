@@ -5,7 +5,7 @@ using IDI.Core.Infrastructure.DependencyInjection;
 
 namespace IDI.Core.Infrastructure.Utils
 {
-    internal static class UtilExtensions
+    internal static class Extensions
     {
         public static object CreateInstance(this Type type)
         {

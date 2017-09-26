@@ -13,7 +13,7 @@ namespace IDI.Central.Controllers
 {
     [Route("api/order/item"), ApplicationAuthorize]
     [Module(Common.Constants.Module.Sales)]
-    public class OrderItemController : Controller
+    public class OrderItemController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;
         private readonly IQueryProcessor queryProcessor;

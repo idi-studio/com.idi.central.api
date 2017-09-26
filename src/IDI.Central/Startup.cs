@@ -1,6 +1,5 @@
 ﻿using IDI.Central.Core;
 using IDI.Central.Domain;
-using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Localization.Packages;
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
@@ -88,7 +87,8 @@ namespace IDI.Central
             #endregion
 
             app.UseMvc();
-            app.UseLanguagePackage<PackageCentral>();
+            app.UseLanguagePackage<CentralPackage>();
+            app.UseAuthorization<ApplicationAuthorization>();
         }
     }
 }
