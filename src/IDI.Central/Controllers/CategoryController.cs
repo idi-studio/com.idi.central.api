@@ -16,9 +16,9 @@ namespace IDI.Central.Controllers
     public class CategoryController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;
-        private readonly IQueryProcessor queryProcessor;
+        private readonly IQuerier queryProcessor;
 
-        public CategoryController(ICommandBus commandBus, IQueryProcessor queryProcessor)
+        public CategoryController(ICommandBus commandBus, IQuerier queryProcessor)
         {
             this.commandBus = commandBus;
             this.queryProcessor = queryProcessor;

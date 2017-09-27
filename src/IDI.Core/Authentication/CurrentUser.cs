@@ -4,15 +4,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace IDI.Core.Authentication
 {
-    public interface ICurrentUser
+    public interface ICurrentUser: IUser
     {
         bool IsAuthenticated { get; }
 
         string NameIdentifier { get; }
-
-        string Name { get; }
-
-        string Role { get; }
 
         string Gender { get; }
     }
@@ -24,7 +20,7 @@ namespace IDI.Core.Authentication
 
         public bool IsAuthenticated => principal.Identity?.IsAuthenticated ?? false;
         public string Name => principal.Identity?.Name ?? string.Empty;
-        public string Role => principal.Claims.Get(ClaimTypes.Role);
+        public string Roles => principal.Claims.Get(ClaimTypes.Role);
         public string Gender => principal.Claims.Get(ClaimTypes.Gender);
         public string NameIdentifier => principal.Claims.Get(ClaimTypes.NameIdentifier);
 

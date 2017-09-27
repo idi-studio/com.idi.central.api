@@ -15,9 +15,9 @@ namespace IDI.Central.Controllers
     public class TagController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;
-        private readonly IQueryProcessor queryProcessor;
+        private readonly IQuerier queryProcessor;
 
-        public TagController(ICommandBus commandBus, IQueryProcessor queryProcessor)
+        public TagController(ICommandBus commandBus, IQuerier queryProcessor)
         {
             this.commandBus = commandBus;
             this.queryProcessor = queryProcessor;

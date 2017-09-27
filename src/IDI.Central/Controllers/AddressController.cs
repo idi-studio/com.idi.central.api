@@ -16,9 +16,9 @@ namespace IDI.Central.Controllers
     public class AddressController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;
-        private readonly IQueryProcessor queryProcessor;
+        private readonly IQuerier queryProcessor;
 
-        public AddressController(ICommandBus commandBus, IQueryProcessor queryProcessor)
+        public AddressController(ICommandBus commandBus, IQuerier queryProcessor)
         {
             this.commandBus = commandBus;
             this.queryProcessor = queryProcessor;

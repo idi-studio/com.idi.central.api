@@ -7,11 +7,17 @@ using IDI.Core.Infrastructure.Verification;
 
 namespace IDI.Core.Infrastructure.Messaging
 {
-    public class QueryProcessor : IQueryProcessor
+    public interface IQuerier
+    {
+        Result<TQueryResult> Execute<TCondition, TQueryResult>(TCondition condition = default(TCondition)) where TCondition : Condition
+            where TQueryResult : IModel;
+    }
+
+    public class Querier : IQuerier
     {
         private readonly IQueryBuilder _queryBuilder;
 
-        public QueryProcessor(IQueryBuilder queryBuilder)
+        public Querier(IQueryBuilder queryBuilder)
         {
             _queryBuilder = queryBuilder;
         }

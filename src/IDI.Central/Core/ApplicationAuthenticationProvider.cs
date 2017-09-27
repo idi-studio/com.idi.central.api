@@ -14,13 +14,13 @@ namespace IDI.Central.Core
 {
     public class ApplicationAuthenticationProvider : TokenAuthenticationProvider
     {
-        private readonly IQueryProcessor queryProcessor;
+        private readonly IQuerier queryProcessor;
         private readonly ICommandBus commandBus;
 
         public ApplicationAuthenticationProvider(RequestDelegate next, IOptions<TokenAuthenticationOptions> options) : base(next, options)
         {
             this.commandBus = Runtime.GetService<ICommandBus>();
-            this.queryProcessor = Runtime.GetService<IQueryProcessor>();
+            this.queryProcessor = Runtime.GetService<IQuerier>();
         }
 
         protected override List<Claim> GenerateClientIdentity(string clientId, string clientSecret)

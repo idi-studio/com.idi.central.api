@@ -18,9 +18,9 @@ namespace IDI.Central.Controllers
     public class OrderController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;
-        private readonly IQueryProcessor queryProcessor;
+        private readonly IQuerier queryProcessor;
 
-        public OrderController(ICommandBus commandBus, IQueryProcessor queryProcessor)
+        public OrderController(ICommandBus commandBus, IQuerier queryProcessor)
         {
             this.commandBus = commandBus;
             this.queryProcessor = queryProcessor;

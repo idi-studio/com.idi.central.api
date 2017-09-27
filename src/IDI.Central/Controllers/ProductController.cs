@@ -23,9 +23,9 @@ namespace IDI.Central.Controllers
     {
         private readonly ApplicationOptions options;
         private readonly ICommandBus commandBus;
-        private readonly IQueryProcessor queryProcessor;
+        private readonly IQuerier queryProcessor;
 
-        public ProductController(IOptionsSnapshot<ApplicationOptions> options, ICommandBus commandBus, IQueryProcessor queryProcessor)
+        public ProductController(IOptionsSnapshot<ApplicationOptions> options, ICommandBus commandBus, IQuerier queryProcessor)
         {
             this.options = options.Value;
             this.commandBus = commandBus;

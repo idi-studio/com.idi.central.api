@@ -19,9 +19,9 @@ namespace IDI.Central.Controllers
     public class ProductPictureController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;
-        private readonly IQueryProcessor queryProcessor;
+        private readonly IQuerier queryProcessor;
 
-        public ProductPictureController(ICommandBus commandBus, IQueryProcessor queryProcessor)
+        public ProductPictureController(ICommandBus commandBus, IQuerier queryProcessor)
         {
             this.commandBus = commandBus;
             this.queryProcessor = queryProcessor;

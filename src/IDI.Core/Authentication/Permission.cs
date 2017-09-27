@@ -13,7 +13,7 @@ namespace IDI.Core.Authentication
         string Module { get; }
     }
 
-    public class Permission : IPermission
+    public sealed class Permission : IPermission
     {
         public string Name { get; private set; }
 

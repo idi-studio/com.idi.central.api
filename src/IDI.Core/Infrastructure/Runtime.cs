@@ -20,18 +20,11 @@ namespace IDI.Core.Infrastructure
         private static bool initialized;
         private static readonly object aync = new object();
         private static IServiceCollection services;
+        public static IServiceCollection Services => services;
+        public static IQuerier Querier => services.BuildServiceProvider().GetService<IQuerier>();
+        public static ICommandBus CommandBus => services.BuildServiceProvider().GetService<ICommandBus>();
 
         public static ILoggerRepository LoggerRepository { get; private set; }
-
-        public static IServiceProvider ServiceProvider
-        {
-            get { return services.BuildServiceProvider(); }
-        }
-
-        public static IServiceCollection Services
-        {
-            get { return services; }
-        }
 
         static Runtime() { }
 
@@ -52,7 +45,7 @@ namespace IDI.Core.Infrastructure
                     services.AddSingleton<ICommandHandlerFactory, CommandHandlerFactory>();
                     services.AddScoped<ICommandBus, CommandBus>();
                     services.AddSingleton<IQueryBuilder, QueryBuilder>();
-                    services.AddScoped<IQueryProcessor, QueryProcessor>();
+                    services.AddScoped<IQuerier, Querier>();
                     services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
                     services.AddTransient<ICurrentUser, CurrentUser>();
 
@@ -75,12 +68,12 @@ namespace IDI.Core.Infrastructure
 
         public static T GetService<T>()
         {
-            return ServiceProvider.GetService<T>().InjectedProperties();
+            return services.BuildServiceProvider().GetService<T>().InjectedProperties();
         }
 
         public static object GetService(Type serviceType)
         {
-            return ServiceProvider.GetService(serviceType).InjectedProperties();
+            return services.BuildServiceProvider().GetService(serviceType).InjectedProperties();
         }
 
         public static void AddDbContext<TContext>(Action<DbContextOptionsBuilder> optionsAction = null) where TContext : DbContext

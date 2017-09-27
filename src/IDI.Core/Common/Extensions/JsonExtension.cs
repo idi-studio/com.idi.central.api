@@ -19,10 +19,10 @@ namespace IDI.Core.Common.Extensions
             return new JsonSerializer().Deserialize(new JsonTextReader(new StringReader(json)));
         }
 
-        public static T To<T>(this string json)
+        public static T To<T>(this string json, TypeNameHandling typeNameHandling = TypeNameHandling.All)
         {
             var settings = new JsonSerializerSettings();
-            settings.TypeNameHandling = TypeNameHandling.All;
+            settings.TypeNameHandling = typeNameHandling;
 
             try
             {

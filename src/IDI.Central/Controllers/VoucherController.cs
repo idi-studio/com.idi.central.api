@@ -19,9 +19,9 @@ namespace IDI.Central.Controllers
     public class VoucherController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;
-        private readonly IQueryProcessor queryProcessor;
+        private readonly IQuerier queryProcessor;
 
-        public VoucherController(ICommandBus commandBus, IQueryProcessor queryProcessor)
+        public VoucherController(ICommandBus commandBus, IQuerier queryProcessor)
         {
             this.commandBus = commandBus;
             this.queryProcessor = queryProcessor;

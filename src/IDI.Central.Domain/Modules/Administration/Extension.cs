@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
+using IDI.Core.Authentication;
 using IDI.Core.Common.Extensions;
 
 namespace IDI.Central.Domain.Modules.Administration
 {
     public static class Extension
     {
-        public static void Authorize(this Role role, params Permission[] permissions)
+        public static void Authorize(this Role role, params IPermission[] permissions)
         {
             if (permissions != null && permissions.Length > 0)
             {
@@ -20,7 +21,7 @@ namespace IDI.Central.Domain.Modules.Administration
             }
         }
 
-        public static void Authorize(this User user, params Role[] roles)
+        public static void Authorize(this User user, params IRole[] roles)
         {
             if (roles != null && roles.Length > 0)
             {

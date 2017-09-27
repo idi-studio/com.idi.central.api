@@ -16,9 +16,9 @@ namespace IDI.Central.Controllers
     public class UserController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;
-        private readonly IQueryProcessor queryProcessor;
+        private readonly IQuerier queryProcessor;
 
-        public UserController(ICommandBus commandBus, IQueryProcessor queryProcessor)
+        public UserController(ICommandBus commandBus, IQuerier queryProcessor)
         {
             this.commandBus = commandBus;
             this.queryProcessor = queryProcessor;

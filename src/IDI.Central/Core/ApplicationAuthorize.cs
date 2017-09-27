@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Reflection;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using IDI.Central.Domain.Localization;
 using IDI.Core.Authentication;
@@ -16,9 +19,16 @@ namespace IDI.Central.Core
 {
     public class ApplicationAuthorize : ActionFilterAttribute
     {
+        public IAuthorization Authorization { get; private set; }
+
+        public ApplicationAuthorize()
+        {
+            this.Authorization = Runtime.GetService<IAuthorization>();
+        }
+
         public override Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            var authorization = context.HttpContext.Request.Headers["Authorization"].ToString().Split(new char[] { ' ' });
+            var authorization = context.HttpContext.Request.Headers[Constants.Headers.Authorization].ToString().Split(new char[] { ' ' });
             var scheme = authorization.FirstOrDefault();
             var token = authorization.LastOrDefault();
 
@@ -42,7 +52,16 @@ namespace IDI.Central.Core
             {
                 context.HttpContext.User = hanlder.ValidateToken(token, validationParameters, out validatedToken);
 
-                return base.OnActionExecutionAsync(context, next);
+                string[] roles = context.HttpContext.User.Claims.Get(ClaimTypes.Role).To<List<string>>().ToArray();
+
+                var permission = context.GetPermission();
+
+                if (permission != null && Authorization.HasPermission(roles, permission))
+                {
+                    return base.OnActionExecutionAsync(context, next);
+                }
+
+                return context.HttpContext.Unauthorized();
             }
             catch (SecurityTokenExpiredException)
             {
@@ -68,6 +87,15 @@ namespace IDI.Central.Core
         static ApplicationAuthorizeExtention()
         {
             localization = Runtime.GetService<ILocalization>();
+        }
+
+        public static IPermission GetPermission(this ActionExecutingContext context)
+        {
+            var module = context.Controller.GetType().GetCustomAttribute<ModuleAttribute>();
+
+            var permission = context.ActionDescriptor.FilterDescriptors.FirstOrDefault(e => e.Filter.GetType() == typeof(PermissionAttribute)).Filter as PermissionAttribute;
+
+            return permission != null ? new Permission(module.Name, permission.Name, permission.Type) : null;
         }
 
         public static Task Unauthorized(this HttpContext context)

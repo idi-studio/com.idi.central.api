@@ -4,11 +4,27 @@ using System.Reflection;
 
 namespace IDI.Core.Authentication
 {
+    public interface IRole
+    {
+        string Name { get; }
+
+        string Permissions { get; }
+    }
+
+    public interface IUser
+    {
+        string Name { get; }
+
+        string Roles { get; }
+    }
+
     public interface IAuthorization
     {
         List<IPermission> Permissions { get; }
 
         Dictionary<string, List<IPermission>> RolePermissions { get; }
+
+        bool HasPermission(string[] roles, IPermission permission);
     }
 
     public abstract class Authorization : IAuthorization
@@ -31,23 +47,24 @@ namespace IDI.Core.Authentication
 
                 Permissions.AddRange(permissions.Select(p => new Permission(module.Name, p.Name, p.Type)));
             }
+
+            RolePermissions = GroupByRole(this.Permissions);
         }
 
-        public void Authorize(string role, IPermission permission)
+        public bool HasPermission(string[] roles, IPermission permission)
         {
-            var current = Permissions.FirstOrDefault(p => p.Code == permission.Code && p.Module == permission.Module);
-
-            if (current == null)
-                return;
-
-            if (RolePermissions.ContainsKey(role))
+            foreach (var role in roles)
             {
-                RolePermissions[role].Add(current);
+                if (!RolePermissions.ContainsKey(role))
+                    continue;
+
+                if (RolePermissions[role].Any(p => p.Code == permission.Code))
+                    return true;
             }
-            else
-            {
-                RolePermissions.Add(role, new List<IPermission> { current });
-            }
+
+            return false;
         }
+
+        protected abstract Dictionary<string, List<IPermission>> GroupByRole(List<IPermission> permissions);
     }
 }

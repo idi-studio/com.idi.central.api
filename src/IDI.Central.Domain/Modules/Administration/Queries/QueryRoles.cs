@@ -24,7 +24,8 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
                 Id = r.Id,
                 Name = r.Name,
                 Descrition = r.Descrition,
-                IsActive = r.IsActive
+                IsActive = r.IsActive,
+                Permissions = r.Permissions
             }).ToList();
 
             return Result.Success(new Set<RoleModel>(collection));

@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using IDI.Core.Authentication;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
 {
-    public class Role : AggregateRoot
+    public class Role : AggregateRoot, IRole
     {
         [Required]
         [StringLength(20)]
@@ -15,9 +16,5 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
         public bool IsActive { get; set; } = true;
 
         public string Permissions { get; set; }
-
-        //public List<RolePermission> RolePermissions { get; set; } = new List<RolePermission>();
-
-        //public List<UserRole> UserRoles { get; set; } = new List<UserRole>();
     }
 }

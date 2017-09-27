@@ -2,48 +2,30 @@
 using System.Linq;
 using IDI.Central.Common;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
+using IDI.Core.Authentication;
 using IDI.Core.Common;
+using IDI.Core.Infrastructure;
 
 namespace IDI.Central.Domain.Modules.Administration
 {
-    //public class ModuleCollection
-    //{
-    //    public Module Administration { get; private set; }
-
-    //    public Module Sales { get; private set; }
-
-    //    public Module Material { get; private set; }
-
-    //    public ModuleCollection()
-    //    {
-    //        this.Administration = new Module { SN = 10, Name = "Administration", Code = "ADM", Description = "Administration", Icon = "fa fa-cogs" };
-    //        this.Administration.NewPage(sn: 10, name: "Dashboard", controller: "platform", action: "dashboard", permission: true, display: false);
-    //        this.Administration.NewPage(sn: 20, name: "Settings", controller: "platform", action: "settings", permission: true);
-    //        this.Administration.NewPage(sn: 30, name: "Role", controller: "role", action: "administration", permission: true);
-    //        this.Administration.NewPage(sn: 40, name: "User", controller: "user", action: "administration", permission: true);
-
-    //        this.Sales = new Module { SN = 20, Name = "Order", Code = "SMM", Description = "Sales", Icon = "fa fa-tasks" };
-    //        this.Sales.NewPage(sn: 10, name: "Order", controller: "order", action: "index", permission: true);
-    //    }
-    //}
-
     public class AuthorizationCollection
     {
-        public List<Permission> Permissions { get; private set; }
+        public List<AggregateRoots.Permission> Permissions { get; private set; }
 
         public AuthorizationCollection()
         {
-            var authorization = new ApplicationAuthorization();
-            Permissions = authorization.Permissions.Select(p => new Permission
+            var authorization = Runtime.GetService<IAuthorization>();
+
+            Permissions = authorization.Permissions.Select(p => new AggregateRoots.Permission
             {
-                Module = p.Module,
                 Code = p.Code,
-                Name = p.Name,
-                Type = p.Type
+                Module = p.Module,
+                Type = p.Type,
+                Name = p.Name
             }).ToList();
         }
 
-        public Permission[] GetPermissions(params string[] modules)
+        public IPermission[] GetPermissions(params string[] modules)
         {
             return Permissions.Where(e => modules.Contains(e.Module)).ToArray();
         }

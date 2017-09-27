@@ -2,6 +2,11 @@
 {
     public class Constants
     {
+        public class Headers
+        {
+            public const string Authorization = "Authorization";
+        }
+
         public class AuthenticationMethod
         {
             public const string ClientCredentials = "client_credentials";
