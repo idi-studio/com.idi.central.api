@@ -22,9 +22,6 @@ namespace IDI.Central.Domain.Modules.Administration
 
         public static void Authorize(this User user, params Role[] roles)
         {
-            if (user.Role == null)
-                throw new ArgumentException("user.Role");
-
             if (roles != null && roles.Length > 0)
             {
                 user.Role.Roles = roles.Select(e => e.Name).ToList().ToJson();

@@ -79,7 +79,5 @@ namespace IDI.Central.Domain.Modules.Sales
     public class Seed
     {
         public CustomerCollection Customers { get; } = new CustomerCollection();
-
-        public Seed() { }
     }
 }
