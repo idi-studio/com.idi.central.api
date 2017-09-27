@@ -128,7 +128,7 @@ namespace IDI.Core.Authentication.TokenAuthentication
 
         private void Log(string username, AuthorizeResult result, string reason = "-")
         {
-            Runtime.GetService<ILogger>().InfoFormat("|{0}|{1}|{2}|{3}|", username ?? "-", "sign-in", result.ToString().ToLower(), reason);
+            Runtime.GetService<ILogger>().InfoFormat("{0}|{1}|{2}|{3}|", username ?? "-", "sign-in", result.ToString().ToLower(), reason);
         }
     }
 }
