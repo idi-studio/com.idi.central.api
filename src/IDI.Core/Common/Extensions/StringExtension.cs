@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using IDI.Core.Common.Extensions;
+using System.Text;
 
 namespace System
 {
@@ -68,6 +70,23 @@ namespace System
         public static string AsCode(this Guid guid)
         {
             return guid.ToString("N").ToUpper();
+        }
+
+        public static string Posterior(this string value, int digit, char placeholder = '0')
+        {
+            string result = value;
+
+            if (value.Length < digit)
+            {
+                for (int i = 0; i < digit - value.Length; i++)
+                    result = placeholder + result;
+
+                return result;
+            }
+            else
+            {
+                return result.Substring(result.Length - digit, digit);
+            }
         }
     }
 }

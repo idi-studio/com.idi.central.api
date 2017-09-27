@@ -84,5 +84,10 @@ namespace IDI.Core.Infrastructure
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IQueryableRepository<>), typeof(Repository<>));
         }
+
+        public static void UseAuthorization<TAuthorization>() where TAuthorization : IAuthorization
+        {
+            services.AddSingleton(typeof(IAuthorization), typeof(TAuthorization));
+        }
     }
 }

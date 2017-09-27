@@ -19,6 +19,8 @@ namespace IDI.Central.Domain.Tests
         [TestMethod]
         public void BasedataInital()
         {
+            Runtime.UseAuthorization<ApplicationAuthorization>();
+
             Assert.AreEqual(ResultStatus.Success, DatabaseInital().Status);
             Assert.AreEqual(ResultStatus.Success, MaterialInital().Status);
             Assert.AreEqual(ResultStatus.Success, SalesInital().Status);

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using IDI.Central.Common;
+using IDI.Central.Domain.Modules.Administration;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Domain.Modules.Sales.AggregateRoots;
 using IDI.Core.Common;
@@ -45,7 +47,7 @@ namespace IDI.Central.Domain.Modules.Sales
                 {
                     UserName = $"cust{phone}",
                     Salt = salt,
-                    Password = Cryptography.Encrypt(phone.Substring(2, phone.Length - 3), salt),
+                    Password = Cryptography.Encrypt(phone.Posterior(8), salt),
                     IsLocked = true,
                     LockTime = DateTime.MaxValue,
                     Profile = new UserProfile
@@ -79,5 +81,10 @@ namespace IDI.Central.Domain.Modules.Sales
     public class Seed
     {
         public CustomerCollection Customers { get; } = new CustomerCollection();
+
+        public Seed()
+        {
+            Customers.Customers.ForEach(e => e.User.Authorize(new Role { Name = Configuration.Roles.Customers }));
+        }
     }
 }
