@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using IDI.Core.Domain;
 
@@ -25,8 +24,8 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
 
         public bool IsActive { get; set; } = true;
 
-        public UserProfile Profile { get; set; }
+        public UserProfile Profile { get; set; } = new UserProfile();
 
-        public List<UserRole> UserRoles { get; set; } = new List<UserRole>();
+        public UserRole Role { get; set; } = new UserRole();
     }
 }

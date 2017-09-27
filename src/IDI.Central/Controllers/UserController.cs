@@ -1,4 +1,5 @@
-﻿using IDI.Central.Core;
+﻿using IDI.Central.Common;
+using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Central.Domain.Modules.Administration.Queries;
 using IDI.Central.Models.Administration;
@@ -11,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IDI.Central.Controllers
 {
     [Route("api/user"), ApplicationAuthorize]
-    [Module(Common.Constants.Module.Administration)]
+    [Module(Configuration.Modules.Administration)]
     public class UserController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using IDI.Core.Common.Extensions;
 
-namespace IDI.Core.Common
+namespace System
 {
     public static class StringExtension
     {
@@ -46,6 +47,11 @@ namespace IDI.Core.Common
         public static string TrimContiguousSpaces(this string input)
         {
             return Regex.Replace(input.Trim(), "\\s+", " ");
+        }
+
+        public static List<string> AsList(this string value)
+        {
+            return value.To<List<string>>();
         }
 
         public static string AsBase64(this byte[] data, string contentType)

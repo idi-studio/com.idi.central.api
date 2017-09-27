@@ -1,4 +1,5 @@
-﻿using IDI.Central.Core;
+﻿using IDI.Central.Common;
+using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Common.Queries;
 using IDI.Central.Models.Common;
 using IDI.Core.Authentication;
@@ -10,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IDI.Central.Controllers
 {
     [Route("api/tag"), ApplicationAuthorize]
-    [Module(Common.Constants.Module.Common)]
+    [Module(Configuration.Modules.BasicInfo)]
     public class TagController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;

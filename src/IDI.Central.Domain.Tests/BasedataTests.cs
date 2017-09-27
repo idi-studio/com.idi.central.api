@@ -30,7 +30,8 @@ namespace IDI.Central.Domain.Tests
             hanlder.Localization = new Globalization();
             hanlder.Users = Runtime.GetService<IRepository<User>>();
             hanlder.Roles = Runtime.GetService<IRepository<Role>>();
-            hanlder.Modules = Runtime.GetService<IRepository<Module>>();
+            hanlder.Permissions = Runtime.GetService<IRepository<Permission>>();
+            //hanlder.Modules = Runtime.GetService<IRepository<Module>>();
             hanlder.Clients = Runtime.GetService<IRepository<Client>>();
 
             return hanlder.Execute(new DatabaseInitalCommand());

@@ -45,7 +45,7 @@ namespace IDI.Central.Core
                 return new List<Claim>
                 {
                     new Claim(ClaimTypes.AuthenticationMethod, Constants.AuthenticationMethod.Password, ClaimValueTypes.String),
-                    new Claim(ClaimTypes.Role, identity.Role, ClaimValueTypes.String),
+                    new Claim(ClaimTypes.Role, identity.Roles, ClaimValueTypes.String),
                     new Claim(ClaimTypes.NameIdentifier, identity.NameIdentifier, ClaimValueTypes.String),
                     new Claim(ClaimTypes.Name, identity.Name, ClaimValueTypes.String),
                     new Claim(ClaimTypes.Gender, identity.Gender.ToString(), ClaimValueTypes.String),

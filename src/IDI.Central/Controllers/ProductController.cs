@@ -1,4 +1,5 @@
 ﻿using System;
+using IDI.Central.Common;
 using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Material.Commands;
 using IDI.Central.Domain.Modules.Material.Queries;
@@ -17,7 +18,7 @@ using Microsoft.Extensions.Options;
 namespace IDI.Central.Controllers
 {
     [Route("api/product"), ApplicationAuthorize]
-    [Module(Common.Constants.Module.Common)]
+    [Module(Configuration.Modules.BasicInfo)]
     public class ProductController : Controller, IAuthorizable
     {
         private readonly ApplicationOptions options;

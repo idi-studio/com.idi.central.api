@@ -21,27 +21,40 @@ namespace IDI.Core.Repositories
         }
 
         #region IRepository<TAggregateRoot> Members
-        public void Add(TAggregateRoot aggregateRoot)
+        public void Add(TAggregateRoot arg)
         {
             if (user != null && user.IsAuthenticated)
             {
-                aggregateRoot.CreatedBy = user.Name;
-                aggregateRoot.LastUpdatedBy = user.Name;
+                arg.CreatedBy = user.Name;
+                arg.LastUpdatedBy = user.Name;
             }
-            context.Add(aggregateRoot);
+            context.Add(arg);
         }
-        public void Remove(TAggregateRoot aggregateRoot)
-        {
-            context.Remove(aggregateRoot);
-        }
-        public void Update(TAggregateRoot aggregateRoot)
+        public void AddRange(List<TAggregateRoot> args)
         {
             if (user != null && user.IsAuthenticated)
             {
-                aggregateRoot.LastUpdatedAt = DateTime.Now;
-                aggregateRoot.LastUpdatedBy = user.Name;
+                args.ForEach(arg =>
+                {
+                    arg.CreatedBy = user.Name;
+                    arg.LastUpdatedBy = user.Name;
+                });
             }
-            context.Update(aggregateRoot);
+
+            context.AddRange(args);
+        }
+        public void Remove(TAggregateRoot arg)
+        {
+            context.Remove(arg);
+        }
+        public void Update(TAggregateRoot arg)
+        {
+            if (user != null && user.IsAuthenticated)
+            {
+                arg.LastUpdatedAt = DateTime.Now;
+                arg.LastUpdatedBy = user.Name;
+            }
+            context.Update(arg);
         }
         public int Commit()
         {

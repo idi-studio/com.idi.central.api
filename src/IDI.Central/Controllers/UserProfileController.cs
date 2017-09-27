@@ -1,4 +1,5 @@
-﻿using IDI.Central.Core;
+﻿using IDI.Central.Common;
+using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Administration.Queries;
 using IDI.Central.Models.Administration;
 using IDI.Core.Authentication;
@@ -10,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IDI.Central.Controllers
 {
     [Route("api/user/profile"), ApplicationAuthorize]
-    [Module(Common.Constants.Module.Common)]
+    [Module(Configuration.Modules.BasicInfo)]
     public class UserProfileController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
@@ -15,8 +14,10 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
 
         public bool IsActive { get; set; } = true;
 
-        public List<RolePermission> RolePermissions { get; set; } = new List<RolePermission>();
+        public string Permissions { get; set; }
 
-        public List<UserRole> UserRoles { get; set; } = new List<UserRole>();
+        //public List<RolePermission> RolePermissions { get; set; } = new List<RolePermission>();
+
+        //public List<UserRole> UserRoles { get; set; } = new List<UserRole>();
     }
 }

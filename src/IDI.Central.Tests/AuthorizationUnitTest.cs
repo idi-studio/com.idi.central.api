@@ -1,4 +1,4 @@
-﻿using IDI.Central.Core;
+﻿using IDI.Central.Domain;
 using IDI.Core.Authentication;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

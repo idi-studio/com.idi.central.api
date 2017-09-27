@@ -1,4 +1,5 @@
 ﻿using System;
+using IDI.Central.Common;
 using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Sales.Commands;
 using IDI.Central.Models.Sales.Inputs;
@@ -11,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IDI.Central.Controllers
 {
     [Route("api/addr"), ApplicationAuthorize]
-    [Module(Common.Constants.Module.Sales)]
+    [Module(Configuration.Modules.Sales)]
     public class AddressController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;

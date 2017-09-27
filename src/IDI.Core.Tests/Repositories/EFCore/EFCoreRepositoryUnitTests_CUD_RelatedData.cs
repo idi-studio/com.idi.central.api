@@ -1,4 +1,4 @@
-﻿using IDI.Core.Common;
+﻿using System;
 using IDI.Core.Infrastructure;
 using IDI.Core.Repositories;
 using IDI.Core.Tests.TestUtils;

@@ -1,4 +1,5 @@
 ﻿using System;
+using IDI.Central.Common;
 using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Sales.Commands;
 using IDI.Central.Domain.Modules.Sales.Queries;
@@ -13,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IDI.Central.Controllers
 {
     [Route("api/cust"), ApplicationAuthorize]
-    [Module(Common.Constants.Module.Sales)]
+    [Module(Configuration.Modules.Sales)]
     public class CustomerController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;

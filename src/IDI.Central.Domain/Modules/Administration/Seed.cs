@@ -1,29 +1,51 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
+using IDI.Central.Common;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
-using IDI.Core.Common.Enums;
 
 namespace IDI.Central.Domain.Modules.Administration
 {
-    public class ModuleCollection
+    //public class ModuleCollection
+    //{
+    //    public Module Administration { get; private set; }
+
+    //    public Module Sales { get; private set; }
+
+    //    public Module Material { get; private set; }
+
+    //    public ModuleCollection()
+    //    {
+    //        this.Administration = new Module { SN = 10, Name = "Administration", Code = "ADM", Description = "Administration", Icon = "fa fa-cogs" };
+    //        this.Administration.NewPage(sn: 10, name: "Dashboard", controller: "platform", action: "dashboard", permission: true, display: false);
+    //        this.Administration.NewPage(sn: 20, name: "Settings", controller: "platform", action: "settings", permission: true);
+    //        this.Administration.NewPage(sn: 30, name: "Role", controller: "role", action: "administration", permission: true);
+    //        this.Administration.NewPage(sn: 40, name: "User", controller: "user", action: "administration", permission: true);
+
+    //        this.Sales = new Module { SN = 20, Name = "Order", Code = "SMM", Description = "Sales", Icon = "fa fa-tasks" };
+    //        this.Sales.NewPage(sn: 10, name: "Order", controller: "order", action: "index", permission: true);
+    //    }
+    //}
+
+    public class AuthorizationCollection
     {
-        public Module Administration { get; private set; }
+        public List<Permission> Permissions { get; private set; }
 
-        public Module Sales { get; private set; }
-
-        public Module Material { get; private set; }
-
-        public ModuleCollection()
+        public AuthorizationCollection()
         {
-            this.Administration = new Module { SN = 10, Name = "Administration", Code = "ADM", Description = "Administration", Icon = "fa fa-cogs" };
-            this.Administration.NewPage(sn: 10, name: "Dashboard", controller: "platform", action: "dashboard", permission: true, display: false);
-            this.Administration.NewPage(sn: 20, name: "Settings", controller: "platform", action: "settings", permission: true);
-            this.Administration.NewPage(sn: 30, name: "Role", controller: "role", action: "administration", permission: true);
-            this.Administration.NewPage(sn: 40, name: "User", controller: "user", action: "administration", permission: true);
+            var authorization = new ApplicationAuthorization();
+            Permissions = authorization.Permissions.Select(p => new Permission
+            {
+                Module = p.Module,
+                Code = p.Code,
+                Name = p.Name,
+                Type = p.Type
+            }).ToList();
+        }
 
-            this.Sales = new Module { SN = 20, Name = "Order", Code = "SMM", Description = "Sales", Icon = "fa fa-tasks" };
-            this.Sales.NewPage(sn: 10, name: "Order", controller: "order", action: "index", permission: true);
+        public Permission[] GetPermissions(params string[] modules)
+        {
+            return Permissions.Where(e => modules.Contains(e.Module)).ToArray();
         }
     }
 
@@ -37,9 +59,9 @@ namespace IDI.Central.Domain.Modules.Administration
 
         public RoleCollection()
         {
-            this.Administrators = new Role { Name = Central.Common.Constants.Roles.Administrators, Descrition = "The administrator of system." };
-            this.Staffs = new Role { Name = Central.Common.Constants.Roles.Staffs, Descrition = "The staff of system." };
-            this.Customers = new Role { Name = Central.Common.Constants.Roles.Customers, Descrition = "The customer of system." };
+            this.Administrators = new Role { Name = Configuration.Roles.Administrators, Descrition = "The administrator of system." };
+            this.Staffs = new Role { Name = Configuration.Roles.Staffs, Descrition = "The staff of system." };
+            this.Customers = new Role { Name = Configuration.Roles.Customers, Descrition = "The customer of system." };
         }
     }
 
@@ -51,7 +73,13 @@ namespace IDI.Central.Domain.Modules.Administration
         {
             string salt = Cryptography.Salt();
 
-            this.Administrator = new User { UserName = "administrator", Salt = salt, Password = Cryptography.Encrypt("p@55w0rd", salt), Profile = new UserProfile { Name = "Administrator", Photo = "administrator.jpg" } };
+            this.Administrator = new User
+            {
+                UserName = "administrator",
+                Salt = salt,
+                Password = Cryptography.Encrypt("p@55w0rd", salt),
+                Profile = new UserProfile { Name = "Administrator", Photo = "administrator.jpg" },
+            };
         }
     }
 
@@ -62,15 +90,16 @@ namespace IDI.Central.Domain.Modules.Administration
         public ClientCollection()
         {
             string salt = Cryptography.Salt();
-            string clientId = "com.idi.central.web";
 
-            this.Central = new Client { ClientId = clientId, SecretKey = Cryptography.Encrypt("6ED5C478-1F3A-4C82-B668-99917D67784E", salt), Salt = salt };
+            this.Central = new Client { ClientId = Configuration.Clients.Central, SecretKey = Cryptography.Encrypt("6ED5C478-1F3A-4C82-B668-99917D67784E", salt), Salt = salt };
         }
     }
 
     public class Seed
     {
-        public ModuleCollection Modules { get; } = new ModuleCollection();
+        //public ModuleCollection Modules { get; } = new ModuleCollection();
+
+        public AuthorizationCollection Authorization { get; } = new AuthorizationCollection();
 
         public RoleCollection Roles { get; } = new RoleCollection();
 
@@ -81,70 +110,11 @@ namespace IDI.Central.Domain.Modules.Administration
         public Seed()
         {
             //UserRoles
-            this.Users.Administrator.Authorize(this.Roles.Administrators);
+            this.Users.Administrator.Authorize(Roles.Administrators);
 
             //RoleModules
-            this.Roles.Administrators.Authorize(this.Modules.Administration, this.Modules.Sales);
-            this.Roles.Staffs.Authorize(this.Modules.Sales);
-        }
-    }
-
-    internal static class SeedDataExtension
-    {
-        public static Menu NewPage(this Module module, int sn, string name, string controller, string action, bool display = true, bool permission = false, Menu parent = null)
-        {
-            var menu = new Menu
-            {
-                SN = sn,
-                Code = parent == null ? $"{module.Code}{sn.ToString("D2")}" : $"{parent.Code}{sn.ToString("D2")}",
-                Name = name,
-                Controller = controller,
-                Action = action,
-                Display = display,
-                Module = module,
-                ParentId = parent == null ? Guid.Empty : parent.Id
-            };
-
-            module.Menus.Add(menu);
-
-            if (permission)
-                module.NewPermission(menu);
-
-            return menu;
-        }
-
-        public static Permission NewPermission(this Module module, Menu menu, string name = null)
-        {
-            var permission = new Permission
-            {
-                Module = module,
-                Name = string.IsNullOrEmpty(name) ? menu.Name : name,
-                Code = menu.Code,
-                Type = PermissionType.Query
-            };
-
-            module.Permissions.Add(permission);
-
-            return permission;
-        }
-
-        public static void Authorize(this Role role, params Module[] modules)
-        {
-            role.RolePermissions.Clear();
-            modules.SelectMany(m => m.Permissions).ToList().ForEach(permission =>
-            {
-                if (!role.RolePermissions.Any(e => e.PermissionId == permission.Id))
-                    role.RolePermissions.Add(new RolePermission { RoleId = role.Id, PermissionId = permission.Id });
-            });
-        }
-
-        public static void Authorize(this User user, params Role[] roles)
-        {
-            user.UserRoles.Clear();
-            roles.ToList().ForEach(role =>
-            {
-                user.UserRoles.Add(new UserRole { User = user, Role = role });
-            });
+            this.Roles.Administrators.Authorize(Authorization.GetPermissions(Configuration.Modules.All));
+            this.Roles.Staffs.Authorize(Authorization.GetPermissions(Configuration.Modules.Sales));
         }
     }
 }

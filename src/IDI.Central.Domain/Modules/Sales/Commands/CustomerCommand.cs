@@ -1,4 +1,5 @@
 ﻿using System;
+using IDI.Central.Common;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Domain.Modules.Sales.AggregateRoots;
@@ -39,21 +40,21 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
         [Injection]
         public IRepository<UserProfile> Profiles { get; set; }
 
-        [Injection]
-        public IRepository<Role> Roles { get; set; }
+        //[Injection]
+        //public IRepository<Role> Roles { get; set; }
 
-        [Injection]
-        public IRepository<UserRole> UserRoles { get; set; }
+        //[Injection]
+        //public IRepository<UserRole> UserRoles { get; set; }
 
         protected override Result Create(CustomerCommand command)
         {
             if (this.Users.Include(e => e.Profile).Exist(e => e.Profile.PhoneNum == command.PhoneNum))
                 return Result.Fail(Localization.Get(Resources.Key.Command.PhoneNumRegistered));
 
-            var customers = this.Roles.Find(e => e.Name == Central.Common.Constants.Roles.Customers);
+            //var customers = this.Roles.Find(e => e.Name == Central.Common.Constants.Roles.Customers);
 
-            if (customers == null)
-                return Result.Fail(Localization.Get(Resources.Key.Command.InvalidRole));
+            //if (customers == null)
+            //    return Result.Fail(Localization.Get(Resources.Key.Command.InvalidRole));
 
             var customer = new Customer
             {
@@ -76,14 +77,15 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
                     Gender = command.Gender,
                     PhoneNum = command.PhoneNum,
                     Photo = $"{command.Gender.ToString().ToLower()}.png"
+                },
+                Role = new UserRole
+                {
+                    Roles = Configuration.Roles.Customers
                 }
             };
 
             this.Customers.Add(customer);
             this.Customers.Commit();
-
-            this.UserRoles.Add(new UserRole { UserId = customer.User.Id, RoleId = customers.Id });
-            this.UserRoles.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess));
         }

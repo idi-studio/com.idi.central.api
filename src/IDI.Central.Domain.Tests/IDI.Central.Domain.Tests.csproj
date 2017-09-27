@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\IDI.Central.Common\IDI.Central.Common.csproj" />
     <ProjectReference Include="..\IDI.Central.Domain\IDI.Central.Domain.csproj" />
+    <ProjectReference Include="..\IDI.Central\IDI.Central.csproj" />
     <ProjectReference Include="..\IDI.Core\IDI.Core.csproj" />
   </ItemGroup>
 

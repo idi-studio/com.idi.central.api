@@ -1,14 +1,17 @@
-﻿using IDI.Core.Domain;
+﻿using System.Collections.Generic;
+using IDI.Core.Domain;
 
 namespace IDI.Core.Repositories
 {
     public interface IRepository<TAggregateRoot>: IQueryableRepository<TAggregateRoot> where TAggregateRoot : AggregateRoot
     {
-        void Add(TAggregateRoot aggregateRoot);
+        void Add(TAggregateRoot arg);
 
-        void Remove(TAggregateRoot aggregateRoot);
+        void AddRange(List<TAggregateRoot> args);
 
-        void Update(TAggregateRoot aggregateRoot);
+        void Remove(TAggregateRoot arg);
+
+        void Update(TAggregateRoot arg);
 
         int Commit();
     }

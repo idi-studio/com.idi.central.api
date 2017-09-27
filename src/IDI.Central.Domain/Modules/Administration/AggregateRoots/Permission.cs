@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using IDI.Core.Authentication;
 using IDI.Core.Common.Enums;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
 {
-    public class Permission : AggregateRoot
+    public class Permission : AggregateRoot, IPermission
     {
         [Required]
         [StringLength(20)]
@@ -18,10 +17,8 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
 
         public PermissionType Type { get; set; }
 
-        public Guid ModuleId { get; set; }
-
-        public Module Module { get; set; }
-
-        public List<RolePermission> RolePermissions { get; set; } = new List<RolePermission>();
+        [Required]
+        [StringLength(20)]
+        public string Module { get; set; }
     }
 }

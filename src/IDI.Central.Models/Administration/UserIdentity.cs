@@ -8,7 +8,7 @@ namespace IDI.Central.Models.Administration
 
         public string Name { get; set; }
 
-        public string Role { get; set; }
+        public string Roles { get; set; }
 
         public string Gender { get; set; }
     }

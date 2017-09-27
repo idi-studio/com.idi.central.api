@@ -1,18 +1,18 @@
 ﻿using System;
+using IDI.Central.Common;
 using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Sales.Commands;
 using IDI.Central.Models.Sales;
 using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
-using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IDI.Central.Controllers
 {
     [Route("api/order/item"), ApplicationAuthorize]
-    [Module(Common.Constants.Module.Sales)]
+    [Module(Configuration.Modules.Sales)]
     public class OrderItemController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;

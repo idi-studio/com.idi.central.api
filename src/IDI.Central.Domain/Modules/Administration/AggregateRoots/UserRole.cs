@@ -7,10 +7,12 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
     {
         public Guid UserId { get; set; }
 
-        public User User { get; set; }
+        public string Roles { get; set; }
 
-        public Guid RoleId { get; set; }
+        //public User User { get; set; }
 
-        public Role Role { get; set; }
+        //public Guid RoleId { get; set; }
+
+        //public Role Role { get; set; }
     }
 }

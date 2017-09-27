@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
@@ -16,9 +15,9 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
         [RequiredField]
         public string Role { get; private set; }
 
-        public Guid[] Permissions { get; private set; }
+        public string[] Permissions { get; private set; }
 
-        public RoleAuthorizationCommand(string role, Guid[] permissions)
+        public RoleAuthorizationCommand(string role, string[] permissions)
         {
             this.Role = role;
             this.Permissions = permissions;
@@ -38,25 +37,17 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 
         public Result Execute(RoleAuthorizationCommand command)
         {
-            var role = this.Roles.Include(e => e.RolePermissions).Find(r => r.Name == command.Role);
+            var role = Roles.Find(r => r.Name == command.Role);
 
             if (role == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidRole));
 
-            var recent = command.Permissions.ToList();
-            var current = role.RolePermissions.Select(e => e.PermissionId).ToList();
-            var deletion = current.Except(recent).ToList();
-            var addition = recent.Except(current).ToList();
+            var permissions = Permissions.Get(e => command.Permissions.Contains(e.Code)).ToArray();
 
-            role.RolePermissions.RemoveAll(e => deletion.Contains(e.PermissionId));
-
-            var permissions = this.Permissions.Get(e => addition.Contains(e.Id));
-            var additionPermissions = permissions.Select(permission => new RolePermission { PermissionId = permission.Id, RoleId = role.Id }).ToList();
-            role.RolePermissions.AddRange(additionPermissions);
+            role.Authorize(permissions);
 
             this.Roles.Update(role);
             this.Roles.Commit();
-            //this.Roles.Context.Dispose();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.RoleAuthorizationSuccess));
         }

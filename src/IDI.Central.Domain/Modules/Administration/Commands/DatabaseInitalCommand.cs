@@ -1,4 +1,5 @@
-﻿using IDI.Central.Domain.Localization;
+﻿using IDI.Central.Common;
+using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
@@ -23,8 +24,11 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
         [Injection]
         public ILocalization Localization { get; set; }
 
+        //[Injection]
+        //public IRepository<Module> Modules { get; set; }
+
         [Injection]
-        public IRepository<Module> Modules { get; set; }
+        public IRepository<Permission> Permissions { get; set; }
 
         [Injection]
         public IRepository<Role> Roles { get; set; }
@@ -37,24 +41,24 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 
         public Result Execute(DatabaseInitalCommand command)
         {
-            bool initialized = this.Modules.Exist(e => e.Code == command.Seed.Modules.Administration.Code);
+            bool initialized = this.Roles.Exist(e => e.Name == Configuration.Roles.Administrators);
 
             if (initialized)
                 return Result.Success(message: Localization.Get(Resources.Key.Command.SysDbInitialized));
 
-            this.Modules.Add(command.Seed.Modules.Administration);
-            this.Modules.Add(command.Seed.Modules.Sales);
-            this.Modules.Commit();
+            Permissions.AddRange(command.Seed.Authorization.Permissions);
+            Permissions.Commit();
 
-            this.Users.Add(command.Seed.Users.Administrator);
-            this.Users.Commit();
+            Users.Add(command.Seed.Users.Administrator);
+            Users.Commit();
 
-            this.Roles.Add(command.Seed.Roles.Staffs);
-            this.Roles.Add(command.Seed.Roles.Customers);
-            this.Roles.Commit();
+            Roles.Add(command.Seed.Roles.Administrators);
+            Roles.Add(command.Seed.Roles.Staffs);
+            Roles.Add(command.Seed.Roles.Customers);
+            Roles.Commit();
 
-            this.Clients.Add(command.Seed.Clients.Central);
-            this.Clients.Commit();
+            Clients.Add(command.Seed.Clients.Central);
+            Clients.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.SysDbInitSuccess));
         }

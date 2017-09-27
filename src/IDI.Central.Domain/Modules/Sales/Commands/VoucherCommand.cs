@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using IDI.Central.Common;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Sales.AggregateRoots;
@@ -100,11 +101,11 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
 
             long size = command.File.Length / 1024;
 
-            if (size > Central.Common.Constants.Config.ImageSpec.Maximum)
-                return Result.Fail(Localization.Get(Resources.Key.Command.FileMaxSizeLimit).ToFormat($"{Central.Common.Constants.Config.ImageSpec.Maximum} KB"));
+            if (size > Configuration.ImageSpec.Maximum)
+                return Result.Fail(Localization.Get(Resources.Key.Command.FileMaxSizeLimit).ToFormat($"{Configuration.ImageSpec.Maximum} KB"));
 
-            if (!Central.Common.Constants.Config.ImageSpec.ContentTypes.Any(e => e == command.File.ContentType))
-                return Result.Fail(Localization.Get(Resources.Key.Command.SupportedExtension).ToFormat(Central.Common.Constants.Config.ImageSpec.Extensions.JoinToString(",")));
+            if (!Configuration.ImageSpec.ContentTypes.Any(e => e == command.File.ContentType))
+                return Result.Fail(Localization.Get(Resources.Key.Command.SupportedExtension).ToFormat(Configuration.ImageSpec.Extensions.JoinToString(",")));
 
             Attach(voucher, command.File);
 

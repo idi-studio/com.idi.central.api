@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using IDI.Central.Common;
 using IDI.Central.Common.Enums;
 using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Material.Commands;
@@ -14,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IDI.Central.Controllers
 {
     [Route("api/product/picture"), ApplicationAuthorize]
-    [Module(Common.Constants.Module.Common)]
+    [Module(Configuration.Modules.BasicInfo)]
     public class ProductPictureController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;

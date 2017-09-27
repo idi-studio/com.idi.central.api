@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IDI.Core.Domain;
 using Microsoft.EntityFrameworkCore;
@@ -52,19 +53,24 @@ namespace IDI.Core.Repositories
             return context.Set<TAggregateRoot>();
         }
 
-        public void Add<TAggregateRoot>(TAggregateRoot aggregateRoot) where TAggregateRoot : AggregateRoot
+        public void Add<TAggregateRoot>(TAggregateRoot arg) where TAggregateRoot : AggregateRoot
         {
-            context.Add(aggregateRoot);
+            context.Add(arg);
             this.Committed = false;
         }
-        public void Update<TAggregateRoot>(TAggregateRoot aggregateRoot) where TAggregateRoot : AggregateRoot
+        public void AddRange<TAggregateRoot>(List<TAggregateRoot> args) where TAggregateRoot : AggregateRoot
         {
-            context.Update(aggregateRoot);
+            context.AddRange(args);
             this.Committed = false;
         }
-        public void Remove<TAggregateRoot>(TAggregateRoot aggregateRoot) where TAggregateRoot : AggregateRoot
+        public void Update<TAggregateRoot>(TAggregateRoot arg) where TAggregateRoot : AggregateRoot
         {
-            context.Remove(aggregateRoot);
+            context.Update(arg);
+            this.Committed = false;
+        }
+        public void Remove<TAggregateRoot>(TAggregateRoot arg) where TAggregateRoot : AggregateRoot
+        {
+            context.Remove(arg);
             this.Committed = false;
         }
         protected virtual void Dispose(bool disposing)

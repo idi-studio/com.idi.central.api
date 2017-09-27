@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using IDI.Central.Common;
 using IDI.Central.Common.Enums;
 using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Sales.Commands;
@@ -14,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IDI.Central.Controllers
 {
     [Route("api/vchr"), ApplicationAuthorize]
-    [Module(Common.Constants.Module.Sales)]
+    [Module(Configuration.Modules.Sales)]
     public class VoucherController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;

@@ -1,6 +1,6 @@
 ﻿using IDI.Core.Authentication;
 
-namespace IDI.Central.Core
+namespace IDI.Central.Domain
 {
     public class ApplicationAuthorization : Authorization
     {

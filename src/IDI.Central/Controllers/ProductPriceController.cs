@@ -1,4 +1,5 @@
 ﻿using System;
+using IDI.Central.Common;
 using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Material.Commands;
 using IDI.Central.Domain.Modules.Material.Queries;
@@ -13,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IDI.Central.Controllers
 {
     [Route("api/product/price"), ApplicationAuthorize]
-    [Module(Common.Constants.Module.Common)]
+    [Module(Configuration.Modules.BasicInfo)]
     public class ProductPriceController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;
