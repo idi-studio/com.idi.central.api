@@ -4,6 +4,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using IDI.Core.Common;
+using IDI.Core.Common.Enums;
+using IDI.Core.Infrastructure;
+using IDI.Core.Logging;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
@@ -51,10 +54,16 @@ namespace IDI.Core.Authentication.TokenAuthentication
             }
 
             if (result != null && result.Status == ResultStatus.Success)
+            {
+                Log(identity, AuthorizeResult.Accept);
                 return GenerateToken(context, identity, secret, generateIdentity);
+            }
 
             if (result != null && result.Status == ResultStatus.Fail)
+            {
+                Log(identity, AuthorizeResult.Reject, result.Message);
                 return context.OK(result);
+            }
 
             return context.Unauthorized();
         }
@@ -115,6 +124,11 @@ namespace IDI.Core.Authentication.TokenAuthentication
             {
                 await context.InternalServerError(ex);
             }
+        }
+
+        private void Log(string username, AuthorizeResult result, string reason = "-")
+        {
+            Runtime.GetService<ILogger>().InfoFormat("|{0}|{1}|{2}|{3}|", username ?? "-", "sign-in", result.ToString().ToLower(), reason);
         }
     }
 }

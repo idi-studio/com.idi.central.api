@@ -88,7 +88,7 @@ namespace IDI.Central.Core
 
         private void Log(string username, IPermission permission, AuthorizeResult result, string reason = "-")
         {
-            Logger.InfoFormat("{0}|{1}|{2}|{3}", username ?? "-", permission.Code, result.ToString().ToLower(), reason);
+            Logger.InfoFormat("|{0}|{1}|{2}|{3}|", username ?? "-", permission.Code, result.ToString().ToLower(), reason);
         }
     }
 

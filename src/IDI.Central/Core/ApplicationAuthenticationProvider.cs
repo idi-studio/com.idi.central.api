@@ -20,7 +20,8 @@ namespace IDI.Central.Core
             return new List<Claim>
             {
                 new Claim(ClaimTypes.AuthenticationMethod, Constants.AuthenticationMethod.ClientCredentials, ClaimValueTypes.String),
-                new Claim(ClaimTypes.NameIdentifier, clientId, ClaimValueTypes.String)
+                new Claim(ClaimTypes.NameIdentifier, clientId, ClaimValueTypes.String),
+                new Claim(ClaimTypes.Name, clientId, ClaimValueTypes.String)
             };
         }
 
