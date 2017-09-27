@@ -1,9 +1,7 @@
-﻿using IDI.Core.Common;
-using IDI.Core.Common.Extensions;
+﻿using IDI.Core.Logging;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.Extensions.Logging;
 
 namespace IDI.Central.Core
 {
@@ -13,11 +11,11 @@ namespace IDI.Central.Core
         private readonly IModelMetadataProvider metadata;
         private readonly ILogger logger;
 
-        public ApplicationExceptionAttribute(IHostingEnvironment environment, IModelMetadataProvider metadata, ILoggerFactory factory)
+        public ApplicationExceptionAttribute(IHostingEnvironment environment, IModelMetadataProvider metadata, ILogger logger)
         {
             this.environment = environment;
             this.metadata = metadata;
-            this.logger = factory.CreateLogger(Constants.LoggerCategory.Error);
+            this.logger = logger;
         }
 
         public override void OnException(ExceptionContext context)
@@ -25,7 +23,8 @@ namespace IDI.Central.Core
             if (!environment.IsDevelopment())
                 return;
 
-            this.logger.LogError(context.Exception, context.Exception.Message, context.HttpContext.Request.AsJson());
+            logger.Error(context.Exception.Message, context.Exception);
+            //this.logger.LogError(context.Exception, context.Exception.Message, context.HttpContext.Request.AsJson());
 
             context.HttpContext.InternalServerError(context.Exception);
 
