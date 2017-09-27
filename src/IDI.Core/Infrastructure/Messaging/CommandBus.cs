@@ -40,8 +40,6 @@ namespace IDI.Core.Infrastructure.Messaging
 
             try
             {
-                logger.Info(command);
-
                 return handler.Execute(command);
             }
             catch (Exception exception)

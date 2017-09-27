@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 using IDI.Central.Domain.Localization;
 using IDI.Core.Authentication;
 using IDI.Core.Common;
+using IDI.Core.Common.Enums;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure;
 using IDI.Core.Localization;
+using IDI.Core.Logging;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.Tokens;
@@ -19,12 +21,11 @@ namespace IDI.Central.Core
 {
     public class ApplicationAuthorize : ActionFilterAttribute
     {
-        public IAuthorization Authorization { get; private set; }
+        public IAuthorization Authorization => Runtime.GetService<IAuthorization>();
 
-        public ApplicationAuthorize()
-        {
-            this.Authorization = Runtime.GetService<IAuthorization>();
-        }
+        public ILogger Logger => Runtime.GetService<ILogger>();
+
+        public ILocalization Localization => Runtime.GetService<ILocalization>();
 
         public override Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
@@ -48,33 +49,46 @@ namespace IDI.Central.Core
                 IssuerSigningKey = options.SigningCredentials.Key
             };
 
+            var username = string.Empty;
+            var permission = context.GetPermission();
+
             try
             {
                 context.HttpContext.User = hanlder.ValidateToken(token, validationParameters, out validatedToken);
 
-                string[] roles = context.HttpContext.User.Claims.Get(ClaimTypes.Role).To<List<string>>().ToArray();
+                username = context.GetName();
 
-                var permission = context.GetPermission();
-
-                if (permission != null && Authorization.HasPermission(roles, permission))
+                if (permission != null && Authorization.HasPermission(context.GetRoles(), permission))
                 {
+                    Log(username, permission, AuthorizeResult.Accept);
                     return base.OnActionExecutionAsync(context, next);
                 }
-
-                return context.HttpContext.Unauthorized();
+                else
+                {
+                    Log(username, permission, AuthorizeResult.Reject, Localization.Get(Resources.Key.Command.Unauthorized));
+                    return context.HttpContext.Unauthorized();
+                }
             }
             catch (SecurityTokenExpiredException)
             {
+                Log(username, permission, AuthorizeResult.Reject, Localization.Get(Resources.Key.Command.TokenExpired));
                 return context.HttpContext.TokenExpired();
             }
             catch (ArgumentException)
             {
+                Log(username, permission, AuthorizeResult.Reject, Localization.Get(Resources.Key.Command.TokenInvalid));
                 return context.HttpContext.TokenInvalid();
             }
             catch (SecurityTokenValidationException)
             {
+                Log(username, permission, AuthorizeResult.Reject, Localization.Get(Resources.Key.Command.TokenInvalid));
                 return context.HttpContext.TokenInvalid();
             }
+        }
+
+        private void Log(string username, IPermission permission, AuthorizeResult result, string reason = "-")
+        {
+            Logger.InfoFormat("{0}|{1}|{2}|{3}", username ?? "-", permission.Code, result.ToString().ToLower(), reason);
         }
     }
 
@@ -96,6 +110,16 @@ namespace IDI.Central.Core
             var permission = context.ActionDescriptor.FilterDescriptors.FirstOrDefault(e => e.Filter.GetType() == typeof(PermissionAttribute)).Filter as PermissionAttribute;
 
             return permission != null ? new Permission(module.Name, permission.Name, permission.Type) : null;
+        }
+
+        public static string GetName(this ActionExecutingContext context)
+        {
+            return context.HttpContext.User.Claims.Get(ClaimTypes.Name)?? "anonymous";
+        }
+
+        public static string[] GetRoles(this ActionExecutingContext context)
+        {
+            return context.HttpContext.User.Claims.Get(ClaimTypes.Role).To<List<string>>().ToArray();
         }
 
         public static Task Unauthorized(this HttpContext context)
