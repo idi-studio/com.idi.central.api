@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IDI.Core.Common.Enums
+﻿namespace IDI.Core.Common.Enums
 {
     public enum AuthorizeResult
     {
