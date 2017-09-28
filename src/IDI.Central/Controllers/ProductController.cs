@@ -22,14 +22,14 @@ namespace IDI.Central.Controllers
     public class ProductController : Controller, IAuthorizable
     {
         private readonly ApplicationOptions options;
-        private readonly ICommandBus commandBus;
-        private readonly IQuerier queryProcessor;
+        private readonly ICommandBus bus;
+        private readonly IQuerier querier;
 
-        public ProductController(IOptionsSnapshot<ApplicationOptions> options, ICommandBus commandBus, IQuerier queryProcessor)
+        public ProductController(IOptionsSnapshot<ApplicationOptions> options, ICommandBus bus, IQuerier querier)
         {
             this.options = options.Value;
-            this.commandBus = commandBus;
-            this.queryProcessor = queryProcessor;
+            this.bus = bus;
+            this.querier = querier;
         }
 
         [HttpPost]
@@ -47,14 +47,14 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Create,
             };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
 
         [HttpGet("list")]
         [Permission("product", PermissionType.Query)]
         public Result<Set<ProductModel>> List()
         {
-            return queryProcessor.Execute<QueryProductSetCondition, Set<ProductModel>>();
+            return querier.Execute<QueryProductSetCondition, Set<ProductModel>>();
         }
 
         [HttpGet("selling/{id}")]
@@ -63,7 +63,7 @@ namespace IDI.Central.Controllers
         {
             var condition = new QuerySellSetCondition { CustomerId = id };
 
-            return queryProcessor.Execute<QuerySellSetCondition, Set<SellModel>>(condition);
+            return querier.Execute<QuerySellSetCondition, Set<SellModel>>(condition);
         }
 
         [HttpPut("{id}")]
@@ -82,7 +82,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
 
         [HttpGet("{id}")]
@@ -96,7 +96,7 @@ namespace IDI.Central.Controllers
                 SavePath = env.WebRootPath
             };
 
-            return queryProcessor.Execute<QueryProductCondition, ProductModel>(condition);
+            return querier.Execute<QueryProductCondition, ProductModel>(condition);
         }
 
         [HttpDelete("{id}")]
@@ -105,7 +105,7 @@ namespace IDI.Central.Controllers
         {
             var command = new ProductCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
     }
 }

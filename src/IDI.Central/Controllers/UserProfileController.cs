@@ -14,13 +14,13 @@ namespace IDI.Central.Controllers
     [Module(Configuration.Modules.Personal)]
     public class UserProfileController : Controller, IAuthorizable
     {
-        private readonly ICommandBus commandBus;
-        private readonly IQuerier queryProcessor;
+        private readonly ICommandBus bus;
+        private readonly IQuerier querier;
 
-        public UserProfileController(ICommandBus commandBus, IQuerier queryProcessor)
+        public UserProfileController(ICommandBus bus, IQuerier querier)
         {
-            this.commandBus = commandBus;
-            this.queryProcessor = queryProcessor;
+            this.bus = bus;
+            this.querier = querier;
         }
 
         [HttpGet("{username}")]
@@ -29,7 +29,7 @@ namespace IDI.Central.Controllers
         {
             var condition = new QueryMyProfileCondition { UserName = username };
 
-            return queryProcessor.Execute<QueryMyProfileCondition, MyProfile>(condition);
+            return querier.Execute<QueryMyProfileCondition, MyProfile>(condition);
         }
     }
 }

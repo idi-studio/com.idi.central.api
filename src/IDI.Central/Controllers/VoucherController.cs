@@ -18,13 +18,13 @@ namespace IDI.Central.Controllers
     [Module(Configuration.Modules.Sales)]
     public class VoucherController : Controller, IAuthorizable
     {
-        private readonly ICommandBus commandBus;
-        private readonly IQuerier queryProcessor;
+        private readonly ICommandBus bus;
+        private readonly IQuerier querier;
 
-        public VoucherController(ICommandBus commandBus, IQuerier queryProcessor)
+        public VoucherController(ICommandBus bus, IQuerier querier)
         {
-            this.commandBus = commandBus;
-            this.queryProcessor = queryProcessor;
+            this.bus = bus;
+            this.querier = querier;
         }
 
         [HttpGet("{id}")]
@@ -33,7 +33,7 @@ namespace IDI.Central.Controllers
         {
             var condition = new QueryVoucherCondition { Id = id };
 
-            return queryProcessor.Execute<QueryVoucherCondition, VoucherModel>(condition);
+            return querier.Execute<QueryVoucherCondition, VoucherModel>(condition);
         }
 
         [HttpPost]
@@ -51,7 +51,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Create,
             };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
 
         [HttpPut("{id}")]
@@ -70,7 +70,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
 
         [HttpPut("paid/{id}")]
@@ -85,7 +85,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
 
         [HttpPost("attach")]
@@ -100,7 +100,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Upload,
             };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
 
         [HttpDelete("{id}")]
@@ -109,7 +109,7 @@ namespace IDI.Central.Controllers
         {
             var command = new VoucherCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
     }
 }

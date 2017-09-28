@@ -14,20 +14,20 @@ namespace IDI.Central.Controllers
     [Module(Configuration.Modules.BasicInfo)]
     public class TagController : Controller, IAuthorizable
     {
-        private readonly ICommandBus commandBus;
-        private readonly IQuerier queryProcessor;
+        private readonly ICommandBus bus;
+        private readonly IQuerier querier;
 
-        public TagController(ICommandBus commandBus, IQuerier queryProcessor)
+        public TagController(ICommandBus bus, IQuerier querier)
         {
-            this.commandBus = commandBus;
-            this.queryProcessor = queryProcessor;
+            this.bus = bus;
+            this.querier = querier;
         }
 
         [HttpGet("list")]
         [Permission("tag", PermissionType.Query)]
         public Result<Set<TagModel>> List()
         {
-            return queryProcessor.Execute<QueryTagSetCondition, Set<TagModel>>();
+            return querier.Execute<QueryTagSetCondition, Set<TagModel>>();
         }
     }
 }

@@ -15,13 +15,13 @@ namespace IDI.Central.Controllers
     [Module(Configuration.Modules.Sales)]
     public class AddressController : Controller, IAuthorizable
     {
-        private readonly ICommandBus commandBus;
-        private readonly IQuerier queryProcessor;
+        private readonly ICommandBus bus;
+        private readonly IQuerier querier;
 
-        public AddressController(ICommandBus commandBus, IQuerier queryProcessor)
+        public AddressController(ICommandBus bus, IQuerier querier)
         {
-            this.commandBus = commandBus;
-            this.queryProcessor = queryProcessor;
+            this.bus = bus;
+            this.querier = querier;
         }
 
         [HttpPost]
@@ -45,7 +45,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Create,
             };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
 
         [HttpPut("{id}")]
@@ -69,7 +69,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
 
         [HttpDelete("{id}")]
@@ -78,7 +78,7 @@ namespace IDI.Central.Controllers
         {
             var command = new ShippingAddressCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
     }
 }

@@ -13,15 +13,9 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
     public class UserAuthorizeCommand : Command
     {
         [RequiredField]
-        public string UserName { get; private set; }
+        public string UserName { get; set; }
 
-        public string[] Roles { get; private set; }
-
-        public UserAuthorizeCommand(string userName, string[] roles)
-        {
-            this.UserName = userName;
-            this.Roles = roles;
-        }
+        public string[] Roles { get; set; }
     }
 
     public class UserAuthorizeCommandHandler : ICommandHandler<UserAuthorizeCommand>

@@ -15,13 +15,13 @@ namespace IDI.Central.Controllers
     [Module(Configuration.Modules.BasicInfo)]
     public class CategoryController : Controller, IAuthorizable
     {
-        private readonly ICommandBus commandBus;
-        private readonly IQuerier queryProcessor;
+        private readonly ICommandBus bus;
+        private readonly IQuerier querier;
 
-        public CategoryController(ICommandBus commandBus, IQuerier queryProcessor)
+        public CategoryController(ICommandBus bus, IQuerier querier)
         {
-            this.commandBus = commandBus;
-            this.queryProcessor = queryProcessor;
+            this.bus = bus;
+            this.querier = querier;
         }
 
         [HttpPost]
@@ -30,7 +30,7 @@ namespace IDI.Central.Controllers
         {
             var condition = new QueryCategoryCondition { EnumType = input.EnumType };
 
-            return queryProcessor.Execute<QueryCategoryCondition, Set<KeyValuePair<int, string>>>(condition);
+            return querier.Execute<QueryCategoryCondition, Set<KeyValuePair<int, string>>>(condition);
         }
     }
 }

@@ -16,27 +16,27 @@ namespace IDI.Central.Controllers
     [Module(Configuration.Modules.Administration)]
     public class RoleController : Controller, IAuthorizable
     {
-        private readonly ICommandBus commandBus;
-        private readonly IQuerier queryProcessor;
+        private readonly ICommandBus bus;
+        private readonly IQuerier querier;
 
-        public RoleController(ICommandBus commandBus, IQuerier queryProcessor)
+        public RoleController(ICommandBus bus, IQuerier querier)
         {
-            this.commandBus = commandBus;
-            this.queryProcessor = queryProcessor;
+            this.bus = bus;
+            this.querier = querier;
         }
 
         [HttpPost]
         [Permission("role", PermissionType.Add)]
         public Result Post([FromBody]RoleCreationInput input)
         {
-            return commandBus.Send(new RoleCreationCommand(input.RoleName));
+            return bus.Send(new RoleCreationCommand(input.RoleName));
         }
 
         [HttpGet("list")]
         [Permission("role", PermissionType.Query)]
         public Result<Set<RoleModel>> List()
         {
-            return queryProcessor.Execute<QueryRoleSetCondition, Set<RoleModel>>();
+            return querier.Execute<QueryRoleSetCondition, Set<RoleModel>>();
         }
 
         [HttpGet("permission/{name}")]
@@ -45,7 +45,7 @@ namespace IDI.Central.Controllers
         {
             var condition = new QueryRolePermissionCondition { Name = name };
 
-            return queryProcessor.Execute<QueryRolePermissionCondition, RolePermissionModel>(condition);
+            return querier.Execute<QueryRolePermissionCondition, RolePermissionModel>(condition);
         }
 
         [HttpPut("authorize")]
@@ -60,7 +60,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
     }
 }

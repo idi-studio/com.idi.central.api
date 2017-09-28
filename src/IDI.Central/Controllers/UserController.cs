@@ -3,6 +3,7 @@ using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Central.Domain.Modules.Administration.Queries;
 using IDI.Central.Models.Administration;
+using IDI.Central.Models.Administration.Inputs;
 using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
@@ -15,27 +16,49 @@ namespace IDI.Central.Controllers
     [Module(Configuration.Modules.Administration)]
     public class UserController : Controller, IAuthorizable
     {
-        private readonly ICommandBus commandBus;
-        private readonly IQuerier queryProcessor;
+        private readonly ICommandBus bus;
+        private readonly IQuerier querier;
 
-        public UserController(ICommandBus commandBus, IQuerier queryProcessor)
+        public UserController(ICommandBus bus, IQuerier querier)
         {
-            this.commandBus = commandBus;
-            this.queryProcessor = queryProcessor;
+            this.bus = bus;
+            this.querier = querier;
         }
 
         [HttpPost]
         [Permission("user", PermissionType.Add)]
         public Result Post([FromBody]UserRegistrationInput input)
         {
-            return commandBus.Send(new UserRegistrationCommand(input.UserName, input.Password, input.Confirm));
+            return bus.Send(new UserRegistrationCommand(input.UserName, input.Password, input.Confirm));
         }
 
         [HttpGet("list")]
         [Permission("user", PermissionType.Query)]
         public Result<Set<UserModel>> List()
         {
-            return queryProcessor.Execute<QueryUserSetCondition, Set<UserModel>>();
+            return querier.Execute<QueryUserSetCondition, Set<UserModel>>();
+        }
+
+        [HttpGet("role/{name}")]
+        [Permission("user-role", PermissionType.Query)]
+        public Result<UserRoleModel> GetUserRole(string name)
+        {
+            return querier.Execute<QueryUserRoleCondition, UserRoleModel>();
+        }
+
+        [HttpPut("authorize")]
+        [Permission("user-authorize", PermissionType.Modify)]
+        public Result Put([FromBody]UserAuthorizeInput input)
+        {
+            var command = new UserAuthorizeCommand
+            {
+                UserName = input.UserName,
+                Roles = input.Roles,
+                Mode = CommandMode.Update,
+                Group = VerificationGroup.Update,
+            };
+
+            return bus.Send(command);
         }
     }
 }

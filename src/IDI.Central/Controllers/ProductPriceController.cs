@@ -17,13 +17,13 @@ namespace IDI.Central.Controllers
     [Module(Configuration.Modules.BasicInfo)]
     public class ProductPriceController : Controller, IAuthorizable
     {
-        private readonly ICommandBus commandBus;
-        private readonly IQuerier queryProcessor;
+        private readonly ICommandBus bus;
+        private readonly IQuerier querier;
 
-        public ProductPriceController(ICommandBus commandBus, IQuerier queryProcessor)
+        public ProductPriceController(ICommandBus bus, IQuerier querier)
         {
-            this.commandBus = commandBus;
-            this.queryProcessor = queryProcessor;
+            this.bus = bus;
+            this.querier = querier;
         }
 
         [HttpPost]
@@ -44,7 +44,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Create,
             };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
 
         [HttpPut("{id}")]
@@ -66,7 +66,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
 
         [HttpGet("{id}")]
@@ -75,7 +75,7 @@ namespace IDI.Central.Controllers
         {
             var condition = new QueryProductPriceCondition { Id = id };
 
-            return queryProcessor.Execute<QueryProductPriceCondition, ProductPriceModel>(condition);
+            return querier.Execute<QueryProductPriceCondition, ProductPriceModel>(condition);
         }
 
         [HttpDelete("{id}")]
@@ -84,7 +84,7 @@ namespace IDI.Central.Controllers
         {
             var command = new ProductPriceCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
 
         [HttpGet("list/{id}")]
@@ -93,7 +93,7 @@ namespace IDI.Central.Controllers
         {
             var condition = new QueryProductPriceSetCondition { ProductId = id };
 
-            return queryProcessor.Execute<QueryProductPriceSetCondition, Set<ProductPriceModel>>(condition);
+            return querier.Execute<QueryProductPriceSetCondition, Set<ProductPriceModel>>(condition);
         }
     }
 }

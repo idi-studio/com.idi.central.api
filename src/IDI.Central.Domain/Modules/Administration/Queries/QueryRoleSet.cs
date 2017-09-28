@@ -17,7 +17,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
 
         public override Result<Set<RoleModel>> Execute(QueryRoleSetCondition condition)
         {
-            var roles = this.Roles.Get();
+            var roles = Roles.Get();
 
             var collection = roles.OrderBy(r => r.Name).Select(r => new RoleModel
             {

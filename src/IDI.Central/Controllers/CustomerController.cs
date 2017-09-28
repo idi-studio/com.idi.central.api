@@ -17,13 +17,13 @@ namespace IDI.Central.Controllers
     [Module(Configuration.Modules.Sales)]
     public class CustomerController : Controller, IAuthorizable
     {
-        private readonly ICommandBus commandBus;
-        private readonly IQuerier queryProcessor;
+        private readonly ICommandBus bus;
+        private readonly IQuerier querier;
 
-        public CustomerController(ICommandBus commandBus, IQuerier queryProcessor)
+        public CustomerController(ICommandBus bus, IQuerier querier)
         {
-            this.commandBus = commandBus;
-            this.queryProcessor = queryProcessor;
+            this.bus = bus;
+            this.querier = querier;
         }
 
         [HttpGet("{id}")]
@@ -32,14 +32,14 @@ namespace IDI.Central.Controllers
         {
             var condition = new QueryCustomerCondition {  Id = id };
 
-            return queryProcessor.Execute<QueryCustomerCondition, CustomerModel>(condition);
+            return querier.Execute<QueryCustomerCondition, CustomerModel>(condition);
         }
 
         [HttpGet("list")]
         [Permission("customer", PermissionType.Query)]
         public Result<Set<CustomerModel>> List()
         {
-            return queryProcessor.Execute<QueryCustomerSetCondition, Set<CustomerModel>>();
+            return querier.Execute<QueryCustomerSetCondition, Set<CustomerModel>>();
         }
 
         [HttpPost]
@@ -57,7 +57,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Create,
             };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
 
         [HttpPut("{id}")]
@@ -75,7 +75,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
 
         [HttpDelete("{id}")]
@@ -84,7 +84,7 @@ namespace IDI.Central.Controllers
         {
             var command = new CustomerCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
     }
 }

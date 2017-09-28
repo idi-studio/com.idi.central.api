@@ -17,13 +17,13 @@ namespace IDI.Central.Controllers
     [Module(Configuration.Modules.Sales)]
     public class OrderController : Controller, IAuthorizable
     {
-        private readonly ICommandBus commandBus;
-        private readonly IQuerier queryProcessor;
+        private readonly ICommandBus bus;
+        private readonly IQuerier querier;
 
-        public OrderController(ICommandBus commandBus, IQuerier queryProcessor)
+        public OrderController(ICommandBus bus, IQuerier querier)
         {
-            this.commandBus = commandBus;
-            this.queryProcessor = queryProcessor;
+            this.bus = bus;
+            this.querier = querier;
         }
 
         [HttpPost]
@@ -39,7 +39,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Create,
             };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
 
         [HttpGet("list")]
@@ -48,7 +48,7 @@ namespace IDI.Central.Controllers
         {
             var condition = new QueryOrderSetCondition { Category = OrderCategory.Sales, Deadline = DateTime.Now.AddMonths(-3) };
 
-            return queryProcessor.Execute<QueryOrderSetCondition, Set<OrderModel>>(condition);
+            return querier.Execute<QueryOrderSetCondition, Set<OrderModel>>(condition);
         }
 
         [HttpPut("{id}")]
@@ -66,7 +66,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
 
         [HttpPut("verify/{id}")]
@@ -82,7 +82,7 @@ namespace IDI.Central.Controllers
                 Group = VerificationGroup.Update,
             };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
 
         [HttpGet("{id}")]
@@ -91,7 +91,7 @@ namespace IDI.Central.Controllers
         {
             var condition = new QueryOrderCondition { Id = id };
 
-            return queryProcessor.Execute<QueryOrderCondition, OrderModel>(condition);
+            return querier.Execute<QueryOrderCondition, OrderModel>(condition);
         }
 
         [HttpDelete("{id}")]
@@ -100,7 +100,7 @@ namespace IDI.Central.Controllers
         {
             var command = new OrderCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
 
-            return commandBus.Send(command);
+            return bus.Send(command);
         }
     }
 }
