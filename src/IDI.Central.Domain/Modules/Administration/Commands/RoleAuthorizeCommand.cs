@@ -10,21 +10,15 @@ using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Commands
 {
-    public class RoleAuthorizationCommand : Command
+    public class RoleAuthorizeCommand : Command
     {
         [RequiredField]
-        public string Role { get; private set; }
+        public string Role { get; set; }
 
-        public string[] Permissions { get; private set; }
-
-        public RoleAuthorizationCommand(string role, string[] permissions)
-        {
-            this.Role = role;
-            this.Permissions = permissions;
-        }
+        public string[] Permissions { get; set; }
     }
 
-    public class RoleAuthorizationCommandHandler : ICommandHandler<RoleAuthorizationCommand>
+    public class RoleAuthorizeCommandHandler : ICommandHandler<RoleAuthorizeCommand>
     {
         [Injection]
         public ILocalization Localization { get; set; }
@@ -35,7 +29,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
         [Injection]
         public IRepository<Permission> Permissions { get; set; }
 
-        public Result Execute(RoleAuthorizationCommand command)
+        public Result Execute(RoleAuthorizeCommand command)
         {
             var role = Roles.Find(r => r.Name == command.Role);
 

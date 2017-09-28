@@ -4,11 +4,13 @@ using System.Linq;
 using IDI.Central.Domain.Localization;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Queries;
+using IDI.Core.Infrastructure.Verification.Attributes;
 
 namespace IDI.Central.Domain.Modules.BasicInfo.Queries
 {
     public class QueryCategoryCondition : Condition
     {
+        [RequiredField]
         public string EnumType { get; set; }
     }
 

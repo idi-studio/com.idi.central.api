@@ -3,6 +3,7 @@ using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Central.Domain.Modules.Administration.Queries;
 using IDI.Central.Models.Administration;
+using IDI.Central.Models.Administration.Inputs;
 using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
@@ -36,6 +37,30 @@ namespace IDI.Central.Controllers
         public Result<Set<RoleModel>> List()
         {
             return queryProcessor.Execute<QueryRoleSetCondition, Set<RoleModel>>();
+        }
+
+        [HttpGet("permission/{name}")]
+        [Permission("role-permission", PermissionType.Query)]
+        public Result<RolePermissionModel> Permission(string name)
+        {
+            var condition = new QueryRolePermissionCondition { Name = name };
+
+            return queryProcessor.Execute<QueryRolePermissionCondition, RolePermissionModel>(condition);
+        }
+
+        [HttpPut("authorize")]
+        [Permission("role-authorize", PermissionType.Modify)]
+        public Result Put([FromBody]RoleAuthorizeInput input)
+        {
+            var command = new RoleAuthorizeCommand
+            {
+                Role = input.Role,
+                Permissions = input.Permissions,
+                Mode = CommandMode.Update,
+                Group = VerificationGroup.Update,
+            };
+
+            return commandBus.Send(command);
         }
     }
 }
