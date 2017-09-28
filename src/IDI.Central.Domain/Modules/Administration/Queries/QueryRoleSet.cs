@@ -8,14 +8,14 @@ using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Administration.Queries
 {
-    public class QueryRolesCondition : Condition { }
+    public class QueryRoleSetCondition : Condition { }
 
-    public class QueryRoles : Query<QueryRolesCondition, Set<RoleModel>>
+    public class QueryRoleSet : Query<QueryRoleSetCondition, Set<RoleModel>>
     {
         [Injection]
         public IQueryableRepository<Role> Roles { get; set; }
 
-        public override Result<Set<RoleModel>> Execute(QueryRolesCondition condition)
+        public override Result<Set<RoleModel>> Execute(QueryRoleSetCondition condition)
         {
             var roles = this.Roles.Get();
 
@@ -26,7 +26,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
                 Descrition = r.Descrition,
                 IsActive = r.IsActive,
                 Permissions = r.Permissions
-            }).ToList();
+            }).OrderBy(e => e.Name).ToList();
 
             return Result.Success(new Set<RoleModel>(collection));
         }

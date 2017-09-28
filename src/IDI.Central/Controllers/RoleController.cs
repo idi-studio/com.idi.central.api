@@ -35,7 +35,7 @@ namespace IDI.Central.Controllers
         [Permission("role", PermissionType.Query)]
         public Result<Set<RoleModel>> List()
         {
-            return queryProcessor.Execute<QueryRolesCondition, Set<RoleModel>>();
+            return queryProcessor.Execute<QueryRoleSetCondition, Set<RoleModel>>();
         }
     }
 }

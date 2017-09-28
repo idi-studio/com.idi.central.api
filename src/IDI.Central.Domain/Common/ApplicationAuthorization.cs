@@ -19,7 +19,7 @@ namespace IDI.Central.Domain
         {
             var dictionary = new Dictionary<string, List<IPermission>>();
 
-            var result = Runtime.Querier.Execute<QueryRolesCondition, Set<RoleModel>>();
+            var result = Runtime.Querier.Execute<QueryRoleSetCondition, Set<RoleModel>>();
 
             if (result.Status != ResultStatus.Success)
                 return dictionary;

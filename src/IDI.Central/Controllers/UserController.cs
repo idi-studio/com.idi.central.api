@@ -35,7 +35,7 @@ namespace IDI.Central.Controllers
         [Permission("user", PermissionType.Query)]
         public Result<Set<UserModel>> List()
         {
-            return queryProcessor.Execute<QueryUsersCondition, Set<UserModel>>();
+            return queryProcessor.Execute<QueryUserSetCondition, Set<UserModel>>();
         }
     }
 }
