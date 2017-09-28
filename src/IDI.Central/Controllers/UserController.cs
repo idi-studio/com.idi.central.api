@@ -39,11 +39,13 @@ namespace IDI.Central.Controllers
             return querier.Execute<QueryUserSetCondition, Set<UserModel>>();
         }
 
-        [HttpGet("role/{name}")]
+        [HttpGet("role/{username}")]
         [Permission("user-role", PermissionType.Query)]
-        public Result<UserRoleModel> GetUserRole(string name)
+        public Result<UserRoleModel> GetUserRole(string username)
         {
-            return querier.Execute<QueryUserRoleCondition, UserRoleModel>();
+            var condition = new QueryUserRoleCondition { UserName = username };
+
+            return querier.Execute<QueryUserRoleCondition, UserRoleModel>(condition);
         }
 
         [HttpPut("authorize")]
