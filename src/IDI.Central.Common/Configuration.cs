@@ -22,10 +22,10 @@
             public const string BasicInfo = "BasicInfo";
             public const string Inventory = "Inventory";
             public const string Logistics = "Logistics";
-            public const string Material = "Material";
             public const string Purchase = "Purchase";
             public const string Sales = "Sales";
-            public static readonly string[] All = new string[] { Administration, BasicInfo, Inventory, Logistics, Material, Purchase, Sales };
+            public const string Personal = "Personal";
+            public static readonly string[] All = new string[] { Administration, BasicInfo, Inventory, Logistics, Purchase, Sales, Personal };
         }
 
         public class Clients

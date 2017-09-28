@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using IDI.Central.Models.Common;
-using IDI.Central.Models.Material;
+using IDI.Central.Models.BasicInfo;
 using IDI.Core.Infrastructure.Queries;
 using Newtonsoft.Json;
 

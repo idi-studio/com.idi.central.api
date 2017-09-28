@@ -1,8 +1,8 @@
-﻿using IDI.Central.Domain.Modules.Material.AggregateRoots;
+﻿using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
 using IDI.Core.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace IDI.Central.Domain.Modules.Material
+namespace IDI.Central.Domain.Modules.BasicInfo
 {
     public class Mapping : EntityMapping
     {

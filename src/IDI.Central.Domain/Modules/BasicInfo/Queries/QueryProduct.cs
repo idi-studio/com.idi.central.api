@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using IDI.Central.Domain.Common;
-using IDI.Central.Domain.Modules.Material.AggregateRoots;
+using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
 using IDI.Central.Models.Common;
-using IDI.Central.Models.Material;
+using IDI.Central.Models.BasicInfo;
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure.DependencyInjection;
@@ -14,7 +14,7 @@ using IDI.Core.Infrastructure.Queries;
 using IDI.Core.Infrastructure.Verification.Attributes;
 using IDI.Core.Repositories;
 
-namespace IDI.Central.Domain.Modules.Material.Queries
+namespace IDI.Central.Domain.Modules.BasicInfo.Queries
 {
     public class QueryProductCondition : Condition
     {

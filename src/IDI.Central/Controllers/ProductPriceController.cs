@@ -1,9 +1,9 @@
 ﻿using System;
 using IDI.Central.Common;
 using IDI.Central.Core;
-using IDI.Central.Domain.Modules.Material.Commands;
-using IDI.Central.Domain.Modules.Material.Queries;
-using IDI.Central.Models.Material;
+using IDI.Central.Domain.Modules.BasicInfo.Commands;
+using IDI.Central.Domain.Modules.BasicInfo.Queries;
+using IDI.Central.Models.BasicInfo;
 using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;

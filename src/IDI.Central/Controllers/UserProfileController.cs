@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IDI.Central.Controllers
 {
     [Route("api/user/profile"), ApplicationAuthorize]
-    [Module(Configuration.Modules.BasicInfo)]
+    [Module(Configuration.Modules.Personal)]
     public class UserProfileController : Controller, IAuthorizable
     {
         private readonly ICommandBus commandBus;

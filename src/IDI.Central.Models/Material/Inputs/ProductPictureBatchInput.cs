@@ -2,7 +2,7 @@
 using IDI.Core.Common;
 using Newtonsoft.Json;
 
-namespace IDI.Central.Models.Material
+namespace IDI.Central.Models.BasicInfo
 {
     public class ProductPictureBatchInput : IInput
     {

@@ -3,7 +3,7 @@ using IDI.Central.Common.Enums;
 using IDI.Core.Infrastructure.Queries;
 using Newtonsoft.Json;
 
-namespace IDI.Central.Models.Material
+namespace IDI.Central.Models.BasicInfo
 {
     public class PriceModel : IModel
     {

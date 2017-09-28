@@ -1,24 +1,24 @@
 ﻿using IDI.Central.Domain.Localization;
-using IDI.Central.Domain.Modules.Material.AggregateRoots;
+using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
-namespace IDI.Central.Domain.Modules.Material.Commands
+namespace IDI.Central.Domain.Modules.BasicInfo.Commands
 {
-    public class MaterialInitalCommand : Command
+    public class BasicInfoInitialCommand : Command
     {
         public Seed Seed { get; private set; }
 
-        public MaterialInitalCommand()
+        public BasicInfoInitialCommand()
         {
             this.Seed = new Seed();
         }
     }
 
-    public class MaterialInitalCommandHandler : ICommandHandler<MaterialInitalCommand>
+    public class BasicInfoInitialCommandHandler : ICommandHandler<BasicInfoInitialCommand>
     {
         [Injection]
         public ILocalization Localization { get; set; }
@@ -26,7 +26,7 @@ namespace IDI.Central.Domain.Modules.Material.Commands
         [Injection]
         public IRepository<Product> Products { get; set; }
 
-        public Result Execute(MaterialInitalCommand command)
+        public Result Execute(BasicInfoInitialCommand command)
         {
             command.Seed.Products.iPhones.ForEach(e => this.Products.Add(e));
             command.Seed.Products.Others.ForEach(e => this.Products.Add(e));

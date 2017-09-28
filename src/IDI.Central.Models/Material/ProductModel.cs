@@ -4,7 +4,7 @@ using IDI.Central.Models.Common;
 using IDI.Core.Infrastructure.Queries;
 using Newtonsoft.Json;
 
-namespace IDI.Central.Models.Material
+namespace IDI.Central.Models.BasicInfo
 {
     public class ProductModel: IModel
     {

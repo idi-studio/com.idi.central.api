@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Localization;
-using IDI.Central.Domain.Modules.Material.AggregateRoots;
+using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
 using IDI.Central.Models.Common;
-using IDI.Central.Models.Material;
+using IDI.Central.Models.BasicInfo;
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
 
-namespace IDI.Central.Domain.Modules.Material
+namespace IDI.Central.Domain.Modules.BasicInfo
 {
     public class ProductCollection
     {

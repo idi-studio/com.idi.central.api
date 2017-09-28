@@ -79,8 +79,6 @@ namespace IDI.Central.Domain.Modules.Administration
 
     public class Seed
     {
-        //public ModuleCollection Modules { get; } = new ModuleCollection();
-
         public AuthorizationCollection Authorization { get; } = new AuthorizationCollection();
 
         public RoleCollection Roles { get; } = new RoleCollection();
@@ -91,12 +89,11 @@ namespace IDI.Central.Domain.Modules.Administration
 
         public Seed()
         {
-            //UserRoles
             this.Users.Administrator.Authorize(Roles.Administrators);
 
-            //RoleModules
             this.Roles.Administrators.Authorize(Authorization.GetPermissions(Configuration.Modules.All));
             this.Roles.Staffs.Authorize(Authorization.GetPermissions(Configuration.Modules.Sales));
+            this.Roles.Customers.Authorize(Authorization.GetPermissions(Configuration.Modules.Personal));
         }
     }
 }

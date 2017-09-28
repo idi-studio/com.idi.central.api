@@ -1,7 +1,7 @@
 ﻿using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Domain.Modules.Administration.Commands;
-using IDI.Central.Domain.Modules.Material.AggregateRoots;
-using IDI.Central.Domain.Modules.Material.Commands;
+using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
+using IDI.Central.Domain.Modules.BasicInfo.Commands;
 using IDI.Central.Domain.Modules.Sales.AggregateRoots;
 using IDI.Central.Domain.Modules.Sales.Commands;
 using IDI.Core.Common;
@@ -22,7 +22,7 @@ namespace IDI.Central.Domain.Tests
             Runtime.UseAuthorization<ApplicationAuthorization>();
 
             Assert.AreEqual(ResultStatus.Success, DatabaseInital().Status);
-            Assert.AreEqual(ResultStatus.Success, MaterialInital().Status);
+            Assert.AreEqual(ResultStatus.Success, BasicInfoInital().Status);
             Assert.AreEqual(ResultStatus.Success, SalesInital().Status);
         }
 
@@ -48,13 +48,13 @@ namespace IDI.Central.Domain.Tests
             return hanlder.Execute(new SalesInitalCommand());
         }
 
-        private Result MaterialInital()
+        private Result BasicInfoInital()
         {
-            var hanlder = new MaterialInitalCommandHandler();
+            var hanlder = new BasicInfoInitialCommandHandler();
             hanlder.Localization = new Globalization();
             hanlder.Products = Runtime.GetService<IRepository<Product>>();
 
-            return hanlder.Execute(new MaterialInitalCommand());
+            return hanlder.Execute(new BasicInfoInitialCommand());
         }
 
     }

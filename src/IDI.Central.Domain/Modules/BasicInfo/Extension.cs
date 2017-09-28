@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using IDI.Central.Common.Enums;
-using IDI.Central.Domain.Modules.Material.AggregateRoots;
-using IDI.Central.Models.Material;
+using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
+using IDI.Central.Models.BasicInfo;
 
-namespace IDI.Central.Domain.Modules.Material
+namespace IDI.Central.Domain.Modules.BasicInfo
 {
     internal static class Extension
     {

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using IDI.Central.Domain.Common;
-using IDI.Central.Domain.Modules.Material;
-using IDI.Central.Domain.Modules.Material.AggregateRoots;
+using IDI.Central.Domain.Modules.BasicInfo;
+using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
 using IDI.Central.Domain.Modules.Sales.AggregateRoots;
 using IDI.Central.Models.Common;
 using IDI.Central.Models.Sales;

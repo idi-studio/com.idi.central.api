@@ -4,7 +4,7 @@ using IDI.Central.Models.Common;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Queries;
 
-namespace IDI.Central.Domain.Modules.Common.Queries
+namespace IDI.Central.Domain.Modules.BasicInfo.Queries
 {
     public class QueryTagSetCondition : Condition { }
 
