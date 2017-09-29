@@ -24,11 +24,20 @@ namespace IDI.Central.Controllers
             this.querier = querier;
         }
 
-        [HttpPost("token/{type}")]
+        [HttpPost("token")]
         [Permission("access-token", PermissionType.Read)]
         public Result<AccessTokenModel> Get([FromBody]AccessTokenInput input)
         {
-            var condition = new QueryAccessTokenCondition { Code = input.Code, Type = input.Type };
+            var condition = new QueryAccessTokenCondition { Code = input.Code, RedirectUri = input.RedirectUri, State = input.State, Type = input.Type };
+
+            return querier.Execute<QueryAccessTokenCondition, AccessTokenModel>(condition);
+        }
+
+        [HttpPost("login")]
+        [Permission("login", PermissionType.Read)]
+        public Result<AccessTokenModel> Get([FromBody]AccessTokenInput input)
+        {
+            var condition = new QueryAccessTokenCondition { Code = input.Code, RedirectUri = input.RedirectUri, State = input.State, Type = input.Type };
 
             return querier.Execute<QueryAccessTokenCondition, AccessTokenModel>(condition);
         }

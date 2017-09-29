@@ -157,14 +157,26 @@
 },
 {
     "language": "chs",
-    "name": "authentication-success",
+    "name": "auth-success",
     "value": "认证成功!",
     "prefix": "command"
 },
 {
     "language": "en",
-    "name": "authentication-success",
+    "name": "auth-success",
     "value": "Authentication successfully.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "auth-fail",
+    "value": "认证失败!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "auth-fail",
+    "value": "Authentication failed.",
     "prefix": "command"
 },
 {

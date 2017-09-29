@@ -9,6 +9,12 @@ namespace IDI.Central.Models.OAuth.Inputs
         [JsonProperty("code")]
         public string Code { get; set; }
 
+        [JsonProperty("redirect_uri")]
+        public string RedirectUri { get; set; }
+
+        [JsonProperty("state")]
+        public string State { get; set; }
+
         [JsonProperty("type")]
         public OAuthType Type { get; set; }
     }

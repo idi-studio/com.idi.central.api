@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using IDI.Central.Common;
 using IDI.Central.Common.Enums;
+using IDI.Central.Domain.Localization;
 using IDI.Central.Models.OAuth;
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
@@ -16,7 +17,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Queries
         [RequiredField]
         public string Code { get; set; }
 
-        public string RedirectUrl { get; set; } = string.Empty;
+        public string RedirectUri { get; set; } = string.Empty;
 
         public string State { get; set; } = string.Empty;
 
@@ -37,11 +38,10 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Queries
             if (result != null)
                 return Result.Success(result);
 
-
-            return Result.Fail<AccessTokenModel>("");
+            return Result.Fail<AccessTokenModel>(Localization.Get(Resources.Key.Command.AuthFail));
         }
 
-        private static AccessTokenModel GitHub(QueryAccessTokenCondition condition)
+        private static GitHubAccessTokenModel GitHub(QueryAccessTokenCondition condition)
         {
             // client_id	    string	Required. The client ID you received from GitHub for your GitHub App.
             // client_secret	string	Required. The client secret you received from GitHub for your GitHub App.
@@ -53,11 +53,11 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Queries
                 client_id = Configuration.OAuthApplication.GitHub.ClientId,
                 client_secret = Configuration.OAuthApplication.GitHub.ClientSecret,
                 code = condition.Code,
-                redirect_uri = condition.RedirectUrl,
+                redirect_uri = condition.RedirectUri,
                 state = condition.State
             };
 
-            return Http.Instance.Post("https://github.com", "/login/oauth/access_token", param).To<AccessTokenModel>();
+            return Http.Instance.Post("https://github.com", "/login/oauth/access_token", param).To<GitHubAccessTokenModel>();
         }
 
         private static AccessTokenModel Wechat(QueryAccessTokenCondition condition)

@@ -43,7 +43,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             Users.Update(user);
             Users.Commit();
 
-            return Result.Success(message: Localization.Get(Resources.Key.Command.AuthenticationSuccess));
+            return Result.Success(message: Localization.Get(Resources.Key.Command.AuthSuccess));
         }
     }
 }

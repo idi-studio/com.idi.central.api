@@ -44,7 +44,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             if (user.Password != hashed)
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidUsernameOrPassword));
 
-            return Result.Success(message: Localization.Get(Resources.Key.Command.AuthenticationSuccess));
+            return Result.Success(message: Localization.Get(Resources.Key.Command.AuthSuccess));
         }
     }
 }

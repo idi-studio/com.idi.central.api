@@ -19,7 +19,8 @@ namespace IDI.Central.Domain.Localization
 		public class Key 
 		{
 						public class Command {
-								public const string AuthenticationSuccess = "authentication-success";
+								public const string AuthSuccess = "auth-success";
+								public const string AuthFail = "auth-fail";
 								public const string InvalidUsernameOrPassword = "invalid-username-or-password";
 								public const string InvalidClient = "invalid-client";
 								public const string InvalidUser = "invalid-user";
