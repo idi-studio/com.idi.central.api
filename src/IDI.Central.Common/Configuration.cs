@@ -25,12 +25,22 @@
             public const string Purchase = "Purchase";
             public const string Sales = "Sales";
             public const string Personal = "Personal";
-            public static readonly string[] All = new string[] { Administration, BasicInfo, Inventory, Logistics, Purchase, Sales, Personal };
+            public const string OAuth = "OAuth";
+            public static readonly string[] All = new string[] { Administration, BasicInfo, Inventory, Logistics, Purchase, Sales, Personal, OAuth };
         }
 
         public class Clients
         {
             public const string Central = "com.idi.central.web";
+        }
+
+        public class OAuthApplication
+        {
+            public class GitHub
+            {
+                public const string ClientId = "1cb801da9da98bc98db4";
+                public const string ClientSecret = "145147d750c3a3f071bacfe6f7000660fc73bbad";
+            }
         }
     }
 }

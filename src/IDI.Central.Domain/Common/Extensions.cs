@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
-using IDI.Central.Models.Common;
+using IDI.Central.Models.BasicInfo;
 using IDI.Core.Common;
 
 namespace IDI.Central.Domain.Common

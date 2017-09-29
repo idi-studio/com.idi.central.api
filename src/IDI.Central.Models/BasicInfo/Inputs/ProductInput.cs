@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using IDI.Central.Models.Common;
 using IDI.Core.Common;
 using Newtonsoft.Json;
 

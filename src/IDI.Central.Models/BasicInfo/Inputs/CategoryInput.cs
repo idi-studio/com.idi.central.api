@@ -1,7 +1,7 @@
 ﻿using IDI.Core.Common;
 using Newtonsoft.Json;
 
-namespace IDI.Central.Models.Common
+namespace IDI.Central.Models.BasicInfo
 {
     public class CategoryInput : IInput
     {

@@ -5,7 +5,7 @@ using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Modules.BasicInfo;
 using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
 using IDI.Central.Domain.Modules.Sales.AggregateRoots;
-using IDI.Central.Models.Common;
+using IDI.Central.Models.BasicInfo;
 using IDI.Central.Models.Sales;
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using IDI.Central.Domain.Localization;
-using IDI.Central.Models.Common;
+using IDI.Central.Models.BasicInfo;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Queries;
 

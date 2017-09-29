@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using IDI.Central.Common;
 using IDI.Central.Core;
 using IDI.Central.Domain.Modules.BasicInfo.Queries;
-using IDI.Central.Models.Common;
+using IDI.Central.Models.BasicInfo;
 using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;

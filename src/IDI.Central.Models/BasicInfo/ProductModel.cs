@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using IDI.Central.Models.Common;
 using IDI.Core.Infrastructure.Queries;
 using Newtonsoft.Json;
 
