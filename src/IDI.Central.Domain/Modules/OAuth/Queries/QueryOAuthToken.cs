@@ -12,7 +12,7 @@ using IDI.Core.Infrastructure.Verification.Attributes;
 
 namespace IDI.Central.Domain.Modules.BasicInfo.Queries
 {
-    public class QueryAccessTokenCondition : Condition
+    public class QueryOAuthTokenCondition : Condition
     {
         [RequiredField]
         public string Code { get; set; }
@@ -24,24 +24,24 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Queries
         public OAuthType Type { get; set; }
     }
 
-    public class QueryAccessToken : Query<QueryAccessTokenCondition, AccessTokenModel>
+    public class QueryOAuthToken : Query<QueryOAuthTokenCondition, OAuthTokenModel>
     {
-        private readonly Dictionary<OAuthType, Func<QueryAccessTokenCondition, AccessTokenModel>> func = new Dictionary<OAuthType, Func<QueryAccessTokenCondition, AccessTokenModel>>
+        private readonly Dictionary<OAuthType, Func<QueryOAuthTokenCondition, OAuthTokenModel>> func = new Dictionary<OAuthType, Func<QueryOAuthTokenCondition, OAuthTokenModel>>
         {
             { OAuthType.GitHub,GitHub }, { OAuthType.Wechat,Wechat }, { OAuthType.Alipay,Alipay }
         };
 
-        public override Result<AccessTokenModel> Execute(QueryAccessTokenCondition condition)
+        public override Result<OAuthTokenModel> Execute(QueryOAuthTokenCondition condition)
         {
             var result = func[condition.Type](condition);
 
             if (result != null)
                 return Result.Success(result);
 
-            return Result.Fail<AccessTokenModel>(Localization.Get(Resources.Key.Command.AuthFail));
+            return Result.Fail<OAuthTokenModel>(Localization.Get(Resources.Key.Command.AuthFail));
         }
 
-        private static GitHubAccessTokenModel GitHub(QueryAccessTokenCondition condition)
+        private static GitHubTokenModel GitHub(QueryOAuthTokenCondition condition)
         {
             // client_id	    string	Required. The client ID you received from GitHub for your GitHub App.
             // client_secret	string	Required. The client secret you received from GitHub for your GitHub App.
@@ -57,15 +57,15 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Queries
                 state = condition.State
             };
 
-            return Http.Instance.Post("https://github.com", "/login/oauth/access_token", param).To<GitHubAccessTokenModel>();
+            return Http.Instance.Post("https://github.com", "/login/oauth/access_token", param).To<GitHubTokenModel>();
         }
 
-        private static AccessTokenModel Wechat(QueryAccessTokenCondition condition)
+        private static OAuthTokenModel Wechat(QueryOAuthTokenCondition condition)
         {
             throw new NotImplementedException();
         }
 
-        private static AccessTokenModel Alipay(QueryAccessTokenCondition condition)
+        private static OAuthTokenModel Alipay(QueryOAuthTokenCondition condition)
         {
             throw new NotImplementedException();
         }

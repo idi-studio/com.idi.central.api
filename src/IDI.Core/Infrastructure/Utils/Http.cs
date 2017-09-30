@@ -24,14 +24,31 @@ namespace IDI.Core.Infrastructure.Utils
             };
         }
 
-        public string Post(string address, string url, object parameter)
+        public string Post(string address, string url, object parameter, AuthenticationHeaderValue authorization = null)
         {
             parameter = parameter ?? new object();
 
             var client = BuildClient(address);
-            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Constants.AuthenticationScheme.Bearer, token);
+
+            if (authorization != null)
+                client.DefaultRequestHeaders.Authorization = authorization;
 
             var response = client.PostAsync(url, new StringContent(parameter.ToJson(), Encoding.UTF8, "application/json")).Result;
+
+            if (response.IsSuccessStatusCode)
+                return response.Content.ReadAsStringAsync().Result;
+
+            throw new HttpRequestException(response.ReasonPhrase);
+        }
+
+        public string Get(string address, string url, AuthenticationHeaderValue authorization = null)
+        {
+            var client = BuildClient(address);
+
+            if (authorization != null)
+                client.DefaultRequestHeaders.Authorization = authorization;
+
+            var response = client.GetAsync(url).Result;
 
             if (response.IsSuccessStatusCode)
                 return response.Content.ReadAsStringAsync().Result;

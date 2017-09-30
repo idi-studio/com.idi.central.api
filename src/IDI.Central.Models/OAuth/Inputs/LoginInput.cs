@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace IDI.Central.Models.OAuth.Inputs
 {
-    public class AccessTokenInput: IInput
+    public class LoginInput : IInput
     {
         [JsonProperty("code")]
         public string Code { get; set; }

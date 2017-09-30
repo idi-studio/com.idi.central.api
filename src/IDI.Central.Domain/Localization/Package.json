@@ -181,6 +181,18 @@
 },
 {
     "language": "chs",
+    "name": "retrieve-user-info-fail",
+    "value": "获取用户信息失败!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "retrieve-user-info-fail",
+    "value": "Retrieve user info failed.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "invalid-username-or-password",
     "value": "无效的用户名或密码!",
     "prefix": "command"

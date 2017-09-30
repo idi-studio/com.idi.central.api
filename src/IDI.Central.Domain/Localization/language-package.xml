@@ -16,6 +16,7 @@
 
   <item prefix="command" name="auth-success" en="Authentication successfully." chs="认证成功!" />
   <item prefix="command" name="auth-fail" en="Authentication failed." chs="认证失败!" />
+  <item prefix="command" name="retrieve-user-info-fail" en="Retrieve user info failed." chs="获取用户信息失败!" />
   <item prefix="command" name="invalid-username-or-password" en="Invalid username or password." chs="无效的用户名或密码!" />
   <item prefix="command" name="invalid-client" en="Invalid client." chs="无效的客户端!" />
   <item prefix="command" name="invalid-user" en="Invalid user." chs="无效的用户!" />

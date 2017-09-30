@@ -3,16 +3,16 @@ using Newtonsoft.Json;
 
 namespace IDI.Central.Models.OAuth
 {
-    public abstract class AccessTokenModel : IModel
-    {
-
-    }
-
-    public class GitHubAccessTokenModel : AccessTokenModel
+    public abstract class OAuthTokenModel : IModel
     {
         [JsonProperty("access_token")]
         public string AccessToken { get; set; }
+    }
 
+    public class CentralTokenModel : OAuthTokenModel { }
+
+    public class GitHubTokenModel : OAuthTokenModel
+    {
         [JsonProperty("scope")]
         public string scope { get; set; }
 
