@@ -37,8 +37,8 @@ namespace IDI.Central.Controllers
         //    return querier.Execute<QueryAccessTokenCondition, AccessTokenModel>(condition);
         //}
 
-        [HttpPost("token")]
-        [Permission("access-token", PermissionType.Read)]
+        [HttpPost("login")]
+        [Permission("login", PermissionType.Read)]
         public Result<CentralTokenModel> Get([FromBody]LoginInput input)
         {
             var tokenResult = querier.Execute<QueryOAuthTokenCondition, OAuthTokenModel>(new QueryOAuthTokenCondition { Code = input.Code, RedirectUri = input.RedirectUri, State = input.State, Type = input.Type });
