@@ -10,13 +10,13 @@ namespace IDI.Central.Models.OAuth
 
         [JsonProperty("email")]
         public string Email { get; set; }
+
+        [JsonProperty("login")]
+        public string Login { get; set; }
     }
 
     public class GitHubUserModel : OAuthUserModel
     {
-        [JsonProperty("login")]
-        public string Login { get; set; }
-
         [JsonProperty("company")]
         public string Company { get; set; }
 
