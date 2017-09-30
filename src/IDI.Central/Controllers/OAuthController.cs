@@ -28,15 +28,6 @@ namespace IDI.Central.Controllers
             this.localization = localization;
         }
 
-        //[HttpPost("token")]
-        //[Permission("access-token", PermissionType.Read)]
-        //public Result<AccessTokenModel> Get([FromBody]AccessTokenInput input)
-        //{
-        //    var condition = new QueryAccessTokenCondition { Code = input.Code, RedirectUri = input.RedirectUri, State = input.State, Type = input.Type };
-
-        //    return querier.Execute<QueryAccessTokenCondition, AccessTokenModel>(condition);
-        //}
-
         [HttpPost("login")]
         [Permission("login", PermissionType.Read)]
         public Result<CentralTokenModel> Get([FromBody]LoginInput input)
@@ -44,9 +35,9 @@ namespace IDI.Central.Controllers
             var tokenResult = querier.Execute<QueryOAuthTokenCondition, OAuthTokenModel>(new QueryOAuthTokenCondition { Code = input.Code, RedirectUri = input.RedirectUri, State = input.State, Type = input.Type });
 
             if (tokenResult.Status != ResultStatus.Success)
-                return Result.Fail<CentralTokenModel>(localization.Get(Resources.Key.Command.AuthFail));
+                return Result.Fail<CentralTokenModel>(tokenResult.Message);
 
-            var userResult = querier.Execute<QueryOAuthUserCondition, OAuthUserModel>(new QueryOAuthUserCondition { AccessToken = tokenResult.Data.AccessToken });
+            var userResult = querier.Execute<QueryOAuthUserCondition, OAuthUserModel>(new QueryOAuthUserCondition { Type = input.Type, AccessToken = tokenResult.Data.AccessToken });
 
             if (userResult.Status != ResultStatus.Success)
                 return Result.Fail<CentralTokenModel>(localization.Get(Resources.Key.Command.RetrieveUserInfoFail));

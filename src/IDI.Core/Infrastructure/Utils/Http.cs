@@ -41,12 +41,9 @@ namespace IDI.Core.Infrastructure.Utils
             throw new HttpRequestException(response.ReasonPhrase);
         }
 
-        public string Get(string address, string url, AuthenticationHeaderValue authorization = null)
+        public string Get(string address, string url, Action<HttpRequestHeaders> buildHeader = null)
         {
-            var client = BuildClient(address);
-
-            if (authorization != null)
-                client.DefaultRequestHeaders.Authorization = authorization;
+            var client = BuildClient(address, buildHeader);
 
             var response = client.GetAsync(url).Result;
 
@@ -56,11 +53,19 @@ namespace IDI.Core.Infrastructure.Utils
             throw new HttpRequestException(response.ReasonPhrase);
         }
 
-        private HttpClient BuildClient(string address)
+        private HttpClient BuildClient(string address, Action<HttpRequestHeaders> buildHeader = null)
         {
             var client = new HttpClient(handler);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.BaseAddress = new Uri(address);
+
+            if (buildHeader == null)
+            {
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            }
+            else
+            {
+                buildHeader(client.DefaultRequestHeaders);
+            }
 
             return client;
         }

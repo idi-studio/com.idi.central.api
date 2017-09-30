@@ -55,10 +55,15 @@ namespace IDI.Central.Core
             try
             {
                 context.HttpContext.User = hanlder.ValidateToken(token, validationParameters, out validatedToken);
+                username = context.UserName();
 
-                username = context.GetName();
+                if (context.AuthenticationMethod() == Constants.AuthenticationMethod.ClientCredentials)
+                {
+                    Log(username, permission, AuthorizeResult.Accept);
+                    return base.OnActionExecutionAsync(context, next);
+                }
 
-                if (permission != null && Authorization.HasPermission(context.GetRoles(), permission))
+                if (permission != null && Authorization.HasPermission(context.UserRoles(), permission))
                 {
                     Log(username, permission, AuthorizeResult.Accept);
                     return base.OnActionExecutionAsync(context, next);
@@ -112,14 +117,19 @@ namespace IDI.Central.Core
             return permission != null ? new Permission(module.Name, permission.Name, permission.Type) : null;
         }
 
-        public static string GetName(this ActionExecutingContext context)
+        public static string UserName(this ActionExecutingContext context)
         {
-            return context.HttpContext.User.Claims.Get(ClaimTypes.Name)?? "anonymous";
+            return context.HttpContext.User.Claims.Get(ClaimTypes.Name) ?? "anonymous";
         }
 
-        public static string[] GetRoles(this ActionExecutingContext context)
+        public static string[] UserRoles(this ActionExecutingContext context)
         {
             return context.HttpContext.User.Claims.Get(ClaimTypes.Role).To<List<string>>().ToArray();
+        }
+
+        public static string AuthenticationMethod(this ActionExecutingContext context)
+        {
+            return context.HttpContext.User.Claims.Get(ClaimTypes.AuthenticationMethod);
         }
 
         public static Task Unauthorized(this HttpContext context)

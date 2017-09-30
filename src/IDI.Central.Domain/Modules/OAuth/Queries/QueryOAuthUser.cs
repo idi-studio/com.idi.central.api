@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Models.OAuth;
 using IDI.Core.Common;
+using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure.Queries;
 using IDI.Core.Infrastructure.Utils;
 using IDI.Core.Infrastructure.Verification.Attributes;
@@ -35,11 +37,13 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Queries
             return Result.Fail<OAuthUserModel>(Localization.Get(Resources.Key.Command.RetrieveUserInfoFail));
         }
 
-        private static OAuthUserModel GitHub(QueryOAuthUserCondition condition)
+        private static GitHubUserModel GitHub(QueryOAuthUserCondition condition)
         {
-            var result = Http.Instance.Get("https://api.github.com", $"/user?access_token={condition.AccessToken}");
-
-            return new OAuthUserModel();
+            return Http.Instance.Get("https://api.github.com", $"/user?access_token={condition.AccessToken}", header =>
+            {
+                header.UserAgent.Add(new ProductInfoHeaderValue("Chrome", "61.0.3163.100"));
+                header.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            }).To<GitHubUserModel>();
         }
 
         private static OAuthUserModel Wechat(QueryOAuthUserCondition condition)

@@ -35,8 +35,11 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Queries
         {
             var result = func[condition.Type](condition);
 
-            if (result != null)
+            if (result != null && !result.AccessToken.IsNull())
                 return Result.Success(result);
+
+            if (result != null && result.AccessToken.IsNull())
+                return Result.Fail<OAuthTokenModel>(result.ErrorDesc);
 
             return Result.Fail<OAuthTokenModel>(Localization.Get(Resources.Key.Command.AuthFail));
         }

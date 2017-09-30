@@ -7,6 +7,12 @@ namespace IDI.Central.Models.OAuth
     {
         [JsonProperty("access_token")]
         public string AccessToken { get; set; }
+
+        [JsonProperty("error")]
+        public string Error { get; set; }
+
+        [JsonProperty("error_description")]
+        public string ErrorDesc { get; set; }
     }
 
     public class CentralTokenModel : OAuthTokenModel { }
@@ -18,11 +24,5 @@ namespace IDI.Central.Models.OAuth
 
         [JsonProperty("token_type")]
         public string TokenType { get; set; }
-
-        [JsonProperty("error")]
-        public string Error { get; set; }
-
-        [JsonProperty("error_description")]
-        public string ErrorDesc { get; set; }
     }
 }
