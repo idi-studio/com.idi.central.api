@@ -24,14 +24,7 @@ namespace IDI.Core.Common.Extensions
             var settings = new JsonSerializerSettings();
             settings.TypeNameHandling = typeNameHandling;
 
-            try
-            {
-                return JsonConvert.DeserializeObject<T>(json, settings);
-            }
-            catch
-            {
-                return default(T);
-            }
+            return JsonConvert.DeserializeObject<T>(json, settings);
         }
     }
 }

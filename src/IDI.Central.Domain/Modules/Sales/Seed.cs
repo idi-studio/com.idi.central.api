@@ -54,8 +54,7 @@ namespace IDI.Central.Domain.Modules.Sales
                     {
                         Name = name,
                         Gender = gender,
-                        PhoneNum = phone,
-                        Photo = $"{gender.ToString().ToLower()}.png"
+                        PhoneNum = phone
                     }
                 };
 

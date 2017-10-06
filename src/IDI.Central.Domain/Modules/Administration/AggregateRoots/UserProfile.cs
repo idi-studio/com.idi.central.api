@@ -25,7 +25,7 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
 
         [Required]
         [StringLength(20)]
-        public string Photo { get; set; } = "default.jpg";
+        public string Photo { get; set; } = "user.png";
 
         public Gender Gender { get; set; } = Gender.Unknown;
 

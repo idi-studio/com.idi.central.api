@@ -15,8 +15,6 @@ namespace IDI.Central.Models.OAuth
         public string ErrorDesc { get; set; }
     }
 
-    public class CentralTokenModel : OAuthTokenModel { }
-
     public class GitHubTokenModel : OAuthTokenModel
     {
         [JsonProperty("scope")]

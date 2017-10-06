@@ -2,6 +2,7 @@
 using IDI.Central.Core;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.BasicInfo.Queries;
+using IDI.Central.Domain.Modules.OAuth.Commands;
 using IDI.Central.Models.OAuth;
 using IDI.Central.Models.OAuth.Inputs;
 using IDI.Core.Authentication;
@@ -30,21 +31,29 @@ namespace IDI.Central.Controllers
 
         [HttpPost("login")]
         [Permission("login", PermissionType.Read)]
-        public Result<CentralTokenModel> Get([FromBody]LoginInput input)
+        public Result Get([FromBody]LoginInput input)
         {
             var tokenResult = querier.Execute<QueryOAuthTokenCondition, OAuthTokenModel>(new QueryOAuthTokenCondition { Code = input.Code, RedirectUri = input.RedirectUri, State = input.State, Type = input.Type });
 
             if (tokenResult.Status != ResultStatus.Success)
-                return Result.Fail<CentralTokenModel>(tokenResult.Message);
+                return Result.Fail(tokenResult.Message);
 
-            var userResult = querier.Execute<QueryOAuthUserCondition, OAuthUserModel>(new QueryOAuthUserCondition { Type = input.Type, AccessToken = tokenResult.Data.AccessToken });
+            var userResult = querier.Execute<QueryOAuthUserCondition, IOAuthUserModel>(new QueryOAuthUserCondition { Type = input.Type, AccessToken = tokenResult.Data.AccessToken });
 
             if (userResult.Status != ResultStatus.Success)
-                return Result.Fail<CentralTokenModel>(localization.Get(Resources.Key.Command.RetrieveUserInfoFail));
+                return Result.Fail(localization.Get(Resources.Key.Command.RetrieveUserInfoFail));
 
-            var data = new CentralTokenModel();
+            var cmd = new OAuthUserCreationCommand
+            {
+                Email = userResult.Data.Email,
+                Login = userResult.Data.Login,
+                Name = userResult.Data.Name,
+                Group = VerificationGroup.Create,
+                Mode = CommandMode.Create,
+                Type = userResult.Data.Type
+            };
 
-            return Result.Success(data);
+            return bus.Send(cmd);
         }
     }
 }

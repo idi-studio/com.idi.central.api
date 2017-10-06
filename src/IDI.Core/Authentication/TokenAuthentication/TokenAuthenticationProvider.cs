@@ -99,24 +99,7 @@ namespace IDI.Core.Authentication.TokenAuthentication
                 if (claims == null || (claims != null && claims.Count == 0))
                     await context.Unauthorized();
 
-                //random nonce
-                claims.Addition(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-                //issued timestamp
-                claims.Addition(new Claim(JwtRegisteredClaimNames.Iat, now.ToUnixEpochDate().ToString(), ClaimValueTypes.Integer64));
-
-                var jwt = new JwtSecurityToken(
-                    issuer: options.Issuer,
-                    audience: options.Audience,
-                    claims: claims,
-                    notBefore: now,
-                    expires: now.Add(options.Expiration),
-                    signingCredentials: options.SigningCredentials);
-
-                var token = new TokenModel
-                {
-                    Token = new JwtSecurityTokenHandler().WriteToken(jwt),
-                    ExpiresIn = (int)options.Expiration.TotalSeconds
-                };
+                var token = Token.JWT(claims, options);
 
                 await context.OK(token);
             }

@@ -1,9 +1,11 @@
-﻿using IDI.Central.Common;
+﻿using System;
+using IDI.Central.Common;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
+using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Verification.Attributes;
@@ -14,13 +16,13 @@ namespace IDI.Central.Domain.Modules.OAuth.Commands
 {
     public class OAuthUserCreationCommand : Command
     {
-        [RequiredField]
+        [RequiredField(Group = VerificationGroup.Create)]
         public string Name { get; set; }
 
-        [RequiredField]
+        [RequiredField(Group = VerificationGroup.Create)]
         public string Login { get; set; }
 
-        [RequiredField]
+        [RequiredField(Group = VerificationGroup.Create)]
         public string Email { get; set; }
 
         public OAuthType Type { get; set; }
@@ -55,24 +57,33 @@ namespace IDI.Central.Domain.Modules.OAuth.Commands
 
             string username = $"{prefix}-{command.Login}";
 
-            if (Users.Exist(e => e.UserName == username))
-                return Result.Success(message: Localization.Get(Resources.Key.Command.AuthSuccess)).Attach("username", username).Attach("token", "");
-
-            var salt = Cryptography.Salt();
-            var user = new User
+            var user = Users.Find(e => e.UserName == username);
+            var pin = new Random().Next(0, 999999).ToString("D6");
+          
+            if (user != null)
             {
-                UserName = username,
-                Salt = salt,
-                Password = Cryptography.Encrypt(command.Login, salt),
-                Profile = new UserProfile { Name = command.Name, Email = command.Email },
-            };
+                user.Password = Cryptography.Encrypt(pin, user.Salt);
+                Users.Update(user);
+                Users.Commit();
+                return Result.Success(message: Localization.Get(Resources.Key.Command.AuthSuccess)).Attach("username", username).Attach("pin", pin);
+            }
+            else
+            {
+                var salt = Cryptography.Salt();
+                user = new User
+                {
+                    UserName = username,
+                    Salt = salt,
+                    Password = Cryptography.Encrypt(pin, salt),
+                    Profile = new UserProfile { Name = command.Name, Email = command.Email },
+                };
 
-            user.Authorize(new Role { Name = Configuration.Roles.Customers });
+                user.Authorize(new Role { Name = Configuration.Roles.Customers });
+                Users.Add(user);
+                Users.Commit();
 
-            Users.Add(user);
-            Users.Commit();
-
-            return Result.Success(message: Localization.Get(Resources.Key.Command.AuthSuccess)).Attach("username", username).Attach("token", "");
+                return Result.Success(message: Localization.Get(Resources.Key.Command.AuthSuccess)).Attach("username", username).Attach("pin", pin);
+            }
         }
     }
 }

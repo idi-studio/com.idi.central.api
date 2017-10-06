@@ -20,21 +20,21 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Queries
         public OAuthType Type { get; set; }
     }
 
-    public class QueryOAuthUser : Query<QueryOAuthUserCondition, OAuthUserModel>
+    public class QueryOAuthUser : Query<QueryOAuthUserCondition, IOAuthUserModel>
     {
-        private readonly Dictionary<OAuthType, Func<QueryOAuthUserCondition, OAuthUserModel>> func = new Dictionary<OAuthType, Func<QueryOAuthUserCondition, OAuthUserModel>>
+        private readonly Dictionary<OAuthType, Func<QueryOAuthUserCondition, IOAuthUserModel>> func = new Dictionary<OAuthType, Func<QueryOAuthUserCondition, IOAuthUserModel>>
         {
             { OAuthType.GitHub,GitHub }, { OAuthType.Wechat,Wechat }, { OAuthType.Alipay,Alipay }
         };
 
-        public override Result<OAuthUserModel> Execute(QueryOAuthUserCondition condition)
+        public override Result<IOAuthUserModel> Execute(QueryOAuthUserCondition condition)
         {
             var result = func[condition.Type](condition);
 
             if (result != null)
                 return Result.Success(result);
 
-            return Result.Fail<OAuthUserModel>(Localization.Get(Resources.Key.Command.RetrieveUserInfoFail));
+            return Result.Fail<IOAuthUserModel>(Localization.Get(Resources.Key.Command.RetrieveUserInfoFail));
         }
 
         private static GitHubUserModel GitHub(QueryOAuthUserCondition condition)
@@ -46,12 +46,12 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Queries
             }).To<GitHubUserModel>();
         }
 
-        private static OAuthUserModel Wechat(QueryOAuthUserCondition condition)
+        private static IOAuthUserModel Wechat(QueryOAuthUserCondition condition)
         {
             throw new NotImplementedException();
         }
 
-        private static OAuthUserModel Alipay(QueryOAuthUserCondition condition)
+        private static IOAuthUserModel Alipay(QueryOAuthUserCondition condition)
         {
             throw new NotImplementedException();
         }

@@ -1,9 +1,21 @@
-﻿using IDI.Core.Infrastructure.Queries;
+﻿using IDI.Central.Common.Enums;
+using IDI.Core.Infrastructure.Queries;
 using Newtonsoft.Json;
 
 namespace IDI.Central.Models.OAuth
 {
-    public abstract class OAuthUserModel : IModel
+    public interface IOAuthUserModel : IModel
+    {
+        string Name { get; set; }
+
+        string Email { get; set; }
+
+        string Login { get; set; }
+
+        OAuthType Type { get; set; }
+    }
+
+    public class GitHubUserModel : IOAuthUserModel
     {
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -13,10 +25,10 @@ namespace IDI.Central.Models.OAuth
 
         [JsonProperty("login")]
         public string Login { get; set; }
-    }
 
-    public class GitHubUserModel : OAuthUserModel
-    {
+        [JsonProperty("otype")]
+        public OAuthType Type { get; set; } = OAuthType.GitHub;
+
         [JsonProperty("company")]
         public string Company { get; set; }
 

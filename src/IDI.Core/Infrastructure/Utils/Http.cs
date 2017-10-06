@@ -6,6 +6,7 @@ using System.Security.Authentication;
 using System.Text;
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
+using IDI.Core.Logging;
 
 namespace IDI.Core.Infrastructure.Utils
 {
