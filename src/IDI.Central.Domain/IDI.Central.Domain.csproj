@@ -45,8 +45,4 @@
     </Compile>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Modules\Inventory\Queries\" />
-  </ItemGroup>
-
 </Project>
