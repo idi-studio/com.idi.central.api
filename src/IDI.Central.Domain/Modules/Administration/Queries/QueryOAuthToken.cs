@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using IDI.Central.Common;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Localization;
-using IDI.Central.Models.OAuth;
+using IDI.Central.Models.Administration;
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure.Queries;

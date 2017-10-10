@@ -2,9 +2,9 @@
 using IDI.Core.Common;
 using Newtonsoft.Json;
 
-namespace IDI.Central.Models.OAuth.Inputs
+namespace IDI.Central.Models.Administration.Inputs
 {
-    public class LoginInput : IInput
+    public class OAuthInput : IInput
     {
         [JsonProperty("code")]
         public string Code { get; set; }

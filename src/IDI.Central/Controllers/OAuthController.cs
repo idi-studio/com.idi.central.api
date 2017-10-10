@@ -1,10 +1,10 @@
 ﻿using IDI.Central.Common;
 using IDI.Central.Core;
 using IDI.Central.Domain.Localization;
-using IDI.Central.Domain.Modules.Administration.Queries;
 using IDI.Central.Domain.Modules.Administration.Commands;
-using IDI.Central.Models.OAuth;
-using IDI.Central.Models.OAuth.Inputs;
+using IDI.Central.Domain.Modules.Administration.Queries;
+using IDI.Central.Models.Administration;
+using IDI.Central.Models.Administration.Inputs;
 using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
@@ -31,7 +31,7 @@ namespace IDI.Central.Controllers
 
         [HttpPost("login")]
         [Permission("login", PermissionType.Read)]
-        public Result Get([FromBody]LoginInput input)
+        public Result Get([FromBody]OAuthInput input)
         {
             var tokenResult = querier.Execute<QueryOAuthTokenCondition, OAuthTokenModel>(new QueryOAuthTokenCondition { Code = input.Code, RedirectUri = input.RedirectUri, State = input.State, Type = input.Type });
 

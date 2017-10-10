@@ -1,7 +1,7 @@
 ﻿using IDI.Core.Infrastructure.Queries;
 using Newtonsoft.Json;
 
-namespace IDI.Central.Models.OAuth
+namespace IDI.Central.Models.Administration
 {
     public class OAuthOneTimePINModel : IModel
     {
