@@ -21,12 +21,10 @@
             public const string Administration = "Administration";
             public const string BasicInfo = "BasicInfo";
             public const string Inventory = "Inventory";
-            public const string Logistics = "Logistics";
-            public const string Purchase = "Purchase";
             public const string Sales = "Sales";
             public const string Personal = "Personal";
             public const string OAuth = "OAuth";
-            public static readonly string[] All = new string[] { Administration, BasicInfo, Inventory, Logistics, Purchase, Sales, Personal, OAuth };
+            public static readonly string[] All = new string[] { Administration, BasicInfo, Inventory, Sales, Personal, OAuth };
         }
 
         public class Clients

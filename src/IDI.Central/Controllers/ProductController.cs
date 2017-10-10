@@ -3,8 +3,10 @@ using IDI.Central.Common;
 using IDI.Central.Core;
 using IDI.Central.Domain.Modules.BasicInfo.Commands;
 using IDI.Central.Domain.Modules.BasicInfo.Queries;
+using IDI.Central.Domain.Modules.Inventory.Queries;
 using IDI.Central.Domain.Modules.Sales.Queries;
 using IDI.Central.Models.BasicInfo;
+using IDI.Central.Models.Inventory;
 using IDI.Central.Models.Sales;
 using IDI.Core.Authentication;
 using IDI.Core.Common;
@@ -106,6 +108,13 @@ namespace IDI.Central.Controllers
             var command = new ProductCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
 
             return bus.Send(command);
+        }
+
+        [HttpGet("stocks/{id}")]
+        [Permission("product-stocks", PermissionType.Query)]
+        public Result<Set<StockModel>> GetStocks(Guid id)
+        {
+            return querier.Execute<QueryStockSetCondition, Set<StockModel>>(new QueryStockSetCondition { ProductId = id });
         }
     }
 }
