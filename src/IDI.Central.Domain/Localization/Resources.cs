@@ -55,6 +55,11 @@ namespace IDI.Central.Domain.Localization
 								public const string UploadFail = "upload-fail";
 								public const string SaveSuccess = "save-success";
 								public const string SaveFail = "save-fail";
+								public const string InboundSuccess = "inbound-success";
+								public const string InboundFail = "inbound-fail";
+								public const string OutboundSuccess = "outbound-success";
+								public const string OutboundFail = "outbound-fail";
+								public const string LowStocks = "low-stocks";
 								public const string OperationNonsupport = "operation-nonsupport";
 								public const string OperationFail = "operation-fail";
 								public const string OperationSuccess = "operation-success";

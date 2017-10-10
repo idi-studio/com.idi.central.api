@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using IDI.Central.Common;
 using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
 using IDI.Core.Domain;
@@ -23,5 +24,8 @@ namespace IDI.Central.Domain.Modules.Inventory.AggregateRoots
         public decimal Quantity { get; set; }
 
         public decimal Frozen { get; set; } = 0.00M;
+
+        [NotMapped]
+        public decimal Available { get { return this.Quantity - this.Frozen; } }
     }
 }

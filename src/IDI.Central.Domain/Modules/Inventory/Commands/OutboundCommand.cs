@@ -13,7 +13,7 @@ using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Inventory.Commands
 {
-    public class InboundCommand : Command
+    public class OutboundCommand : Command
     {
         public Guid StroeId { get; set; }
 
@@ -25,7 +25,7 @@ namespace IDI.Central.Domain.Modules.Inventory.Commands
         public decimal Quantity { get; set; }
     }
 
-    public class InboundCommandHandler : ICommandHandler<InboundCommand>
+    public class OutboundCommandHandler : ICommandHandler<OutboundCommand>
     {
         [Injection]
         public ILocalization Localization { get; set; }
@@ -36,7 +36,7 @@ namespace IDI.Central.Domain.Modules.Inventory.Commands
         [Injection]
         public IRepository<Product> Products { get; set; }
 
-        public Result Execute(InboundCommand command)
+        public Result Execute(OutboundCommand command)
         {
             var product = this.Products.Find(e => e.Id == command.ProductId);
 
@@ -48,12 +48,17 @@ namespace IDI.Central.Domain.Modules.Inventory.Commands
             if (store == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.StoreNotExisting));
 
-            store.Inbound(product, command.Quantity, command.BinCode);
+            decimal remain;
 
-            this.Stores.Update(store);
-            this.Stores.Commit();
+            if (store.Outbound(product, command.Quantity, out remain, command.BinCode))
+            {
+                this.Stores.Update(store);
+                this.Stores.Commit();
 
-            return Result.Success(message: Localization.Get(Resources.Key.Command.InboundSuccess));
+                return Result.Success(message: Localization.Get(Resources.Key.Command.OutboundSuccess));
+            }
+
+            return Result.Fail(message: Localization.Get(Resources.Key.Command.LowStocks));
         }
     }
 }

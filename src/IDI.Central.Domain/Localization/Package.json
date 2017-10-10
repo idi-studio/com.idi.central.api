@@ -589,6 +589,66 @@
 },
 {
     "language": "chs",
+    "name": "inbound-success",
+    "value": "入库成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "inbound-success",
+    "value": "Inbound successfully.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "inbound-fail",
+    "value": "入库失败!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "inbound-fail",
+    "value": "Inbound failed.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "outbound-success",
+    "value": "入库成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "outbound-success",
+    "value": "Outbound successfully.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "outbound-fail",
+    "value": "出库失败!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "outbound-fail",
+    "value": "Outbound failed.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "low-stocks",
+    "value": "库存不足!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "low-stocks",
+    "value": "Low stocks.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "operation-nonsupport",
     "value": "不支持该项操作!",
     "prefix": "command"

@@ -55,7 +55,12 @@ namespace IDI.Central.Domain.Modules.BasicInfo
             if (product.Stocks == null || (product.Stocks != null && product.Stocks.Count > 0))
                 return 0.00M;
 
-            return product.Stocks.Sum(e => e.Quantity - e.Frozen);
+            return product.Stocks.Sum(e => e.Available);
+        }
+
+        public static decimal Available(this Stock stock)
+        {
+            return stock.Quantity - stock.Frozen;
         }
 
         public static void Inbound(this Store store, Product product, decimal qty, string bin = Configuration.Inventory.DefaultBinCode)
@@ -70,6 +75,27 @@ namespace IDI.Central.Domain.Modules.BasicInfo
             {
                 stock.Quantity += qty;
             }
+        }
+
+        public static bool Outbound(this Store store, Product product, decimal qty, out decimal remain, string bin = "")
+        {
+            remain = qty;
+
+            foreach (var stock in store.Stocks)
+            {
+                if (stock.ProductId != product.Id)
+                    continue;
+
+                if (!bin.IsNull() && stock.BinCode != bin)
+                    continue;
+
+                var amount = stock.Available >= qty ? qty : stock.Available;
+
+                stock.Quantity -= amount;
+                remain -= amount;
+            }
+
+            return remain == 0;
         }
     }
 }
