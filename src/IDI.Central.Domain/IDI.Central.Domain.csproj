@@ -46,7 +46,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Modules\Inventory\Commands\" />
     <Folder Include="Modules\Inventory\Queries\" />
   </ItemGroup>
 

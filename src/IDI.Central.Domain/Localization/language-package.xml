@@ -57,6 +57,7 @@
   <item prefix="command" name="password-mismatch" en="Passwords does not match." chs="两次密码不一致!" />
   <item prefix="command" name="product-code-duplicated" en="Product code duplicated." chs="产品编码重复!" />
   <item prefix="command" name="product-not-existing" en="Cannot found this product." chs="产品不存在!" />
+  <item prefix="command" name="store-not-existing" en="Cannot found this store." chs="库房不存在!" />
   <item prefix="command" name="record-not-existing" en="Record does not exist." chs="记录不存在!" />
   <item prefix="command" name="record-duplicated" en="Record duplicated." chs="记录重复!" />
   <item prefix="command" name="time-conflict" en="Time conflict." chs="时间冲突!" />

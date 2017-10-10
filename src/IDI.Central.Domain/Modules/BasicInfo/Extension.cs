@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using IDI.Central.Common;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
 using IDI.Central.Domain.Modules.Inventory.AggregateRoots;
@@ -57,7 +58,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo
             return product.Stocks.Sum(e => e.Quantity - e.Frozen);
         }
 
-        public static void StockIn(this Store store, Product product, decimal qty, string bin = "MAIN")
+        public static void Inbound(this Store store, Product product, decimal qty, string bin = Configuration.Inventory.DefaultBinCode)
         {
             var stock = store.Stocks.FirstOrDefault(e => e.ProductId == product.Id && e.BinCode == bin);
 

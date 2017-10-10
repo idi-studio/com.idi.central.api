@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using IDI.Core.Common;
 using IDI.Core.Localization;
 using IDI.Core.Localization.Packages;
 

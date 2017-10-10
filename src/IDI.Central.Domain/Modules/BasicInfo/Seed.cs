@@ -145,8 +145,8 @@ namespace IDI.Central.Domain.Modules.BasicInfo
 
         public Seed()
         {
-            Products.iPhones.ForEach(e => this.Store.StockIn(e, 100));
-            Products.Others.ForEach(e => this.Store.StockIn(e, 50));
+            Products.iPhones.ForEach(e => this.Store.Inbound(e, 100));
+            Products.Others.ForEach(e => this.Store.Inbound(e, 50));
         }
     }
 }

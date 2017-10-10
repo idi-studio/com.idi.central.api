@@ -24,6 +24,9 @@ namespace IDI.Core.Localization.Packages
 								public const string CharactersRange = "characters-range";
 								public const string CharactersMaximum = "characters-maximum";
 								public const string CharactersMinimum = "characters-minimum";
+								public const string DecimalRange = "decimal-range";
+								public const string DecimalMaximum = "decimal-maximum";
+								public const string DecimalMinimum = "decimal-minimum";
 								}
 
 						public class DisplayName {

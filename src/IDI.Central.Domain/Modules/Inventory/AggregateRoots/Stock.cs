@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using IDI.Central.Common;
 using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
 using IDI.Core.Domain;
 
@@ -9,7 +10,7 @@ namespace IDI.Central.Domain.Modules.Inventory.AggregateRoots
     {
         [Required]
         [StringLength(10)]
-        public string BinCode { get; set; } = "MAIN";
+        public string BinCode { get; set; } = Configuration.Inventory.DefaultBinCode;
 
         public Guid ProductId { get; set; }
 

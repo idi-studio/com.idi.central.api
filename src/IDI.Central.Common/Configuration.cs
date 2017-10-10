@@ -34,6 +34,11 @@
             public const string Central = "com.idi.central.web";
         }
 
+        public class Inventory
+        {
+            public const string DefaultBinCode = "P";
+        }
+
         public class OAuthApplication
         {
             public class GitHub

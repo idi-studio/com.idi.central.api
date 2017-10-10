@@ -49,6 +49,42 @@
 },
 {
     "language": "chs",
+    "name": "decimal-range",
+    "value": "'{0}'范围从{1}到{2}!",
+    "prefix": "verification"
+},
+{
+    "language": "en",
+    "name": "decimal-range",
+    "value": "'{0}' range from {1} to {2}.",
+    "prefix": "verification"
+},
+{
+    "language": "chs",
+    "name": "decimal-maximum",
+    "value": "'{0}'最大为{1}!",
+    "prefix": "verification"
+},
+{
+    "language": "en",
+    "name": "decimal-maximum",
+    "value": "'{0} maximum is {1}.",
+    "prefix": "verification"
+},
+{
+    "language": "chs",
+    "name": "decimal-minimum",
+    "value": "'{0}'最小为{1}!",
+    "prefix": "verification"
+},
+{
+    "language": "en",
+    "name": "decimal-minimum",
+    "value": "'{0}' minimum is {1}.",
+    "prefix": "verification"
+},
+{
+    "language": "chs",
     "name": "token",
     "value": "令牌",
     "prefix": "display-name"

@@ -661,6 +661,18 @@
 },
 {
     "language": "chs",
+    "name": "store-not-existing",
+    "value": "库房不存在!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "store-not-existing",
+    "value": "Cannot found this store.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "record-not-existing",
     "value": "记录不存在!",
     "prefix": "command"

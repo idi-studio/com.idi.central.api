@@ -1,9 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <items>
   <item prefix="verification" name="required" en="'{0}' Required." chs="'{0}'必填!" />
+
   <item prefix="verification" name="characters-range" en="'{0}' maximum {1} to {2} characters." chs="'{0}'最多{1}到{2}个字符!" />
   <item prefix="verification" name="characters-maximum" en="'{0} maximum is {1} characters." chs="'{0}'最多{1}个字符!" />
   <item prefix="verification" name="characters-minimum" en="'{0}' minimum is {1} characters." chs="'{0}'最少{1}个字符!" />
+
+  <item prefix="verification" name="decimal-range" en="'{0}' range from {1} to {2}." chs="'{0}'范围从{1}到{2}!" />
+  <item prefix="verification" name="decimal-maximum" en="'{0} maximum is {1}." chs="'{0}'最大为{1}!" />
+  <item prefix="verification" name="decimal-minimum" en="'{0}' minimum is {1}." chs="'{0}'最小为{1}!" />
 
   <item prefix="display-name" name="token" en="Token" chs="令牌" />
 
