@@ -1,7 +1,8 @@
-﻿using IDI.Central.Domain.Localization;
+﻿using System.Collections.Generic;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Models.Administration;
 using IDI.Core.Common;
+using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
 using IDI.Core.Infrastructure.Verification.Attributes;
@@ -22,7 +23,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
 
         public override Result<MyProfile> Execute(QueryMyProfileCondition condition)
         {
-            var user = this.Users.Include(e => e.Profile).Find(u => u.UserName == condition.UserName);
+            var user = this.Users.Include(e => e.Profile).Include(e => e.Role).Find(u => u.UserName == condition.UserName);
 
             var profile = new MyProfile
             {
@@ -31,7 +32,8 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
                 Name = user.Profile.Name,
                 Gender = user.Profile.Gender,
                 Birthday = user.Profile.Birthday,
-                Photo = user.Profile.Photo
+                Photo = user.Profile.Photo,
+                Roles = user.Role.Roles.To<List<string>>()
             };
 
             return Result.Success(profile);

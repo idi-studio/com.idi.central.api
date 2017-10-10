@@ -1,7 +1,6 @@
 ﻿using System;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Localization;
-using IDI.Central.Domain.Modules.Logistics.AggregateRoots;
 using IDI.Central.Domain.Modules.Sales.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;

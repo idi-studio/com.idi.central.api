@@ -10,7 +10,7 @@ using IDI.Core.Infrastructure.Queries;
 using IDI.Core.Infrastructure.Utils;
 using IDI.Core.Infrastructure.Verification.Attributes;
 
-namespace IDI.Central.Domain.Modules.BasicInfo.Queries
+namespace IDI.Central.Domain.Modules.Administration.Queries
 {
     public class QueryOAuthUserCondition : Condition
     {

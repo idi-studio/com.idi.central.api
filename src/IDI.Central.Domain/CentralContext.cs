@@ -24,7 +24,6 @@ namespace IDI.Central.Domain
             new Modules.Administration.Mapping().Create(modelBuilder);
             new Modules.BasicInfo.Mapping().Create(modelBuilder);
             new Modules.Sales.Mapping().Create(modelBuilder);
-            new Modules.Logistics.Mapping().Create(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }

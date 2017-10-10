@@ -1,5 +1,6 @@
 ﻿using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
+using IDI.Central.Domain.Modules.Inventory.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.DependencyInjection;
@@ -26,11 +27,18 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Commands
         [Injection]
         public IRepository<Product> Products { get; set; }
 
+        [Injection]
+        public IRepository<Store> Stores { get; set; }
+
         public Result Execute(BasicInfoInitialCommand command)
         {
             command.Seed.Products.iPhones.ForEach(e => this.Products.Add(e));
             command.Seed.Products.Others.ForEach(e => this.Products.Add(e));
+
             this.Products.Commit();
+
+            this.Stores.Add(command.Seed.Store);
+            this.Stores.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.SysDataInitSuccess));
         }

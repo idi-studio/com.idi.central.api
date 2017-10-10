@@ -2,7 +2,6 @@
 using IDI.Central.Common;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Localization;
-using IDI.Central.Domain.Modules.Administration;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
@@ -12,7 +11,7 @@ using IDI.Core.Infrastructure.Verification.Attributes;
 using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
-namespace IDI.Central.Domain.Modules.OAuth.Commands
+namespace IDI.Central.Domain.Modules.Administration.Commands
 {
     public class OAuthUserCreationCommand : Command
     {

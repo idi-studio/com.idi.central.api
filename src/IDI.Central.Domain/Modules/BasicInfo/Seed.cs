@@ -4,8 +4,8 @@ using System.Linq;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
+using IDI.Central.Domain.Modules.Inventory.AggregateRoots;
 using IDI.Central.Models.BasicInfo;
-using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
 
 namespace IDI.Central.Domain.Modules.BasicInfo
@@ -141,6 +141,12 @@ namespace IDI.Central.Domain.Modules.BasicInfo
     {
         public ProductCollection Products { get; } = new ProductCollection();
 
-        public Seed() { }
+        public Store Store  = new Store { Name = "Main" };
+
+        public Seed()
+        {
+            Products.iPhones.ForEach(e => this.Store.StockIn(e, 100));
+            Products.Others.ForEach(e => this.Store.StockIn(e, 50));
+        }
     }
 }

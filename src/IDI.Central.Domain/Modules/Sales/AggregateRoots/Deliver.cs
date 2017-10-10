@@ -4,7 +4,7 @@ using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Modules.Sales.AggregateRoots;
 using IDI.Core.Domain;
 
-namespace IDI.Central.Domain.Modules.Logistics.AggregateRoots
+namespace IDI.Central.Domain.Modules.Sales.AggregateRoots
 {
     public class Deliver : AggregateRoot
     {

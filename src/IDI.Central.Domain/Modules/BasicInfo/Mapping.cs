@@ -15,6 +15,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo
             //One-to-Many
             modelBuilder.Entity<Product>().HasMany(e => e.Prices).WithOne(e => e.Product).HasForeignKey(e => e.ProductId);
             modelBuilder.Entity<Product>().HasMany(e => e.Pictures).WithOne(e => e.Product).HasForeignKey(e => e.ProductId);
+            modelBuilder.Entity<Product>().HasMany(e => e.Stocks).WithOne(e => e.Product).HasForeignKey(e => e.ProductId);
         }
     }
 }

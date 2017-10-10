@@ -1,8 +1,8 @@
 ﻿using IDI.Central.Common;
 using IDI.Central.Core;
 using IDI.Central.Domain.Localization;
-using IDI.Central.Domain.Modules.BasicInfo.Queries;
-using IDI.Central.Domain.Modules.OAuth.Commands;
+using IDI.Central.Domain.Modules.Administration.Queries;
+using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Central.Models.OAuth;
 using IDI.Central.Models.OAuth.Inputs;
 using IDI.Core.Authentication;

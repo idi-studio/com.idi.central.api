@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Queries;
 using Newtonsoft.Json;
@@ -24,5 +25,8 @@ namespace IDI.Central.Models.Administration
 
         [JsonProperty("photo")]
         public string Photo { get; set; }
-    }
+
+        [JsonProperty("roles")]
+        public List<string> Roles { get; set; } = new List<string>();
+}
 }

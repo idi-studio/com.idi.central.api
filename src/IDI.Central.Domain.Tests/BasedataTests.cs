@@ -2,6 +2,7 @@
 using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
 using IDI.Central.Domain.Modules.BasicInfo.Commands;
+using IDI.Central.Domain.Modules.Inventory.AggregateRoots;
 using IDI.Central.Domain.Modules.Sales.AggregateRoots;
 using IDI.Central.Domain.Modules.Sales.Commands;
 using IDI.Core.Common;
@@ -53,6 +54,7 @@ namespace IDI.Central.Domain.Tests
             var hanlder = new BasicInfoInitialCommandHandler();
             hanlder.Localization = new Globalization();
             hanlder.Products = Runtime.GetService<IRepository<Product>>();
+            hanlder.Stores = Runtime.GetService<IRepository<Store>>();
 
             return hanlder.Execute(new BasicInfoInitialCommand());
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
+using IDI.Central.Domain.Modules.Inventory.AggregateRoots;
 using IDI.Central.Models.BasicInfo;
 
 namespace IDI.Central.Domain.Modules.BasicInfo
@@ -46,6 +47,28 @@ namespace IDI.Central.Domain.Modules.BasicInfo
             }
 
             return list.OrderBy(e => e.Amount).FirstOrDefault();
+        }
+
+        public static decimal Available(this Product product)
+        {
+            if (product.Stocks == null || (product.Stocks != null && product.Stocks.Count > 0))
+                return 0.00M;
+
+            return product.Stocks.Sum(e => e.Quantity - e.Frozen);
+        }
+
+        public static void StockIn(this Store store, Product product, decimal qty, string bin = "MAIN")
+        {
+            var stock = store.Stocks.FirstOrDefault(e => e.ProductId == product.Id && e.BinCode == bin);
+
+            if (stock == null)
+            {
+                store.Stocks.Add(new Stock { BinCode = bin, ProductId = product.Id, Quantity = qty, StoreId = store.Id });
+            }
+            else
+            {
+                stock.Quantity += qty;
+            }
         }
     }
 }
