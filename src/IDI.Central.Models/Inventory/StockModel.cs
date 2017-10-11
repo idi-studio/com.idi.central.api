@@ -15,22 +15,22 @@ namespace IDI.Central.Models.Inventory
         [JsonProperty("pid")]
         public Guid ProductId { get; set; }
 
-        [JsonProperty("pname")]
+        [JsonProperty("product")]
         public string ProductName { get; set; }
 
-        [JsonProperty("storeid")]
+        [JsonProperty("sid")]
         public Guid StoreId { get; set; }
 
-        [JsonProperty("storename")]
+        [JsonProperty("store")]
         public string StoreName { get; set; }
 
         [JsonProperty("qty")]
         public decimal Quantity { get; set; }
 
-        [JsonProperty("frozen")]
+        [JsonProperty("frz")]
         public decimal Frozen { get; set; }
 
-        [JsonProperty("available")]
+        [JsonProperty("avl")]
         public decimal Available { get; set; }
     }
 }

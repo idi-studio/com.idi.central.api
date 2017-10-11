@@ -63,6 +63,7 @@ namespace IDI.Central.Domain.Localization
 								public const string OperationNonsupport = "operation-nonsupport";
 								public const string OperationFail = "operation-fail";
 								public const string OperationSuccess = "operation-success";
+								public const string OperationLimited = "operation-limited";
 								public const string PasswordMismatch = "password-mismatch";
 								public const string ProductCodeDuplicated = "product-code-duplicated";
 								public const string ProductNotExisting = "product-not-existing";

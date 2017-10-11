@@ -13,8 +13,8 @@ namespace IDI.Central.Models.Inventory
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("inactive")]
-        public bool Inactive { get; set; }
+        [JsonProperty("active")]
+        public bool Active { get; set; }
 
         [JsonProperty("stocks")]
         public List<StockModel> Stocks { get; set; } = new List<StockModel>();

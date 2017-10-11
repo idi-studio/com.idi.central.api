@@ -10,7 +10,7 @@ namespace IDI.Central.Domain.Modules.Inventory.AggregateRoots
         [StringLength(50)]
         public string Name { get; set; }
 
-        public bool Inactive { get; set; } = false;
+        public bool Active { get; set; } = true;
 
         public List<Stock> Stocks { get; set; } = new List<Stock>();
     }

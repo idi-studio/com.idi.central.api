@@ -1,8 +1,10 @@
 ﻿using System;
 using IDI.Central.Common;
 using IDI.Central.Core;
+using IDI.Central.Domain.Modules.BasicInfo.Commands;
 using IDI.Central.Domain.Modules.Inventory.Queries;
 using IDI.Central.Models.Inventory;
+using IDI.Central.Models.Inventory.Inputs;
 using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
@@ -24,8 +26,48 @@ namespace IDI.Central.Controllers
             this.querier = querier;
         }
 
+        [HttpPost]
+        [Permission("store", PermissionType.Add)]
+        public Result Post([FromBody]StoreInput input)
+        {
+            var command = new StoreCommand
+            {
+                Name = input.Name,
+                Active = input.Active,
+                Mode = CommandMode.Create,
+                Group = VerificationGroup.Create,
+            };
+
+            return bus.Send(command);
+        }
+
+        [HttpPut("{id}")]
+        [Permission("store", PermissionType.Upload)]
+        public Result Put(Guid id, [FromBody]StoreInput input)
+        {
+            var command = new StoreCommand
+            {
+                Id = id,
+                Name = input.Name,
+                Active = input.Active,
+                Mode = CommandMode.Update,
+                Group = VerificationGroup.Update,
+            };
+
+            return bus.Send(command);
+        }
+
+        [HttpDelete("{id}")]
+        [Permission("store", PermissionType.Remove)]
+        public Result Delete(Guid id)
+        {
+            var command = new StoreCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
+
+            return bus.Send(command);
+        }
+
         [HttpGet("list")]
-        [Permission("list", PermissionType.Query)]
+        [Permission("store", PermissionType.Query)]
         public Result<Set<StoreModel>> GetStores()
         {
             return querier.Execute<QueryStoreSetCondition, Set<StoreModel>>();

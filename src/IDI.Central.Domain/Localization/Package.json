@@ -685,6 +685,18 @@
 },
 {
     "language": "chs",
+    "name": "operation-limited",
+    "value": "操作受限!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "operation-limited",
+    "value": "Operation is limited.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "password-mismatch",
     "value": "两次密码不一致!",
     "prefix": "command"

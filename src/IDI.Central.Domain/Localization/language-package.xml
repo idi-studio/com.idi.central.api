@@ -59,6 +59,7 @@
   <item prefix="command" name="operation-nonsupport" en="This operation is not supported." chs="不支持该项操作!" />
   <item prefix="command" name="operation-fail" en="Operation failed." chs="操作失败!" />
   <item prefix="command" name="operation-success" en="Operation successfully." chs="操作成功!" />
+  <item prefix="command" name="operation-limited" en="Operation is limited." chs="操作受限!" />
   <item prefix="command" name="password-mismatch" en="Passwords does not match." chs="两次密码不一致!" />
   <item prefix="command" name="product-code-duplicated" en="Product code duplicated." chs="产品编码重复!" />
   <item prefix="command" name="product-not-existing" en="Cannot found this product." chs="产品不存在!" />

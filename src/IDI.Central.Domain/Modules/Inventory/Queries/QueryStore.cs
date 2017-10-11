@@ -31,7 +31,7 @@ namespace IDI.Central.Domain.Modules.Inventory.Queries
             {
                 Id = store.Id,
                 Name = store.Name,
-                Inactive = store.Inactive,
+                Active = store.Active,
                 Stocks = store.Stocks.Select(e => new StockModel
                 {
                     Id = e.Id,

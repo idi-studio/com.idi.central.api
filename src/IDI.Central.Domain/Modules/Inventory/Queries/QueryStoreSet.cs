@@ -23,7 +23,7 @@ namespace IDI.Central.Domain.Modules.Inventory.Queries
             {
                 Id = e.Id,
                 Name = e.Name,
-                Inactive = e.Inactive
+                Active = e.Active
             }).ToList();
 
             return Result.Success(new Set<StoreModel>(data));
