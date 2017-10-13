@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using IDI.Central.Common;
 using IDI.Central.Core;
 using IDI.Central.Domain.Modules.BasicInfo.Commands;
+using IDI.Central.Domain.Modules.Inventory;
+using IDI.Central.Domain.Modules.Inventory.Commands;
 using IDI.Central.Domain.Modules.Inventory.Queries;
 using IDI.Central.Models.Inventory;
 using IDI.Central.Models.Inventory.Inputs;
@@ -42,7 +45,7 @@ namespace IDI.Central.Controllers
         }
 
         [HttpPut("{id}")]
-        [Permission("store", PermissionType.Upload)]
+        [Permission("store", PermissionType.Modify)]
         public Result Put(Guid id, [FromBody]StoreInput input)
         {
             var command = new StoreCommand
@@ -50,6 +53,36 @@ namespace IDI.Central.Controllers
                 Id = id,
                 Name = input.Name,
                 Active = input.Active,
+                Mode = CommandMode.Update,
+                Group = VerificationGroup.Update,
+            };
+
+            return bus.Send(command);
+        }
+
+        [HttpPut("in/{id}")]
+        [Permission("in-store", PermissionType.Modify)]
+        public Result InStore(Guid id, [FromBody]ChangeStoreInput input)
+        {
+            var command = new InStoreCommand
+            {
+                StroeId = id,
+                Items = input.Items.Select(e => new StockItem { ProductId = e.ProductId, BinCode = e.BinCode, Quantity = e.Quantity }).ToList(),
+                Mode = CommandMode.Update,
+                Group = VerificationGroup.Update,
+            };
+
+            return bus.Send(command);
+        }
+
+        [HttpPut("out/{id}")]
+        [Permission("out-store", PermissionType.Modify)]
+        public Result OutStore(Guid id, [FromBody]ChangeStoreInput input)
+        {
+            var command = new OutStoreCommand
+            {
+                StroeId = id,
+                Items = input.Items.Select(e => new StockItem { ProductId = e.ProductId, BinCode = e.BinCode, Quantity = e.Quantity }).ToList(),
                 Mode = CommandMode.Update,
                 Group = VerificationGroup.Update,
             };
@@ -71,6 +104,13 @@ namespace IDI.Central.Controllers
         public Result<Set<StoreModel>> GetStores()
         {
             return querier.Execute<QueryStoreSetCondition, Set<StoreModel>>();
+        }
+
+        [HttpGet("stock-options")]
+        [Permission("stock-options", PermissionType.Query)]
+        public Result<Set<StockOptionModel>> GetStockOptions()
+        {
+            return querier.Execute<QueryStockOptionSetCondition, Set<StockOptionModel>>();
         }
 
         [HttpGet("{id}")]
