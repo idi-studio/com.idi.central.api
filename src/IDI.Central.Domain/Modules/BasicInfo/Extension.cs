@@ -63,7 +63,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo
             return stock.Quantity - stock.Frozen;
         }
 
-        public static void Inbound(this Store store, Product product, decimal qty, string bin = Configuration.Inventory.DefaultBinCode)
+        public static void InStore(this Store store, Product product, decimal qty, string bin = Configuration.Inventory.DefaultBinCode)
         {
             var stock = store.Stocks.FirstOrDefault(e => e.ProductId == product.Id && e.BinCode == bin);
 
@@ -77,7 +77,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo
             }
         }
 
-        public static bool Outbound(this Store store, Product product, decimal qty, out decimal remain, string bin = "")
+        public static bool OutStore(this Store store, Product product, decimal qty, out decimal remain, string bin = "")
         {
             remain = qty;
 

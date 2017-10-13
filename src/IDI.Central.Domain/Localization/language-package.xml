@@ -56,6 +56,7 @@
   <item prefix="command" name="outbound-success" en="Outbound successfully." chs="入库成功!" />
   <item prefix="command" name="outbound-fail" en="Outbound failed." chs="出库失败!" />
   <item prefix="command" name="low-stocks" en="Low stocks." chs="库存不足!" />
+  <item prefix="command" name="product-out-of-stock" en="'{0}' out of stock." chs="'{0}'库存不足!" />
   <item prefix="command" name="operation-nonsupport" en="This operation is not supported." chs="不支持该项操作!" />
   <item prefix="command" name="operation-fail" en="Operation failed." chs="操作失败!" />
   <item prefix="command" name="operation-success" en="Operation successfully." chs="操作成功!" />

@@ -649,6 +649,18 @@
 },
 {
     "language": "chs",
+    "name": "product-out-of-stock",
+    "value": "'{0}'库存不足!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "product-out-of-stock",
+    "value": "'{0}' out of stock.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "operation-nonsupport",
     "value": "不支持该项操作!",
     "prefix": "command"

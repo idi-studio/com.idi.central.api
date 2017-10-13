@@ -60,6 +60,7 @@ namespace IDI.Central.Domain.Localization
 								public const string OutboundSuccess = "outbound-success";
 								public const string OutboundFail = "outbound-fail";
 								public const string LowStocks = "low-stocks";
+								public const string ProductOutOfStock = "product-out-of-stock";
 								public const string OperationNonsupport = "operation-nonsupport";
 								public const string OperationFail = "operation-fail";
 								public const string OperationSuccess = "operation-success";
