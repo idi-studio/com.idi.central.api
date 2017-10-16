@@ -30,12 +30,17 @@ namespace IDI.Central.Domain.Modules.Inventory.Commands
         [Injection]
         public IRepository<Product> Products { get; set; }
 
+        [Injection]
+        public IRepository<StoreTrans> Transaction { get; set; }
+
         public Result Execute(OutStoreCommand command)
         {
             var store = this.Stores.Include(e => e.Stocks).Find(e => e.Id == command.StroeId);
 
             if (store == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.StoreNotExisting));
+
+            var result = new List<StoreTrans>();
 
             foreach (var item in command.Items)
             {
@@ -46,12 +51,19 @@ namespace IDI.Central.Domain.Modules.Inventory.Commands
 
                 decimal remain;
 
-                if (!store.OutStore(product, item.Quantity, out remain, item.BinCode))
+                var trans = new List<StoreTrans>();
+
+                if (!store.OutStore(product, item.Quantity, item.BinCode, out remain, out trans))
                     return Result.Fail(message: Localization.Get(Resources.Key.Command.ProductOutOfStock.ToFormat(product.Name)));
+
+                result.AddRange(trans);
             }
 
             this.Stores.Update(store);
             this.Stores.Commit();
+
+            this.Transaction.AddRange(result);
+            this.Transaction.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.OutboundSuccess));
         }

@@ -7,7 +7,7 @@ namespace IDI.Central.Models.Inventory.Inputs
 {
     public class ChangeStoreInput : IInput
     {
-        [JsonProperty("list")]
+        [JsonProperty("items")]
         public List<StockItemModel> Items { get; set; } = new List<StockItemModel>();
     }
 }

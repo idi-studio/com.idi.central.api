@@ -63,8 +63,10 @@ namespace IDI.Central.Domain.Modules.BasicInfo
             return stock.Quantity - stock.Frozen;
         }
 
-        public static void InStore(this Store store, Product product, decimal qty, string bin = Configuration.Inventory.DefaultBinCode)
+        public static void InStore(this Store store, Product product, decimal qty, string bin, out List<StoreTrans> trans)
         {
+            trans = new List<StoreTrans>();
+
             var stock = store.Stocks.FirstOrDefault(e => e.ProductId == product.Id && e.BinCode == bin);
 
             if (stock == null)
@@ -75,11 +77,14 @@ namespace IDI.Central.Domain.Modules.BasicInfo
             {
                 stock.Quantity += qty;
             }
+
+            trans.Add(new StoreTrans { BinCode = bin, ProductId = product.Id, Quantity = qty, StoreId = store.Id, TransType = StoreTransType.InStore });
         }
 
-        public static bool OutStore(this Store store, Product product, decimal qty, out decimal remain, string bin = "")
+        public static bool OutStore(this Store store, Product product, decimal qty, string bin, out decimal remain, out List<StoreTrans> trans)
         {
             remain = qty;
+            trans = new List<StoreTrans>();
 
             foreach (var stock in store.Stocks)
             {
@@ -93,6 +98,8 @@ namespace IDI.Central.Domain.Modules.BasicInfo
 
                 stock.Quantity -= amount;
                 remain -= amount;
+
+                trans.Add(new StoreTrans { BinCode = bin, ProductId = product.Id, Quantity = amount, StoreId = store.Id, TransType = StoreTransType.OutStore });
             }
 
             return remain == 0;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using IDI.Central.Common;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
@@ -141,12 +142,13 @@ namespace IDI.Central.Domain.Modules.BasicInfo
     {
         public ProductCollection Products { get; } = new ProductCollection();
 
-        public Store Store  = new Store { Name = "Main" };
+        public Store Store = new Store { Name = "Main" };
 
         public Seed()
         {
-            Products.iPhones.ForEach(e => this.Store.InStore(e, 100));
-            Products.Others.ForEach(e => this.Store.InStore(e, 50));
+            var trans = new List<StoreTrans>();
+            Products.iPhones.ForEach(e => this.Store.InStore(e, 100, Configuration.Inventory.DefaultBinCode, out trans));
+            Products.Others.ForEach(e => this.Store.InStore(e, 50, Configuration.Inventory.DefaultBinCode, out trans));
         }
     }
 }
