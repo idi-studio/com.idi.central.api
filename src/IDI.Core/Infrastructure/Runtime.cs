@@ -81,6 +81,7 @@ namespace IDI.Core.Infrastructure
             services.AddDbContextPool<TContext>(optionsAction: optionsAction);
             services.AddScoped<DbContext, TContext>();
             services.AddScoped<IRepositoryContext, RepositoryContext>();
+            services.AddScoped<ITransaction, Transaction>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IQueryableRepository<>), typeof(Repository<>));
         }

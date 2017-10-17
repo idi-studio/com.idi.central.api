@@ -74,32 +74,6 @@ namespace IDI.Core.Repositories
         {
             return queryable.Where(condition).ToList();
         }
-
-        //public Page<TAggregateRoot> Paging(int number, int size)
-        //{
-        //    if (number <= 0)
-        //        throw new ArgumentOutOfRangeException("number", number, "The number should be larger than zero.");
-
-        //    if (size <= 0)
-        //        throw new ArgumentOutOfRangeException("size", size, "The size should be larger than zero.");
-
-        //    int skip = (number - 1) * size;
-        //    int take = size;
-        //    int total = this.queryable.Count();
-
-        //    List<TAggregateRoot> items;
-
-        //    if (sortPredicates.Count > 0)
-        //    {
-        //        items = this.orderedQueryable.Skip(skip).Take(take).SortBy(sortPredicates).ToList();
-        //    }
-        //    else
-        //    {
-        //        items = this.orderedQueryable.Skip(skip).Take(take).ToList();
-        //    }
-
-        //    return new Page<TAggregateRoot>(totalRecords: total, totalPages: (total + size - 1) / size, pageSize: size, pageNumber: number, items: items);
-        //}
         #endregion
     }
 

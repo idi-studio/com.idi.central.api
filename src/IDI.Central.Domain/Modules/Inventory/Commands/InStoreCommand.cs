@@ -25,42 +25,37 @@ namespace IDI.Central.Domain.Modules.Inventory.Commands
         public ILocalization Localization { get; set; }
 
         [Injection]
-        public IRepository<Store> Stores { get; set; }
-
-        [Injection]
-        public IRepository<Product> Products { get; set; }
-
-        [Injection]
-        public IRepository<StoreTrans> Transaction { get; set; }
+        public ITransaction Transaction { get; set; }
 
         public Result Execute(InStoreCommand command)
         {
-            var store = this.Stores.Include(e => e.Stocks).Find(e => e.Id == command.StroeId);
-
-            if (store == null)
-                return Result.Fail(Localization.Get(Resources.Key.Command.StoreNotExisting));
-
-            var result = new List<StoreTrans>();
-
-            foreach (var item in command.Items)
+            using (var transaction = Transaction.Begin())
             {
-                var product = this.Products.Find(e => e.Id == item.ProductId);
+                var store = transaction.Source<Store>().Include(e => e.Stocks).Find(e => e.Id == command.StroeId);
 
-                if (product == null)
-                    return Result.Fail(Localization.Get(Resources.Key.Command.ProductNotExisting));
+                if (store == null)
+                    return Result.Fail(Localization.Get(Resources.Key.Command.StoreNotExisting));
 
-                var trans = new List<StoreTrans>();
+                var storeTrans = new List<StoreTrans>();
 
-                store.InStore(product, item.Quantity, item.BinCode, out trans);
+                foreach (var item in command.Items)
+                {
+                    var product = transaction.Source<Product>().Find(e => e.Id == item.ProductId);
 
-                result.AddRange(trans);
+                    if (product == null)
+                        return Result.Fail(Localization.Get(Resources.Key.Command.ProductNotExisting));
+
+                    var trans = new List<StoreTrans>();
+
+                    store.InStore(product, item.Quantity, item.BinCode, out trans);
+
+                    storeTrans.AddRange(trans);
+                }
+
+                transaction.Update(store);
+                transaction.AddRange(storeTrans);
+                transaction.Commit();
             }
-
-            this.Stores.Update(store);
-            this.Stores.Commit();
-
-            this.Transaction.AddRange(result);
-            this.Transaction.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.OperationSuccess));
         }

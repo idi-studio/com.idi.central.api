@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IDI.Core.Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace IDI.Core.Repositories
 {
@@ -86,6 +87,11 @@ namespace IDI.Core.Repositories
         {
             this.Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public IDbContextTransaction BeginTransaction()
+        {
+            return this.context.Database.BeginTransaction();
         }
 
         ~RepositoryContext()
