@@ -21,7 +21,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Commands
         public bool Active { get; set; }
     }
 
-    public class StoreCommandHandler : CommandHandler<StoreCommand>
+    public class StoreCommandHandler : CRUDCommandHandler<StoreCommand>
     {
         [Injection]
         public IRepository<Store> Stores { get; set; }

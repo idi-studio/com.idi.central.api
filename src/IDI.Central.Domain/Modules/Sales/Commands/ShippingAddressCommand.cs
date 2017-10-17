@@ -51,7 +51,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
         public bool Default { get; set; }
     }
 
-    public class ShippingCommandHandler : CommandHandler<ShippingAddressCommand>
+    public class ShippingCommandHandler : CRUDCommandHandler<ShippingAddressCommand>
     {
         [Injection]
         public IRepository<ShippingAddress> Shippings { get; set; }

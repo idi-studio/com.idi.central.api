@@ -18,7 +18,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Commands
         public List<ProductPictureInput> Pictures { get; set; }
     }
 
-    public class ProductPictureBatchCommandHandler : CommandHandler<ProductPictureBatchCommand>
+    public class ProductPictureBatchCommandHandler : CRUDCommandHandler<ProductPictureBatchCommand>
     {
         [Injection]
         public IRepository<Product> Products { get; set; }

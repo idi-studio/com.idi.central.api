@@ -31,7 +31,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Commands
         public bool Enabled { get; set; }
     }
 
-    public class ProductPriceCommandHandler : CommandHandler<ProductPriceCommand>
+    public class ProductPriceCommandHandler : CRUDCommandHandler<ProductPriceCommand>
     {
         private readonly DateTime min = new DateTime(2010, 1, 1);
         private readonly DateTime max = new DateTime(2030, 12, 31);

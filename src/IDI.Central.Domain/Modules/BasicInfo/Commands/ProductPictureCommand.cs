@@ -33,7 +33,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Commands
         public string SavePath { get; set; }
     }
 
-    public class ProductPictureCommandHandler : CommandHandler<ProductPictureCommand>
+    public class ProductPictureCommandHandler : CRUDCommandHandler<ProductPictureCommand>
     {
         [Injection]
         public IRepository<Product> Products { get; set; }

@@ -27,7 +27,7 @@ namespace IDI.Central.Domain.Modules.Logistics.Commands
         public Guid OrderId { get; set; }
     }
 
-    public class DeliverCommandHandler : CommandHandler<DeliverCommand>
+    public class DeliverCommandHandler : CRUDCommandHandler<DeliverCommand>
     {
         [Injection]
         public IRepository<Order> Orders { get; set; }

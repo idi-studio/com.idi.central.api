@@ -24,7 +24,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
         public decimal Quantity { get; set; }
     }
 
-    public class OrderItemCommandHandler : CommandHandler<OrderItemCommand>
+    public class OrderItemCommandHandler : CRUDCommandHandler<OrderItemCommand>
     {
         [Injection]
         public IRepository<Product> Products { get; set; }

@@ -23,6 +23,7 @@ namespace IDI.Core.Domain
         public string LastUpdatedBy { get; set; }
 
         public DateTime LastUpdatedAt { get; set; }
+        public Guid TransactionId { get; set; }
 
         public AggregateRoot()
         {
@@ -32,6 +33,7 @@ namespace IDI.Core.Domain
             this.CreatedAt = DateTime.Now;
             this.LastUpdatedBy = "-";
             this.LastUpdatedAt = DateTime.Now;
+            this.TransactionId = Guid.Empty;
         }
 
         public override int GetHashCode()

@@ -32,7 +32,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Commands
         public bool OnShelf { get; set; }
     }
 
-    public class ProductCommandHandler : CommandHandler<ProductCommand>
+    public class ProductCommandHandler : CRUDCommandHandler<ProductCommand>
     {
         [Injection]
         public IRepository<Product> Products { get; set; }

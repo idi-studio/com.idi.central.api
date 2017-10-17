@@ -8,11 +8,7 @@ using IDI.Core.Logging;
 
 namespace IDI.Core.Infrastructure.Commands
 {
-    /// <summary>
-    /// Create/Update/Delete/Upload CommandHandler
-    /// </summary>
-    /// <typeparam name="T">Type of Command</typeparam>
-    public abstract class CommandHandler<T> : ICommandHandler<T> where T : Command
+    public abstract class CRUDCommandHandler<T> : ICommandHandler<T> where T : Command
     {
         [Injection]
         public ILocalization Localization { get; set; }
@@ -43,8 +39,11 @@ namespace IDI.Core.Infrastructure.Commands
         }
 
         protected abstract Result Create(T command);
+
         protected abstract Result Update(T command);
+
         protected abstract Result Delete(T command);
+
         protected virtual Result Upload(T command)
         {
             throw new NotImplementedException();

@@ -30,7 +30,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
         public IFormFile File { get; set; }
     }
 
-    public class VoucherCommandHandler : CommandHandler<VoucherCommand>
+    public class VoucherCommandHandler : CRUDCommandHandler<VoucherCommand>
     {
         [Injection]
         public IRepository<Order> Orders { get; set; }

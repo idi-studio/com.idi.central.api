@@ -40,6 +40,7 @@ namespace IDI.Core.Repositories
             {
                 arg.CreatedBy = user.Name;
                 arg.LastUpdatedBy = user.Name;
+                arg.TransactionId = this.transaction.TransactionId;
             }
             this.context.Add(arg);
         }
@@ -52,6 +53,7 @@ namespace IDI.Core.Repositories
                 {
                     arg.CreatedBy = user.Name;
                     arg.LastUpdatedBy = user.Name;
+                    arg.TransactionId = this.transaction.TransactionId;
                 });
             }
 
@@ -64,6 +66,7 @@ namespace IDI.Core.Repositories
             {
                 arg.LastUpdatedAt = DateTime.Now;
                 arg.LastUpdatedBy = user.Name;
+                arg.TransactionId = this.transaction.TransactionId;
             }
             this.context.Update(arg);
         }

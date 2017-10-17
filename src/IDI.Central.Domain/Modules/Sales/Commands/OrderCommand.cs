@@ -25,7 +25,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
         public Guid? CustomerId { get; set; }
     }
 
-    public class OrderCommandHandler : CommandHandler<OrderCommand>
+    public class OrderCommandHandler : CRUDCommandHandler<OrderCommand>
     {
         [Injection]
         public IRepository<Order> Orders { get; set; }

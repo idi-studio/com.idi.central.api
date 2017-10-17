@@ -29,7 +29,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
         public Gender Gender { get; set; }
     }
 
-    public class CustomerCommandHandler : CommandHandler<CustomerCommand>
+    public class CustomerCommandHandler : CRUDCommandHandler<CustomerCommand>
     {
         [Injection]
         public IRepository<Customer> Customers { get; set; }

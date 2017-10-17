@@ -15,5 +15,7 @@ namespace IDI.Core.Domain
         string LastUpdatedBy { get; set; }
 
         DateTime LastUpdatedAt { get; set; }
+
+        Guid TransactionId { get; set; }
     }
 }
