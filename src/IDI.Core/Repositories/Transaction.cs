@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using IDI.Core.Authentication;
 using IDI.Core.Domain;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace IDI.Core.Repositories
@@ -12,13 +13,32 @@ namespace IDI.Core.Repositories
         private readonly ICurrentUser user;
         private IDbContextTransaction transaction = null;
 
+        public Guid TransactionId => transaction.TransactionId;
+
         public Transaction(IRepositoryContext context, ICurrentUser user)
         {
-            this.context = context;
             this.user = user;
-        }
+            this.context = context;
+            this.context.BeforeCommitted = (entity, state) =>
+            {
+                if (!(user != null && user.IsAuthenticated))
+                    return;
 
-        public Guid TransactionId => transaction.TransactionId;
+                if (state == EntityState.Added)
+                {
+                    entity.CreatedBy = user.Name;
+                    entity.LastUpdatedBy = user.Name;
+                    entity.TransactionId = this.transaction.TransactionId;
+                }
+
+                if (state == EntityState.Modified)
+                {
+                    entity.LastUpdatedAt = DateTime.Now;
+                    entity.LastUpdatedBy = user.Name;
+                    entity.TransactionId = this.transaction.TransactionId;
+                }
+            };
+        }
 
         public ITransaction Begin()
         {
@@ -36,38 +56,16 @@ namespace IDI.Core.Repositories
         #region ITransaction Members
         public void Add<TAggregateRoot>(TAggregateRoot arg) where TAggregateRoot : AggregateRoot
         {
-            if (user != null && user.IsAuthenticated)
-            {
-                arg.CreatedBy = user.Name;
-                arg.LastUpdatedBy = user.Name;
-                arg.TransactionId = this.transaction.TransactionId;
-            }
             this.context.Add(arg);
         }
 
         public void AddRange<TAggregateRoot>(List<TAggregateRoot> args) where TAggregateRoot : AggregateRoot
         {
-            if (user != null && user.IsAuthenticated)
-            {
-                args.ForEach(arg =>
-                {
-                    arg.CreatedBy = user.Name;
-                    arg.LastUpdatedBy = user.Name;
-                    arg.TransactionId = this.transaction.TransactionId;
-                });
-            }
-
             this.context.AddRange(args);
         }
 
         public void Update<TAggregateRoot>(TAggregateRoot arg) where TAggregateRoot : AggregateRoot
         {
-            if (user != null && user.IsAuthenticated)
-            {
-                arg.LastUpdatedAt = DateTime.Now;
-                arg.LastUpdatedBy = user.Name;
-                arg.TransactionId = this.transaction.TransactionId;
-            }
             this.context.Update(arg);
         }
 

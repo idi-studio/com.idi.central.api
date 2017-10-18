@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using IDI.Core.Domain;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace IDI.Core.Repositories
@@ -9,6 +10,8 @@ namespace IDI.Core.Repositories
     public interface IRepositoryContext : IUnitOfWork, IDisposable
     {
         Guid Id { get; }
+
+        Action<AggregateRoot, EntityState> BeforeCommitted { get; set; }
 
         IQueryable<TAggregateRoot> Source<TAggregateRoot>() where TAggregateRoot : AggregateRoot;
 

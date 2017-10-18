@@ -14,6 +14,8 @@ namespace IDI.Core.Repositories
         private volatile bool committed = true;
         private readonly object sync = new object();
 
+        public Action<AggregateRoot, EntityState> BeforeCommitted { get; set; }
+
         public RepositoryContext(DbContext context)
         {
             this.context = context;
@@ -33,6 +35,7 @@ namespace IDI.Core.Repositories
             {
                 lock (sync)
                 {
+                    BeforeCommittedHandle();
                     affected = context.SaveChanges();
                 }
                 Committed = true;
@@ -40,6 +43,20 @@ namespace IDI.Core.Repositories
 
             return affected;
         }
+
+        private void BeforeCommittedHandle()
+        {
+            if (this.BeforeCommitted == null)
+                return;
+
+            var entries = this.context.ChangeTracker.Entries<AggregateRoot>();
+
+            foreach (var entry in entries)
+            {
+                this.BeforeCommitted(entry.Entity, entry.State);
+            }
+        }
+
         public void Rollback()
         {
             Committed = false;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using IDI.Core.Authentication;
 using IDI.Core.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace IDI.Core.Repositories
 {
@@ -12,35 +13,40 @@ namespace IDI.Core.Repositories
         private readonly IRepositoryContext context;
         private readonly ICurrentUser user;
 
-        public IQueryable<TAggregateRoot> Source { get { return context.Source<TAggregateRoot>(); } }
+        public IQueryable<TAggregateRoot> Source => context.Source<TAggregateRoot>();
 
         public Repository(IRepositoryContext context, ICurrentUser user)
         {
-            this.context = context;
             this.user = user;
+            this.context = context;
+            this.context.BeforeCommitted = (entity, state) =>
+            {
+                if (!(user != null && user.IsAuthenticated))
+                    return;
+
+                if (state == EntityState.Added)
+                {
+                    entity.CreatedBy = user.Name;
+                    entity.LastUpdatedBy = user.Name;
+                    entity.TransactionId = context.Id;
+                }
+
+                if (state == EntityState.Modified)
+                {
+                    entity.LastUpdatedAt = DateTime.Now;
+                    entity.LastUpdatedBy = user.Name;
+                    entity.TransactionId = context.Id;
+                }
+            };
         }
 
         #region IRepository<TAggregateRoot> Members
         public void Add(TAggregateRoot arg)
         {
-            if (user != null && user.IsAuthenticated)
-            {
-                arg.CreatedBy = user.Name;
-                arg.LastUpdatedBy = user.Name;
-            }
             context.Add(arg);
         }
         public void AddRange(List<TAggregateRoot> args)
         {
-            if (user != null && user.IsAuthenticated)
-            {
-                args.ForEach(arg =>
-                {
-                    arg.CreatedBy = user.Name;
-                    arg.LastUpdatedBy = user.Name;
-                });
-            }
-
             context.AddRange(args);
         }
         public void Remove(TAggregateRoot arg)
@@ -49,11 +55,6 @@ namespace IDI.Core.Repositories
         }
         public void Update(TAggregateRoot arg)
         {
-            if (user != null && user.IsAuthenticated)
-            {
-                arg.LastUpdatedAt = DateTime.Now;
-                arg.LastUpdatedBy = user.Name;
-            }
             context.Update(arg);
         }
         public int Commit()
