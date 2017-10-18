@@ -9,6 +9,7 @@ using IDI.Core.Common;
 using IDI.Core.Infrastructure;
 using IDI.Core.Localization;
 using IDI.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IDI.Central.Domain.Tests

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using IDI.Core.Common;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
 {
+    [Table("UserProfile")]
     public class UserProfile : AggregateRoot
     {
         public Guid UserId { get; set; }

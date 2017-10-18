@@ -53,5 +53,10 @@ namespace IDI.Core.Infrastructure.Utils
 
             properties.ForEach(p => p.SetValue(service, Runtime.GetService(p.PropertyType)));
         }
+
+        public static bool HasAttribute<T>(this Type type) where T : Attribute
+        {
+            return type.GetCustomAttribute<T>() != null;
+        }
     }
 }

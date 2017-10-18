@@ -8,9 +8,9 @@ namespace IDI.Central.Domain.Modules.BasicInfo
     {
         public override void Create(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>().ToTable("Products");
-            modelBuilder.Entity<ProductPrice>().ToTable("ProductPrices");
-            modelBuilder.Entity<ProductPicture>().ToTable("ProductPictures");
+            //modelBuilder.Entity<Product>().ToTable("Products");
+            //modelBuilder.Entity<ProductPrice>().ToTable("ProductPrices");
+            //modelBuilder.Entity<ProductPicture>().ToTable("ProductPictures");
 
             //One-to-Many
             modelBuilder.Entity<Product>().HasMany(e => e.Prices).WithOne(e => e.Product).HasForeignKey(e => e.ProductId);

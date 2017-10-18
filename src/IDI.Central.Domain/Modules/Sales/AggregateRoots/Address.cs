@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Sales.AggregateRoots
 {
+    [Table("Addresses")]
     public class ShippingAddress : Address
     {
         [Required]

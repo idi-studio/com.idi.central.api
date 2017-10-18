@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using IDI.Central.Common.Enums;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.BasicInfo.AggregateRoots
 {
+    [Table("ProductPrices")]
     public class ProductPrice : AggregateRoot
     {
         public PriceCategory Category { get; set; }

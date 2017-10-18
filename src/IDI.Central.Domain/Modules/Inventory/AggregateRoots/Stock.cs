@@ -7,6 +7,7 @@ using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Inventory.AggregateRoots
 {
+    [Table("Stocks")]
     public class Stock : AggregateRoot
     {
         [Required]

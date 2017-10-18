@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Sales.AggregateRoots
 {
+    [Table("OrderItems")]
     public class OrderItem : AggregateRoot
     {
         public Guid OrderId { get; set; }

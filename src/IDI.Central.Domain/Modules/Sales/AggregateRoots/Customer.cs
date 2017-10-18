@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Sales.AggregateRoots
 {
+    [Table("Customers")]
     public class Customer : AggregateRoot
     {
         [Required]

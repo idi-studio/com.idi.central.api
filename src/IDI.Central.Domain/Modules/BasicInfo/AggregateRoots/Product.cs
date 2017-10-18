@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using IDI.Central.Domain.Modules.Inventory.AggregateRoots;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.BasicInfo.AggregateRoots
 {
+    [Table("Products")]
     public class Product : AggregateRoot
     {
         [Required]

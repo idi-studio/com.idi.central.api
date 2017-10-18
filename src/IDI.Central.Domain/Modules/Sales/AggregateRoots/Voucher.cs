@@ -1,10 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using IDI.Central.Common.Enums;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Sales.AggregateRoots
 {
+    [Table("Vouchers")]
     public class Voucher : AggregateRoot
     {
         public string TN { get; set; }

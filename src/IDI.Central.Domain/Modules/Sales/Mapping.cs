@@ -8,12 +8,12 @@ namespace IDI.Central.Domain.Modules.Sales
     {
         public override void Create(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Customer>().ToTable("Customers");
-            modelBuilder.Entity<Order>().ToTable("Orders");
-            modelBuilder.Entity<OrderItem>().ToTable("OrderItems");
-            modelBuilder.Entity<Voucher>().ToTable("Vouchers");
-            modelBuilder.Entity<ShippingAddress>().ToTable("Addresses");
-            modelBuilder.Entity<Deliver>().ToTable("Delivers");
+            //modelBuilder.Entity<Customer>().ToTable("Customers");
+            //modelBuilder.Entity<Order>().ToTable("Orders");
+            //modelBuilder.Entity<OrderItem>().ToTable("OrderItems");
+            //modelBuilder.Entity<Voucher>().ToTable("Vouchers");
+            //modelBuilder.Entity<ShippingAddress>().ToTable("Addresses");
+            //modelBuilder.Entity<Deliver>().ToTable("Delivers");
 
             //One-to-one
             modelBuilder.Entity<Customer>().HasOne(e => e.User).WithOne().HasForeignKey<Customer>(e => e.UserId).IsRequired(false).OnDelete(DeleteBehavior.SetNull);

@@ -7,6 +7,7 @@ using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Inventory.AggregateRoots
 {
+    [Table("StoreTrans")]
     public class StoreTrans : AggregateRoot
     {
         public Guid StoreId { get; set; }

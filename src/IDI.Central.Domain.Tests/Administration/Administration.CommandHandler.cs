@@ -12,22 +12,22 @@ namespace IDI.Central.Domain.Tests
 {
     public partial class AdministrationUnitTests : IntegrationTests
     {
-        [TestMethod]
-        public void Administration_UserRegisterCommand()
-        {
-            var hanlder = new UserRegistrationCommandHandler();
-            hanlder.Users = Runtime.GetService<IRepository<User>>();
+        //[TestMethod]
+        //public void Administration_UserRegisterCommand()
+        //{
+        //    var hanlder = new UserRegistrationCommandHandler();
+        //    hanlder.Users = Runtime.GetService<IRepository<User>>();
 
-            var result = hanlder.Execute(new UserRegistrationCommand("administrator", "123456", "123456"));
+        //    var result = hanlder.Execute(new UserRegistrationCommand("administrator", "123456", "123456"));
 
-            Assert.AreEqual(ResultStatus.Success, result.Status);
-            Assert.AreEqual("注册成功!", result.Message);
+        //    Assert.AreEqual(ResultStatus.Success, result.Status);
+        //    Assert.AreEqual("注册成功!", result.Message);
 
-            TestData(context =>
-            {
-                Assert.AreEqual(1, context.Users.Count());
-            });
-        }
+        //    TestData(context =>
+        //    {
+        //        Assert.AreEqual(1, context.Users.Count());
+        //    });
+        //}
 
         //[TestMethod]
         //public void Administration_RoleAuthorizationCommand()

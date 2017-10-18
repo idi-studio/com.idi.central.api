@@ -1,10 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using IDI.Central.Common.Enums;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.BasicInfo.AggregateRoots
 {
+    [Table("ProductPictures")]
     public class ProductPicture : AggregateRoot
     {
         [Required]

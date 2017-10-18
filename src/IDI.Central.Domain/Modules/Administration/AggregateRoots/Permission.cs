@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using IDI.Core.Authentication;
 using IDI.Core.Common.Enums;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
 {
+    [Table("Permissions")]
     public class Permission : AggregateRoot, IPermission
     {
         [Required]
