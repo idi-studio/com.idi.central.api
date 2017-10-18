@@ -14,7 +14,7 @@ namespace IDI.Core.Repositories
         private volatile bool committed = true;
         private readonly object sync = new object();
 
-        public Action<AggregateRoot, EntityState> BeforeCommitted { get; set; }
+        public Action<AggregateRoot, EntityState, DateTime> BeforeCommitted { get; set; }
 
         public RepositoryContext(DbContext context)
         {
@@ -49,11 +49,12 @@ namespace IDI.Core.Repositories
             if (this.BeforeCommitted == null)
                 return;
 
+            var timestamp = DateTime.Now;
             var entries = this.context.ChangeTracker.Entries<AggregateRoot>();
 
             foreach (var entry in entries)
             {
-                this.BeforeCommitted(entry.Entity, entry.State);
+                this.BeforeCommitted(entry.Entity, entry.State, timestamp);
             }
         }
 

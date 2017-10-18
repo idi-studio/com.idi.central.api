@@ -1,5 +1,4 @@
-﻿using IDI.Central.Domain.Modules.Administration.AggregateRoots;
-using IDI.Central.Domain.Modules.Administration.Commands;
+﻿using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
 using IDI.Central.Domain.Modules.BasicInfo.Commands;
 using IDI.Central.Domain.Modules.Inventory.AggregateRoots;
@@ -9,7 +8,6 @@ using IDI.Core.Common;
 using IDI.Core.Infrastructure;
 using IDI.Core.Localization;
 using IDI.Core.Repositories;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IDI.Central.Domain.Tests
@@ -32,11 +30,7 @@ namespace IDI.Central.Domain.Tests
         {
             var hanlder = new DatabaseInitalCommandHandler();
             hanlder.Localization = new Globalization();
-            hanlder.Users = Runtime.GetService<IRepository<User>>();
-            hanlder.Roles = Runtime.GetService<IRepository<Role>>();
-            hanlder.Permissions = Runtime.GetService<IRepository<Permission>>();
-            //hanlder.Modules = Runtime.GetService<IRepository<Module>>();
-            hanlder.Clients = Runtime.GetService<IRepository<Client>>();
+            hanlder.Transaction = Runtime.GetService<ITransaction>();
 
             return hanlder.Execute(new DatabaseInitalCommand());
         }

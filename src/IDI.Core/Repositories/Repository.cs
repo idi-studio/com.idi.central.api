@@ -19,23 +19,29 @@ namespace IDI.Core.Repositories
         {
             this.user = user;
             this.context = context;
-            this.context.BeforeCommitted = (entity, state) =>
+            this.context.BeforeCommitted = (entity, state, timestamp) =>
             {
-                if (!(user != null && user.IsAuthenticated))
-                    return;
+                var name = "anonymous";
 
-                if (state == EntityState.Added)
-                {
-                    entity.CreatedBy = user.Name;
-                    entity.LastUpdatedBy = user.Name;
-                    entity.TransactionId = context.Id;
-                }
+                if (user != null && user.IsAuthenticated)
+                    name = user.Name;
 
-                if (state == EntityState.Modified)
+                switch (state)
                 {
-                    entity.LastUpdatedAt = DateTime.Now;
-                    entity.LastUpdatedBy = user.Name;
-                    entity.TransactionId = context.Id;
+                    case EntityState.Added:
+                        entity.TransactionId = context.Id;
+                        entity.CreatedBy = user.Name;
+                        entity.CreatedAt = timestamp;
+                        entity.LastUpdatedBy = user.Name;
+                        entity.LastUpdatedAt = timestamp;
+                        break;
+                    case EntityState.Modified:
+                        entity.TransactionId = context.Id;
+                        entity.LastUpdatedBy = user.Name;
+                        entity.LastUpdatedAt = timestamp;
+                        break;
+                    default:
+                        break;
                 }
             };
         }

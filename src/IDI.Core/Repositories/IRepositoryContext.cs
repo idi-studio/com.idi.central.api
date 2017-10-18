@@ -11,7 +11,7 @@ namespace IDI.Core.Repositories
     {
         Guid Id { get; }
 
-        Action<AggregateRoot, EntityState> BeforeCommitted { get; set; }
+        Action<AggregateRoot, EntityState, DateTime> BeforeCommitted { get; set; }
 
         IQueryable<TAggregateRoot> Source<TAggregateRoot>() where TAggregateRoot : AggregateRoot;
 
