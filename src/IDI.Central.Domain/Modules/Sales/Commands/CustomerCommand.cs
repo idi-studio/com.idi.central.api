@@ -6,7 +6,6 @@ using IDI.Central.Domain.Modules.Sales.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.Commands;
-using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Verification.Attributes;
 using IDI.Core.Repositories;
 
@@ -29,32 +28,12 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
         public Gender Gender { get; set; }
     }
 
-    public class CustomerCommandHandler : CRUDCommandHandler<CustomerCommand>
+    public class CustomerCommandHandler : CRUDTransactionCommandHandler<CustomerCommand>
     {
-        [Injection]
-        public IRepository<Customer> Customers { get; set; }
-
-        [Injection]
-        public IRepository<User> Users { get; set; }
-
-        [Injection]
-        public IRepository<UserProfile> Profiles { get; set; }
-
-        //[Injection]
-        //public IRepository<Role> Roles { get; set; }
-
-        //[Injection]
-        //public IRepository<UserRole> UserRoles { get; set; }
-
-        protected override Result Create(CustomerCommand command)
+        protected override Result Create(CustomerCommand command, ITransaction transaction)
         {
-            if (this.Users.Include(e => e.Profile).Exist(e => e.Profile.PhoneNum == command.PhoneNum))
+            if (transaction.Source<User>().Include(e => e.Profile).Exist(e => e.Profile.PhoneNum == command.PhoneNum))
                 return Result.Fail(Localization.Get(Resources.Key.Command.PhoneNumRegistered));
-
-            //var customers = this.Roles.Find(e => e.Name == Central.Common.Constants.Roles.Customers);
-
-            //if (customers == null)
-            //    return Result.Fail(Localization.Get(Resources.Key.Command.InvalidRole));
 
             var customer = new Customer
             {
@@ -84,15 +63,15 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
                 }
             };
 
-            this.Customers.Add(customer);
-            this.Customers.Commit();
+            transaction.Add(customer);
+            transaction.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess));
         }
 
-        protected override Result Update(CustomerCommand command)
+        protected override Result Update(CustomerCommand command, ITransaction transaction)
         {
-            var customer = this.Customers.Include(e => e.User).AlsoInclude(e => e.Profile).Find(command.Id);
+            var customer = transaction.Source<Customer>().Include(e => e.User).AlsoInclude(e => e.Profile).Find(command.Id);
 
             if (customer == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
@@ -100,8 +79,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
             customer.Name = command.Name;
             customer.Grade = command.Grade;
 
-            this.Customers.Update(customer);
-            this.Customers.Commit();
+            transaction.Update(customer);
 
             if (!customer.User.Profile.PhoneVerified)
             {
@@ -109,16 +87,17 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
                 customer.User.Profile.PhoneNum = command.PhoneNum;
                 customer.User.Profile.Photo = $"{command.Gender.ToString().ToLower()}.png";
 
-                this.Profiles.Update(customer.User.Profile);
-                this.Profiles.Commit();
+                transaction.Update(customer.User.Profile);
             }
+
+            transaction.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
         }
 
-        protected override Result Delete(CustomerCommand command)
+        protected override Result Delete(CustomerCommand command, ITransaction transaction)
         {
-            var customer = this.Customers.Include(e => e.User).Include(e => e.Shippings).Include(e => e.Orders).Find(command.Id);
+            var customer = transaction.Source<Customer>().Include(e => e.User).Include(e => e.Shippings).Include(e => e.Orders).Find(command.Id);
 
             if (customer == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
@@ -126,11 +105,9 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
             if (customer.Orders.Count > 0 || customer.Shippings.Count > 0)
                 return Result.Fail(Localization.Get(Resources.Key.Command.OperationNonsupport));
 
-            this.Customers.Remove(customer);
-            this.Customers.Commit();
-
-            this.Users.Remove(customer.User);
-            this.Users.Commit();
+            transaction.Remove(customer);
+            transaction.Remove(customer.User);
+            transaction.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
         }

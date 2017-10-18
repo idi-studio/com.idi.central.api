@@ -7,7 +7,6 @@ using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Sales.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
-using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Repositories;
 using Microsoft.AspNetCore.Http;
 
@@ -30,22 +29,16 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
         public IFormFile File { get; set; }
     }
 
-    public class VoucherCommandHandler : CRUDCommandHandler<VoucherCommand>
+    public class VoucherCommandHandler : CRUDTransactionCommandHandler<VoucherCommand>
     {
-        [Injection]
-        public IRepository<Order> Orders { get; set; }
-
-        [Injection]
-        public IRepository<Voucher> Vouchers { get; set; }
-
-        protected override Result Create(VoucherCommand command)
+        protected override Result Create(VoucherCommand command, ITransaction transaction)
         {
-            var voucher = this.Vouchers.Find(e => e.OrderId == command.OrderId);
+            var voucher = transaction.Source<Voucher>().Find(e => e.OrderId == command.OrderId);
 
             if (voucher != null)
                 return Result.Success(message: Localization.Get(Resources.Key.Command.Success)).Attach("vchrid", voucher.Id);
 
-            var order = this.Orders.Include(e => e.Items).Find(e => e.Id == command.OrderId);
+            var order = transaction.Source<Order>().Include(e => e.Items).Find(e => e.Id == command.OrderId);
 
             if (order == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidOrder));
@@ -68,33 +61,33 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
                 Payment = amount
             };
 
-            this.Vouchers.Add(voucher);
-            this.Vouchers.Commit();
+            transaction.Add(voucher);
+            transaction.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess)).Attach("vchrid", voucher.Id);
         }
 
-        protected override Result Update(VoucherCommand command)
+        protected override Result Update(VoucherCommand command, ITransaction transaction)
         {
-            var voucher = this.Vouchers.Include(e => e.Order).Find(command.Id);
+            var voucher = transaction.Source<Voucher>().Include(e => e.Order).Find(command.Id);
 
             if (voucher == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
 
             var result = Result.Fail(message: Localization.Get(Resources.Key.Command.OperationFail));
 
-            Save(voucher, command, ref result);
-            Paid(voucher, command, ref result);
+            Save(voucher, command, transaction, ref result);
+            Paid(voucher, command, transaction, ref result);
 
             return result;
         }
 
-        protected override Result Upload(VoucherCommand command)
+        protected override Result Upload(VoucherCommand command, ITransaction transaction)
         {
             if (command.File == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.NoFileUpload));
 
-            var voucher = this.Vouchers.Find(command.Id);
+            var voucher = transaction.Source<Voucher>().Find(command.Id);
 
             if (voucher == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
@@ -109,21 +102,21 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
 
             Attach(voucher, command.File);
 
-            this.Vouchers.Update(voucher);
-            this.Vouchers.Commit();
+            transaction.Update(voucher);
+            transaction.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.UploadSuccess));
         }
 
-        protected override Result Delete(VoucherCommand command)
+        protected override Result Delete(VoucherCommand command, ITransaction transaction)
         {
-            var voucher = this.Vouchers.Find(command.Id);
+            var voucher = transaction.Source<Voucher>().Find(command.Id);
 
             if (voucher == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
 
-            this.Vouchers.Remove(voucher);
-            this.Vouchers.Commit();
+            transaction.Remove(voucher);
+            transaction.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
         }
@@ -133,7 +126,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
             return $"{timestamp.ToString("yyMMdd")}{timestamp.TimeOfDay.Ticks.ToString("x8")}".ToUpper();
         }
 
-        private void Save(Voucher voucher, VoucherCommand command, ref Result result)
+        private void Save(Voucher voucher, VoucherCommand command, ITransaction transaction, ref Result result)
         {
             if (!(voucher.Status == TradeStatus.InProcess && command.Status == TradeStatus.InProcess))
                 return;
@@ -148,13 +141,13 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
             voucher.Payment = command.Payment;
             voucher.Remark = command.Remark;
 
-            this.Vouchers.Update(voucher);
-            this.Vouchers.Commit();
+            transaction.Update(voucher);
+            transaction.Commit();
 
             result = Result.Success(message: Localization.Get(Resources.Key.Command.SaveSuccess));
         }
 
-        private void Paid(Voucher voucher, VoucherCommand command, ref Result result)
+        private void Paid(Voucher voucher, VoucherCommand command, ITransaction transaction, ref Result result)
         {
             if (!(voucher.Status == TradeStatus.InProcess && command.Status == TradeStatus.Success))
                 return;
@@ -162,11 +155,9 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
             voucher.Status = TradeStatus.Success;
             voucher.Order.Status = OrderStatus.Paid;
 
-            this.Vouchers.Update(voucher);
-            this.Vouchers.Commit();
-
-            this.Orders.Update(voucher.Order);
-            this.Orders.Commit();
+            transaction.Update(voucher);
+            transaction.Update(voucher.Order);
+            transaction.Commit();
 
             result = Result.Success(message: Localization.Get(Resources.Key.Command.Confirmed));
         }

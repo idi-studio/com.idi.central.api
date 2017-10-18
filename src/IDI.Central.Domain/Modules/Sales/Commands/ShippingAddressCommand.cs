@@ -4,7 +4,6 @@ using IDI.Central.Domain.Modules.Sales.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.Commands;
-using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Verification.Attributes;
 using IDI.Core.Repositories;
 
@@ -51,17 +50,11 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
         public bool Default { get; set; }
     }
 
-    public class ShippingCommandHandler : CRUDCommandHandler<ShippingAddressCommand>
+    public class ShippingCommandHandler : CRUDTransactionCommandHandler<ShippingAddressCommand>
     {
-        [Injection]
-        public IRepository<ShippingAddress> Shippings { get; set; }
-
-        [Injection]
-        public IRepository<Customer> Customers { get; set; }
-
-        protected override Result Create(ShippingAddressCommand command)
+        protected override Result Create(ShippingAddressCommand command, ITransaction transaction)
         {
-            var customer = this.Customers.Find(e => e.Id == command.CustomerId);
+            var customer = transaction.Source<Customer>().Find(e => e.Id == command.CustomerId);
 
             if (customer == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidCustomer));
@@ -79,27 +72,27 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
                 Postcode = command.Postcode
             };
 
-            this.Shippings.Add(shipping);
-            this.Shippings.Commit();
+            transaction.Add(shipping);
 
             if (command.Default)
             {
                 customer.DefaultShippingId = shipping.Id;
-                this.Customers.Update(customer);
-                this.Customers.Commit();
+                transaction.Update(customer);
             }
+
+            transaction.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess));
         }
 
-        protected override Result Update(ShippingAddressCommand command)
+        protected override Result Update(ShippingAddressCommand command, ITransaction transaction)
         {
-            var customer = this.Customers.Find(e => e.Id == command.CustomerId);
+            var customer = transaction.Source<Customer>().Find(e => e.Id == command.CustomerId);
 
             if (customer == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidCustomer));
 
-            var shipping = this.Shippings.Find(command.Id);
+            var shipping = transaction.Source<ShippingAddress>().Find(command.Id);
 
             if (shipping == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
@@ -114,28 +107,28 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
             shipping.Detail = command.Detail;
             shipping.Postcode = command.Postcode;
 
-            this.Shippings.Update(shipping);
-            this.Shippings.Commit();
+            transaction.Update(shipping);
 
             if (command.Default && customer.DefaultShippingId != shipping.Id)
             {
                 customer.DefaultShippingId = shipping.Id;
-                this.Customers.Update(customer);
-                this.Customers.Commit();
+                transaction.Update(customer);
             }
+
+            transaction.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
         }
 
-        protected override Result Delete(ShippingAddressCommand command)
+        protected override Result Delete(ShippingAddressCommand command, ITransaction transaction)
         {
-            var shipping = this.Shippings.Find(command.Id);
+            var shipping = transaction.Source<ShippingAddress>().Find(command.Id);
 
             if (shipping == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
 
-            this.Shippings.Remove(shipping);
-            this.Shippings.Commit();
+            transaction.Remove(shipping);
+            transaction.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
         }

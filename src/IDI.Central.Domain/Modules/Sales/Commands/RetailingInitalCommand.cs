@@ -1,9 +1,6 @@
 ﻿using IDI.Central.Domain.Localization;
-using IDI.Central.Domain.Modules.Sales.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
-using IDI.Core.Infrastructure.DependencyInjection;
-using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Sales.Commands
@@ -18,18 +15,12 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
         }
     }
 
-    public class SalesInitalCommandHandler : ICommandHandler<SalesInitalCommand>
+    public class SalesInitalCommandHandler : TransactionCommandHandler<SalesInitalCommand>
     {
-        [Injection]
-        public ILocalization Localization { get; set; }
-
-        [Injection]
-        public IRepository<Customer> Customers { get; set; }
-
-        public Result Execute(SalesInitalCommand command)
+        protected override Result Execute(SalesInitalCommand command, ITransaction transaction)
         {
-            command.Seed.Customers.Customers.ForEach(e => this.Customers.Add(e));
-            this.Customers.Commit();
+            command.Seed.Customers.Customers.ForEach(e => transaction.Add(e));
+            transaction.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.SysDataInitSuccess));
         }

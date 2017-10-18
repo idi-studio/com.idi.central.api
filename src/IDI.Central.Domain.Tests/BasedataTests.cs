@@ -1,8 +1,5 @@
 ﻿using IDI.Central.Domain.Modules.Administration.Commands;
-using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
 using IDI.Central.Domain.Modules.BasicInfo.Commands;
-using IDI.Central.Domain.Modules.Inventory.AggregateRoots;
-using IDI.Central.Domain.Modules.Sales.AggregateRoots;
 using IDI.Central.Domain.Modules.Sales.Commands;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure;
@@ -39,7 +36,7 @@ namespace IDI.Central.Domain.Tests
         {
             var hanlder = new SalesInitalCommandHandler();
             hanlder.Localization = new Globalization();
-            hanlder.Customers = Runtime.GetService<IRepository<Customer>>();
+            hanlder.Transaction = Runtime.GetService<ITransaction>();
 
             return hanlder.Execute(new SalesInitalCommand());
         }
@@ -48,8 +45,7 @@ namespace IDI.Central.Domain.Tests
         {
             var hanlder = new BasicInfoInitialCommandHandler();
             hanlder.Localization = new Globalization();
-            hanlder.Products = Runtime.GetService<IRepository<Product>>();
-            hanlder.Stores = Runtime.GetService<IRepository<Store>>();
+            hanlder.Transaction = Runtime.GetService<ITransaction>();
 
             return hanlder.Execute(new BasicInfoInitialCommand());
         }

@@ -1,10 +1,6 @@
 ﻿using IDI.Central.Domain.Localization;
-using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
-using IDI.Central.Domain.Modules.Inventory.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
-using IDI.Core.Infrastructure.DependencyInjection;
-using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.BasicInfo.Commands
@@ -19,26 +15,15 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Commands
         }
     }
 
-    public class BasicInfoInitialCommandHandler : ICommandHandler<BasicInfoInitialCommand>
+    public class BasicInfoInitialCommandHandler : TransactionCommandHandler<BasicInfoInitialCommand>
     {
-        [Injection]
-        public ILocalization Localization { get; set; }
-
-        [Injection]
-        public IRepository<Product> Products { get; set; }
-
-        [Injection]
-        public IRepository<Store> Stores { get; set; }
-
-        public Result Execute(BasicInfoInitialCommand command)
+        protected override Result Execute(BasicInfoInitialCommand command, ITransaction transaction)
         {
-            command.Seed.Products.iPhones.ForEach(e => this.Products.Add(e));
-            command.Seed.Products.Others.ForEach(e => this.Products.Add(e));
+            command.Seed.Products.iPhones.ForEach(e => transaction.Add(e));
+            command.Seed.Products.Others.ForEach(e => transaction.Add(e));
 
-            this.Products.Commit();
-
-            this.Stores.Add(command.Seed.Store);
-            this.Stores.Commit();
+            transaction.Add(command.Seed.Store);
+            transaction.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.SysDataInitSuccess));
         }
