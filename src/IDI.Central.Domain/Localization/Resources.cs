@@ -36,10 +36,8 @@ namespace IDI.Central.Domain.Localization
 								public const string ClientDisabled = "client-disabled";
 								public const string ClientAuthenticationFail = "client-authentication-fail";
 								public const string ClientAuthenticationSuccess = "client-authentication-success";
-								public const string SysDbInitialized = "sys-db-initialized";
-								public const string SysDbInitSuccess = "sys-db-init-success";
-								public const string SysDataInitialized = "sys-data-initialized";
-								public const string SysDataInitSuccess = "sys-data-init-success";
+								public const string SystemInitialized = "system-initialized";
+								public const string SystemInitSuccess = "system-init-success";
 								public const string RoleAuthorizationSuccess = "role-authorization-success";
 								public const string RoleExists = "role-exists";
 								public const string UserAuthorizationSuccess = "user-authorization-success";

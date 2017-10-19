@@ -25,7 +25,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             bool initialized = transaction.Source<Role>().Exist(e => e.Name == Configuration.Roles.Administrators);
 
             if (initialized)
-                return Result.Success(message: Localization.Get(Resources.Key.Command.SysDbInitialized));
+                return Result.Success(message: Localization.Get(Resources.Key.Command.SystemInitialized));
 
             transaction.AddRange(command.Seed.Authorization.Permissions);
             transaction.Add(command.Seed.Users.Administrator);
@@ -40,7 +40,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 
             transaction.Commit();
 
-            return Result.Success(message: Localization.Get(Resources.Key.Command.SysDbInitSuccess));
+            return Result.Success(message: Localization.Get(Resources.Key.Command.SystemInitSuccess));
         }
     }
 }

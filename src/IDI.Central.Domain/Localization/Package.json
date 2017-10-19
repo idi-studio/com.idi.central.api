@@ -361,50 +361,26 @@
 },
 {
     "language": "chs",
-    "name": "sys-db-initialized",
-    "value": "系统数据库已初始化!",
+    "name": "system-initialized",
+    "value": "系统已初始化!",
     "prefix": "command"
 },
 {
     "language": "en",
-    "name": "sys-db-initialized",
-    "value": "System database has been initialized!",
+    "name": "system-initialized",
+    "value": "The system has been initialized!",
     "prefix": "command"
 },
 {
     "language": "chs",
-    "name": "sys-db-init-success",
-    "value": "系统数据库初始化成功!",
+    "name": "system-init-success",
+    "value": "系统初始化成功!",
     "prefix": "command"
 },
 {
     "language": "en",
-    "name": "sys-db-init-success",
-    "value": "The system database initialized successfully!",
-    "prefix": "command"
-},
-{
-    "language": "chs",
-    "name": "sys-data-initialized",
-    "value": "系统数据已初始化!",
-    "prefix": "command"
-},
-{
-    "language": "en",
-    "name": "sys-data-initialized",
-    "value": "System data has been initialized!",
-    "prefix": "command"
-},
-{
-    "language": "chs",
-    "name": "sys-data-init-success",
-    "value": "系统数据初始化成功!",
-    "prefix": "command"
-},
-{
-    "language": "en",
-    "name": "sys-data-init-success",
-    "value": "The system data initialized successfully!",
+    "name": "system-init-success",
+    "value": "System initialization successful!",
     "prefix": "command"
 },
 {
