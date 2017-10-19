@@ -8,14 +8,13 @@ namespace IDI.Central.Domain.Modules.BasicInfo
     {
         public override void Create(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Product>().ToTable("Products");
-            //modelBuilder.Entity<ProductPrice>().ToTable("ProductPrices");
-            //modelBuilder.Entity<ProductPicture>().ToTable("ProductPictures");
-
             //One-to-Many
             modelBuilder.Entity<Product>().HasMany(e => e.Prices).WithOne(e => e.Product).HasForeignKey(e => e.ProductId);
             modelBuilder.Entity<Product>().HasMany(e => e.Pictures).WithOne(e => e.Product).HasForeignKey(e => e.ProductId);
             modelBuilder.Entity<Product>().HasMany(e => e.Stocks).WithOne(e => e.Product).HasForeignKey(e => e.ProductId);
+
+            modelBuilder.Entity<Product>().HasOne(e => e.Stock).WithOne().HasForeignKey<ProductStock>(e => e.ProductId).OnDelete(DeleteBehavior.Cascade);
+            //modelBuilder.Entity<ProductStock>().HasOne(e => e.Store).WithOne().HasForeignKey<ProductStock>(e => e.StoreId).IsRequired(false);
         }
     }
 }

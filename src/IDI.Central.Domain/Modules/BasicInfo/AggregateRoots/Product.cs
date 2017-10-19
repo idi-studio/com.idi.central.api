@@ -32,5 +32,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo.AggregateRoots
         public List<ProductPicture> Pictures { get; set; } = new List<ProductPicture>();
 
         public List<Stock> Stocks { get; set; } = new List<Stock>();
+
+        public ProductStock Stock { get; set; }
     }
 }

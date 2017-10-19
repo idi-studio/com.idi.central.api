@@ -4,13 +4,88 @@ using System.Linq;
 using IDI.Central.Common;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Localization;
+using IDI.Central.Domain.Modules.Administration;
+using IDI.Central.Domain.Modules.Administration.AggregateRoots;
+using IDI.Central.Domain.Modules.BasicInfo;
 using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
 using IDI.Central.Domain.Modules.Inventory.AggregateRoots;
+using IDI.Central.Domain.Modules.Sales.AggregateRoots;
 using IDI.Central.Models.BasicInfo;
+using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
+using IDI.Core.Infrastructure;
 
-namespace IDI.Central.Domain.Modules.BasicInfo
+namespace IDI.Central.Domain.Common
 {
+    public class AuthorizationCollection
+    {
+        public List<Permission> Permissions { get; private set; }
+
+        public AuthorizationCollection()
+        {
+            var authorization = Runtime.GetService<Core.Authentication.IAuthorization>();
+
+            Permissions = authorization.Permissions.Select(p => new Permission
+            {
+                Code = p.Code,
+                Module = p.Module,
+                Type = p.Type,
+                Name = p.Name
+            }).ToList();
+        }
+
+        public Core.Authentication.IPermission[] GetPermissions(params string[] modules)
+        {
+            return Permissions.Where(e => modules.Contains(e.Module)).ToArray();
+        }
+    }
+
+    public class RoleCollection
+    {
+        public Role Administrators { get; private set; }
+
+        public Role Staffs { get; private set; }
+
+        public Role Customers { get; private set; }
+
+        public RoleCollection()
+        {
+            this.Administrators = new Role { Name = Configuration.Roles.Administrators, Descrition = "The administrator of system." };
+            this.Staffs = new Role { Name = Configuration.Roles.Staffs, Descrition = "The staff of system." };
+            this.Customers = new Role { Name = Configuration.Roles.Customers, Descrition = "The customer of system." };
+        }
+    }
+
+    public class UserCollection
+    {
+        public User Administrator { get; private set; }
+
+        public UserCollection()
+        {
+            string salt = Cryptography.Salt();
+
+            this.Administrator = new User
+            {
+                UserName = "administrator",
+                Salt = salt,
+                Password = Cryptography.Encrypt("p@55w0rd", salt),
+                Profile = new UserProfile { Name = "Administrator", Photo = "admin.jpg" },
+            };
+        }
+    }
+
+    public class ClientCollection
+    {
+        public Client Central { get; private set; }
+
+        public ClientCollection()
+        {
+            string salt = Cryptography.Salt();
+
+            this.Central = new Client { ClientId = Configuration.Clients.Central, SecretKey = Cryptography.Encrypt("6ED5C478-1F3A-4C82-B668-99917D67784E", salt), Salt = salt };
+        }
+    }
+
     public class ProductCollection
     {
         private readonly Random random = new Random();
@@ -138,17 +213,119 @@ namespace IDI.Central.Domain.Modules.BasicInfo
         }
     }
 
+    public class CustomerCollection
+    {
+        private readonly Random random = new Random();
+
+        public List<Customer> Customers { get; private set; }
+
+        public CustomerCollection()
+        {
+            this.Customers = new List<Customer>
+            {
+                new Customer { Name="李", Grade=0 },
+                new Customer { Name="王", Grade=1 },
+                new Customer { Name="张", Grade=2 },
+                new Customer { Name="刘", Grade=3 },
+                new Customer { Name="陈", Grade=4 },
+                new Customer { Name="杨", Grade=5 },
+                new Customer { Name="赵", Grade=6 },
+                new Customer { Name="黄", Grade=7 },
+                new Customer { Name="周", Grade=8 },
+                new Customer { Name="吴", Grade=9 },
+            };
+
+            Update(this.Customers);
+        }
+
+        private void Update(List<Customer> customers)
+        {
+            for (var index = 0; index < customers.Count; index++)
+            {
+                var gender = (Gender)(index % 2);
+                var name = string.Format("{0}{1}", customers[index].Name, gender == Gender.Male ? "先生" : "女士");
+                var salt = Cryptography.Salt();
+                var phone = $"{ 13900000000 + index}";
+
+                customers[index].Name = name;
+                customers[index].User = new User
+                {
+                    UserName = $"cust{phone}",
+                    Salt = salt,
+                    Password = Cryptography.Encrypt(phone.Posterior(8), salt),
+                    IsLocked = true,
+                    LockTime = DateTime.MaxValue,
+                    Profile = new UserProfile
+                    {
+                        Name = name,
+                        Gender = gender,
+                        PhoneNum = phone
+                    }
+                };
+
+                var shipping = new ShippingAddress
+                {
+                    CustomerId = customers[index].Id,
+                    Receiver = name,
+                    ContactNo = phone,
+                    Province = "四川",
+                    City = "成都",
+                    Area = "高新区",
+                    Street = "天府四街",
+                    Detail = "天府软件园C区",
+                    Postcode = "610041"
+                };
+
+                customers[index].DefaultShippingId = shipping.Id;
+                customers[index].Shippings.Add(shipping);
+            }
+        }
+    }
+
     public class Seed
     {
+        public AuthorizationCollection Authorization { get; } = new AuthorizationCollection();
+
+        public RoleCollection Roles { get; } = new RoleCollection();
+
+        public UserCollection Users { get; } = new UserCollection();
+
+        public ClientCollection Clients { get; } = new ClientCollection();
+
+        public CustomerCollection Customers { get; } = new CustomerCollection();
+
         public ProductCollection Products { get; } = new ProductCollection();
 
-        public Store Store = new Store { Name = "Main" };
+        public Store Store = new Store { Name = "Main Warehouse" };
 
         public Seed()
         {
+            #region Administration
+            this.Users.Administrator.Authorize(Roles.Administrators);
+            this.Roles.Administrators.Authorize(Authorization.GetPermissions(Configuration.Modules.All));
+            this.Roles.Staffs.Authorize(Authorization.GetPermissions(Configuration.Modules.Sales));
+            this.Roles.Customers.Authorize(Authorization.GetPermissions(Configuration.Modules.Personal));
+            #endregion
+
+            #region BasicInfo
             var trans = new List<StockTransaction>();
-            Products.iPhones.ForEach(e => this.Store.StockIn(e, 100, Configuration.Inventory.DefaultBinCode, out trans));
-            Products.Others.ForEach(e => this.Store.StockIn(e, 50, Configuration.Inventory.DefaultBinCode, out trans));
+
+            Products.iPhones.ForEach(e =>
+            {
+                e.Stock = new ProductStock { ProductId = e.Id, StoreId = this.Store.Id };
+                this.Store.StockIn(e, 100, Configuration.Inventory.DefaultBinCode, out trans);
+            });
+
+            Products.Others.ForEach(e =>
+            {
+                e.Stock = new ProductStock { ProductId = e.Id, StoreId = this.Store.Id };
+                this.Store.StockIn(e, 50, Configuration.Inventory.DefaultBinCode, out trans);
+            });
+            #endregion
+
+            #region Sales
+            Customers.Customers.ForEach(e => e.User.Authorize(new Role { Name = Configuration.Roles.Customers }));
+            #endregion
         }
     }
 }

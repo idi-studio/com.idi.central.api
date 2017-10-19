@@ -1,4 +1,5 @@
 ﻿using IDI.Central.Common;
+using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
@@ -32,6 +33,11 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             transaction.Add(command.Seed.Roles.Staffs);
             transaction.Add(command.Seed.Roles.Customers);
             transaction.Add(command.Seed.Clients.Central);
+            transaction.Add(command.Seed.Store);
+            transaction.AddRange(command.Seed.Products.iPhones);
+            transaction.AddRange(command.Seed.Products.Others);
+            transaction.AddRange(command.Seed.Customers.Customers);
+
             transaction.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.SysDbInitSuccess));

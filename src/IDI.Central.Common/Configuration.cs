@@ -34,7 +34,7 @@
 
         public class Inventory
         {
-            public const string DefaultBinCode = "P";
+            public const string DefaultBinCode = "P000";
         }
 
         public class OAuthApplication
