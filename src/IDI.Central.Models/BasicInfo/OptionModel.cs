@@ -2,9 +2,9 @@
 using IDI.Core.Infrastructure.Queries;
 using Newtonsoft.Json;
 
-namespace IDI.Central.Models.Inventory
+namespace IDI.Central.Models.BasicInfo
 {
-    public class StockOptionModel : IModel
+    public class OptionModel: IModel
     {
         [JsonProperty("id")]
         public Guid Id { get; set; }

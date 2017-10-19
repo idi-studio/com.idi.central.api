@@ -106,13 +106,6 @@ namespace IDI.Central.Controllers
             return querier.Execute<QueryStoreSetCondition, Set<StoreModel>>();
         }
 
-        [HttpGet("stock-options")]
-        [Permission("stock-options", PermissionType.Query)]
-        public Result<Set<StockOptionModel>> GetStockOptions()
-        {
-            return querier.Execute<QueryStockOptionSetCondition, Set<StockOptionModel>>();
-        }
-
         [HttpGet("{id}")]
         [Permission("store", PermissionType.Read)]
         public Result<StoreModel> GetStocks(Guid id)

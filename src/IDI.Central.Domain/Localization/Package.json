@@ -313,6 +313,18 @@
 },
 {
     "language": "chs",
+    "name": "invalid-store",
+    "value": "无效的仓库!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "invalid-store",
+    "value": "Invalid store.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "incompleted-order",
     "value": "订单信息不完整!",
     "prefix": "command"

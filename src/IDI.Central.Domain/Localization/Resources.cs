@@ -32,6 +32,7 @@ namespace IDI.Central.Domain.Localization
 								public const string InvalidProductPrice = "invalid-product-price";
 								public const string InvalidCustomer = "invalid-customer";
 								public const string InvalidPayment = "invalid-payment";
+								public const string InvalidStore = "invalid-store";
 								public const string IncompletedOrder = "incompleted-order";
 								public const string ClientDisabled = "client-disabled";
 								public const string ClientAuthenticationFail = "client-authentication-fail";

@@ -41,7 +41,11 @@ namespace IDI.Central.Controllers
             var command = new ProductCommand
             {
                 Name = input.Name,
-                QRCode = input.QRCode,
+                BinCode = input.BinCode,
+                Uint = input.Uint,
+                SafetyStock = input.SafetyStock,
+                SKU = input.SKU,
+                StroeId = input.StockId,
                 Tags = input.Tags.ToJson(),
                 Enabled = input.Enabled,
                 OnShelf = input.OnShelf,
@@ -76,7 +80,11 @@ namespace IDI.Central.Controllers
             {
                 Id = id,
                 Name = input.Name,
-                QRCode = input.QRCode,
+                BinCode = input.BinCode,
+                Uint = input.Uint,
+                SafetyStock = input.SafetyStock,
+                SKU = input.SKU,
+                StroeId = input.StockId,
                 Tags = input.Tags.ToJson(),
                 Enabled = input.Enabled,
                 OnShelf = input.OnShelf,

@@ -24,13 +24,22 @@ namespace IDI.Central.Controllers
             this.querier = querier;
         }
 
-        [HttpPost]
-        [Permission("category", PermissionType.Query)]
+        [HttpPost("enum")]
+        [Permission("enum", PermissionType.Query)]
         public Result<Set<KeyValuePair<int, string>>> Get([FromBody]CategoryInput input)
         {
             var condition = new QueryCategoryCondition { EnumType = input.EnumType };
 
             return querier.Execute<QueryCategoryCondition, Set<KeyValuePair<int, string>>>(condition);
+        }
+
+        [HttpPost("option")]
+        [Permission("option", PermissionType.Query)]
+        public Result<Set<OptionModel>> GetOptions([FromBody]OptionInput input)
+        {
+            var condition = new QueryOptionSetCondition { Category = input.Category };
+
+            return querier.Execute<QueryOptionSetCondition, Set<OptionModel>>(condition);
         }
     }
 }

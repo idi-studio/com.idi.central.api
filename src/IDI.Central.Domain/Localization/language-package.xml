@@ -27,6 +27,7 @@
   <item prefix="command" name="invalid-product-price" en="Invalid product price." chs="无效的产品价格!" />
   <item prefix="command" name="invalid-customer" en="Invalid customer." chs="无效的客户!" />
   <item prefix="command" name="invalid-payment" en="Invalid payment." chs="无效的支付!" />
+  <item prefix="command" name="invalid-store" en="Invalid store." chs="无效的仓库!" />
   <item prefix="command" name="incompleted-order" en="Incompleted order." chs="订单信息不完整!" />
   <item prefix="command" name="client-disabled" en="The client has been disabled." chs="该客户端已被禁用!" />
   <item prefix="command" name="client-authentication-fail" en="Client authentication failed." chs="客户端认证失败!" />
