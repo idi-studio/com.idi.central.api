@@ -94,7 +94,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo
                 stock.Available += amount;
                 remain -= amount;
 
-                trans.Add(new StockTransaction { BinCode = bin, ProductId = product.Id, Quantity = amount, StoreId = store.Id, Category = StockTransactionType.StockRelease });
+                trans.Add(new StockTransaction { BinCode = bin, ProductId = product.Id, Quantity = amount, StoreId = store.Id, Category = StockTransactionType.Release });
             }
 
             return remain == 0;
@@ -142,7 +142,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo
                 stock.Reserve += amount;
                 remain -= amount;
 
-                trans.Add(new StockTransaction { BinCode = bin, ProductId = product.Id, Quantity = amount, StoreId = store.Id, Category = StockTransactionType.StockReserve });
+                trans.Add(new StockTransaction { BinCode = bin, ProductId = product.Id, Quantity = amount, StoreId = store.Id, Category = StockTransactionType.Reserve });
             }
 
             return remain == 0;

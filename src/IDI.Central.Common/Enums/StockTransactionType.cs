@@ -4,7 +4,8 @@
     {
         StockIn = 2,
         StockOut = 4,
-        StockReserve = 8,
-        StockRelease = 16
+        Reserve = 8,
+        Release = 16,
+        Open = 1024
     }
 }

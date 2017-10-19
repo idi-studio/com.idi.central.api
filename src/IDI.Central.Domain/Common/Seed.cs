@@ -298,6 +298,8 @@ namespace IDI.Central.Domain.Common
 
         public Store Store = new Store { Name = "Main Warehouse" };
 
+        public List<StockTransaction> StockTransactions { get; private set; } = new List<StockTransaction>();
+
         public Seed()
         {
             #region Administration
@@ -308,19 +310,24 @@ namespace IDI.Central.Domain.Common
             #endregion
 
             #region BasicInfo
-            var trans = new List<StockTransaction>();
 
             Products.iPhones.ForEach(e =>
             {
+                var transactions = new List<StockTransaction>();
                 e.Stock = new ProductStock { ProductId = e.Id, StoreId = this.Store.Id };
-                this.Store.StockIn(e, 100, Configuration.Inventory.DefaultBinCode, out trans);
+                this.Store.StockIn(e, 100, Configuration.Inventory.DefaultBinCode, out transactions);
+                this.StockTransactions.AddRange(transactions);
             });
 
             Products.Others.ForEach(e =>
             {
+                var transactions = new List<StockTransaction>();
                 e.Stock = new ProductStock { ProductId = e.Id, StoreId = this.Store.Id };
-                this.Store.StockIn(e, 50, Configuration.Inventory.DefaultBinCode, out trans);
+                this.Store.StockIn(e, 50, Configuration.Inventory.DefaultBinCode, out transactions);
+                this.StockTransactions.AddRange(transactions);
             });
+
+            this.StockTransactions.ForEach(e => e.Category = StockTransactionType.Open);
             #endregion
 
             #region Sales
