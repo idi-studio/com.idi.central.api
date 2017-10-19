@@ -22,11 +22,11 @@ namespace IDI.Central.Domain.Modules.Inventory.AggregateRoots
 
         public Store Store { get; set; }
 
-        public decimal Quantity { get; set; }
+        public decimal Reserve { get; set; } = 0.00M;
 
-        public decimal Frozen { get; set; } = 0.00M;
+        public decimal Available { get; set; }
 
         [NotMapped]
-        public decimal Available { get { return this.Quantity - this.Frozen; } }
+        public decimal Quantity => this.Reserve + this.Available;
     }
 }

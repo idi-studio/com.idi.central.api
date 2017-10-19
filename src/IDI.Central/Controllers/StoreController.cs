@@ -64,7 +64,7 @@ namespace IDI.Central.Controllers
         [Permission("in-store", PermissionType.Modify)]
         public Result InStore(Guid id, [FromBody]ChangeStoreInput input)
         {
-            var command = new InStoreCommand
+            var command = new StockInCommand
             {
                 StroeId = id,
                 Items = input.Items.Select(e => new StockItem { ProductId = e.ProductId, BinCode = e.BinCode, Quantity = e.Quantity }).ToList(),
@@ -79,7 +79,7 @@ namespace IDI.Central.Controllers
         [Permission("out-store", PermissionType.Modify)]
         public Result OutStore(Guid id, [FromBody]ChangeStoreInput input)
         {
-            var command = new OutStoreCommand
+            var command = new StockOutCommand
             {
                 StroeId = id,
                 Items = input.Items.Select(e => new StockItem { ProductId = e.ProductId, BinCode = e.BinCode, Quantity = e.Quantity }).ToList(),

@@ -8,7 +8,6 @@ namespace IDI.Central.Domain.Modules.Inventory
     {
         public override void Create(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<StoreTrans>().ToTable("StoreTrans");
             modelBuilder.Entity<Store>().HasMany(e => e.Stocks).WithOne(e => e.Store).HasForeignKey(e => e.StoreId);
         }
     }

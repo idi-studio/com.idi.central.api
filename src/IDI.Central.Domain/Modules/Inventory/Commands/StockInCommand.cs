@@ -10,23 +10,23 @@ using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Inventory.Commands
 {
-    public class OutStoreCommand : Command
+    public class StockInCommand : Command
     {
         public Guid StroeId { get; set; }
 
         public List<StockItem> Items { get; set; } = new List<StockItem>();
     }
 
-    public class OutStoreCommandHandler : TransactionCommandHandler<OutStoreCommand>
+    public class StockInCommandHandler : TransactionCommandHandler<StockInCommand>
     {
-        protected override Result Execute(OutStoreCommand command, ITransaction transaction)
+        protected override Result Execute(StockInCommand command, ITransaction transaction)
         {
             var store = transaction.Source<Store>().Include(e => e.Stocks).Find(e => e.Id == command.StroeId);
 
             if (store == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.StoreNotExisting));
 
-            var result = new List<StoreTrans>();
+            var storeTrans = new List<StockTransaction>();
 
             foreach (var item in command.Items)
             {
@@ -35,21 +35,18 @@ namespace IDI.Central.Domain.Modules.Inventory.Commands
                 if (product == null)
                     return Result.Fail(Localization.Get(Resources.Key.Command.ProductNotExisting));
 
-                decimal remain;
+                var trans = new List<StockTransaction>();
 
-                var trans = new List<StoreTrans>();
+                store.StockIn(product, item.Quantity, item.BinCode, out trans);
 
-                if (!store.OutStore(product, item.Quantity, item.BinCode, out remain, out trans))
-                    return Result.Fail(message: Localization.Get(Resources.Key.Command.ProductOutOfStock.ToFormat(product.Name)));
-
-                result.AddRange(trans);
+                storeTrans.AddRange(trans);
             }
 
             transaction.Update(store);
-            transaction.AddRange(result);
+            transaction.AddRange(storeTrans);
             transaction.Commit();
 
-            return Result.Success(message: Localization.Get(Resources.Key.Command.OutboundSuccess));
+            return Result.Success(message: Localization.Get(Resources.Key.Command.StockInSuccess));
         }
     }
 }

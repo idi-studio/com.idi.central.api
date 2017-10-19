@@ -28,7 +28,7 @@ namespace IDI.Central.Models.Inventory
         public decimal Quantity { get; set; }
 
         [JsonProperty("frz")]
-        public decimal Frozen { get; set; }
+        public decimal Reserve { get; set; }
 
         [JsonProperty("avl")]
         public decimal Available { get; set; }

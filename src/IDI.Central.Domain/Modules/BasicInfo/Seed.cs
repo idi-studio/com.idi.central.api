@@ -146,9 +146,9 @@ namespace IDI.Central.Domain.Modules.BasicInfo
 
         public Seed()
         {
-            var trans = new List<StoreTrans>();
-            Products.iPhones.ForEach(e => this.Store.InStore(e, 100, Configuration.Inventory.DefaultBinCode, out trans));
-            Products.Others.ForEach(e => this.Store.InStore(e, 50, Configuration.Inventory.DefaultBinCode, out trans));
+            var trans = new List<StockTransaction>();
+            Products.iPhones.ForEach(e => this.Store.StockIn(e, 100, Configuration.Inventory.DefaultBinCode, out trans));
+            Products.Others.ForEach(e => this.Store.StockIn(e, 50, Configuration.Inventory.DefaultBinCode, out trans));
         }
     }
 }

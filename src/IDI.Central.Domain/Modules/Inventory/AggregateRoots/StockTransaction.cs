@@ -7,8 +7,8 @@ using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Inventory.AggregateRoots
 {
-    [Table("StoreTrans")]
-    public class StoreTrans : AggregateRoot
+    [Table("StockTransactions")]
+    public class StockTransaction : AggregateRoot
     {
         public Guid StoreId { get; set; }
 
@@ -26,6 +26,6 @@ namespace IDI.Central.Domain.Modules.Inventory.AggregateRoots
 
         public decimal Quantity { get; set; }
 
-        public StoreTransType TransType { get; set; }
+        public StockTransactionType Category { get; set; }
     }
 }

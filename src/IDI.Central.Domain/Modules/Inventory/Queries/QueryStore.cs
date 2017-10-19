@@ -41,7 +41,7 @@ namespace IDI.Central.Domain.Modules.Inventory.Queries
                     StoreName = store.Name,
                     BinCode = e.BinCode,
                     Available = e.Available,
-                    Frozen = e.Frozen,
+                    Reserve = e.Reserve,
                     Quantity = e.Quantity
                 }).ToList()
             };

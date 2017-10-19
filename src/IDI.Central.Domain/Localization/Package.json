@@ -589,50 +589,98 @@
 },
 {
     "language": "chs",
-    "name": "inbound-success",
+    "name": "stock-in-success",
     "value": "入库成功!",
     "prefix": "command"
 },
 {
     "language": "en",
-    "name": "inbound-success",
-    "value": "Inbound successfully.",
+    "name": "stock-in-success",
+    "value": "Stock in successfully.",
     "prefix": "command"
 },
 {
     "language": "chs",
-    "name": "inbound-fail",
+    "name": "stock-in-fail",
     "value": "入库失败!",
     "prefix": "command"
 },
 {
     "language": "en",
-    "name": "inbound-fail",
-    "value": "Inbound failed.",
+    "name": "stock-in-fail",
+    "value": "Stock in failed.",
     "prefix": "command"
 },
 {
     "language": "chs",
-    "name": "outbound-success",
-    "value": "入库成功!",
+    "name": "stock-out-success",
+    "value": "出库成功!",
     "prefix": "command"
 },
 {
     "language": "en",
-    "name": "outbound-success",
-    "value": "Outbound successfully.",
+    "name": "stock-out-success",
+    "value": "Stock out successfully.",
     "prefix": "command"
 },
 {
     "language": "chs",
-    "name": "outbound-fail",
+    "name": "stock-out-fail",
     "value": "出库失败!",
     "prefix": "command"
 },
 {
     "language": "en",
-    "name": "outbound-fail",
-    "value": "Outbound failed.",
+    "name": "stock-out-fail",
+    "value": "Stock out failed.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "stock-reserve-success",
+    "value": "库存预留成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "stock-reserve-success",
+    "value": "Stock reserve successfully.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "stock-reserve-fail",
+    "value": "库存预留失败!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "stock-reserve-fail",
+    "value": "Stock reserve failed.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "stock-release-success",
+    "value": "取消库存预留成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "stock-release-success",
+    "value": "Stock release successfully.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "stock-release-fail",
+    "value": "取消库存预留失败!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "stock-release-fail",
+    "value": "Stock release failed.",
     "prefix": "command"
 },
 {
