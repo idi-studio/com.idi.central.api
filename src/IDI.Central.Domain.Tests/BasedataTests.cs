@@ -10,11 +10,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IDI.Central.Domain.Tests
 {
     [TestClass]
-    [TestCategory("Basedata")]
-    public class BasedataUnitTests : IntegrationTests
+    public class InfrastructureUnitTests : IntegrationTests
     {
         [TestMethod]
-        public void BasedataInital()
+        public void Should_Initialize_Database_Success()
         {
             Runtime.UseAuthorization<ApplicationAuthorization>();
 
