@@ -23,9 +23,9 @@ namespace IDI.Central.Domain.Modules.BasicInfo.AggregateRoots
 
         [Required]
         [StringLength(10)]
-        public string Uint { get; set; } = "PCS";
+        public string Unit { get; set; } = "PCS";
 
-        public Guid? StoreId { get; set; }
+        public Guid StoreId { get; set; }
 
         [ForeignKey("StoreId")]
         public Store Store { get; set; }

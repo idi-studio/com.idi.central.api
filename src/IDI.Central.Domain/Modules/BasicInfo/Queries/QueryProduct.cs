@@ -33,7 +33,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Queries
 
         public override Result<ProductModel> Execute(QueryProductCondition condition)
         {
-            var product = this.Products.Include(e => e.Pictures).Find(condition.Id);
+            var product = this.Products.Include(e => e.Pictures).Include(e => e.Stock).Find(condition.Id);
 
             var url = $"{condition.Domain}/assets/images/products";
 
@@ -46,6 +46,11 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Queries
                 Tags = product.Tags.To<List<TagModel>>(),
                 Enabled = product.Enabled,
                 OnShelf = product.OnShelf,
+                SafetyStock = product.Stock.SafetyStock,
+                SKU = product.Stock.SKU,
+                StoreId = product.Stock.StoreId,
+                Unit = product.Stock.Unit,
+                BinCode = product.Stock.BinCode,
                 Pictures = product.Pictures.Select(e => new ProductPictureModel
                 {
                     Id = e.Id,

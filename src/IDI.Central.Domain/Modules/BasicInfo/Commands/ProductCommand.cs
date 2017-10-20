@@ -79,7 +79,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Commands
                 SafetyStock = command.SafetyStock,
                 SKU = command.SKU,
                 BinCode = command.BinCode,
-                Uint = command.Uint
+                Unit = command.Uint
             };
 
             this.Products.Add(product);
@@ -114,7 +114,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Commands
             product.Stock.SafetyStock = command.SafetyStock;
             product.Stock.SKU = command.SKU;
             product.Stock.BinCode = command.BinCode;
-            product.Stock.Uint = command.Uint;
+            product.Stock.Unit = command.Uint;
 
             this.Products.Update(product);
             this.Products.Commit();

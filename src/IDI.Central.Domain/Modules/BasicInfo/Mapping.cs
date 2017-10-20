@@ -14,7 +14,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo
             modelBuilder.Entity<Product>().HasMany(e => e.Stocks).WithOne(e => e.Product).HasForeignKey(e => e.ProductId);
 
             modelBuilder.Entity<Product>().HasOne(e => e.Stock).WithOne().HasForeignKey<ProductStock>(e => e.ProductId).OnDelete(DeleteBehavior.Cascade);
-            //modelBuilder.Entity<ProductStock>().HasOne(e => e.Store).WithOne().HasForeignKey<ProductStock>(e => e.StoreId).IsRequired(false);
+            modelBuilder.Entity<Product>().HasOne(e => e.Article).WithOne().HasForeignKey<ProductArticle>(e => e.ProductId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

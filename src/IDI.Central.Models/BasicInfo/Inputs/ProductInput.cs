@@ -12,7 +12,7 @@ namespace IDI.Central.Models.BasicInfo
         public string Name { get; set; } = "";
 
         [JsonProperty("skid")]
-        public Guid StockId { get; set; }
+        public Guid StoreId { get; set; }
 
         [JsonProperty("sku")]
         public decimal SKU { get; set; } = 1M;

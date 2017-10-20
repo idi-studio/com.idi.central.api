@@ -20,13 +20,18 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Queries
 
         public override Result<Set<ProductModel>> Execute(QueryProductSetCondition condition)
         {
-            var products = this.Products.Get();
+            var products = this.Products.Include(e=>e.Stock).Get();
 
             var collection = products.OrderBy(product => product.Name).Select(product => new ProductModel
             {
                 Id = product.Id,
                 Name = product.Name,
                 QRCode = product.QRCode,
+                SafetyStock = product.Stock.SafetyStock,
+                SKU = product.Stock.SKU,
+                StoreId = product.Stock.StoreId,
+                Unit = product.Stock.Unit,
+                BinCode = product.Stock.BinCode,
                 Description = product.Tags.To<List<TagModel>>().AsString(),
                 Tags = product.Tags.To<List<TagModel>>(),
                 Enabled = product.Enabled,

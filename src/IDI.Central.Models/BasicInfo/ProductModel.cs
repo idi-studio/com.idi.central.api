@@ -19,6 +19,21 @@ namespace IDI.Central.Models.BasicInfo
         [JsonProperty("description")]
         public string Description { get; set; }
 
+        [JsonProperty("skid")]
+        public Guid StoreId { get; set; }
+
+        [JsonProperty("bin")]
+        public string BinCode { get; set; }
+
+        [JsonProperty("sku")]
+        public decimal SKU { get; set; }
+
+        [JsonProperty("ss")]
+        public decimal SafetyStock { get; set; }
+
+        [JsonProperty("unit")]
+        public string Unit { get; set; }
+
         [JsonProperty("tags")]
         public List<TagModel> Tags { get; set; } = new List<TagModel>();
 
