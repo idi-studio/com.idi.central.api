@@ -33,6 +33,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             transaction.Add(command.Seed.Roles.Staffs);
             transaction.Add(command.Seed.Roles.Customers);
             transaction.Add(command.Seed.Clients.Central);
+            transaction.Add(command.Seed.Clients.Wechat);
             transaction.Add(command.Seed.Store);
             transaction.AddRange(command.Seed.Customers.Customers);
             transaction.AddRange(command.Seed.Products.iPhones);

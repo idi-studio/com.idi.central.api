@@ -8,7 +8,7 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
     public class Client : AggregateRoot
     {
         [Required]
-        [StringLength(20)]
+        [StringLength(50)]
         public string ClientId { get; set; }
 
         [Required]

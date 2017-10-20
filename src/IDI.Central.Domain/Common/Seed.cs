@@ -78,11 +78,14 @@ namespace IDI.Central.Domain.Common
     {
         public Client Central { get; private set; }
 
+        public Client Wechat { get; private set; }
+
         public ClientCollection()
         {
             string salt = Cryptography.Salt();
 
             this.Central = new Client { ClientId = Configuration.Clients.Central, SecretKey = Cryptography.Encrypt("6ED5C478-1F3A-4C82-B668-99917D67784E", salt), Salt = salt };
+            this.Wechat = new Client { ClientId = Configuration.Clients.Wechat, SecretKey = Cryptography.Encrypt("BA65E9B3-93CF-407D-B2EF-5C291B9D3230", salt), Salt = salt };
         }
     }
 

@@ -30,6 +30,7 @@
         public class Clients
         {
             public const string Central = "com.idi.central.web";
+            public const string Wechat = "com.idi.central.wechat";
         }
 
         public class Inventory
