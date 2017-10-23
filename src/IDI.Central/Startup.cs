@@ -58,15 +58,15 @@ namespace IDI.Central
             //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             //loggerFactory.AddDebug();
 
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //    app.UseBrowserLink();
-            //}
-            //else
-            //{
-            //    app.UseExceptionHandler("/Home/Error");
-            //}
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
 
             //app.UseCookieAuthentication(AuthOptions.CookieOptions());
 
@@ -81,12 +81,12 @@ namespace IDI.Central
             #endregion
 
             app.UseStaticFiles();
-
-            #region Allow CORS Domain
+            //app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+            });
             app.UseCors(Constants.Policy.AllowCORSDomain);
-            #endregion
-
-            app.UseMvc();
             app.UseLanguagePackage<CentralPackage>();
             app.UseAuthorization<ApplicationAuthorization>();
         }
