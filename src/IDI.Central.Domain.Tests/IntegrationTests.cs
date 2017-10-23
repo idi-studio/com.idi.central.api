@@ -18,6 +18,11 @@ namespace IDI.Central.Domain.Tests
             Runtime.Initialize();
             Runtime.AddDbContext<CentralContext>(options => options.UseSqlServer(connectionString, o => o.UseRowNumberForPaging()));
             Runtime.UseAuthorization<FakeAuthorization>();
+
+            using (var context = Runtime.GetService<CentralContext>())
+            {
+                context.Database.EnsureDeleted();
+            }
         }
 
         protected void TestData(Action<CentralContext> action)

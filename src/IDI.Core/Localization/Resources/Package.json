@@ -157,6 +157,42 @@
 },
 {
     "language": "chs",
+    "name": "querier-condition-cannot-be-null",
+    "value": "查询条件不能为空!",
+    "prefix": "querier"
+},
+{
+    "language": "en",
+    "name": "querier-condition-cannot-be-null",
+    "value": "Querier condition cannot be null.",
+    "prefix": "querier"
+},
+{
+    "language": "chs",
+    "name": "querier-with-invalid-condition",
+    "value": "查询条件无效!",
+    "prefix": "querier"
+},
+{
+    "language": "en",
+    "name": "querier-with-invalid-condition",
+    "value": "Invalid condition(s).",
+    "prefix": "querier"
+},
+{
+    "language": "chs",
+    "name": "querier-error",
+    "value": "查询器执行出错!",
+    "prefix": "querier"
+},
+{
+    "language": "en",
+    "name": "querier-error",
+    "value": "Querier executed with error.",
+    "prefix": "querier"
+},
+{
+    "language": "chs",
     "name": "SimplifiedChinese",
     "value": "简体中文",
     "prefix": "Language"

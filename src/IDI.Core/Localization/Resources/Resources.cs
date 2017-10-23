@@ -14,6 +14,7 @@ namespace IDI.Core.Localization.Packages
         {
 		    			public const string COMMAND = "command";
 						public const string DISPLAY_NAME = "display-name";
+						public const string QUERIER = "querier";
 						public const string VERIFICATION = "verification";
 			        }
 
@@ -39,6 +40,13 @@ namespace IDI.Core.Localization.Packages
 								public const string CommandWithInvalidParameter = "command-with-invalid-parameter";
 								public const string CommandInvalid = "command-invalid";
 								public const string CommandError = "command-error";
+								}
+
+						public class Querier {
+								public const string QuerierConditionCannotBeNull = "querier-condition-cannot-be-null";
+								public const string QuerierWithInvalidCondition = "querier-with-invalid-condition";
+								public const string QuerierError = "querier-error";
+								public const string QuerierCannotFound = "querier-cannot-found";
 								}
 
 					}

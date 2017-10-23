@@ -1,9 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using IDI.Central.Domain.Modules.Administration.Commands;
+using IDI.Core.Common;
+using IDI.Core.Infrastructure.Messaging;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IDI.Central.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ICommandBus bus;
+        private readonly IQuerier querier;
+
+        public HomeController(ICommandBus bus, IQuerier querier)
+        {
+            this.bus = bus;
+            this.querier = querier;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -11,12 +23,12 @@ namespace IDI.Central.Controllers
 
         public IActionResult API()
         {
-            ViewData["Message"] = "Your api list page.";
+            var result = bus.Send(new DatabaseInitalCommand());
 
-            var initialized = true;
-
-            if (initialized)
+            if (result.Status == ResultStatus.Success)
                 return Redirect("~/swagger/ui/index.html");
+
+            ViewData["Message"] = result.Message;
 
             return View();
         }
