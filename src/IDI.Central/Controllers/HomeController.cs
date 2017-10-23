@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace IDI.Central.Controllers
 {
@@ -10,6 +6,18 @@ namespace IDI.Central.Controllers
     {
         public IActionResult Index()
         {
+            return View();
+        }
+
+        public IActionResult API()
+        {
+            ViewData["Message"] = "Your api list page.";
+
+            var initialized = true;
+
+            if (initialized)
+                return Redirect("~/swagger/ui/index.html");
+
             return View();
         }
 
