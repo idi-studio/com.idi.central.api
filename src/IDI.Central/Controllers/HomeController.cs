@@ -33,6 +33,10 @@ namespace IDI.Central.Controllers
             return View();
         }
 
+        public IActionResult GitHub() {
+            return Redirect("https://github.com/idi-studio");
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
