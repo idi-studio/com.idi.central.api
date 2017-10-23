@@ -1,4 +1,6 @@
-﻿using IDI.Central.Domain.Modules.Administration.Commands;
+﻿using System;
+using System.Net;
+using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +35,16 @@ namespace IDI.Central.Controllers
             return View();
         }
 
-        public IActionResult GitHub() {
+        public IActionResult Central()
+        {
+            if (Request.Host.Host.Equals("localhost", StringComparison.CurrentCultureIgnoreCase))
+                return Redirect("http://localhost:4200/central");
+
+            return Redirect("http://www.idi-studio.com.cn/central");
+        }
+
+        public IActionResult GitHub()
+        {
             return Redirect("https://github.com/idi-studio");
         }
 
