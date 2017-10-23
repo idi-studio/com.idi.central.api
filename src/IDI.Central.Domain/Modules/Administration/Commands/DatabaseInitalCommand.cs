@@ -1,7 +1,5 @@
-﻿using IDI.Central.Common;
-using IDI.Central.Domain.Common;
+﻿using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Localization;
-using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Repositories;
@@ -20,11 +18,16 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 
     public class DatabaseInitalCommandHandler : TransactionCommandHandler<DatabaseInitalCommand>
     {
+        private bool created = false;
+
+        protected override void Executing(DatabaseInitalCommand command, ITransaction transaction)
+        {
+            created = transaction.EnsureCreated();
+        }
+
         protected override Result Execute(DatabaseInitalCommand command, ITransaction transaction)
         {
-            bool initialized = transaction.Source<Role>().Exist(e => e.Name == Configuration.Roles.Administrators);
-
-            if (initialized)
+            if (!created)
                 return Result.Success(message: Localization.Get(Resources.Key.Command.SystemInitialized));
 
             transaction.AddRange(command.Seed.Authorization.Permissions);

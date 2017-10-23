@@ -38,7 +38,7 @@ namespace IDI.Core.Localization.Packages
 								public const string UnknownCommand = "unknown-command";
 								public const string CommandWithInvalidParameter = "command-with-invalid-parameter";
 								public const string CommandInvalid = "command-invalid";
-								public const string CommandExecutedWithError = "command-executed-with-error";
+								public const string CommandError = "command-error";
 								}
 
 					}

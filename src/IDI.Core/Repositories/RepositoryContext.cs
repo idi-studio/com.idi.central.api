@@ -92,6 +92,12 @@ namespace IDI.Core.Repositories
             context.Remove(arg);
             this.Committed = false;
         }
+
+        public bool EnsureCreated()
+        {
+            return context.Database.EnsureCreated();
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)

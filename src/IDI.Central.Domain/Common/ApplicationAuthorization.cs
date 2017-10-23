@@ -7,7 +7,6 @@ using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure;
-using Newtonsoft.Json;
 
 namespace IDI.Central.Domain
 {

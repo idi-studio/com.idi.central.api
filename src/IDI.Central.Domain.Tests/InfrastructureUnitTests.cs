@@ -13,8 +13,6 @@ namespace IDI.Central.Domain.Tests
         [TestMethod]
         public void Should_Initialize_Database_Success()
         {
-            Runtime.UseAuthorization<ApplicationAuthorization>();
-
             var hanlder = new DatabaseInitalCommandHandler();
             hanlder.Localization = new Globalization();
             hanlder.Transaction = Runtime.GetService<ITransaction>();

@@ -16,7 +16,7 @@
   <item prefix="command" name="unknown-command" en="Unknown command." chs="未知的指令!" />
   <item prefix="command" name="command-with-invalid-parameter" en="Invalid command parameter(s)." chs="指令参数无效!" />
   <item prefix="command" name="command-invalid" en="Invalid command." chs="无效的指令!" />
-  <item prefix="command" name="command-executed-with-error" en="Command executed with error." chs="指令执行出错!" />
+  <item prefix="command" name="command-error" en="Command executed with error." chs="指令执行出错!" />
 
   <item prefix="Language" cs="false" name="SimplifiedChinese" en="Chinese(Simplified)" chs="简体中文" />
   <item prefix="Language" cs="false" name="TraditionalChinese" en="Chinese(Traditional)" chs="繁体中文" />

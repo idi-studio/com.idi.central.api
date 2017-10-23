@@ -24,5 +24,7 @@ namespace IDI.Core.Repositories
         void Remove<TAggregateRoot>(TAggregateRoot arg) where TAggregateRoot : AggregateRoot;
 
         IDbContextTransaction BeginTransaction();
+
+        bool EnsureCreated();
     }
 }

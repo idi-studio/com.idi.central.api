@@ -44,8 +44,8 @@ namespace IDI.Core.Infrastructure.Messaging
             }
             catch (Exception exception)
             {
-                logger.Error(localization.Get(Resources.Key.Command.CommandExecutedWithError), exception);
-                return Result.Error(localization.Get(Resources.Key.Command.CommandExecutedWithError));
+                logger.Error(localization.Get(Resources.Key.Command.CommandError), exception);
+                return Result.Error(localization.Get(Resources.Key.Command.CommandError));
             }
 
         }

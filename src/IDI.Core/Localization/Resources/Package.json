@@ -145,13 +145,13 @@
 },
 {
     "language": "chs",
-    "name": "command-executed-with-error",
+    "name": "command-error",
     "value": "指令执行出错!",
     "prefix": "command"
 },
 {
     "language": "en",
-    "name": "command-executed-with-error",
+    "name": "command-error",
     "value": "Command executed with error.",
     "prefix": "command"
 },

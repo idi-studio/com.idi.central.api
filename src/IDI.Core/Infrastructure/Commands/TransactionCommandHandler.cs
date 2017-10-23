@@ -23,6 +23,16 @@ namespace IDI.Core.Infrastructure.Commands
         {
             Result result;
 
+            try
+            {
+                Executing(command, this.Transaction);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message, ex);
+                return Result.Error(message: Localization.Get(Resources.Key.Command.CommandError));
+            }
+
             using (var transaction = Transaction.Begin())
             {
                 try
@@ -32,13 +42,15 @@ namespace IDI.Core.Infrastructure.Commands
                 catch (Exception ex)
                 {
                     transaction.Rollback();
-                    result = Result.Error(message: Localization.Get(Resources.Key.Command.CommandExecutedWithError));
+                    result = Result.Error(message: Localization.Get(Resources.Key.Command.CommandError));
                     Logger.Error(ex.Message, ex);
                 }
             }
 
             return result;
         }
+
+        protected virtual void Executing(T command, ITransaction transaction) { }
 
         protected abstract Result Execute(T command, ITransaction transaction);
     }

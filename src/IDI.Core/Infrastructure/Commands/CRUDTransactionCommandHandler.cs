@@ -52,7 +52,7 @@ namespace IDI.Core.Infrastructure.Commands
                 catch (Exception ex)
                 {
                     transaction.Rollback();
-                    result = Result.Error(message: Localization.Get(Resources.Key.Command.CommandExecutedWithError));
+                    result = Result.Error(message: Localization.Get(Resources.Key.Command.CommandError));
                     Logger.Error(ex.Message, ex);
                 }
             }

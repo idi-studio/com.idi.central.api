@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using IDI.Core.Authentication;
 using IDI.Core.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,12 +17,7 @@ namespace IDI.Central.Domain.Tests
         {
             Runtime.Initialize();
             Runtime.AddDbContext<CentralContext>(options => options.UseSqlServer(connectionString, o => o.UseRowNumberForPaging()));
-
-            using (var context = Runtime.GetService<CentralContext>())
-            {
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
-            }
+            Runtime.UseAuthorization<FakeAuthorization>();
         }
 
         protected void TestData(Action<CentralContext> action)
@@ -29,6 +26,16 @@ namespace IDI.Central.Domain.Tests
             {
                 action(context);
             }
+        }
+    }
+
+    public class FakeAuthorization : Authorization
+    {
+        public FakeAuthorization() : base("IDI.Central") { }
+
+        protected override Dictionary<string, List<IPermission>> GroupByRole(List<IPermission> permissions)
+        {
+            return new Dictionary<string, List<IPermission>>();
         }
     }
 }

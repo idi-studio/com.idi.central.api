@@ -53,6 +53,11 @@ namespace IDI.Core.Repositories
             return this;
         }
 
+        public bool EnsureCreated()
+        {
+            return context.EnsureCreated();
+        }
+
         public void Dispose()
         {
             this.context.Dispose();
