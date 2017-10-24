@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IDI.Central.Domain.Tests
 {
     [TestClass]
-    public abstract class IntegrationTests
+    public abstract class IntegrationUnitTest
     {
         private const string connectionString = @"Server=localhost; Database=com.idi.central;User Id = sa; Password = p@55w0rd;";
 

@@ -51,13 +51,29 @@ namespace IDI.Central.Domain.Modules.BasicInfo
 
         public static decimal Available(this Product product)
         {
-            if (product.Stocks == null || (product.Stocks != null && product.Stocks.Count > 0))
+            if (product.Stocks == null || (product.Stocks != null && product.Stocks.Count == 0))
                 return 0.00M;
 
             return product.Stocks.Sum(e => e.Available);
         }
 
-        public static void StockIn(this Store store, Product product, decimal qty, string bin, out List<StockTransaction> trans)
+        public static decimal Reserve(this Product product)
+        {
+            if (product.Stocks == null || (product.Stocks != null && product.Stocks.Count == 0))
+                return 0.00M;
+
+            return product.Stocks.Sum(e => e.Reserve);
+        }
+
+        public static decimal Quantity(this Product product)
+        {
+            if (product.Stocks == null || (product.Stocks != null && product.Stocks.Count == 0))
+                return 0.00M;
+
+            return product.Stocks.Sum(e => e.Quantity);
+        }
+
+        public static void In(this Store store, Product product, decimal qty, string bin, out List<StockTransaction> trans)
         {
             trans = new List<StockTransaction>();
 
@@ -75,7 +91,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo
             trans.Add(new StockTransaction { BinCode = bin, ProductId = product.Id, Quantity = qty, StoreId = store.Id, Category = StockTransactionType.StockIn });
         }
 
-        public static bool StockRelease(this Store store, Product product, decimal qty, string bin, out decimal remain, out List<StockTransaction> trans)
+        public static bool Release(this Store store, Product product, decimal qty, string bin, out decimal remain, out List<StockTransaction> trans)
         {
             remain = qty;
             trans = new List<StockTransaction>();
@@ -100,7 +116,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo
             return remain == 0;
         }
 
-        public static bool StockOut(this Store store, Product product, decimal qty, string bin, out decimal remain, out List<StockTransaction> trans)
+        public static bool Out(this Store store, Product product, decimal qty, string bin, out decimal remain, out List<StockTransaction> trans)
         {
             remain = qty;
             trans = new List<StockTransaction>();
@@ -124,14 +140,30 @@ namespace IDI.Central.Domain.Modules.BasicInfo
             return remain == 0;
         }
 
-        public static bool StockReserve(this Store store, Product product, decimal qty, string bin, out decimal remain, out List<StockTransaction> trans)
+        public static bool Reserve(this Store store, Product product, decimal qty, string bin, out decimal remain, out List<StockTransaction> trans)
         {
             remain = qty;
             trans = new List<StockTransaction>();
 
-            foreach (var stock in store.Stocks)
+            return store.Stocks.Reserve(store.Id, product.Id, qty, bin, out remain, out trans);
+        }
+
+        public static bool Reserve(this Product product, decimal qty, string bin, out decimal remain, out List<StockTransaction> trans)
+        {
+            remain = qty;
+            trans = new List<StockTransaction>();
+
+            return product.Stocks.Reserve(product.Stock.StoreId, product.Id, qty, bin, out remain, out trans);
+        }
+
+        private static bool Reserve(this List<Stock> stocks, Guid storeId, Guid productId, decimal qty, string bin, out decimal remain, out List<StockTransaction> trans)
+        {
+            remain = qty;
+            trans = new List<StockTransaction>();
+
+            foreach (var stock in stocks)
             {
-                if (stock.ProductId != product.Id)
+                if (stock.ProductId != productId)
                     continue;
 
                 if (!bin.IsNull() && stock.BinCode != bin)
@@ -140,9 +172,10 @@ namespace IDI.Central.Domain.Modules.BasicInfo
                 var amount = stock.Available >= qty ? qty : stock.Available;
 
                 stock.Reserve += amount;
+                stock.Available -= amount;
                 remain -= amount;
 
-                trans.Add(new StockTransaction { BinCode = bin, ProductId = product.Id, Quantity = amount, StoreId = store.Id, Category = StockTransactionType.Reserve });
+                trans.Add(new StockTransaction { BinCode = bin, ProductId = productId, Quantity = amount, StoreId = storeId, Category = StockTransactionType.Reserve });
             }
 
             return remain == 0;

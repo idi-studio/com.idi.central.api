@@ -18,24 +18,36 @@ namespace IDI.Core.Infrastructure.Commands
 
         public Result Execute(T command)
         {
-            if (command.Mode == CommandMode.Create)
+            Result result;
+
+            try
             {
-                return Create(command);
+                switch (command.Mode)
+                {
+                    case CommandMode.Create:
+                        result = Create(command);
+                        break;
+                    case CommandMode.Update:
+                        result = Update(command);
+                        break;
+                    case CommandMode.Delete:
+                        result = Delete(command);
+                        break;
+                    case CommandMode.Upload:
+                        result = Upload(command);
+                        break;
+                    default:
+                        result = Result.Fail(message: Localization.Get(Resources.Key.Command.CommandNonsupport));
+                        break;
+                }
             }
-            else if (command.Mode == CommandMode.Update)
+            catch (Exception ex)
             {
-                return Update(command);
-            }
-            else if (command.Mode == CommandMode.Delete)
-            {
-                return Delete(command);
-            }
-            else if (command.Mode == CommandMode.Upload)
-            {
-                return Upload(command);
+                Logger.Error(ex.Message, ex);
+                result = Result.Error(message: Localization.Get(Resources.Key.Command.CommandError));
             }
 
-            return Result.Fail(message: Localization.Get(Resources.Key.Command.CommandNonsupport));
+            return result;
         }
 
         protected abstract Result Create(T command);

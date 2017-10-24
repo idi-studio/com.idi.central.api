@@ -20,6 +20,15 @@ namespace IDI.Central.Models.Sales
         [JsonProperty("desc")]
         public string Description { get; set; }
 
+        [JsonProperty("qty")]
+        public decimal Quantity { get; set; }
+
+        [JsonProperty("avl")]
+        public decimal Available { get; set; }
+
+        [JsonProperty("rev")]
+        public decimal Reserve { get; set; }
+
         [JsonProperty("tags")]
         public List<TagModel> Tags { get; set; }
 

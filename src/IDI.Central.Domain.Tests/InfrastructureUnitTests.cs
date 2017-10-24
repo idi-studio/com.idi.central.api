@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IDI.Central.Domain.Tests
 {
     [TestClass]
-    public class InfrastructureUnitTests : IntegrationTests
+    public class InfrastructureUnitTests : IntegrationUnitTest
     {
         [TestMethod]
         public void Should_Initialize_Database_Success()

@@ -34,7 +34,7 @@ namespace IDI.Central.Domain.Modules.Sales.Queries
 
             var grade = customer == null ? 0 : customer.Grade;
 
-            var products = this.Products.Include(e => e.Prices).Get(e => e.OnShelf && e.Enabled);
+            var products = this.Products.Include(e => e.Prices).Include(e=>e.Stocks).Get(e => e.OnShelf && e.Enabled);
 
             var collection = products.OrderBy(product => product.Name).Select(product => new SellModel
             {
@@ -42,6 +42,9 @@ namespace IDI.Central.Domain.Modules.Sales.Queries
                 Name = product.Name,
                 QRCode = product.QRCode,
                 Description = product.Tags.To<List<TagModel>>().AsString(),
+                Quantity = product.Quantity(),
+                Reserve = product.Reserve(),
+                Available = product.Available(),
                 Tags = product.Tags.To<List<TagModel>>(),
                 Price = product.FavorablePrice(grade)
             }).Where(e => e.Price != null).ToList();

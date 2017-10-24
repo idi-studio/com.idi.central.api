@@ -21,6 +21,8 @@ namespace IDI.Core.Repositories
 
         void Update<TAggregateRoot>(TAggregateRoot arg) where TAggregateRoot : AggregateRoot;
 
+        void UpdateRange<TAggregateRoot>(List<TAggregateRoot> args) where TAggregateRoot : AggregateRoot;
+
         void Remove<TAggregateRoot>(TAggregateRoot arg) where TAggregateRoot : AggregateRoot;
 
         IDbContextTransaction BeginTransaction();

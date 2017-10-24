@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using IDI.Central.Common.Enums;
 using IDI.Central.Domain.Localization;
+using IDI.Central.Domain.Modules.BasicInfo;
+using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
+using IDI.Central.Domain.Modules.Inventory.AggregateRoots;
 using IDI.Central.Domain.Modules.Sales.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.Commands;
-using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Verification.Attributes;
 using IDI.Core.Repositories;
 
@@ -25,17 +28,11 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
         public Guid? CustomerId { get; set; }
     }
 
-    public class OrderCommandHandler : CRUDCommandHandler<OrderCommand>
+    public class OrderCommandHandler : CRUDTransactionCommandHandler<OrderCommand>
     {
-        [Injection]
-        public IRepository<Order> Orders { get; set; }
-
-        [Injection]
-        public IRepository<Customer> Customers { get; set; }
-
-        protected override Result Create(OrderCommand command)
+        protected override Result Create(OrderCommand command, ITransaction transaction)
         {
-            if (command.CustomerId.HasValue && !this.Customers.Exist(e => e.Id == command.CustomerId))
+            if (command.CustomerId.HasValue && !transaction.Source<Customer>().Exist(e => e.Id == command.CustomerId))
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidCustomer));
 
             DateTime timestamp = DateTime.Now;
@@ -50,50 +47,50 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
                 SN = GenerateSerialNumber(command.Category, timestamp)
             };
 
-            this.Orders.Add(order);
-            this.Orders.Commit();
+            transaction.Add(order);
+            transaction.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.CreateSuccess)).Attach("oid", order.Id);
         }
 
-        protected override Result Update(OrderCommand command)
+        protected override Result Update(OrderCommand command, ITransaction transaction)
         {
-            if (command.CustomerId.HasValue && !this.Customers.Exist(e => e.Id == command.CustomerId))
+            if (command.CustomerId.HasValue && !transaction.Source<Customer>().Exist(e => e.Id == command.CustomerId))
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidCustomer));
 
-            var order = this.Orders.Include(e => e.Items).Include(e => e.Customer).Find(command.Id);
+            var order = transaction.Source<Order>().Include(e => e.Customer).Find(command.Id);
 
             if (order == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
 
-            return Handle(order, command);
+            return Handle(order, command, transaction);
         }
 
-        protected override Result Delete(OrderCommand command)
+        protected override Result Delete(OrderCommand command, ITransaction transaction)
         {
-            var order = this.Orders.Find(command.Id);
+            var order = transaction.Source<Order>().Find(command.Id);
 
             if (order == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
 
-            this.Orders.Remove(order);
-            this.Orders.Commit();
+            transaction.Remove(order);
+            transaction.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
         }
 
-        private Result Handle(Order order, OrderCommand command)
+        private Result Handle(Order order, OrderCommand command, ITransaction transaction)
         {
             var result = Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
 
-            Save(order, command, ref result);
+            Save(order, command, transaction, ref result);
 
-            Confirm(order, command, ref result);
+            Confirm(order, command, transaction, ref result);
 
             return result;
         }
 
-        private void Save(Order order, OrderCommand command, ref Result result)
+        private void Save(Order order, OrderCommand command, ITransaction transaction, ref Result result)
         {
             if (!(order.Status == OrderStatus.Pending && command.Status == OrderStatus.Pending))
                 return;
@@ -103,16 +100,18 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
 
             order.Remark = command.Remark;
 
-            this.Orders.Update(order);
-            this.Orders.Commit();
+            transaction.Update(order);
+            transaction.Commit();
 
             result = Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
         }
 
-        private void Confirm(Order order, OrderCommand command, ref Result result)
+        private void Confirm(Order order, OrderCommand command, ITransaction transaction, ref Result result)
         {
             if (!(order.Status == OrderStatus.Pending && command.Status == OrderStatus.Confirmed))
                 return;
+
+            order = transaction.Source<Order>().Include(e => e.Items).Find(command.Id);
 
             if (!(order.HasItems() && order.HasCustomer()))
             {
@@ -120,10 +119,30 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
                 return;
             }
 
+            foreach (var item in order.Items)
+            {
+                var product = transaction.Source<Product>().Include(e => e.Stocks).Include(e => e.Stock).Find(item.ProductId);
+
+                var remain = 0M;
+                var trans = new List<StockTransaction>();
+
+                if (product.Reserve(item.Quantity, product.Stock.BinCode, out remain, out trans))
+                {
+                    transaction.UpdateRange(product.Stocks);
+                    transaction.AddRange(trans);
+                }
+                else
+                {
+                    result = Result.Fail(message: Localization.Get(Resources.Key.Command.ProductOutOfStock).ToFormat(product.Name));
+                    transaction.Rollback();
+                    return;
+                }
+            }
+
             order.Status = OrderStatus.Confirmed;
 
-            this.Orders.Update(order);
-            this.Orders.Commit();
+            transaction.Update(order);
+            transaction.Commit();
 
             result = Result.Success(message: Localization.Get(Resources.Key.Command.OrderConfirmed));
         }

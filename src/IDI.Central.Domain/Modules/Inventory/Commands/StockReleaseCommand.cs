@@ -37,7 +37,7 @@ namespace IDI.Central.Domain.Modules.Inventory.Commands
 
                 var trans = new List<StockTransaction>();
 
-                store.StockIn(product, item.Quantity, item.BinCode, out trans);
+                store.In(product, item.Quantity, item.BinCode, out trans);
 
                 storeTrans.AddRange(trans);
             }

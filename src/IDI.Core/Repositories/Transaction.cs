@@ -80,6 +80,11 @@ namespace IDI.Core.Repositories
             this.context.Update(arg);
         }
 
+        public void UpdateRange<TAggregateRoot>(List<TAggregateRoot> args) where TAggregateRoot : AggregateRoot
+        {
+            this.context.UpdateRange(args);
+        }
+
         public void Remove<TAggregateRoot>(TAggregateRoot arg) where TAggregateRoot : AggregateRoot
         {
             context.Remove(arg);

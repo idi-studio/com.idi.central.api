@@ -318,7 +318,7 @@ namespace IDI.Central.Domain.Common
             {
                 var transactions = new List<StockTransaction>();
                 e.Stock = new ProductStock { ProductId = e.Id, StoreId = this.Store.Id };
-                this.Store.StockIn(e, 100, Configuration.Inventory.DefaultBinCode, out transactions);
+                this.Store.In(e, 100, Configuration.Inventory.DefaultBinCode, out transactions);
                 this.StockTransactions.AddRange(transactions);
             });
 
@@ -326,7 +326,7 @@ namespace IDI.Central.Domain.Common
             {
                 var transactions = new List<StockTransaction>();
                 e.Stock = new ProductStock { ProductId = e.Id, StoreId = this.Store.Id };
-                this.Store.StockIn(e, 50, Configuration.Inventory.DefaultBinCode, out transactions);
+                this.Store.In(e, 50, Configuration.Inventory.DefaultBinCode, out transactions);
                 this.StockTransactions.AddRange(transactions);
             });
 

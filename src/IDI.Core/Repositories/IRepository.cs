@@ -13,6 +13,8 @@ namespace IDI.Core.Repositories
 
         void Update(TAggregateRoot arg);
 
+        void UpdateRange(List<TAggregateRoot> args);
+
         int Commit();
     }
 }

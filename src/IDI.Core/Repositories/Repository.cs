@@ -63,6 +63,10 @@ namespace IDI.Core.Repositories
         {
             context.Update(arg);
         }
+        public void UpdateRange(List<TAggregateRoot> args)
+        {
+            context.UpdateRange(args);
+        }
         public int Commit()
         {
             return context.Commit();

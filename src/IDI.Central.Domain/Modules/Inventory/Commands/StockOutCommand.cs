@@ -39,8 +39,8 @@ namespace IDI.Central.Domain.Modules.Inventory.Commands
 
                 var trans = new List<StockTransaction>();
 
-                if (!store.StockOut(product, item.Quantity, item.BinCode, out remain, out trans))
-                    return Result.Fail(message: Localization.Get(Resources.Key.Command.ProductOutOfStock.ToFormat(product.Name)));
+                if (!store.Out(product, item.Quantity, item.BinCode, out remain, out trans))
+                    return Result.Fail(message: Localization.Get(Resources.Key.Command.ProductOutOfStock).ToFormat(product.Name));
 
                 result.AddRange(trans);
             }
