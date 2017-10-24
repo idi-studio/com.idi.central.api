@@ -43,7 +43,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
                 Category = command.Category,
                 Date = timestamp,
                 Remark = command.Remark,
-                Status = OrderStatus.Pending,
+                Status = OrderStatus.Created,
                 SN = GenerateSerialNumber(command.Category, timestamp)
             };
 
@@ -81,43 +81,44 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
 
         private Result Handle(Order order, OrderCommand command, ITransaction transaction)
         {
-            var result = Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
-
-            Save(order, command, transaction, ref result);
-
-            Confirm(order, command, transaction, ref result);
-
-            return result;
+            switch (order.Status)
+            {
+                case OrderStatus.Created:
+                    return Save(order, command, transaction);
+                case OrderStatus.Pending:
+                    return Confirm(order, command, transaction);
+                default:
+                    return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
+            };
         }
 
-        private void Save(Order order, OrderCommand command, ITransaction transaction, ref Result result)
+        private Result Save(Order order, OrderCommand command, ITransaction transaction)
         {
-            if (!(order.Status == OrderStatus.Pending && command.Status == OrderStatus.Pending))
-                return;
+            if (order.Status != OrderStatus.Created)
+                return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
 
-            if (command.CustomerId.HasValue)
-                order.CustomerId = command.CustomerId;
+            if (!command.CustomerId.HasValue)
+                return Result.Fail(Localization.Get(Resources.Key.Command.IncompletedOrder));
 
+            order.Status = OrderStatus.Pending;
+            order.CustomerId = command.CustomerId;
             order.Remark = command.Remark;
 
             transaction.Update(order);
             transaction.Commit();
 
-            result = Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
+            return Result.Success(message: Localization.Get(Resources.Key.Command.UpdateSuccess));
         }
 
-        private void Confirm(Order order, OrderCommand command, ITransaction transaction, ref Result result)
+        private Result Confirm(Order order, OrderCommand command, ITransaction transaction)
         {
-            if (!(order.Status == OrderStatus.Pending && command.Status == OrderStatus.Confirmed))
-                return;
+            if (order.Status != OrderStatus.Pending)
+                return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
 
-            order = transaction.Source<Order>().Include(e => e.Items).Find(command.Id);
+            order = transaction.Source<Order>().Include(e => e.Customer).Include(e => e.Items).Find(command.Id);
 
             if (!(order.HasItems() && order.HasCustomer()))
-            {
-                result = Result.Fail(message: Localization.Get(Resources.Key.Command.IncompletedOrder));
-                return;
-            }
+                return Result.Fail(message: Localization.Get(Resources.Key.Command.IncompletedOrder));
 
             foreach (var item in order.Items)
             {
@@ -133,9 +134,8 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
                 }
                 else
                 {
-                    result = Result.Fail(message: Localization.Get(Resources.Key.Command.ProductOutOfStock).ToFormat(product.Name));
                     transaction.Rollback();
-                    return;
+                    return Result.Fail(message: Localization.Get(Resources.Key.Command.ProductOutOfStock).ToFormat(product.Name));
                 }
             }
 
@@ -144,7 +144,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
             transaction.Update(order);
             transaction.Commit();
 
-            result = Result.Success(message: Localization.Get(Resources.Key.Command.OrderConfirmed));
+            return Result.Success(message: Localization.Get(Resources.Key.Command.OrderConfirmed));
         }
 
         private string GenerateSerialNumber(OrderCategory category, DateTime timestamp)

@@ -3,32 +3,36 @@
     public enum OrderStatus
     {
         /// <summary>
-        /// 无效
+        /// 取消
         /// </summary>
-        Invalid = 1,
+        Cancelled = 1,
+        /// <summary>
+        /// 新建
+        /// </summary>
+        Created = 2,
         /// <summary>
         /// 待确认
         /// </summary>
-        Pending = 2,
+        Pending = 4,
         /// <summary>
-        /// 已确认
+        /// 订单确认
         /// </summary>
-        Confirmed = 4,
+        Confirmed = 8,
         /// <summary>
-        /// 已付款
+        /// 付款
         /// </summary>
-        Paid = 8,
+        Paid = 16,
         /// <summary>
-        /// 已发货
+        /// 发货
         /// </summary>
-        Shipped = 16,
+        Shipped = 32,
         /// <summary>
-        /// 已收货
+        /// 收货
         /// </summary>
-        Received = 32,
+        Received = 64,
         /// <summary>
         /// 交易成功
         /// </summary>
-        Traded = 64
+        Traded = 128
     }
 }

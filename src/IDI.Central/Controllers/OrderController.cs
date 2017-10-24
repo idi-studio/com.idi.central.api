@@ -53,7 +53,7 @@ namespace IDI.Central.Controllers
 
         [HttpPut("{id}")]
         [Permission("order", PermissionType.Modify)]
-        public Result Put(Guid id, [FromBody]OrderInput input)
+        public Result Save(Guid id, [FromBody]OrderInput input)
         {
             var command = new OrderCommand
             {
