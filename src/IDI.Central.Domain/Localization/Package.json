@@ -193,6 +193,18 @@
 },
 {
     "language": "chs",
+    "name": "password-mismatch",
+    "value": "两次密码不一致!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "password-mismatch",
+    "value": "Passwords does not match.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "invalid-username-or-password",
     "value": "无效的用户名或密码!",
     "prefix": "command"
@@ -685,18 +697,6 @@
 },
 {
     "language": "chs",
-    "name": "product-out-of-stock",
-    "value": "'{0}'库存不足!",
-    "prefix": "command"
-},
-{
-    "language": "en",
-    "name": "product-out-of-stock",
-    "value": "'{0}' out of stock.",
-    "prefix": "command"
-},
-{
-    "language": "chs",
     "name": "operation-nonsupport",
     "value": "不支持该项操作!",
     "prefix": "command"
@@ -745,18 +745,6 @@
 },
 {
     "language": "chs",
-    "name": "password-mismatch",
-    "value": "两次密码不一致!",
-    "prefix": "command"
-},
-{
-    "language": "en",
-    "name": "password-mismatch",
-    "value": "Passwords does not match.",
-    "prefix": "command"
-},
-{
-    "language": "chs",
     "name": "product-code-duplicated",
     "value": "产品编码重复!",
     "prefix": "command"
@@ -777,6 +765,30 @@
     "language": "en",
     "name": "product-not-existing",
     "value": "Cannot found this product.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "product-out-of-stock",
+    "value": "'{0}'库存不足!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "product-out-of-stock",
+    "value": "'{0}' out of stock.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "product-stock-release-fail",
+    "value": "'{0}'取消库存预留失败!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "product-stock-release-fail",
+    "value": "'{0}' stock release failed.",
     "prefix": "command"
 },
 {

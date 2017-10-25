@@ -22,6 +22,7 @@ namespace IDI.Central.Domain.Localization
 								public const string AuthSuccess = "auth-success";
 								public const string AuthFail = "auth-fail";
 								public const string RetrieveUserInfoFail = "retrieve-user-info-fail";
+								public const string PasswordMismatch = "password-mismatch";
 								public const string InvalidUsernameOrPassword = "invalid-username-or-password";
 								public const string InvalidClient = "invalid-client";
 								public const string InvalidUser = "invalid-user";
@@ -63,14 +64,14 @@ namespace IDI.Central.Domain.Localization
 								public const string StockReleaseSuccess = "stock-release-success";
 								public const string StockReleaseFail = "stock-release-fail";
 								public const string LowStocks = "low-stocks";
-								public const string ProductOutOfStock = "product-out-of-stock";
 								public const string OperationNonsupport = "operation-nonsupport";
 								public const string OperationFail = "operation-fail";
 								public const string OperationSuccess = "operation-success";
 								public const string OperationLimited = "operation-limited";
-								public const string PasswordMismatch = "password-mismatch";
 								public const string ProductCodeDuplicated = "product-code-duplicated";
 								public const string ProductNotExisting = "product-not-existing";
+								public const string ProductOutOfStock = "product-out-of-stock";
+								public const string ProductStockReleaseFail = "product-stock-release-fail";
 								public const string StoreNotExisting = "store-not-existing";
 								public const string RecordNotExisting = "record-not-existing";
 								public const string RecordDuplicated = "record-duplicated";

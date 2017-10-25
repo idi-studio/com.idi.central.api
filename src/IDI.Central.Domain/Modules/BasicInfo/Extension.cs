@@ -96,9 +96,25 @@ namespace IDI.Central.Domain.Modules.BasicInfo
             remain = qty;
             trans = new List<StockTransaction>();
 
-            foreach (var stock in store.Stocks)
+            return store.Stocks.Release(product.Stock.StoreId, product.Id, qty, bin, out remain, out trans);
+        }
+
+        public static bool Release(this Product product, decimal qty, string bin, out decimal remain, out List<StockTransaction> trans)
+        {
+            remain = qty;
+            trans = new List<StockTransaction>();
+
+            return product.Stocks.Release(product.Stock.StoreId, product.Id, qty, bin, out remain, out trans);
+        }
+
+        private static bool Release(this List<Stock> stocks, Guid storeId, Guid productId, decimal qty, string bin, out decimal remain, out List<StockTransaction> trans)
+        {
+            remain = qty;
+            trans = new List<StockTransaction>();
+
+            foreach (var stock in stocks)
             {
-                if (stock.ProductId != product.Id)
+                if (stock.ProductId != productId)
                     continue;
 
                 if (!bin.IsNull() && stock.BinCode != bin)
@@ -110,7 +126,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo
                 stock.Available += amount;
                 remain -= amount;
 
-                trans.Add(new StockTransaction { BinCode = bin, ProductId = product.Id, Quantity = amount, StoreId = store.Id, Category = StockTransactionType.Release });
+                trans.Add(new StockTransaction { BinCode = bin, ProductId = productId, Quantity = amount, StoreId = storeId, Category = StockTransactionType.Release });
             }
 
             return remain == 0;

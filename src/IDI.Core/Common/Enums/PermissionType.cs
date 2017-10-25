@@ -36,6 +36,10 @@ namespace IDI.Core.Common.Enums
         /// <summary>
         /// 支付
         /// </summary>
-        Paid = 256
+        Paid = 256,
+        /// <summary>
+        /// 取消
+        /// </summary>
+        Cancel = 1024
     }
 }

@@ -81,22 +81,26 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
 
         private Result Handle(Order order, OrderCommand command, ITransaction transaction)
         {
-            switch (order.Status)
+            if (order.Status == OrderStatus.Created)
             {
-                case OrderStatus.Created:
-                    return Save(order, command, transaction);
-                case OrderStatus.Pending:
-                    return Confirm(order, command, transaction);
-                default:
-                    return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
+                return Save(order, command, transaction);
+            }
+            else if (order.Status == OrderStatus.Pending && command.Status == OrderStatus.Confirmed)
+            {
+                return Confirm(order, command, transaction);
+            }
+            else if (order.Status == OrderStatus.Confirmed && command.Status == OrderStatus.Cancelled)
+            {
+                return Cancel(order, command, transaction);
+            }
+            else
+            {
+                return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
             };
         }
 
         private Result Save(Order order, OrderCommand command, ITransaction transaction)
         {
-            if (order.Status != OrderStatus.Created)
-                return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
-
             if (!command.CustomerId.HasValue)
                 return Result.Fail(Localization.Get(Resources.Key.Command.IncompletedOrder));
 
@@ -112,9 +116,6 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
 
         private Result Confirm(Order order, OrderCommand command, ITransaction transaction)
         {
-            if (order.Status != OrderStatus.Pending)
-                return Result.Fail(message: Localization.Get(Resources.Key.Command.OperationNonsupport));
-
             order = transaction.Source<Order>().Include(e => e.Customer).Include(e => e.Items).Find(command.Id);
 
             if (!(order.HasItems() && order.HasCustomer()))
@@ -140,6 +141,40 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
             }
 
             order.Status = OrderStatus.Confirmed;
+
+            transaction.Update(order);
+            transaction.Commit();
+
+            return Result.Success(message: Localization.Get(Resources.Key.Command.OrderConfirmed));
+        }
+
+        private Result Cancel(Order order, OrderCommand command, ITransaction transaction)
+        {
+            order = transaction.Source<Order>().Include(e => e.Customer).Include(e => e.Items).Find(command.Id);
+
+            if (order.Status == OrderStatus.Confirmed)
+            {
+                foreach (var item in order.Items)
+                {
+                    var product = transaction.Source<Product>().Include(e => e.Stocks).Include(e => e.Stock).Find(item.ProductId);
+
+                    var remain = 0M;
+                    var trans = new List<StockTransaction>();
+
+                    if (product.Release(item.Quantity, product.Stock.BinCode, out remain, out trans))
+                    {
+                        transaction.UpdateRange(product.Stocks);
+                        transaction.AddRange(trans);
+                    }
+                    else
+                    {
+                        transaction.Rollback();
+                        return Result.Fail(message: Localization.Get(Resources.Key.Command.ProductStockReleaseFail).ToFormat(product.Name));
+                    }
+                }
+            }
+
+            order.Status = OrderStatus.Cancelled;
 
             transaction.Update(order);
             transaction.Commit();

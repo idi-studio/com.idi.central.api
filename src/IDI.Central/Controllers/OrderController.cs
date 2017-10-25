@@ -85,6 +85,22 @@ namespace IDI.Central.Controllers
             return bus.Send(command);
         }
 
+        [HttpPut("cancel/{id}")]
+        [Permission("order", PermissionType.Cancel)]
+        public Result Cancel(Guid id)
+        {
+            var command = new OrderCommand
+            {
+                Id = id,
+                Category = OrderCategory.Sales,
+                Status = OrderStatus.Cancelled,
+                Mode = CommandMode.Update,
+                Group = VerificationGroup.Update,
+            };
+
+            return bus.Send(command);
+        }
+
         [HttpGet("{id}")]
         [Permission("order", PermissionType.Read)]
         public Result<OrderModel> Get(Guid id)
