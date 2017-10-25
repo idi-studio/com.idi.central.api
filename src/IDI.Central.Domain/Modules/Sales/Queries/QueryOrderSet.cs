@@ -27,13 +27,14 @@ namespace IDI.Central.Domain.Modules.Sales.Queries
 
         public override Result<Set<OrderModel>> Execute(QueryOrderSetCondition condition)
         {
-            var orders = this.Orders.Get(e => e.Category == condition.Category && e.Date >= condition.Deadline);
+            var orders = this.Orders.Include(e => e.Customer).Get(e => e.Category == condition.Category && e.Date >= condition.Deadline);
 
             var collection = orders.OrderBy(e => e.Date).Select(e => new OrderModel
             {
                 Id = e.Id,
                 Category = e.Category,
                 CustomerId = e.CustomerId.HasValue ? e.CustomerId.Value : Guid.Empty,
+                CustomerName = e.Customer == null ? string.Empty : e.Customer.Name,
                 Date = e.Date.AsLongDate(),
                 SN = e.SN,
                 Status = e.Status,

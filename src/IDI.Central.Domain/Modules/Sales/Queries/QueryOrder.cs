@@ -7,7 +7,6 @@ using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
 using IDI.Core.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace IDI.Central.Domain.Modules.Sales.Queries
 {
@@ -23,13 +22,14 @@ namespace IDI.Central.Domain.Modules.Sales.Queries
 
         public override Result<OrderModel> Execute(QueryOrderCondition condition)
         {
-            var order = this.Orders.Include(e => e.Items).AlsoInclude(a => a.Product).Find(condition.Id);
+            var order = this.Orders.Include(e => e.Customer).Include(e => e.Items).AlsoInclude(a => a.Product).Find(condition.Id);
 
             var model = new OrderModel
             {
                 Id = order.Id,
                 Category = order.Category,
                 CustomerId = order.CustomerId.HasValue ? order.CustomerId.Value : Guid.Empty,
+                CustomerName = order.Customer == null ? string.Empty : order.Customer.Name,
                 Date = order.Date.AsLongDate(),
                 SN = order.SN,
                 Status = order.Status,

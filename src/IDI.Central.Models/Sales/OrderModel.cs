@@ -32,6 +32,9 @@ namespace IDI.Central.Models.Sales
         [JsonProperty("custid")]
         public Guid CustomerId { get; set; }
 
+        [JsonProperty("custname")]
+        public string CustomerName { get; set; }
+
         [JsonProperty("items")]
         public List<OrderItemModel> Items { get; set; }
     }
