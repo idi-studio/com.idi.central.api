@@ -3,10 +3,6 @@
     public enum OrderStatus
     {
         /// <summary>
-        /// 取消
-        /// </summary>
-        Cancelled = 1,
-        /// <summary>
         /// 新建
         /// </summary>
         Created = 2,
@@ -33,6 +29,10 @@
         /// <summary>
         /// 交易成功
         /// </summary>
-        Traded = 128
+        Traded = 128,
+        /// <summary>
+        /// 取消
+        /// </summary>
+        Cancelled = 1024
     }
 }
