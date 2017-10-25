@@ -28,5 +28,8 @@ namespace IDI.Central.Models.Administration
 
         [JsonProperty("roles")]
         public List<string> Roles { get; set; } = new List<string>();
-}
+
+        [JsonProperty("menus")]
+        public List<MenuItem> Menus { get; set; } = new List<MenuItem>();
+    }
 }

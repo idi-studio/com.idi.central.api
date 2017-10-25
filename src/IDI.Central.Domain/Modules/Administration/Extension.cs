@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
+using IDI.Central.Models.Administration;
 using IDI.Core.Authentication;
 using IDI.Core.Common.Extensions;
 
@@ -42,6 +43,33 @@ namespace IDI.Central.Domain.Modules.Administration
             {
                 user.Role.Roles = new List<string>().ToJson();
             }
+        }
+
+        public static List<MenuItem> UserMenus(this List<Module> source, List<int> menus)
+        {
+            if (menus == null || (menus != null && menus.Count == 0))
+                return new List<MenuItem>();
+
+            return source.Where(e => menus.Contains(e.SN)).Select(e => new MenuItem
+            {
+                Name = e.Name,
+                Icon = e.Icon,
+                Route = e.Route,
+                Sub = e.Menus.Select(item => new MenuItem
+                {
+                    Name = item.Name,
+                    Route = item.Route
+                }).ToList()
+            }).ToList();
+        }
+
+        public static List<int> UserMenus(this List<Role> source, List<string> userRoles)
+        {
+            if (userRoles == null || (userRoles != null && userRoles.Count == 0))
+                return new List<int>();
+
+            return source.Where(e => userRoles.Contains(e.Name)).SelectMany(e => e.Menus.To<List<int>>()).Distinct().ToList();
+
         }
     }
 }

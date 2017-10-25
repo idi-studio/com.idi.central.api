@@ -21,9 +21,19 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
         [Injection]
         public IQueryableRepository<User> Users { get; set; }
 
+        [Injection]
+        public IQueryableRepository<Role> Roles { get; set; }
+
+        [Injection]
+        public IQueryableRepository<Module> Modules { get; set; }
+
         public override Result<MyProfile> Execute(QueryMyProfileCondition condition)
         {
             var user = this.Users.Include(e => e.Profile).Include(e => e.Role).Find(u => u.UserName == condition.UserName);
+
+            var modules = this.Modules.Include(e => e.Menus).Get();
+
+            var roles = this.Roles.Get();
 
             var profile = new MyProfile
             {
@@ -33,7 +43,8 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
                 Gender = user.Profile.Gender,
                 Birthday = user.Profile.Birthday,
                 Photo = user.Profile.Photo,
-                Roles = user.Role.Roles.To<List<string>>()
+                Roles = user.Role.Roles.To<List<string>>(),
+                Menus = modules.UserMenus(roles.UserMenus(user.Role.Roles.To<List<string>>()))
             };
 
             return Result.Success(profile);
