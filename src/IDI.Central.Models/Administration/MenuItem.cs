@@ -6,6 +6,9 @@ namespace IDI.Central.Models.Administration
 {
     public class MenuItem : IModel
     {
+        [JsonProperty("sn")]
+        public int SN { get; set; }
+
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -14,6 +17,9 @@ namespace IDI.Central.Models.Administration
 
         [JsonProperty("action")]
         public string Route { get; set; }
+
+        [JsonProperty("checked")]
+        public bool Checked { get; set; }
 
         [JsonProperty("sub")]
         public List<MenuItem> Sub { get; set; } = new List<MenuItem>();

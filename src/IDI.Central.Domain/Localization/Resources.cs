@@ -41,6 +41,7 @@ namespace IDI.Central.Domain.Localization
 								public const string SystemInitialized = "system-initialized";
 								public const string SystemInitSuccess = "system-init-success";
 								public const string RoleAuthorizationSuccess = "role-authorization-success";
+								public const string RoleMenuAuthorizationSuccess = "role-menu-authorization-success";
 								public const string RoleExists = "role-exists";
 								public const string UserAuthorizationSuccess = "user-authorization-success";
 								public const string UserRegisterSuccess = "user-register-success";
@@ -79,6 +80,7 @@ namespace IDI.Central.Domain.Localization
 								public const string OrderExists = "order-exists";
 								public const string OrderUpdated = "order-updated";
 								public const string OrderConfirmed = "order-confirmed";
+								public const string OrderCencelled = "order-cencelled";
 								public const string TradeConfirmed = "trade-confirmed";
 								public const string PhoneNumRegistered = "phone-num-registered";
 								public const string RequiredSellingPrice = "required-selling-price";

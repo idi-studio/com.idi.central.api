@@ -31,6 +31,8 @@ namespace IDI.Central.Domain.Common
 
         public Module[] All { get { return new Module[] { this.Dashboard, this.Administration, this.BasicInfo, this.Sales, this.Inventory }; } }
 
+        public Module[] None { get { return new Module[] { }; } }
+
         public ModuleCollection()
         {
             this.Dashboard = new Module
@@ -388,6 +390,7 @@ namespace IDI.Central.Domain.Common
 
             this.Roles.Administrators.Authorize(Modules.All);
             this.Roles.Staffs.Authorize(Modules.BasicInfo, Modules.Sales, Modules.Inventory);
+            this.Roles.Customers.Authorize(Modules.None);
             #endregion
 
             #region BasicInfo

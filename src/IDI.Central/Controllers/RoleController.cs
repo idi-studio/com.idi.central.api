@@ -48,6 +48,15 @@ namespace IDI.Central.Controllers
             return querier.Execute<QueryRolePermissionCondition, RolePermissionModel>(condition);
         }
 
+        [HttpGet("menu/{name}")]
+        [Permission("role-menu", PermissionType.Query)]
+        public Result<RoleMenuModel> RoleMenu(string name)
+        {
+            var condition = new QueryRoleMenuCondition { Name = name };
+
+            return querier.Execute<QueryRoleMenuCondition, RoleMenuModel>(condition);
+        }
+
         [HttpPut("authorize")]
         [Permission("role-authorize", PermissionType.Modify)]
         public Result Put([FromBody]RoleAuthorizeInput input)
@@ -56,6 +65,21 @@ namespace IDI.Central.Controllers
             {
                 Role = input.Role,
                 Permissions = input.Permissions,
+                Mode = CommandMode.Update,
+                Group = VerificationGroup.Update,
+            };
+
+            return bus.Send(command);
+        }
+
+        [HttpPut("authorize-menu")]
+        [Permission("role-menus", PermissionType.Modify)]
+        public Result AuthorizeMenus([FromBody]RoleMenuInput input)
+        {
+            var command = new RoleMenuCommand
+            {
+                Role = input.Role,
+                Menus = input.Menus,
                 Mode = CommandMode.Update,
                 Group = VerificationGroup.Update,
             };

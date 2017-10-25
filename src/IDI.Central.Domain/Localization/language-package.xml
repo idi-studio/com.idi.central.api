@@ -29,7 +29,7 @@
   <item prefix="command" name="invalid-customer" en="Invalid customer." chs="无效的客户!" />
   <item prefix="command" name="invalid-payment" en="Invalid payment." chs="无效的支付!" />
   <item prefix="command" name="invalid-store" en="Invalid store." chs="无效的仓库!" />
-  
+
   <item prefix="command" name="incompleted-order" en="Incompleted order." chs="订单信息不完整!" />
   <item prefix="command" name="client-disabled" en="The client has been disabled." chs="该客户端已被禁用!" />
   <item prefix="command" name="client-authentication-fail" en="Client authentication failed." chs="客户端认证失败!" />
@@ -38,6 +38,7 @@
   <item prefix="command" name="system-init-success" en="System initialization successful!" chs="系统初始化成功!" />
 
   <item prefix="command" name="role-authorization-success" en="Role authorization successfully." chs="角色授权成功!" />
+  <item prefix="command" name="role-menu-authorization-success" en="Role menu authorization successfully." chs="角色菜单授权成功!" />
   <item prefix="command" name="role-exists" en="The role already exists." chs="角色已存在!" />
   <item prefix="command" name="user-authorization-success" en="User authorization successfully." chs="用户授权成功!" />
   <item prefix="command" name="user-register-success" en="Registration successfully." chs="注册成功!" />
@@ -65,12 +66,12 @@
   <item prefix="command" name="operation-fail" en="Operation failed." chs="操作失败!" />
   <item prefix="command" name="operation-success" en="Operation successfully." chs="操作成功!" />
   <item prefix="command" name="operation-limited" en="Operation is limited." chs="操作受限!" />
- 
+
   <item prefix="command" name="product-code-duplicated" en="Product code duplicated." chs="产品编码重复!" />
   <item prefix="command" name="product-not-existing" en="Cannot found this product." chs="产品不存在!" />
   <item prefix="command" name="product-out-of-stock" en="'{0}' out of stock." chs="'{0}'库存不足!" />
   <item prefix="command" name="product-stock-release-fail" en="'{0}' stock release failed." chs="'{0}'取消库存预留失败!" />
-  
+
   <item prefix="command" name="store-not-existing" en="Cannot found this store." chs="库房不存在!" />
   <item prefix="command" name="record-not-existing" en="Record does not exist." chs="记录不存在!" />
   <item prefix="command" name="record-duplicated" en="Record duplicated." chs="记录重复!" />

@@ -421,6 +421,18 @@
 },
 {
     "language": "chs",
+    "name": "role-menu-authorization-success",
+    "value": "角色菜单授权成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "role-menu-authorization-success",
+    "value": "Role menu authorization successfully.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "role-exists",
     "value": "角色已存在!",
     "prefix": "command"
@@ -873,6 +885,18 @@
     "language": "en",
     "name": "order-confirmed",
     "value": "Order confirmed.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "order-cencelled",
+    "value": "订单取消成功!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "order-cencelled",
+    "value": "Order cencelled.",
     "prefix": "command"
 },
 {

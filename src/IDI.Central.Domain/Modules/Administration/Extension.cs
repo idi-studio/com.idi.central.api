@@ -29,7 +29,7 @@ namespace IDI.Central.Domain.Modules.Administration
             }
             else
             {
-                role.Menus = new List<string>().ToJson();
+                role.Menus = new List<int>().ToJson();
             }
         }
 
@@ -52,15 +52,22 @@ namespace IDI.Central.Domain.Modules.Administration
 
             return source.Where(e => menus.Contains(e.SN)).Select(e => new MenuItem
             {
+                SN = e.SN,
                 Name = e.Name,
                 Icon = e.Icon,
                 Route = e.Route,
                 Sub = e.Menus.Select(item => new MenuItem
                 {
+                    SN = item.SN,
                     Name = item.Name,
                     Route = item.Route
                 }).ToList()
             }).ToList();
+        }
+
+        public static List<int> Menus(this List<Module> source)
+        {
+            return source.Select(e => e.SN).Union(source.SelectMany(e => e.Menus).Select(e => e.SN)).ToList();
         }
 
         public static List<int> UserMenus(this List<Role> source, List<string> userRoles)
