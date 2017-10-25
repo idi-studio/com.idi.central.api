@@ -1,4 +1,5 @@
-﻿using IDI.Central.Domain.Common;
+﻿using System.Linq;
+using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Localization;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
@@ -30,6 +31,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             if (!created)
                 return Result.Success(message: Localization.Get(Resources.Key.Command.SystemInitialized));
 
+            transaction.AddRange(command.Seed.Modules.All.ToList());
             transaction.AddRange(command.Seed.Authorization.Permissions);
             transaction.Add(command.Seed.Users.Administrator);
             transaction.Add(command.Seed.Roles.Administrators);

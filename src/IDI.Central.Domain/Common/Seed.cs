@@ -17,6 +17,78 @@ using IDI.Core.Infrastructure;
 
 namespace IDI.Central.Domain.Common
 {
+    public class ModuleCollection
+    {
+        public Module Dashboard { get; private set; }
+
+        public Module Administration { get; private set; }
+
+        public Module BasicInfo { get; private set; }
+
+        public Module Sales { get; private set; }
+
+        public Module Inventory { get; private set; }
+
+        public Module[] All { get { return new Module[] { this.Dashboard, this.Administration, this.BasicInfo, this.Sales, this.Inventory }; } }
+
+        public ModuleCollection()
+        {
+            this.Dashboard = new Module
+            {
+                SN = 10,
+                Name = "Dashboard",
+                Route = "dashboard",
+                Icon = "zmdi zmdi-view-dashboard"
+            };
+
+            this.Administration = new Module
+            {
+                SN = 20,
+                Name = "Administration",
+                Icon = "zmdi zmdi-accounts-list-alt",
+                Menus = new List<Menu>
+                {
+                    new Menu { SN=2010, Name="Roles", Route="role/list"  },
+                    new Menu { SN=2020, Name="Users", Route="user/list"  }
+                }
+            };
+
+            this.BasicInfo = new Module
+            {
+                SN = 30,
+                Name = "Basic Info",
+                Icon = "zmdi zmdi-apps zmdi-hc-fw",
+                Menus = new List<Menu>
+                {
+                    new Menu { SN=3010, Name="Products", Route="product/list"  }
+                }
+            };
+
+            this.Sales = new Module
+            {
+                SN = 40,
+                Name = "Sales",
+                Icon = "zmdi zmdi-labels",
+                Menus = new List<Menu>
+                {
+                    new Menu { SN=4010, Name="Orders", Route="order/list"  },
+                    new Menu { SN=4020, Name="Customers", Route="cust/list"  }
+                }
+            };
+
+            this.Inventory = new Module
+            {
+                SN = 50,
+                Name = "Inventory",
+                Icon = "zmdi zmdi-store",
+                Menus = new List<Menu>
+                {
+                    new Menu { SN=5010, Name="Stores", Route="store/list"  }
+                }
+            };
+        }
+    }
+
     public class AuthorizationCollection
     {
         public List<Permission> Permissions { get; private set; }
@@ -289,6 +361,8 @@ namespace IDI.Central.Domain.Common
     {
         public AuthorizationCollection Authorization { get; } = new AuthorizationCollection();
 
+        public ModuleCollection Modules { get; } = new ModuleCollection();
+
         public RoleCollection Roles { get; } = new RoleCollection();
 
         public UserCollection Users { get; } = new UserCollection();
@@ -307,9 +381,13 @@ namespace IDI.Central.Domain.Common
         {
             #region Administration
             this.Users.Administrator.Authorize(Roles.Administrators);
+
             this.Roles.Administrators.Authorize(Authorization.GetPermissions(Configuration.Modules.All));
             this.Roles.Staffs.Authorize(Authorization.GetPermissions(Configuration.Modules.Sales));
             this.Roles.Customers.Authorize(Authorization.GetPermissions(Configuration.Modules.Personal));
+
+            this.Roles.Administrators.Authorize(Modules.All);
+            this.Roles.Staffs.Authorize(Modules.BasicInfo, Modules.Sales, Modules.Inventory);
             #endregion
 
             #region BasicInfo

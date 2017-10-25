@@ -20,6 +20,18 @@ namespace IDI.Central.Domain.Modules.Administration
             }
         }
 
+        public static void Authorize(this Role role, params Module[] modules)
+        {
+            if (modules != null && modules.Length > 0)
+            {
+                role.Menus = modules.Select(e => e.SN).Union(modules.SelectMany(e => e.Menus).Select(e => e.SN)).ToJson();
+            }
+            else
+            {
+                role.Menus = new List<string>().ToJson();
+            }
+        }
+
         public static void Authorize(this User user, params IRole[] roles)
         {
             if (roles != null && roles.Length > 0)

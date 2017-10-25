@@ -18,5 +18,7 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
         public bool IsActive { get; set; } = true;
 
         public string Permissions { get; set; }
+
+        public string Menus { get; set; }
     }
 }

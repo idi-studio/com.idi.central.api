@@ -8,8 +8,10 @@ namespace IDI.Central.Domain.Modules.Administration
     {
         public override void Create(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasOne(u => u.Profile).WithOne().HasForeignKey<UserProfile>(p => p.UserId).OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<User>().HasOne(u => u.Role).WithOne().HasForeignKey<UserRole>(p => p.UserId).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<User>().HasOne(e => e.Profile).WithOne().HasForeignKey<UserProfile>(e => e.UserId).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<User>().HasOne(e => e.Role).WithOne().HasForeignKey<UserRole>(e => e.UserId).OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Module>().HasMany(e => e.Menus).WithOne(e => e.Module).HasForeignKey(e => e.ModuleId);
         }
     }
 }
