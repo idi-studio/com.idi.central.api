@@ -50,17 +50,17 @@ namespace IDI.Central.Domain.Modules.Administration
             if (menus == null || (menus != null && menus.Count == 0))
                 return new List<MenuItem>();
 
-            return source.Where(e => menus.Contains(e.SN)).Select(e => new MenuItem
+            return source.Where(e => menus.Contains(e.SN)).OrderBy(e => e.SN).Select(e => new MenuItem
             {
                 SN = e.SN,
                 Name = e.Name,
                 Icon = e.Icon,
                 Route = e.Route,
-                Sub = e.Menus.Select(item => new MenuItem
+                Sub = e.Menus.OrderBy(o => o.SN).Select(o => new MenuItem
                 {
-                    SN = item.SN,
-                    Name = item.Name,
-                    Route = item.Route
+                    SN = o.SN,
+                    Name = o.Name,
+                    Route = o.Route
                 }).ToList()
             }).ToList();
         }
