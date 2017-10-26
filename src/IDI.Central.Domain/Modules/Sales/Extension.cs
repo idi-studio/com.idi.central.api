@@ -10,7 +10,7 @@ namespace IDI.Central.Domain.Modules.Sales
             if (order == null)
                 return false;
 
-            if (order.Status == OrderStatus.Pending)
+            if (order.Status == SaleStatus.Pending)
                 return true;
 
             return false;

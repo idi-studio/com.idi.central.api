@@ -14,11 +14,11 @@ namespace IDI.Central.Domain.Modules.Sales.AggregateRoots
         [StringLength(30)]
         public string SN { get; set; }
 
-        public OrderCategory Category { get; set; }
+        public DocumentCategory Category { get; set; }
 
         public DateTime Date { get; set; }
 
-        public OrderStatus Status { get; set; }
+        public SaleStatus Status { get; set; }
 
         [StringLength(200)]
         public string Remark { get; set; }

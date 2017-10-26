@@ -32,7 +32,7 @@ namespace IDI.Central.Controllers
         {
             var command = new OrderCommand
             {
-                Category = OrderCategory.Sales,
+                Category = DocumentCategory.SOO,
                 Remark = input.Remark,
                 CustomerId = input.CustomerId,
                 Mode = CommandMode.Create,
@@ -46,7 +46,7 @@ namespace IDI.Central.Controllers
         [Permission("order", PermissionType.Query)]
         public Result<Set<OrderModel>> List()
         {
-            var condition = new QueryOrderSetCondition { Category = OrderCategory.Sales, Deadline = DateTime.Now.AddMonths(-3) };
+            var condition = new QueryOrderSetCondition { Category = DocumentCategory.SOO, Deadline = DateTime.Now.AddMonths(-3) };
 
             return querier.Execute<QueryOrderSetCondition, Set<OrderModel>>(condition);
         }
@@ -58,7 +58,7 @@ namespace IDI.Central.Controllers
             var command = new OrderCommand
             {
                 Id = id,
-                Category = OrderCategory.Sales,
+                Category = DocumentCategory.SOO,
                 CustomerId = input.CustomerId,
                 Status = input.Status,
                 Remark = input.Remark,
@@ -76,8 +76,8 @@ namespace IDI.Central.Controllers
             var command = new OrderCommand
             {
                 Id = id,
-                Category = OrderCategory.Sales,
-                Status = OrderStatus.Confirmed,
+                Category = DocumentCategory.SOO,
+                Status = SaleStatus.Confirmed,
                 Mode = CommandMode.Update,
                 Group = VerificationGroup.Update,
             };
@@ -92,8 +92,8 @@ namespace IDI.Central.Controllers
             var command = new OrderCommand
             {
                 Id = id,
-                Category = OrderCategory.Sales,
-                Status = OrderStatus.Cancelled,
+                Category = DocumentCategory.SOO,
+                Status = SaleStatus.Cancelled,
                 Mode = CommandMode.Update,
                 Group = VerificationGroup.Update,
             };

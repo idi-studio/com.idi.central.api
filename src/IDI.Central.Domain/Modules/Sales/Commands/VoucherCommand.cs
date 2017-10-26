@@ -43,7 +43,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
             if (order == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidOrder));
 
-            if (order.Status != OrderStatus.Confirmed)
+            if (order.Status != SaleStatus.Confirmed)
                 return Result.Fail(Localization.Get(Resources.Key.Command.PlsConfirmOrder));
 
             DateTime timestamp = DateTime.Now;
@@ -153,7 +153,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
                 return;
 
             voucher.Status = TradeStatus.Success;
-            voucher.Order.Status = OrderStatus.Paid;
+            voucher.Order.Status = SaleStatus.Paid;
 
             transaction.Update(voucher);
             transaction.Update(voucher.Order);

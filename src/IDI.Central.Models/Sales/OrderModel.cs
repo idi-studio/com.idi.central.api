@@ -15,13 +15,13 @@ namespace IDI.Central.Models.Sales
         public string SN { get; set; }
 
         [JsonProperty("category")]
-        public OrderCategory Category { get; set; }
+        public DocumentCategory Category { get; set; }
 
         [JsonProperty("date")]
         public string Date { get; set; }
 
         [JsonProperty("status")]
-        public OrderStatus Status { get; set; }
+        public SaleStatus Status { get; set; }
 
         [JsonProperty("statusdesc")]
         public string StatusDesc { get; set; }

@@ -8,7 +8,7 @@ namespace IDI.Central.Models.Sales
     public class OrderInput : IInput
     {
         [JsonProperty("status")]
-        public OrderStatus Status { get; set; }
+        public SaleStatus Status { get; set; }
 
         [JsonProperty("remark")]
         public string Remark { get; set; } = string.Empty;

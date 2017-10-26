@@ -18,9 +18,9 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
     {
         public Guid Id { get; set; }
 
-        public OrderCategory Category { get; set; }
+        public DocumentCategory Category { get; set; }
 
-        public OrderStatus Status { get; set; }
+        public SaleStatus Status { get; set; }
 
         [StringLength(MaxLength = 200, Group = VerificationGroup.Create | VerificationGroup.Update)]
         public string Remark { get; set; }
@@ -43,7 +43,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
                 Category = command.Category,
                 Date = timestamp,
                 Remark = command.Remark,
-                Status = OrderStatus.Created,
+                Status = SaleStatus.Created,
                 SN = GenerateSerialNumber(command.Category, timestamp)
             };
 
@@ -81,15 +81,15 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
 
         private Result Handle(Order order, OrderCommand command, ITransaction transaction)
         {
-            if (order.Status == OrderStatus.Created)
+            if (order.Status == SaleStatus.Created)
             {
                 return Save(order, command, transaction);
             }
-            else if (order.Status == OrderStatus.Pending && command.Status == OrderStatus.Confirmed)
+            else if (order.Status == SaleStatus.Pending && command.Status == SaleStatus.Confirmed)
             {
                 return Confirm(order, command, transaction);
             }
-            else if (order.Status == OrderStatus.Confirmed && command.Status == OrderStatus.Cancelled)
+            else if (order.Status == SaleStatus.Confirmed && command.Status == SaleStatus.Cancelled)
             {
                 return Cancel(order, command, transaction);
             }
@@ -104,7 +104,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
             if (!command.CustomerId.HasValue)
                 return Result.Fail(Localization.Get(Resources.Key.Command.IncompletedOrder));
 
-            order.Status = OrderStatus.Pending;
+            order.Status = SaleStatus.Pending;
             order.CustomerId = command.CustomerId;
             order.Remark = command.Remark;
 
@@ -140,7 +140,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
                 }
             }
 
-            order.Status = OrderStatus.Confirmed;
+            order.Status = SaleStatus.Confirmed;
 
             transaction.Update(order);
             transaction.Commit();
@@ -152,7 +152,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
         {
             order = transaction.Source<Order>().Include(e => e.Customer).Include(e => e.Items).Find(command.Id);
 
-            if (order.Status == OrderStatus.Confirmed)
+            if (order.Status == SaleStatus.Confirmed)
             {
                 foreach (var item in order.Items)
                 {
@@ -174,7 +174,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
                 }
             }
 
-            order.Status = OrderStatus.Cancelled;
+            order.Status = SaleStatus.Cancelled;
 
             transaction.Update(order);
             transaction.Commit();
@@ -182,30 +182,9 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
             return Result.Success(message: Localization.Get(Resources.Key.Command.OrderConfirmed));
         }
 
-        private string GenerateSerialNumber(OrderCategory category, DateTime timestamp)
+        private string GenerateSerialNumber(DocumentCategory category, DateTime timestamp)
         {
-            string prefix = string.Empty;
-
-            switch (category)
-            {
-                case OrderCategory.Sales:
-                    prefix = "SOO-";
-                    break;
-                case OrderCategory.Purchase:
-                    prefix = "POO-";
-                    break;
-                case OrderCategory.StockIn:
-                    prefix = "SIN-";
-                    break;
-                case OrderCategory.StockOut:
-                    prefix = "SOT-";
-                    break;
-                default:
-                    prefix = string.Empty;
-                    break;
-            }
-
-            return $"{prefix}{timestamp.ToString("yyMMdd")}{timestamp.TimeOfDay.Ticks.ToString("x8")}".ToUpper();
+            return $"{category.ToString()}-{timestamp.ToString("yyMMdd")}{timestamp.TimeOfDay.Ticks.ToString("x8")}".ToUpper();
         }
     }
 }

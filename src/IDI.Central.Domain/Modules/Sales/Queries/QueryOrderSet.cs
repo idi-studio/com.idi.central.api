@@ -8,14 +8,13 @@ using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
-using IDI.Core.Localization;
 using IDI.Core.Repositories;
 
 namespace IDI.Central.Domain.Modules.Sales.Queries
 {
     public class QueryOrderSetCondition : Condition
     {
-        public OrderCategory Category { get; set; }
+        public DocumentCategory Category { get; set; }
 
         public DateTime Deadline { get; set; }
     }

@@ -1,6 +1,6 @@
 ﻿namespace IDI.Central.Common.Enums
 {
-    public enum OrderStatus
+    public enum SaleStatus
     {
         /// <summary>
         /// 新建
