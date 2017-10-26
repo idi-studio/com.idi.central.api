@@ -30,7 +30,8 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
                 Birthday = r.Profile.Birthday.AsShortDate(),
                 Photo = r.Profile.Photo,
                 IsLocked = r.IsLocked,
-                LockTime = r.LockTime.AsLongDate()
+                LockTime = r.LockTime.AsLongDate(),
+                LatestLoginTime = r.LatestLoginTime.AsLongDate()
             }).ToList();
 
             return Result.Success(new Set<UserModel>(collection));

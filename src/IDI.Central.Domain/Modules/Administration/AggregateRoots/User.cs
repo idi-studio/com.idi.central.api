@@ -24,6 +24,8 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
 
         public DateTime? LockTime { get; set; }
 
+        public DateTime? LatestLoginTime { get; set; }
+
         public bool IsActive { get; set; } = true;
 
         public UserProfile Profile { get; set; } = new UserProfile();

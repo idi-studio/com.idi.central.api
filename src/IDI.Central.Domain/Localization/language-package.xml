@@ -16,6 +16,8 @@
 
   <item prefix="command" name="auth-success" en="Authentication successfully." chs="认证成功!" />
   <item prefix="command" name="auth-fail" en="Authentication failed." chs="认证失败!" />
+  <item prefix="command" name="account-inactive" en="Your account has been inactive." chs="您的帐号已停用!" />
+  <item prefix="command" name="account-locked" en="Your account has been locked." chs="您的帐号已锁定!" />
   <item prefix="command" name="retrieve-user-info-fail" en="Retrieve user info failed." chs="获取用户信息失败!" />
   <item prefix="command" name="password-mismatch" en="Passwords does not match." chs="两次密码不一致!" />
   <item prefix="command" name="invalid-username-or-password" en="Invalid username or password." chs="无效的用户名或密码!" />

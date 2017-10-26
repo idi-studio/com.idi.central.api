@@ -32,5 +32,8 @@ namespace IDI.Central.Models.Administration
 
         [JsonProperty("locktime")]
         public string LockTime { get; set; }
+
+        [JsonProperty("latest")]
+        public string LatestLoginTime { get; set; }
     }
 }

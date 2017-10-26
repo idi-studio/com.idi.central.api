@@ -21,6 +21,8 @@ namespace IDI.Central.Domain.Localization
 						public class Command {
 								public const string AuthSuccess = "auth-success";
 								public const string AuthFail = "auth-fail";
+								public const string AccountInactive = "account-inactive";
+								public const string AccountLocked = "account-locked";
 								public const string RetrieveUserInfoFail = "retrieve-user-info-fail";
 								public const string PasswordMismatch = "password-mismatch";
 								public const string InvalidUsernameOrPassword = "invalid-username-or-password";

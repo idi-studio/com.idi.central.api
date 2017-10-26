@@ -1,4 +1,5 @@
-﻿using IDI.Central.Domain.Localization;
+﻿using System;
+using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Commands;
@@ -39,10 +40,21 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             if (user == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidUsernameOrPassword));
 
+            if (!user.IsActive)
+                return Result.Fail(Localization.Get(Resources.Key.Command.AccountInactive));
+
+            if (user.IsLocked)
+                return Result.Fail(Localization.Get(Resources.Key.Command.AccountLocked));
+
             string hashed = Cryptography.Encrypt(command.Password, user.Salt);
 
             if (user.Password != hashed)
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidUsernameOrPassword));
+
+            user.LatestLoginTime = DateTime.Now;
+
+            this.Users.Update(user);
+            this.Users.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.AuthSuccess));
         }

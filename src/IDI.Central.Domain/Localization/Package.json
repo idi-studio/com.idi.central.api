@@ -181,6 +181,30 @@
 },
 {
     "language": "chs",
+    "name": "account-inactive",
+    "value": "您的帐号已停用!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "account-inactive",
+    "value": "Your account has been inactive.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
+    "name": "account-locked",
+    "value": "您的帐号已锁定!",
+    "prefix": "command"
+},
+{
+    "language": "en",
+    "name": "account-locked",
+    "value": "Your account has been locked.",
+    "prefix": "command"
+},
+{
+    "language": "chs",
     "name": "retrieve-user-info-fail",
     "value": "获取用户信息失败!",
     "prefix": "command"
