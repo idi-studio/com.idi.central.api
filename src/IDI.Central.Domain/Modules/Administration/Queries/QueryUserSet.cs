@@ -5,6 +5,7 @@ using IDI.Core.Common;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Infrastructure.Queries;
 using IDI.Core.Repositories;
+using IDI.Core.Common.Extensions;
 
 namespace IDI.Central.Domain.Modules.Administration.Queries
 {
@@ -26,8 +27,10 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
                 IsActive = r.IsActive,
                 Name = r.Profile.Name,
                 Gender = r.Profile.Gender,
-                Birthday = r.Profile.Birthday,
-                Photo = r.Profile.Photo
+                Birthday = r.Profile.Birthday.AsShortDate(),
+                Photo = r.Profile.Photo,
+                IsLocked = r.IsLocked,
+                LockTime = r.LockTime.AsLongDate()
             }).ToList();
 
             return Result.Success(new Set<UserModel>(collection));

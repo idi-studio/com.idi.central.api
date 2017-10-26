@@ -19,12 +19,18 @@ namespace IDI.Central.Models.Administration
         public Gender Gender { get; set; }
 
         [JsonProperty("birthday")]
-        public DateTime Birthday { get; set; }
+        public string Birthday { get; set; }
 
         [JsonProperty("photo")]
         public string Photo { get; set; }
 
         [JsonProperty("active")]
         public bool IsActive { get; set; }
+
+        [JsonProperty("locked")]
+        public bool IsLocked { get; set; }
+
+        [JsonProperty("locktime")]
+        public string LockTime { get; set; }
     }
 }
