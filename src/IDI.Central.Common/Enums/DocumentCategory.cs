@@ -15,7 +15,7 @@
         /// </summary>
         SOB = 8,
         /// <summary>
-        /// 入库单 - SIO
+        /// 入库单
         /// </summary>
         SIB = 16,
         /// <summary>
