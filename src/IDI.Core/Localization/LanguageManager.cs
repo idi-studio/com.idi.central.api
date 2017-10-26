@@ -18,7 +18,7 @@ namespace IDI.Core.Localization
         {
             items = new List<PackageItem>();
 
-            Load(new PackageCore());
+            Load(new LanguagePackage());
         }
 
         public enum Language

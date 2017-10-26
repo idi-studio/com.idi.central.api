@@ -1,6 +1,6 @@
 ﻿using IDI.Central.Core;
 using IDI.Central.Domain;
-using IDI.Central.Domain.Localization.Packages;
+using IDI.Central.Domain.Localization;
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure;
@@ -87,7 +87,7 @@ namespace IDI.Central
                 routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
             });
             app.UseCors(Constants.Policy.AllowCORSDomain);
-            app.UseLanguagePackage<CentralPackage>();
+            app.UseLanguagePackage<LanguagePackage>();
             app.UseAuthorization<ApplicationAuthorization>();
         }
     }

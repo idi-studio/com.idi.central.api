@@ -32,7 +32,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
                 IsLocked = r.IsLocked,
                 LockTime = r.LockTime.AsLongDate(),
                 LatestLoginTime = r.LatestLoginTime.AsLongDate()
-            }).ToList();
+            }).OrderBy(e => e.UserName).ToList();
 
             return Result.Success(new Set<UserModel>(collection));
         }
