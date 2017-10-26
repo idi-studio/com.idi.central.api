@@ -32,6 +32,13 @@ namespace IDI.Central.Controllers
             return bus.Send(new UserRegistrationCommand(input.UserName, input.Password, input.Confirm));
         }
 
+        [HttpPost("lock")]
+        [Permission("user-lock", PermissionType.Modify)]
+        public Result Lock([FromBody]UserLockInput input)
+        {
+            return bus.Send(new UserLockCommand(input.UserName));
+        }
+
         [HttpGet("list")]
         [Permission("user", PermissionType.Query)]
         public Result<Set<UserModel>> List()
