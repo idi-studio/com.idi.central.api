@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using IDI.Core.Common;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
@@ -9,9 +11,7 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
     {
         public Guid UserId { get; set; }
 
-        /// <summary>
-        /// Json Type: list of string
-        /// </summary>
+        [JsonData(typeof(List<string>))]
         public string Roles { get; set; }
     }
 }

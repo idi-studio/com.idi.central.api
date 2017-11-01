@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using IDI.Central.Common.JsonTypes;
 using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
 using IDI.Central.Models.BasicInfo;
@@ -32,8 +33,8 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Queries
                 StoreId = product.Stock.StoreId,
                 Unit = product.Stock.Unit,
                 BinCode = product.Stock.BinCode,
-                Description = product.Tags.To<List<TagModel>>().AsString(),
-                Tags = product.Tags.To<List<TagModel>>(),
+                Description = product.Tags.To<List<Tag>>().AsString(),
+                Tags = product.Tags.To<List<Tag>>(),
                 Enabled = product.Enabled,
                 OnShelf = product.OnShelf
             }).ToList();

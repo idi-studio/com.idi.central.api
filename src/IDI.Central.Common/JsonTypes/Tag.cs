@@ -1,9 +1,9 @@
 ﻿using IDI.Core.Infrastructure.Queries;
 using Newtonsoft.Json;
 
-namespace IDI.Central.Models.BasicInfo
+namespace IDI.Central.Common.JsonTypes
 {
-    public class TagModel : IModel
+    public class Tag : IModel
     {
         [JsonProperty("key")]
         public string Key { get; set; }

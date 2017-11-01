@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using IDI.Central.Common.JsonTypes;
 using IDI.Central.Domain.Common;
 using IDI.Central.Domain.Modules.BasicInfo;
 using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
@@ -41,11 +42,11 @@ namespace IDI.Central.Domain.Modules.Sales.Queries
                 Id = product.Id,
                 Name = product.Name,
                 QRCode = product.QRCode,
-                Description = product.Tags.To<List<TagModel>>().AsString(),
+                Description = product.Tags.To<List<Tag>>().AsString(),
                 Quantity = product.Quantity(),
                 Reserve = product.Reserve(),
                 Available = product.Available(),
-                Tags = product.Tags.To<List<TagModel>>(),
+                Tags = product.Tags.To<List<Tag>>(),
                 Price = product.FavorablePrice(grade)
             }).Where(e => e.Price != null).ToList();
 

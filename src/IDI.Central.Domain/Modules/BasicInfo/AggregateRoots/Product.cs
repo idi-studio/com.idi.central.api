@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using IDI.Central.Common.JsonTypes;
 using IDI.Central.Domain.Modules.Inventory.AggregateRoots;
+using IDI.Core.Common;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.BasicInfo.AggregateRoots
@@ -18,9 +20,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo.AggregateRoots
         [StringLength(50)]
         public string QRCode { get; set; } = Guid.NewGuid().AsCode();
 
-        /// <summary>
-        /// JsonType: List of TagModel
-        /// </summary>
+        [JsonData(typeof(List<Tag>))]
         public string Tags { get; set; }
 
         public bool Enabled { get; set; } = true;

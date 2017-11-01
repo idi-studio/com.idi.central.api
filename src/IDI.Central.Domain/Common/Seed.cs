@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IDI.Central.Common;
 using IDI.Central.Common.Enums;
+using IDI.Central.Common.JsonTypes;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
@@ -178,44 +179,44 @@ namespace IDI.Central.Domain.Common
                 new Product
                 {
                     Name = "iPhone 5 黑色 32GB",
-                    Tags = new List<TagModel> {
-                    new TagModel { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1442" },
-                    new TagModel { Key = Resources.Key.Tag.Color, Name="Color", Value = "黑色" },
-                    new TagModel { Key = Resources.Key.Tag.Year, Name="Year", Value = "2012" },
-                    new TagModel { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "32GB" },
+                    Tags = new List<Tag> {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1442" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "黑色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2012" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "32GB" },
                 }.ToJson() },
                 new Product
                 {
                     Name = "iPhone 5s 金色 32GB",
-                    Tags = new List<TagModel> {
-                    new TagModel { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1533" },
-                    new TagModel { Key = Resources.Key.Tag.Color, Name="Color", Value = "金色" },
-                    new TagModel { Key = Resources.Key.Tag.Year, Name="Year", Value = "2013" },
-                    new TagModel { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "32GB" },
+                    Tags = new List<Tag> {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1533" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "金色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2013" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "32GB" },
                 }.ToJson() },
                 new Product {
                     Name = "iPhone 6 深空灰色 64GB",
-                    Tags = new List<TagModel> {
-                    new TagModel { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1589" },
-                    new TagModel { Key = Resources.Key.Tag.Color, Name="Color", Value = "深空灰色" },
-                    new TagModel { Key = Resources.Key.Tag.Year, Name="Year", Value = "2014" },
-                    new TagModel { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "64GB" },
+                    Tags = new List<Tag> {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1589" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "深空灰色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2014" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "64GB" },
                 }.ToJson() },
                 new Product {
                     Name = "iPhone 6 Plus 银色 64GB",
-                    Tags = new List<TagModel> {
-                    new TagModel { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1593" },
-                    new TagModel { Key = Resources.Key.Tag.Color, Name="Color", Value = "银色" },
-                    new TagModel { Key = Resources.Key.Tag.Year, Name="Year", Value = "2014" },
-                    new TagModel { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "64GB" },
+                    Tags = new List<Tag> {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1593" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "银色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2014" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "64GB" },
                 }.ToJson() },
                 new Product {
                     Name = "iPhone 7 金色 128GB",
-                    Tags = new List<TagModel> {
-                    new TagModel { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1778" },
-                    new TagModel { Key = Resources.Key.Tag.Color, Name="Color", Value = "金色" },
-                    new TagModel { Key = Resources.Key.Tag.Year, Name="Year", Value = "2016" },
-                    new TagModel { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "128GB" },
+                    Tags = new List<Tag> {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "A1778" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "金色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2016" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "128GB" },
                 }.ToJson() },
 
             };
@@ -224,22 +225,22 @@ namespace IDI.Central.Domain.Common
                 new Product
                 {
                     Name = "小米MIX 2 64GB",
-                    Tags = new List<TagModel> {
-                    new TagModel { Key = Resources.Key.Tag.Model, Name="Model", Value = "MIX 2" },
-                    new TagModel { Key = Resources.Key.Tag.Color, Name="Color", Value = "黑色" },
-                    new TagModel { Key = Resources.Key.Tag.Year, Name="Year", Value = "2017" },
-                    new TagModel { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "64GB" },
+                    Tags = new List<Tag> {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "MIX 2" },
+                    new Tag { Key = Resources.Key.Tag.Color, Name="Color", Value = "黑色" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2017" },
+                    new Tag { Key = Resources.Key.Tag.Capacity, Name="Capacity", Value = "64GB" },
                 }.ToJson() },
                 new Product
                 {
                     Name = "iMac Retina 4K 21.5-inch",
-                    Tags = new List<TagModel> {
-                    new TagModel { Key = Resources.Key.Tag.Model, Name="Model", Value = "iMac" },
-                    new TagModel { Key = Resources.Key.Tag.Processor, Name="Processor", Value = "3.1 GHz Intel Core i5" },
-                    new TagModel { Key = Resources.Key.Tag.Year, Name="Year", Value = "2015" },
-                    new TagModel { Key = Resources.Key.Tag.Memory, Name="Memory", Value = "8G 1867 MHz DDR3" },
-                    new TagModel { Key = Resources.Key.Tag.Display, Name="Display", Value = "Retina 4K 21.5-inch" },
-                    new TagModel { Key = Resources.Key.Tag.Storage, Name="Storage", Value = "251GB" },
+                    Tags = new List<Tag> {
+                    new Tag { Key = Resources.Key.Tag.Model, Name="Model", Value = "iMac" },
+                    new Tag { Key = Resources.Key.Tag.Processor, Name="Processor", Value = "3.1 GHz Intel Core i5" },
+                    new Tag { Key = Resources.Key.Tag.Year, Name="Year", Value = "2015" },
+                    new Tag { Key = Resources.Key.Tag.Memory, Name="Memory", Value = "8G 1867 MHz DDR3" },
+                    new Tag { Key = Resources.Key.Tag.Display, Name="Display", Value = "Retina 4K 21.5-inch" },
+                    new Tag { Key = Resources.Key.Tag.Storage, Name="Storage", Value = "251GB" },
                 }.ToJson() },
             };
 

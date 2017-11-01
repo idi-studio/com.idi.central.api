@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using IDI.Central.Common.JsonTypes;
 using IDI.Central.Models.BasicInfo;
 using IDI.Core.Infrastructure.Queries;
 using Newtonsoft.Json;
@@ -30,7 +31,7 @@ namespace IDI.Central.Models.Sales
         public decimal Reserve { get; set; }
 
         [JsonProperty("tags")]
-        public List<TagModel> Tags { get; set; }
+        public List<Tag> Tags { get; set; }
 
         [JsonProperty("price")]
         public PriceModel Price { get; set; }

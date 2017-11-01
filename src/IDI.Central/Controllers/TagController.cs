@@ -1,7 +1,7 @@
 ﻿using IDI.Central.Common;
+using IDI.Central.Common.JsonTypes;
 using IDI.Central.Core;
 using IDI.Central.Domain.Modules.BasicInfo.Queries;
-using IDI.Central.Models.BasicInfo;
 using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
@@ -25,9 +25,9 @@ namespace IDI.Central.Controllers
 
         [HttpGet("list")]
         [Permission("tag", PermissionType.Query)]
-        public Result<Set<TagModel>> List()
+        public Result<Set<Tag>> List()
         {
-            return querier.Execute<QueryTagSetCondition, Set<TagModel>>();
+            return querier.Execute<QueryTagSetCondition, Set<Tag>>();
         }
     }
 }

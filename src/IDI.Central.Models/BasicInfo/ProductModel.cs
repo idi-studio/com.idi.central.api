@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using IDI.Central.Common.JsonTypes;
 using IDI.Core.Infrastructure.Queries;
 using Newtonsoft.Json;
 
@@ -35,7 +36,7 @@ namespace IDI.Central.Models.BasicInfo
         public string Unit { get; set; }
 
         [JsonProperty("tags")]
-        public List<TagModel> Tags { get; set; } = new List<TagModel>();
+        public List<Tag> Tags { get; set; } = new List<Tag>();
 
         [JsonProperty("images")]
         public List<ProductPictureModel> Pictures { get; set; } = new List<ProductPictureModel>();

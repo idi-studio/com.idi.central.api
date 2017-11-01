@@ -1,6 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using IDI.Core.Authentication;
+using IDI.Core.Common;
 using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
@@ -17,8 +19,10 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
 
         public bool IsActive { get; set; } = true;
 
+        [JsonData(typeof(Dictionary<string, List<string>>))]
         public string Permissions { get; set; }
 
+        [JsonData(typeof(List<int>))]
         public string Menus { get; set; }
     }
 }

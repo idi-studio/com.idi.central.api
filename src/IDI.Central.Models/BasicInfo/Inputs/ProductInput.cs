@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using IDI.Central.Common;
+using IDI.Central.Common.JsonTypes;
 using IDI.Core.Common;
 using Newtonsoft.Json;
 
@@ -27,7 +28,7 @@ namespace IDI.Central.Models.BasicInfo
         public string BinCode { get; set; } = Configuration.Inventory.DefaultBinCode;
 
         [JsonProperty("tags")]
-        public List<TagModel> Tags { get; set; } = new List<TagModel>();
+        public List<Tag> Tags { get; set; } = new List<Tag>();
 
         [JsonProperty("active")]
         public bool Enabled { get; set; }
