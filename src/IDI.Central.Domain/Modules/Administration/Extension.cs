@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Models.Administration;
@@ -76,7 +77,14 @@ namespace IDI.Central.Domain.Modules.Administration
                 return new List<int>();
 
             return source.Where(e => userRoles.Contains(e.Name)).SelectMany(e => e.Menus.To<List<int>>()).Distinct().ToList();
+        }
 
+        public static List<string> Roles(this User user)
+        {
+            if (user.Role == null || (user.Role != null && user.Role.Roles.IsNull()))
+                return new List<string>();
+
+            return user.Role.Roles.To<List<string>>();
         }
     }
 }

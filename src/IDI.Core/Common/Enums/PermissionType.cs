@@ -38,6 +38,10 @@ namespace IDI.Core.Common.Enums
         /// </summary>
         Paid = 256,
         /// <summary>
+        /// 报表
+        /// </summary>
+        Report = 512,
+        /// <summary>
         /// 取消
         /// </summary>
         Cancel = 1024
