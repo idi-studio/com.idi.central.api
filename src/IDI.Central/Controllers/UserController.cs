@@ -64,7 +64,7 @@ namespace IDI.Central.Controllers
                 UserName = input.UserName,
                 Roles = input.Roles,
                 Mode = CommandMode.Update,
-                Group = VerificationGroup.Update,
+                Group = ValidationGroup.Update,
             };
 
             return bus.Send(command);

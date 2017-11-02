@@ -29,7 +29,7 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Commands
 
         public List<IFormFile> Files { get; set; } = new List<IFormFile>();
 
-        [RequiredField(Group = VerificationGroup.Create)]
+        [RequiredField(Group = ValidationGroup.Create)]
         public string SavePath { get; set; }
     }
 

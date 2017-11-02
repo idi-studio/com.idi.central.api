@@ -10,7 +10,7 @@ namespace IDI.Core.Infrastructure.Commands
 
         public CommandMode Mode { get; set; } = CommandMode.None;
 
-        public VerificationGroup Group { get; set; } = VerificationGroup.Default;
+        public ValidationGroup Group { get; set; } = ValidationGroup.Default;
 
         public int Version { get; private set; }
 

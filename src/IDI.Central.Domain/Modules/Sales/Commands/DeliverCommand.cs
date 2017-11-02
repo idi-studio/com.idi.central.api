@@ -15,13 +15,13 @@ namespace IDI.Central.Domain.Modules.Logistics.Commands
     {
         public Guid Id { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
-        [StringLength(MaxLength = 50, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = ValidationGroup.Create | ValidationGroup.Update)]
+        [StringLength(MaxLength = 50, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string CourierNo { get; set; }
 
         public DeliverStatus Status { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string Details { get; set; }
 
         public Guid OrderId { get; set; }

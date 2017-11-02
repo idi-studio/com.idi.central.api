@@ -17,11 +17,11 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Commands
     {
         public Guid Id { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
-        [StringLength(MaxLength = 50, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = ValidationGroup.Create | ValidationGroup.Update)]
+        [StringLength(MaxLength = 50, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string Name { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string Tags { get; set; }
 
         public bool Enabled { get; set; }
@@ -30,18 +30,18 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Commands
 
         public Guid StroeId { get; set; }
 
-        [DecimalRange(Minimum = 0.01, Maximum = int.MaxValue, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [DecimalRange(Minimum = 0.01, Maximum = int.MaxValue, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public decimal SKU { get; set; }
 
-        [DecimalRange(Minimum = 0, Maximum = int.MaxValue, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [DecimalRange(Minimum = 0, Maximum = int.MaxValue, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public decimal SafetyStock { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
-        [StringLength(MaxLength = 10, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = ValidationGroup.Create | ValidationGroup.Update)]
+        [StringLength(MaxLength = 10, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string Uint { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
-        [StringLength(MaxLength = 10, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = ValidationGroup.Create | ValidationGroup.Update)]
+        [StringLength(MaxLength = 10, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string BinCode { get; set; }
     }
 

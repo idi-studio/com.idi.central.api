@@ -3,7 +3,7 @@
 namespace IDI.Core.Common.Enums
 {
     [Flags]
-    public enum VerificationGroup
+    public enum ValidationGroup
     {
         Default=1,
         Create=2,

@@ -48,7 +48,7 @@ namespace IDI.Central.Controllers
                 PayMethod = input.PayMethod,
                 Remark = input.Remark,
                 Mode = CommandMode.Create,
-                Group = VerificationGroup.Create,
+                Group = ValidationGroup.Create,
             };
 
             return bus.Send(command);
@@ -67,7 +67,7 @@ namespace IDI.Central.Controllers
                 PayMethod = input.PayMethod,
                 Remark = input.Remark,
                 Mode = CommandMode.Update,
-                Group = VerificationGroup.Update,
+                Group = ValidationGroup.Update,
             };
 
             return bus.Send(command);
@@ -82,7 +82,7 @@ namespace IDI.Central.Controllers
                 Id = id,
                 Status = TradeStatus.Success,
                 Mode = CommandMode.Update,
-                Group = VerificationGroup.Update,
+                Group = ValidationGroup.Update,
             };
 
             return bus.Send(command);
@@ -97,7 +97,7 @@ namespace IDI.Central.Controllers
                 Id = this.HttpContext.Request.Form["vchrid"].ToString().ToGuid(),
                 File = this.HttpContext.Request.Form.Files.FirstOrDefault(),
                 Mode = CommandMode.Upload,
-                Group = VerificationGroup.Upload,
+                Group = ValidationGroup.Upload,
             };
 
             return bus.Send(command);
@@ -107,7 +107,7 @@ namespace IDI.Central.Controllers
         [Permission("voucher", PermissionType.Remove)]
         public Result Delete(Guid id)
         {
-            var command = new VoucherCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
+            var command = new VoucherCommand { Id = id, Mode = CommandMode.Delete, Group = ValidationGroup.Delete };
 
             return bus.Send(command);
         }

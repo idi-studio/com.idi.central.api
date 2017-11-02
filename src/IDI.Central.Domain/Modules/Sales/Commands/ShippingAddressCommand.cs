@@ -15,36 +15,36 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
 
         public Guid CustomerId { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
-        [StringLength(MaxLength = 30, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = ValidationGroup.Create | ValidationGroup.Update)]
+        [StringLength(MaxLength = 30, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string Receiver { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
-        [StringLength(MaxLength = 20, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = ValidationGroup.Create | ValidationGroup.Update)]
+        [StringLength(MaxLength = 20, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string ContactNo { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
-        [StringLength(MaxLength = 100, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = ValidationGroup.Create | ValidationGroup.Update)]
+        [StringLength(MaxLength = 100, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string Province { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
-        [StringLength(MaxLength = 100, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = ValidationGroup.Create | ValidationGroup.Update)]
+        [StringLength(MaxLength = 100, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string City { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
-        [StringLength(MaxLength = 100, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = ValidationGroup.Create | ValidationGroup.Update)]
+        [StringLength(MaxLength = 100, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string Area { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
-        [StringLength(MaxLength = 200, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = ValidationGroup.Create | ValidationGroup.Update)]
+        [StringLength(MaxLength = 200, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string Street { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
-        [StringLength(MaxLength = 200, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = ValidationGroup.Create | ValidationGroup.Update)]
+        [StringLength(MaxLength = 200, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string Detail { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
-        [StringLength(MaxLength = 20, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = ValidationGroup.Create | ValidationGroup.Update)]
+        [StringLength(MaxLength = 20, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string Postcode { get; set; }
 
         public bool Default { get; set; }

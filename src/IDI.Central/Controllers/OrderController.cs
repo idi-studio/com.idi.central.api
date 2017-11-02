@@ -36,7 +36,7 @@ namespace IDI.Central.Controllers
                 Remark = input.Remark,
                 CustomerId = input.CustomerId,
                 Mode = CommandMode.Create,
-                Group = VerificationGroup.Create,
+                Group = ValidationGroup.Create,
             };
 
             return bus.Send(command);
@@ -63,7 +63,7 @@ namespace IDI.Central.Controllers
                 Status = input.Status,
                 Remark = input.Remark,
                 Mode = CommandMode.Update,
-                Group = VerificationGroup.Update,
+                Group = ValidationGroup.Update,
             };
 
             return bus.Send(command);
@@ -79,7 +79,7 @@ namespace IDI.Central.Controllers
                 Category = DocumentCategory.SOO,
                 Status = SaleStatus.Confirmed,
                 Mode = CommandMode.Update,
-                Group = VerificationGroup.Update,
+                Group = ValidationGroup.Update,
             };
 
             return bus.Send(command);
@@ -95,7 +95,7 @@ namespace IDI.Central.Controllers
                 Category = DocumentCategory.SOO,
                 Status = SaleStatus.Cancelled,
                 Mode = CommandMode.Update,
-                Group = VerificationGroup.Update,
+                Group = ValidationGroup.Update,
             };
 
             return bus.Send(command);
@@ -114,7 +114,7 @@ namespace IDI.Central.Controllers
         [Permission("order", PermissionType.Remove)]
         public Result Delete(Guid id)
         {
-            var command = new OrderCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
+            var command = new OrderCommand { Id = id, Mode = CommandMode.Delete, Group = ValidationGroup.Delete };
 
             return bus.Send(command);
         }

@@ -8,7 +8,7 @@ namespace IDI.Core.Infrastructure.Queries
     {
         public Guid UniqueId { get; private set; }
 
-        public VerificationGroup Group { get; set; } = VerificationGroup.Default;
+        public ValidationGroup Group { get; set; } = ValidationGroup.Default;
 
         public Condition()
         {

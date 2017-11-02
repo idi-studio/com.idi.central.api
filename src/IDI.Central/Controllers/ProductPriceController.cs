@@ -41,7 +41,7 @@ namespace IDI.Central.Controllers
                 GradeTo = input.GradeTo,
                 Enabled = input.Enabled,
                 Mode = CommandMode.Create,
-                Group = VerificationGroup.Create,
+                Group = ValidationGroup.Create,
             };
 
             return bus.Send(command);
@@ -63,7 +63,7 @@ namespace IDI.Central.Controllers
                 GradeTo = input.GradeTo,
                 Enabled = input.Enabled,
                 Mode = CommandMode.Update,
-                Group = VerificationGroup.Update,
+                Group = ValidationGroup.Update,
             };
 
             return bus.Send(command);
@@ -82,7 +82,7 @@ namespace IDI.Central.Controllers
         [Permission("product-price", PermissionType.Remove)]
         public Result Delete(Guid id)
         {
-            var command = new ProductPriceCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
+            var command = new ProductPriceCommand { Id = id, Mode = CommandMode.Delete, Group = ValidationGroup.Delete };
 
             return bus.Send(command);
         }

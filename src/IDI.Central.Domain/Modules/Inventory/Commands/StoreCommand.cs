@@ -14,8 +14,8 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Commands
     {
         public Guid Id { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
-        [StringLength(MaxLength = 50, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = ValidationGroup.Create | ValidationGroup.Update)]
+        [StringLength(MaxLength = 50, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string Name { get; set; }
 
         public bool Active { get; set; }

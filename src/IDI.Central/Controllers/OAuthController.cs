@@ -48,7 +48,7 @@ namespace IDI.Central.Controllers
                 Email = userResult.Data.Email,
                 Login = userResult.Data.Login,
                 Name = userResult.Data.Name,
-                Group = VerificationGroup.Create,
+                Group = ValidationGroup.Create,
                 Mode = CommandMode.Create,
                 Type = userResult.Data.Type
             };

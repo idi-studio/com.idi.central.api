@@ -15,13 +15,13 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
 {
     public class OAuthUserCreationCommand : Command
     {
-        [RequiredField(Group = VerificationGroup.Create)]
+        [RequiredField(Group = ValidationGroup.Create)]
         public string Name { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create)]
+        [RequiredField(Group = ValidationGroup.Create)]
         public string Login { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create)]
+        [RequiredField(Group = ValidationGroup.Create)]
         public string Email { get; set; }
 
         public OAuthType Type { get; set; }

@@ -66,7 +66,7 @@ namespace IDI.Central.Controllers
                 Role = input.Role,
                 Permissions = input.Permissions,
                 Mode = CommandMode.Update,
-                Group = VerificationGroup.Update,
+                Group = ValidationGroup.Update,
             };
 
             return bus.Send(command);
@@ -81,7 +81,7 @@ namespace IDI.Central.Controllers
                 Role = input.Role,
                 Menus = input.Menus,
                 Mode = CommandMode.Update,
-                Group = VerificationGroup.Update,
+                Group = ValidationGroup.Update,
             };
 
             return bus.Send(command);

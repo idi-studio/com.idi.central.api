@@ -4,6 +4,6 @@ namespace IDI.Core.Infrastructure.Verification
 {
     public interface IVerifiable
     {
-        VerificationGroup Group { get; set; }
+        ValidationGroup Group { get; set; }
     }
 }

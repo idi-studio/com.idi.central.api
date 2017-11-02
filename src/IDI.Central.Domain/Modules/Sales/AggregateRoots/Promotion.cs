@@ -8,8 +8,8 @@ using IDI.Core.Domain;
 
 namespace IDI.Central.Domain.Modules.Sales.AggregateRoots
 {
-    [Table("Promotion")]
-    public class Promotion  : AggregateRoot
+    [Table("Promotions")]
+    public class Promotion : AggregateRoot
     {
         [Required]
         [StringLength(30)]
@@ -19,14 +19,15 @@ namespace IDI.Central.Domain.Modules.Sales.AggregateRoots
 
         public DateTime EndTime { get; set; }
 
-        public Guid ProductId { get; set; }
-
-        public Product Product { get; set; }
-
         [Required]
         [JsonData(typeof(PromotionPrice))]
         public string Price { get; set; }
 
         public bool Enabled { get; set; }
+
+        public Guid ProductId { get; set; }
+
+        [ForeignKey("ProductId")]
+        public Product Product { get; set; }
     }
 }

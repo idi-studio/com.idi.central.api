@@ -22,7 +22,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
 
         public SaleStatus Status { get; set; }
 
-        [StringLength(MaxLength = 200, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [StringLength(MaxLength = 200, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string Remark { get; set; }
 
         public Guid? CustomerId { get; set; }

@@ -35,7 +35,7 @@ namespace IDI.Central.Controllers
                 Quantity = input.Quantity,
                 PriceId = input.PriceId,
                 Mode = CommandMode.Create,
-                Group = VerificationGroup.Create,
+                Group = ValidationGroup.Create,
             };
 
             return bus.Send(command);
@@ -53,7 +53,7 @@ namespace IDI.Central.Controllers
                 Quantity = input.Quantity,
                 PriceId = input.PriceId,
                 Mode = CommandMode.Update,
-                Group = VerificationGroup.Update,
+                Group = ValidationGroup.Update,
             };
 
             return bus.Send(command);
@@ -63,7 +63,7 @@ namespace IDI.Central.Controllers
         [Permission("order-item", PermissionType.Remove)]
         public Result Delete(Guid id)
         {
-            var command = new OrderItemCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
+            var command = new OrderItemCommand { Id = id, Mode = CommandMode.Delete, Group = ValidationGroup.Delete };
 
             return bus.Send(command);
         }

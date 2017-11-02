@@ -38,7 +38,7 @@ namespace IDI.Central.Controllers
                 Name = input.Name,
                 Active = input.Active,
                 Mode = CommandMode.Create,
-                Group = VerificationGroup.Create,
+                Group = ValidationGroup.Create,
             };
 
             return bus.Send(command);
@@ -54,7 +54,7 @@ namespace IDI.Central.Controllers
                 Name = input.Name,
                 Active = input.Active,
                 Mode = CommandMode.Update,
-                Group = VerificationGroup.Update,
+                Group = ValidationGroup.Update,
             };
 
             return bus.Send(command);
@@ -69,7 +69,7 @@ namespace IDI.Central.Controllers
                 StroeId = id,
                 Items = input.Items.Select(e => new StockItem { ProductId = e.ProductId, BinCode = e.BinCode, Quantity = e.Quantity }).ToList(),
                 Mode = CommandMode.Update,
-                Group = VerificationGroup.Update,
+                Group = ValidationGroup.Update,
             };
 
             return bus.Send(command);
@@ -84,7 +84,7 @@ namespace IDI.Central.Controllers
                 StroeId = id,
                 Items = input.Items.Select(e => new StockItem { ProductId = e.ProductId, BinCode = e.BinCode, Quantity = e.Quantity }).ToList(),
                 Mode = CommandMode.Update,
-                Group = VerificationGroup.Update,
+                Group = ValidationGroup.Update,
             };
 
             return bus.Send(command);
@@ -94,7 +94,7 @@ namespace IDI.Central.Controllers
         [Permission("store", PermissionType.Remove)]
         public Result Delete(Guid id)
         {
-            var command = new StoreCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
+            var command = new StoreCommand { Id = id, Mode = CommandMode.Delete, Group = ValidationGroup.Delete };
 
             return bus.Send(command);
         }

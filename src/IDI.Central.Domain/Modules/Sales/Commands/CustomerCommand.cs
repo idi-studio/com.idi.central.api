@@ -15,12 +15,12 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
     {
         public Guid Id { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
-        [StringLength(MaxLength = 50, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = ValidationGroup.Create | ValidationGroup.Update)]
+        [StringLength(MaxLength = 50, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string Name { get; set; }
 
-        [RequiredField(Group = VerificationGroup.Create | VerificationGroup.Update)]
-        [StringLength(MaxLength = 50, Group = VerificationGroup.Create | VerificationGroup.Update)]
+        [RequiredField(Group = ValidationGroup.Create | ValidationGroup.Update)]
+        [StringLength(MaxLength = 50, Group = ValidationGroup.Create | ValidationGroup.Update)]
         public string PhoneNum { get; set; }
 
         public int Grade { get; set; }

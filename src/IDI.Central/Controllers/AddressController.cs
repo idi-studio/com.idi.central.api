@@ -42,7 +42,7 @@ namespace IDI.Central.Controllers
                 Postcode = input.Postcode,
                 Default = input.Default,
                 Mode = CommandMode.Create,
-                Group = VerificationGroup.Create,
+                Group = ValidationGroup.Create,
             };
 
             return bus.Send(command);
@@ -66,7 +66,7 @@ namespace IDI.Central.Controllers
                 Postcode = input.Postcode,
                 Default = input.Default,
                 Mode = CommandMode.Update,
-                Group = VerificationGroup.Update,
+                Group = ValidationGroup.Update,
             };
 
             return bus.Send(command);
@@ -76,7 +76,7 @@ namespace IDI.Central.Controllers
         [Permission("address", PermissionType.Remove)]
         public Result Delete(Guid id)
         {
-            var command = new ShippingAddressCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
+            var command = new ShippingAddressCommand { Id = id, Mode = CommandMode.Delete, Group = ValidationGroup.Delete };
 
             return bus.Send(command);
         }

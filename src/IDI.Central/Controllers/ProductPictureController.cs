@@ -38,7 +38,7 @@ namespace IDI.Central.Controllers
                 Files = this.HttpContext.Request.Form.Files.ToList(),
                 Category = ImageCategory.Picture,
                 Mode = CommandMode.Create,
-                Group = VerificationGroup.Create,
+                Group = ValidationGroup.Create,
             };
 
             return bus.Send(command);
@@ -53,7 +53,7 @@ namespace IDI.Central.Controllers
                 ProductId = id,
                 Pictures = input.Pictures,
                 Mode = CommandMode.Update,
-                Group = VerificationGroup.Update,
+                Group = ValidationGroup.Update,
             };
 
             return bus.Send(command);
@@ -63,7 +63,7 @@ namespace IDI.Central.Controllers
         [Permission("product-picture", PermissionType.Remove)]
         public Result Delete(Guid id)
         {
-            var command = new ProductPictureCommand { Id = id, Mode = CommandMode.Delete, Group = VerificationGroup.Delete };
+            var command = new ProductPictureCommand { Id = id, Mode = CommandMode.Delete, Group = ValidationGroup.Delete };
 
             return bus.Send(command);
         }
