@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using IDI.Central.Common.JsonTypes;
 using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
@@ -25,9 +26,9 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
 
         public PromotionPrice Price { get; set; } = new PromotionPrice();
 
-        public bool Enabled { get; set; }
-
         public Guid ProductId { get; set; }
+
+        public bool Enabled { get; set; }
     }
 
     public class PromotionCommandHandler : CRUDTransactionCommandHandler<PromotionCommand>
@@ -36,6 +37,9 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
         {
             if (!transaction.Source<Product>().Exist(e => e.Id == command.ProductId))
                 return Result.Fail(Localization.Get(Resources.Key.Command.ProductNotExisting));
+
+            if (HasConflict(command, transaction))
+                return Result.Fail(Localization.Get(Resources.Key.Command.TimeConflict));
 
             var promotion = new Promotion
             {
@@ -63,6 +67,9 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
             if (promotion == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.RecordNotExisting));
 
+            if (HasConflict(command, transaction))
+                return Result.Fail(Localization.Get(Resources.Key.Command.TimeConflict));
+
             promotion.Subject = command.Subject;
             promotion.Price = command.Price.ToJson();
             promotion.ProductId = command.ProductId;
@@ -87,6 +94,19 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
             transaction.Commit();
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.DeleteSuccess));
+        }
+
+        private bool HasConflict(PromotionCommand command, ITransaction transaction)
+        {
+            var promotions = transaction.Source<Promotion>().Get(e => e.ProductId == command.ProductId && e.Id != command.Id);
+
+            if (promotions.Count == 0)
+                return false;
+
+            //（S2 <= E1）AND (S1 <= E2）
+            promotions = promotions.Where(e => e.StartTime <= command.EndTime && command.StartTime <= e.EndTime).ToList();
+
+            return promotions.Count > 0;
         }
     }
 }
