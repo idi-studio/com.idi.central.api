@@ -4,10 +4,10 @@ using IDI.Central.Core;
 using IDI.Central.Domain.Modules.Sales.Commands;
 using IDI.Central.Domain.Modules.Sales.Queries;
 using IDI.Central.Models.Sales;
-using IDI.Central.Models.Sales.Inputs;
 using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
+using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Mvc;
 
@@ -50,8 +50,8 @@ namespace IDI.Central.Controllers
             {
                 ProductId = input.ProductId,
                 Subject = input.Subject,
-                StartTime = input.StartTime,
-                EndTime = input.EndTime,
+                StartTime = input.StartTime.AsDate(),
+                EndTime = input.EndTime.AsDate(),
                 Enabled = input.Enabled,
                 Price = input.Price,
                 Mode = CommandMode.Create,
@@ -70,8 +70,8 @@ namespace IDI.Central.Controllers
                 Id = id,
                 ProductId = input.ProductId,
                 Subject = input.Subject,
-                StartTime = input.StartTime,
-                EndTime = input.EndTime,
+                StartTime = input.StartTime.AsDate(),
+                EndTime = input.EndTime.AsDate(),
                 Enabled = input.Enabled,
                 Price = input.Price,
                 Mode = CommandMode.Update,

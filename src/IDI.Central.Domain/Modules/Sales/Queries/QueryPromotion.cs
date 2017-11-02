@@ -23,12 +23,13 @@ namespace IDI.Central.Domain.Modules.Sales.Queries
 
         public override Result<PromotionModel> Execute(QueryPromotionCondition condition)
         {
-            var promotion = this.Promotions.Include(e => e.Price).Find(condition.Id);
+            var promotion = this.Promotions.Include(e => e.Product).Find(condition.Id);
 
             var model = new PromotionModel
             {
                 Id = promotion.Id,
                 ProductId = promotion.ProductId,
+                ProductName = promotion.Product.Name,
                 Subject = promotion.Subject,
                 StartTime = promotion.StartTime.AsShortDate(),
                 EndTime = promotion.EndTime.AsShortDate(),

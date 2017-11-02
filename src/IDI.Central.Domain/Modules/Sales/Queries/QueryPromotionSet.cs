@@ -19,13 +19,14 @@ namespace IDI.Central.Domain.Modules.Sales.Queries
 
         public override Result<Set<PromotionModel>> Execute(QueryPromotionSetCondition condition)
         {
-            var promotions = this.Promotions.Include(e => e.Price).Get();
+            var promotions = this.Promotions.Include(e => e.Product).Get();
 
             var collection = promotions.OrderBy(e => e.StartTime).Select(e => new PromotionModel
             {
                 Id = e.Id,
                 ProductId = e.ProductId,
                 Subject = e.Subject,
+                ProductName = e.Product.Name,
                 StartTime = e.StartTime.AsShortDate(),
                 EndTime = e.EndTime.AsShortDate(),
                 Enabled = e.Enabled,

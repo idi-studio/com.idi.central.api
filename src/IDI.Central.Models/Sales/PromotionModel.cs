@@ -25,6 +25,9 @@ namespace IDI.Central.Models.Sales
         [JsonProperty("pid")]
         public Guid ProductId { get; set; }
 
+        [JsonProperty("pname")]
+        public string ProductName { get; set; }
+
         [JsonProperty("enabled")]
         public bool Enabled { get; set; }
     }

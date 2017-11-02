@@ -75,7 +75,8 @@ namespace IDI.Central.Domain.Common
                 Menus = new List<Menu>
                 {
                     new Menu { SN=4010, Name="Orders", Route="order/list"  },
-                    new Menu { SN=4020, Name="Customers", Route="cust/list"  }
+                    new Menu { SN=4020, Name="Customers", Route="cust/list"  },
+                    new Menu { SN=4030, Name="Promotions", Route="prom/list"  }
                 }
             };
 
