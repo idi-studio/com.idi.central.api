@@ -6,26 +6,26 @@ namespace IDI.Core.Common.Extensions
     {
         public static string AsShortDate(this DateTime date)
         {
-            return date.ToString("yyyy/M/d");
+            return date.ToString("yyyy/MM/dd");
         }
 
         public static string AsShortDate(this DateTime? date)
         {
             if (date.HasValue)
-                return date.Value.ToString("yyyy/M/d");
+                return date.Value.ToString("yyyy/MM/dd");
 
             return string.Empty;
         }
 
         public static string AsLongDate(this DateTime date)
         {
-            return date.ToString("yyyy/M/d HH:mm:ss");
+            return date.ToString("yyyy/MM/dd HH:mm:ss");
         }
 
         public static string AsLongDate(this DateTime? date)
         {
             if (date.HasValue)
-                return date.Value.ToString("yyyy/M/d HH:mm:ss");
+                return date.Value.ToString("yyyy/MM/dd HH:mm:ss");
 
             return string.Empty;
         }

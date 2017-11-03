@@ -11,10 +11,10 @@ namespace IDI.Central.Models.Sales
         public string Subject { get; set; }
 
         [JsonProperty("start")]
-        public string StartTime { get; set; }
+        public DateTime StartTime { get; set; }
 
         [JsonProperty("end")]
-        public string EndTime { get; set; }
+        public DateTime EndTime { get; set; }
 
         [JsonProperty("price")]
         public PromotionPrice Price { get; set; } = new PromotionPrice();

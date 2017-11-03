@@ -27,8 +27,8 @@ namespace IDI.Central.Domain.Modules.Sales.Queries
                 ProductId = e.ProductId,
                 Subject = e.Subject,
                 ProductName = e.Product.Name,
-                StartTime = e.StartTime.AsShortDate(),
-                EndTime = e.EndTime.AsShortDate(),
+                StartTime = e.StartTime,//.AsShortDate(),
+                EndTime = e.EndTime,//.AsShortDate(),
                 Enabled = e.Enabled,
                 Price = e.Price.To<PromotionPrice>(),
             }).ToList();

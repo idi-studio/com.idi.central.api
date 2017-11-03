@@ -31,8 +31,8 @@ namespace IDI.Central.Domain.Modules.Sales.Queries
                 ProductId = promotion.ProductId,
                 ProductName = promotion.Product.Name,
                 Subject = promotion.Subject,
-                StartTime = promotion.StartTime.AsShortDate(),
-                EndTime = promotion.EndTime.AsShortDate(),
+                StartTime = promotion.StartTime,//.AsShortDate(),
+                EndTime = promotion.EndTime,//.AsShortDate(),
                 Enabled = promotion.Enabled,
                 Price = promotion.Price.To<PromotionPrice>(),
             };
