@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
+using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.Verification;
+using IDI.Core.Infrastructure.Verification.Attributes;
 using IDI.Core.Tests.TestUtils;
-using IDI.Core.Tests.TestUtils.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IDI.Core.Tests.Infrastructure
@@ -11,6 +12,14 @@ namespace IDI.Core.Tests.Infrastructure
     [TestCategory(Contants.TestCategory.Verification)]
     public class RequiredFieldVerificationUnitTests
     {
+        #region TestObjects
+        public class TestObjectA : Command
+        {
+            [RequiredField(DisplayName = "测试字段")]
+            public string Field { get; set; }
+        }
+        #endregion
+
         [TestInitialize]
         public void Setup()
         {
@@ -18,7 +27,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestRequiredFieldVerification_Fail_ForEmptyValue()
+        public void It_Should_Not_Be_Pass_When_EmptyValue()
         {
             var model = new TestObjectA { Field = string.Empty };
 
@@ -32,7 +41,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestRequiredFieldVerification_Fail_ForNullValue()
+        public void It_Should_Not_Be_Pass_When_NullValue()
         {
             var model = new TestObjectA { Field = null };
 
@@ -46,7 +55,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestRequiredFieldVerification_Success_ForValue()
+        public void It_Should_Be_Pass_When_HasValue()
         {
             var model = new TestObjectA { Field = "test" };
 

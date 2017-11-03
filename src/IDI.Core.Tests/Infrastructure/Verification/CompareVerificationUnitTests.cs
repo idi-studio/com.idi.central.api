@@ -74,7 +74,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void It_Should_Be_Not_Pass_When_StartTime_NotEqualTo_EndTime()
+        public void It_Should_Not_Be_Pass_When_StartTime_NotEqualTo_EndTime()
         {
             var model = new EqualToModel { StartTime = current.Date, EndTime = current.Date.AddDays(1) };
 
@@ -101,7 +101,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void It_Should_Be_Not_Pass_When_StartTime_NotLessThan_EndTime()
+        public void It_Should_Not_Be_Pass_When_StartTime_NotLessThan_EndTime()
         {
             var model = new LessThanModel { StartTime = current.Date.AddDays(1), EndTime = current.Date };
 
@@ -135,7 +135,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void It_Should_Be_Not_Pass_When_StartTime_NotLessThanOrEqualTo_EndTime()
+        public void It_Should_Not_Be_Pass_When_StartTime_NotLessThanOrEqualTo_EndTime()
         {
             var model = new LessThanOrEqualToModel { StartTime = current.Date, EndTime = current.Date.AddDays(-1) };
 
@@ -162,7 +162,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void It_Should_Be_Not_Pass_When_StartTime_NotGreaterThan_EndTime()
+        public void It_Should_Not_Be_Pass_When_StartTime_NotGreaterThan_EndTime()
         {
             var model = new GreaterThanModel { StartTime = current.Date, EndTime = current.Date.AddDays(1) };
 
@@ -196,7 +196,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void It_Should_Be_Not_Pass_When_StartTime_NotGreaterThanOrEqualTo_EndTime()
+        public void It_Should_Not_Be_Pass_When_StartTime_NotGreaterThanOrEqualTo_EndTime()
         {
             var model = new GreaterThanOrEqualToModel { StartTime = current.Date.AddDays(-1), EndTime = current.Date };
 

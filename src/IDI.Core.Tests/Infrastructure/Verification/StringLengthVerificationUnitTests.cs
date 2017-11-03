@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
+using IDI.Core.Infrastructure.Commands;
 using IDI.Core.Infrastructure.Verification;
+using IDI.Core.Infrastructure.Verification.Attributes;
 using IDI.Core.Tests.TestUtils;
-using IDI.Core.Tests.TestUtils.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IDI.Core.Tests.Infrastructure
@@ -11,6 +12,24 @@ namespace IDI.Core.Tests.Infrastructure
     [TestCategory(Contants.TestCategory.Verification)]
     public class StringLengthVerificationUnitTests
     {
+        #region TestObjects
+        public class TestObjectB : Command
+        {
+            [StringLength(DisplayName = "测试字段", MinLength = 5, MaxLength = 10)]
+            public string Field { get; set; }
+        }
+        public class TestObjectC : Command
+        {
+            [StringLength(DisplayName = "测试字段", MaxLength = 10)]
+            public string Field { get; set; }
+        }
+        public class TestObjectD : Command
+        {
+            [StringLength(DisplayName = "测试字段", MinLength = 5)]
+            public string Field { get; set; }
+        }
+        #endregion
+
         [TestInitialize]
         public void Setup()
         {
@@ -18,7 +37,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestStringLengthVerification_Fail_ForRangeLengthLimite_LessThanMinLength()
+        public void It_Should_Not_Be_Pass_When_RangeLengthLimite_LessThanMinLength()
         {
             var model = new TestObjectB { Field = "1234" };
 
@@ -32,7 +51,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestStringLengthVerification_Fail_ForRangeLengthLimite_GreaterThanMaxLength()
+        public void It_Should_Not_Be_Pass_When_RangeLengthLimite_GreaterThanMaxLength()
         {
             var model = new TestObjectB { Field = "12345678901" };
 
@@ -46,7 +65,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestStringLengthVerification_Success_ForRangeLengthLimite_InRange()
+        public void It_Should_Be_Pass_When_RangeLengthLimite_InRange()
         {
             var model = new TestObjectB { Field = "123456789" };
 
@@ -59,7 +78,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestStringLengthVerification_Success_ForRangeLengthLimite_EqualToMinLength()
+        public void It_Should_Be_Pass_When_RangeLengthLimite_EqualToMinLength()
         {
             var model = new TestObjectB { Field = "12345" };
 
@@ -72,7 +91,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestStringLengthVerification_Success_ForRangeLengthLimite_EqualToMaxLength()
+        public void It_Should_Be_Pass_When_RangeLengthLimite_EqualToMaxLength()
         {
             var model = new TestObjectB { Field = "1234567890" };
 
@@ -85,7 +104,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestStringLengthVerification_Success_ForMaxLengthLimite_NullValue()
+        public void It_Should_Be_Pass_When_MaxLengthLimite_NullValue()
         {
             var model = new TestObjectC { Field = null };
 
@@ -98,7 +117,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestStringLengthVerification_Success_ForMaxLengthLimite_EmptyValue()
+        public void It_Should_Be_Pass_When_MaxLengthLimite_EmptyValue()
         {
             var model = new TestObjectC { Field = "" };
 
@@ -111,7 +130,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestStringLengthVerification_Success_ForMaxLengthLimite_LessThanToMaxLength()
+        public void It_Should_Be_Pass_When_MaxLengthLimite_LessThanToMaxLength()
         {
             var model = new TestObjectC { Field = "123456789" };
 
@@ -124,7 +143,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestStringLengthVerification_Success_ForMaxLengthLimite_EqualToMaxLength()
+        public void It_Should_Be_Pass_When_MaxLengthLimite_EqualToMaxLength()
         {
             var model = new TestObjectC { Field = "1234567890" };
 
@@ -137,7 +156,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestStringLengthVerification_Fail_ForMaxLengthLimite_GreaterThanMaxLength()
+        public void It_Should_Not_Be_Pass_When_MaxLengthLimite_GreaterThanMaxLength()
         {
             var model = new TestObjectC { Field = "12345678901" };
 
@@ -151,7 +170,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestStringLengthVerification_Success_ForMinLengthLimite_EqualToMinLength()
+        public void It_Should_Be_Pass_When_MinLengthLimite_EqualToMinLength()
         {
             var model = new TestObjectD { Field = "12345" };
 
@@ -164,7 +183,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestStringLengthVerification_Success_ForMinLengthLimite_GreaterThanMinLength()
+        public void It_Should_Be_Pass_When_MinLengthLimite_GreaterThanMinLength()
         {
             var model = new TestObjectD { Field = "123456" };
 
@@ -177,7 +196,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestStringLengthVerification_Fail_ForMinLengthLimite_LessThanMinLength()
+        public void It_Should_Not_Be_Pass_When_MinLengthLimite_LessThanMinLength()
         {
             var model = new TestObjectD { Field = "1234" };
 
@@ -191,7 +210,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestStringLengthVerification_Fail_ForMinLengthLimite_EmptyValue()
+        public void It_Should_Not_Be_Pass_When_MinLengthLimite_EmptyValue()
         {
             var model = new TestObjectD { Field = "" };
 
@@ -205,7 +224,7 @@ namespace IDI.Core.Tests.Infrastructure
         }
 
         [TestMethod]
-        public void TestStringLengthVerification_Fail_ForMinLengthLimite_NullValue()
+        public void It_Should_Not_Be_Pass_When_MinLengthLimite_NullValue()
         {
             var model = new TestObjectD { Field = null };
 
