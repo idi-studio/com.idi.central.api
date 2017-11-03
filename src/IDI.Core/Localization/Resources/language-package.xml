@@ -6,7 +6,7 @@
   <item prefix="verification" name="less-than" en="'{0}' should be less than '{1}'." chs="'{0}'应小于'{1}'." />
   <item prefix="verification" name="less-than-or-equal-to" en="'{0}' should be less than or equal to '{1}'." chs="'{0}'应小于或等于'{1}'." />
   <item prefix="verification" name="greater-than" en="'{0}' should be greater than '{1}'." chs="'{0}'应大于'{1}'." />
-  <item prefix="verification" name="greater-than-or-equal-to" en="'{0}' should be greater than or equal to '{1}'." chs="'{0}'大于或等于'{1}'." />
+  <item prefix="verification" name="greater-than-or-equal-to" en="'{0}' should be greater than or equal to '{1}'." chs="'{0}'应大于或等于'{1}'." />
   <item prefix="verification" name="cannot-compare" en="Cannot compare '{0}' with '{1}'." chs="无法比较'{0}'和'{1}'." />
 
   <item prefix="verification" name="characters-range" en="'{0}' maximum {1} to {2} characters." chs="'{0}'最多{1}到{2}个字符!" />

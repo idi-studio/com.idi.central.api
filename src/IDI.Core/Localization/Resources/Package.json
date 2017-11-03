@@ -62,7 +62,7 @@
 {
     "language": "chs",
     "name": "greater-than-or-equal-to",
-    "value": "'{0}'大于或等于'{1}'.",
+    "value": "'{0}'应大于或等于'{1}'.",
     "prefix": "verification"
 },
 {
