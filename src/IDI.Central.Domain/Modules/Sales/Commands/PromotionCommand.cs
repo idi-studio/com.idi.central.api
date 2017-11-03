@@ -43,11 +43,11 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
 
             var promotion = new Promotion
             {
-                Subject = command.Subject,
+                Subject = command.Subject.TrimContiguousSpaces(),
                 Price = command.Price.ToJson(),
                 ProductId = command.ProductId,
-                StartTime = command.StartTime,
-                EndTime = command.EndTime,
+                StartTime = command.StartTime.FirstMoment(),
+                EndTime = command.EndTime.LastMoment(),
                 Enabled = command.Enabled
             };
 
@@ -70,11 +70,11 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
             if (HasConflict(command, transaction))
                 return Result.Fail(Localization.Get(Resources.Key.Command.TimeConflict));
 
-            promotion.Subject = command.Subject;
+            promotion.Subject = command.Subject.TrimContiguousSpaces();
             promotion.Price = command.Price.ToJson();
             promotion.ProductId = command.ProductId;
-            promotion.StartTime = command.StartTime;
-            promotion.EndTime = command.EndTime;
+            promotion.StartTime = command.StartTime.FirstMoment();
+            promotion.EndTime = command.EndTime.LastMoment();
             promotion.Enabled = command.Enabled;
 
             transaction.Update(promotion);
@@ -104,7 +104,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
                 return false;
 
             //（S2 <= E1）AND (S1 <= E2）
-            promotions = promotions.Where(e => e.StartTime <= command.EndTime && command.StartTime <= e.EndTime).ToList();
+            promotions = promotions.Where(e => e.StartTime <= command.EndTime.LastMoment() && command.StartTime.FirstMoment() <= e.EndTime).ToList();
 
             return promotions.Count > 0;
         }

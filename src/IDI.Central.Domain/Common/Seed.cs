@@ -331,7 +331,7 @@ namespace IDI.Central.Domain.Common
                 {
                     UserName = $"cust{phone}",
                     Salt = salt,
-                    Password = Cryptography.Encrypt(phone.Posterior(8), salt),
+                    Password = Cryptography.Encrypt(phone.Fix(8), salt),
                     IsLocked = true,
                     LockTime = DateTime.MaxValue,
                     Profile = new UserProfile

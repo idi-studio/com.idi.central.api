@@ -39,5 +39,15 @@ namespace IDI.Core.Common.Extensions
 
             return date;
         }
+
+        public static DateTime FirstMoment(this DateTime day)
+        {
+            return day.Date;
+        }
+
+        public static DateTime LastMoment(this DateTime day)
+        {
+            return day.Date.Add(new TimeSpan(23, 59, 59));
+        }
     }
 }

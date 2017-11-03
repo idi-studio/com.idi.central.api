@@ -72,7 +72,7 @@ namespace System
             return guid.ToString("N").ToUpper();
         }
 
-        public static string Posterior(this string value, int digit, char placeholder = '0')
+        public static string Fix(this string value, int digit, char placeholder = '0')
         {
             string result = value;
 
