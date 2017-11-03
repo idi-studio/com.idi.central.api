@@ -8,7 +8,7 @@ namespace IDI.Core.Infrastructure.Verification.Attributes
     /// <summary>
     /// 字符长度验证
     /// </summary>
-    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class StringLengthAttribute : ValidationAttribute
     {
         public string DisplayName { get; set; }

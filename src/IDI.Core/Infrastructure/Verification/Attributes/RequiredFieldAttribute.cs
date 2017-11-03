@@ -8,7 +8,7 @@ namespace IDI.Core.Infrastructure.Verification.Attributes
     /// <summary>
     /// 必填验证
     /// </summary>
-    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class RequiredFieldAttribute : ValidationAttribute
     {
         public string DisplayName { get; set; }

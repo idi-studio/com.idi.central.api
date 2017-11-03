@@ -13,6 +13,78 @@
 },
 {
     "language": "chs",
+    "name": "equal-to",
+    "value": "'{0}'应等于'{1}'.",
+    "prefix": "verification"
+},
+{
+    "language": "en",
+    "name": "equal-to",
+    "value": "'{0}' should be equal to '{1}'.",
+    "prefix": "verification"
+},
+{
+    "language": "chs",
+    "name": "less-than",
+    "value": "'{0}'应小于'{1}'.",
+    "prefix": "verification"
+},
+{
+    "language": "en",
+    "name": "less-than",
+    "value": "'{0}' should be less than '{1}'.",
+    "prefix": "verification"
+},
+{
+    "language": "chs",
+    "name": "less-than-or-equal-to",
+    "value": "'{0}'应小于或等于'{1}'.",
+    "prefix": "verification"
+},
+{
+    "language": "en",
+    "name": "less-than-or-equal-to",
+    "value": "'{0}' should be less than or equal to '{1}'.",
+    "prefix": "verification"
+},
+{
+    "language": "chs",
+    "name": "greater-than",
+    "value": "'{0}'应大于'{1}'.",
+    "prefix": "verification"
+},
+{
+    "language": "en",
+    "name": "greater-than",
+    "value": "'{0}' should be greater than '{1}'.",
+    "prefix": "verification"
+},
+{
+    "language": "chs",
+    "name": "greater-than-or-equal-to",
+    "value": "'{0}'大于或等于'{1}'.",
+    "prefix": "verification"
+},
+{
+    "language": "en",
+    "name": "greater-than-or-equal-to",
+    "value": "'{0}' should be greater than or equal to '{1}'.",
+    "prefix": "verification"
+},
+{
+    "language": "chs",
+    "name": "cannot-compare",
+    "value": "无法比较'{0}'和'{1}'.",
+    "prefix": "verification"
+},
+{
+    "language": "en",
+    "name": "cannot-compare",
+    "value": "Cannot compare '{0}' with '{1}'.",
+    "prefix": "verification"
+},
+{
+    "language": "chs",
     "name": "characters-range",
     "value": "'{0}'最多{1}到{2}个字符!",
     "prefix": "verification"
@@ -189,6 +261,18 @@
     "language": "en",
     "name": "querier-error",
     "value": "Querier executed with error.",
+    "prefix": "querier"
+},
+{
+    "language": "chs",
+    "name": "querier-cannot-found",
+    "value": "未找到任何相关查询器!",
+    "prefix": "querier"
+},
+{
+    "language": "en",
+    "name": "querier-cannot-found",
+    "value": "Cannot found any querier.",
     "prefix": "querier"
 },
 {

@@ -8,7 +8,7 @@ namespace IDI.Core.Infrastructure.Verification.Attributes
     /// <summary>
     /// 小数范围验证
     /// </summary>
-    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class DecimalRangeAttribute : ValidationAttribute
     {
         public string DisplayName { get; set; }

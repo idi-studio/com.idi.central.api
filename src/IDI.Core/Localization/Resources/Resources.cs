@@ -22,6 +22,12 @@ namespace IDI.Core.Localization.Packages
 		{
 						public class Verification {
 								public const string Required = "required";
+								public const string EqualTo = "equal-to";
+								public const string LessThan = "less-than";
+								public const string LessThanOrEqualTo = "less-than-or-equal-to";
+								public const string GreaterThan = "greater-than";
+								public const string GreaterThanOrEqualTo = "greater-than-or-equal-to";
+								public const string CannotCompare = "cannot-compare";
 								public const string CharactersRange = "characters-range";
 								public const string CharactersMaximum = "characters-maximum";
 								public const string CharactersMinimum = "characters-minimum";
