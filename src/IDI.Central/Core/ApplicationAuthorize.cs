@@ -63,7 +63,12 @@ namespace IDI.Central.Core
                     return base.OnActionExecutionAsync(context, next);
                 }
 
-                if (permission != null && Authorization.HasPermission(context.UserRoles(), permission))
+                if (permission != null && permission.Everyone)
+                {
+                    Log(username, permission, AuthorizeResult.Accept);
+                    return base.OnActionExecutionAsync(context, next);
+                }
+                else if (permission != null && permission.Everyone == false && Authorization.HasPermission(context.UserRoles(), permission))
                 {
                     Log(username, permission, AuthorizeResult.Accept);
                     return base.OnActionExecutionAsync(context, next);
@@ -114,7 +119,7 @@ namespace IDI.Central.Core
 
             var permission = context.ActionDescriptor.FilterDescriptors.FirstOrDefault(e => e.Filter.GetType() == typeof(PermissionAttribute)).Filter as PermissionAttribute;
 
-            return permission != null ? new Permission(module.Name, permission.Name, permission.Type) : null;
+            return permission != null ? new Permission(module.Name, permission.Name, permission.Type, permission.Everyone) : null;
         }
 
         public static string UserName(this ActionExecutingContext context)

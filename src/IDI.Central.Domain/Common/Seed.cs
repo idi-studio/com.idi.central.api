@@ -106,7 +106,8 @@ namespace IDI.Central.Domain.Common
                 Code = p.Code,
                 Module = p.Module,
                 Type = p.Type,
-                Name = p.Name
+                Name = p.Name,
+                Everyone = p.Everyone,
             }).ToList();
         }
 

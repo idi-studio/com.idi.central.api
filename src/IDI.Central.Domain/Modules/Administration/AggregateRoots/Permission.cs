@@ -22,5 +22,7 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
         [Required]
         [StringLength(20)]
         public string Module { get; set; }
+
+        public bool Everyone { get; set; }
     }
 }

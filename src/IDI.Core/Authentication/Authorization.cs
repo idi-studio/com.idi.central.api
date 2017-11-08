@@ -45,7 +45,7 @@ namespace IDI.Core.Authentication
 
                 var permissions = type.GetMethods().Where(m => m.GetCustomAttribute<PermissionAttribute>() != null).Select(m => m.GetCustomAttribute<PermissionAttribute>());
 
-                Permissions.AddRange(permissions.Select(p => new Permission(module.Name, p.Name, p.Type)));
+                Permissions.AddRange(permissions.Select(p => new Permission(module.Name, p.Name, p.Type,p.Everyone)));
             }
 
             RolePermissions = GroupByRole(this.Permissions);

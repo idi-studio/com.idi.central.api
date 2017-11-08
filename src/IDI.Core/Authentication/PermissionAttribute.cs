@@ -11,10 +11,13 @@ namespace IDI.Core.Authentication
 
         public PermissionType Type { get; private set; }
 
-        public PermissionAttribute(string name, PermissionType type)
+        public bool Everyone { get; private set; }
+
+        public PermissionAttribute(string name, PermissionType type, bool everyone = false)
         {
             this.Name = name;
             this.Type = type;
+            this.Everyone = everyone;
         }
     }
 }

@@ -27,7 +27,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
 
         public override Result<RolePermissionModel> Execute(QueryRolePermissionCondition condition)
         {
-            var permissions = Permissions.Get();
+            var permissions = Permissions.Get(e => !e.Everyone);
             var role = Roles.Find(e => e.Name == condition.Name);
             var current = role.Permissions.To<Dictionary<string, List<string>>>();
 

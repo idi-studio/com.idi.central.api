@@ -11,6 +11,8 @@ namespace IDI.Core.Authentication
         PermissionType Type { get; }
 
         string Module { get; }
+
+        bool Everyone { get; }
     }
 
     public sealed class Permission : IPermission
@@ -23,11 +25,14 @@ namespace IDI.Core.Authentication
 
         public string Code => $"{Module}-{Name}-{Type.ToString()}".ToLower();
 
-        public Permission(string module, string name, PermissionType type)
+        public bool Everyone { get; private set; }
+
+        public Permission(string module, string name, PermissionType type, bool everyone)
         {
             Name = name;
             Module = module;
             Type = type;
+            Everyone = everyone;
         }
     }
 }
