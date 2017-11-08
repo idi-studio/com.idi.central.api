@@ -126,7 +126,7 @@ namespace IDI.Central.Domain.Common
 
         public RoleCollection()
         {
-            this.Administrators = new Role { Name = Configuration.Roles.Administrators, Descrition = "The administrator of system." };
+            this.Administrators = new Role { Name = Configuration.Roles.Administrators, Descrition = "The administrator of system.", UserDefined = false };
             this.Staffs = new Role { Name = Configuration.Roles.Staffs, Descrition = "The staff of system." };
             this.Customers = new Role { Name = Configuration.Roles.Customers, Descrition = "The customer of system." };
         }
@@ -145,6 +145,7 @@ namespace IDI.Central.Domain.Common
                 UserName = "administrator",
                 Salt = salt,
                 Password = Cryptography.Encrypt("p@55w0rd", salt),
+                UserDefined = false,
                 Profile = new UserProfile { Name = "Administrator", Photo = "admin.jpg" },
             };
         }

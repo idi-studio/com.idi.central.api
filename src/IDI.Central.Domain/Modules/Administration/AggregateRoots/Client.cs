@@ -19,6 +19,6 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
         [StringLength(256)]
         public string Salt { get; set; }
 
-        public bool IsActive { get; set; } = true;
+        public bool Active { get; set; } = true;
     }
 }

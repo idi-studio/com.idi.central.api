@@ -17,7 +17,9 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
         [StringLength(200)]
         public string Descrition { get; set; }
 
-        public bool IsActive { get; set; } = true;
+        public bool Active { get; set; } = true;
+
+        public bool UserDefined { get; set; } = true;
 
         [JsonData(typeof(Dictionary<string, List<string>>))]
         public string Permissions { get; set; }

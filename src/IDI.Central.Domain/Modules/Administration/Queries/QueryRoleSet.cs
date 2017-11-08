@@ -24,7 +24,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
                 Id = r.Id,
                 Name = r.Name,
                 Descrition = r.Descrition,
-                IsActive = r.IsActive,
+                IsActive = r.Active,
                 Permissions = r.Permissions
             }).OrderBy(e => e.Name).ToList();
 

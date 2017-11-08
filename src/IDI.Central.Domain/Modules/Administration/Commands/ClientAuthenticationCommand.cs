@@ -39,7 +39,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             if (client == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidClient));
 
-            if (!client.IsActive)
+            if (!client.Active)
                 return Result.Fail(Localization.Get(Resources.Key.Command.ClientDisabled));
 
             string secret = Cryptography.Encrypt(command.SecretKey, client.Salt);

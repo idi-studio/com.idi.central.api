@@ -40,7 +40,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             if (user == null)
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidUsernameOrPassword));
 
-            if (!user.IsActive)
+            if (!user.Active)
                 return Result.Fail(Localization.Get(Resources.Key.Command.AccountInactive));
 
             if (user.IsLocked)

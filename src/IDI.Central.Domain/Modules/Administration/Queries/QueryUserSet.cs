@@ -24,7 +24,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
             {
                 Id = r.Id,
                 UserName = r.UserName,
-                IsActive = r.IsActive,
+                IsActive = r.Active,
                 Name = r.Profile.Name,
                 Gender = r.Profile.Gender,
                 Birthday = r.Profile.Birthday.AsShortDate(),
