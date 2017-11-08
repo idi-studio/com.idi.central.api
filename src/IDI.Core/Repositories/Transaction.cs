@@ -21,23 +21,23 @@ namespace IDI.Core.Repositories
             this.context = context;
             this.context.BeforeCommitted = (entity, state, timestamp) =>
             {
-                var name = "anonymous";
+                var username = "anonymous";
 
                 if (user != null && user.IsAuthenticated)
-                    name = user.Name;
+                    username = user.Name;
 
                 switch (state)
                 {
                     case EntityState.Added:
                         entity.TransactionId = this.TransactionId;
-                        entity.CreatedBy = user.Name;
+                        entity.CreatedBy = username;
                         entity.CreatedAt = timestamp;
-                        entity.LastUpdatedBy = user.Name;
+                        entity.LastUpdatedBy = username;
                         entity.LastUpdatedAt = timestamp;
                         break;
                     case EntityState.Modified:
                         entity.TransactionId = this.TransactionId;
-                        entity.LastUpdatedBy = user.Name;
+                        entity.LastUpdatedBy = username;
                         entity.LastUpdatedAt = timestamp;
                         break;
                     default:

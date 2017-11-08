@@ -18,7 +18,7 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
 
         public override Result<Set<UserModel>> Execute(QueryUserSetCondition condition)
         {
-            var users = this.Users.Include(e => e.Profile).Get();
+            var users = this.Users.Include(e => e.Profile).Get(e => e.UserDefined);
 
             var collection = users.OrderBy(r => r.UserName).Select(r => new UserModel
             {
