@@ -1,4 +1,5 @@
-﻿using IDI.Core.Common;
+﻿using IDI.Core.Authentication;
+using IDI.Core.Common;
 using IDI.Core.Infrastructure.DependencyInjection;
 using IDI.Core.Localization;
 
@@ -10,6 +11,9 @@ namespace IDI.Core.Infrastructure.Queries
     {
         [Injection]
         public ILocalization Localization { get; set; }
+
+        [Injection]
+        public ICurrentUser CurrentUser { get; set; }
 
         public abstract Result<TResult> Execute(TCondition condition);
     }

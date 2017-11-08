@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using IDI.Central.Domain.Localization;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Models.Administration;
 using IDI.Core.Common;
@@ -29,6 +30,9 @@ namespace IDI.Central.Domain.Modules.Administration.Queries
 
         public override Result<MyProfile> Execute(QueryMyProfileCondition condition)
         {
+            if (condition.UserName != CurrentUser.Name)
+                return Result.Fail<MyProfile>(Localization.Get(Resources.Key.Command.OperationLimited));
+
             var user = this.Users.Include(e => e.Profile).Include(e => e.Role).Find(u => u.UserName == condition.UserName);
 
             var modules = this.Modules.Include(e => e.Menus).Get();
