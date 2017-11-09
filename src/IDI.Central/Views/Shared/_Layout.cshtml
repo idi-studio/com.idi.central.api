@@ -31,7 +31,6 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a target="_blank" asp-area="" asp-controller="Home" asp-action="Central">Central</a></li>
                     <li><a target="_blank" asp-area="" asp-controller="Home" asp-action="API">APIs</a></li>
                     <li><a target="_blank" asp-area="" asp-controller="Home" asp-action="GitHub">GitHub</a></li>
@@ -44,7 +43,11 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2017 - IDI Studio &trade;</p>
+            <div class="row">
+                <div class="col-xs-4">&copy; 2017 - IDI Studio &trade;</div>
+                <div class="col-xs-4"></div>
+                <div class="col-xs-4"><a class="pull-right" style="color:black" target="_blank" href="http://www.miitbeian.gov.cn">蜀ICP备17037852号</a></div>
+            </div>
         </footer>
     </div>
 
