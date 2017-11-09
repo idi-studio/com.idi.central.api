@@ -46,8 +46,6 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             if (user.IsLocked)
                 return Result.Fail(Localization.Get(Resources.Key.Command.AccountLocked));
 
-            //string hashed = Cryptography.Encrypt(command.Password, user.Salt);
-
             if (!user.SecretKey().Verify(command.Password))
                 return Result.Fail(Localization.Get(Resources.Key.Command.InvalidUsernameOrPassword));
 

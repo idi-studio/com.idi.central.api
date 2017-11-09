@@ -41,8 +41,6 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
                 Grade = command.Grade,
             };
 
-            var salt = Cryptography.Salt();
-
             customer.User = new User
             {
                 UserName = $"cust{command.PhoneNum}",

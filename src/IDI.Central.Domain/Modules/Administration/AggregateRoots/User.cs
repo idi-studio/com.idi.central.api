@@ -12,10 +12,6 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
         [StringLength(20)]
         public string UserName { get; set; }
 
-        //[Required]
-        //[StringLength(256)]
-        //public string Salt { get; set; }
-
         [Required]
         [StringLength(1024)]
         public string SecretKey { get; set; }

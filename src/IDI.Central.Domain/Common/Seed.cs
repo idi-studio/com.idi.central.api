@@ -11,7 +11,6 @@ using IDI.Central.Domain.Modules.BasicInfo;
 using IDI.Central.Domain.Modules.BasicInfo.AggregateRoots;
 using IDI.Central.Domain.Modules.Inventory.AggregateRoots;
 using IDI.Central.Domain.Modules.Sales.AggregateRoots;
-using IDI.Central.Models.BasicInfo;
 using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
 using IDI.Core.Infrastructure;
@@ -139,13 +138,9 @@ namespace IDI.Central.Domain.Common
 
         public UserCollection()
         {
-            string salt = Cryptography.Salt();
-
             this.Administrator = new User
             {
                 UserName = "administrator",
-                //Salt = salt,
-                //Password = Cryptography.Encrypt("p@55w0rd", salt),
                 SecretKey = Cryptography.NewSecretKey("p@55w0rd").ToString(),
                 UserDefined = false,
                 Profile = new UserProfile { Name = "Administrator", Photo = "admin.jpg" },
@@ -161,8 +156,6 @@ namespace IDI.Central.Domain.Common
 
         public ClientCollection()
         {
-            string salt = Cryptography.Salt();
-
             this.Central = new Client { ClientId = Configuration.Clients.Central, SecretKey = Cryptography.NewSecretKey("6ED5C4781F3A4C82B66899917D67784E").ToString() };
             this.Wechat = new Client { ClientId = Configuration.Clients.Wechat, SecretKey = Cryptography.NewSecretKey("BA65E9B393CF407DB2EF5C291B9D3230").ToString() };
         }
