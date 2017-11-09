@@ -4,6 +4,7 @@ using System.Linq;
 using IDI.Central.Domain.Modules.Administration.AggregateRoots;
 using IDI.Central.Models.Administration;
 using IDI.Core.Authentication;
+using IDI.Core.Common;
 using IDI.Core.Common.Extensions;
 
 namespace IDI.Central.Domain.Modules.Administration
@@ -85,6 +86,16 @@ namespace IDI.Central.Domain.Modules.Administration
                 return new List<string>();
 
             return user.Role.Roles.To<List<string>>();
+        }
+
+        public static SecretKey SecretKey(this User user)
+        {
+            return new SecretKey(user.SecretKey);
+        }
+
+        public static SecretKey SecretKey(this Client client)
+        {
+            return new SecretKey(client.SecretKey);
         }
     }
 }

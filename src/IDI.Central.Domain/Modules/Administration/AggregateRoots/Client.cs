@@ -12,12 +12,8 @@ namespace IDI.Central.Domain.Modules.Administration.AggregateRoots
         public string ClientId { get; set; }
 
         [Required]
-        [StringLength(128)]
+        [StringLength(1024)]
         public string SecretKey { get; set; }
-
-        [Required]
-        [StringLength(256)]
-        public string Salt { get; set; }
 
         public bool Active { get; set; } = true;
     }

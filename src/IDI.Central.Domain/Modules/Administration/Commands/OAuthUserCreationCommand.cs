@@ -61,19 +61,17 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
           
             if (user != null)
             {
-                user.Password = Cryptography.Encrypt(pin, user.Salt);
+                user.SecretKey = Cryptography.NewSecretKey(pin).ToString();
                 Users.Update(user);
                 Users.Commit();
                 return Result.Success(message: Localization.Get(Resources.Key.Command.AuthSuccess)).Attach("username", username).Attach("pin", pin);
             }
             else
             {
-                var salt = Cryptography.Salt();
                 user = new User
                 {
                     UserName = username,
-                    Salt = salt,
-                    Password = Cryptography.Encrypt(pin, salt),
+                    SecretKey = Cryptography.NewSecretKey(pin).ToString(),
                     Profile = new UserProfile { Name = command.Name, Email = command.Email },
                 };
 

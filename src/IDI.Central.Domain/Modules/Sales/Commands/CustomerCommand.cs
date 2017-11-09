@@ -46,8 +46,7 @@ namespace IDI.Central.Domain.Modules.Sales.Commands
             customer.User = new User
             {
                 UserName = $"cust{command.PhoneNum}",
-                Salt = salt,
-                Password = Cryptography.Encrypt(command.PhoneNum.Substring(2, command.PhoneNum.Length - 3), salt),
+                SecretKey = Cryptography.NewSecretKey(command.PhoneNum.Substring(2, command.PhoneNum.Length - 3)).ToString(),
                 IsLocked = true,
                 LockTime = DateTime.MaxValue,
                 Profile = new UserProfile

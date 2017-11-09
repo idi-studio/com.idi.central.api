@@ -144,8 +144,9 @@ namespace IDI.Central.Domain.Common
             this.Administrator = new User
             {
                 UserName = "administrator",
-                Salt = salt,
-                Password = Cryptography.Encrypt("p@55w0rd", salt),
+                //Salt = salt,
+                //Password = Cryptography.Encrypt("p@55w0rd", salt),
+                SecretKey = Cryptography.NewSecretKey("p@55w0rd").ToString(),
                 UserDefined = false,
                 Profile = new UserProfile { Name = "Administrator", Photo = "admin.jpg" },
             };
@@ -162,8 +163,8 @@ namespace IDI.Central.Domain.Common
         {
             string salt = Cryptography.Salt();
 
-            this.Central = new Client { ClientId = Configuration.Clients.Central, SecretKey = Cryptography.Encrypt("6ED5C478-1F3A-4C82-B668-99917D67784E", salt), Salt = salt };
-            this.Wechat = new Client { ClientId = Configuration.Clients.Wechat, SecretKey = Cryptography.Encrypt("BA65E9B3-93CF-407D-B2EF-5C291B9D3230", salt), Salt = salt };
+            this.Central = new Client { ClientId = Configuration.Clients.Central, SecretKey = Cryptography.NewSecretKey("6ED5C4781F3A4C82B66899917D67784E").ToString() };
+            this.Wechat = new Client { ClientId = Configuration.Clients.Wechat, SecretKey = Cryptography.NewSecretKey("BA65E9B393CF407DB2EF5C291B9D3230").ToString() };
         }
     }
 
@@ -325,15 +326,13 @@ namespace IDI.Central.Domain.Common
             {
                 var gender = (Gender)(index % 2);
                 var name = string.Format("{0}{1}", customers[index].Name, gender == Gender.Male ? "先生" : "女士");
-                var salt = Cryptography.Salt();
                 var phone = $"{ 13900000000 + index}";
 
                 customers[index].Name = name;
                 customers[index].User = new User
                 {
                     UserName = $"cust{phone}",
-                    Salt = salt,
-                    Password = Cryptography.Encrypt(phone.Fix(8), salt),
+                    SecretKey = Cryptography.NewSecretKey(phone.Fix(8)).ToString(),
                     IsLocked = true,
                     LockTime = DateTime.MaxValue,
                     Profile = new UserProfile

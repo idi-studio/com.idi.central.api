@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Security.Cryptography;
-using System.Text;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace IDI.Core.Common
@@ -24,6 +23,12 @@ namespace IDI.Core.Common
             }
 
             return Convert.ToBase64String(salt);
+        }
+
+
+        public static SecretKey NewSecretKey(string password)
+        {
+            return new SecretKey(password, Salt());
         }
     }
 }

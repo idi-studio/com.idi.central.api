@@ -15,12 +15,12 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
         public string ClientId { get; private set; }
 
         [RequiredField]
-        public string SecretKey { get; private set; }
+        public string ClientKey { get; private set; }
 
-        public ClientAuthenticationCommand(string clientId, string secretKey)
+        public ClientAuthenticationCommand(string clientId, string clientKey)
         {
             this.ClientId = clientId;
-            this.SecretKey = secretKey;
+            this.ClientKey = clientKey;
         }
     }
 
@@ -42,9 +42,7 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             if (!client.Active)
                 return Result.Fail(Localization.Get(Resources.Key.Command.ClientDisabled));
 
-            string secret = Cryptography.Encrypt(command.SecretKey, client.Salt);
-
-            if (client.SecretKey != secret)
+            if (!client.SecretKey().Verify(command.ClientKey))
                 return Result.Fail(Localization.Get(Resources.Key.Command.ClientAuthenticationFail));
 
             return Result.Success(message: Localization.Get(Resources.Key.Command.ClientAuthenticationSuccess));

@@ -47,12 +47,10 @@ namespace IDI.Central.Domain.Modules.Administration.Commands
             if (this.Users.Exist(u => u.UserName == command.UserName))
                 return Result.Fail(Localization.Get(Resources.Key.Command.UsernameRegistered));
 
-            var salt = Cryptography.Salt();
             var user = new User
             {
                 UserName = command.UserName,
-                Salt = salt,
-                Password = Cryptography.Encrypt(command.Password, salt),
+                SecretKey = Cryptography.NewSecretKey(command.Password).ToString(),
                 Profile = new UserProfile { Name = command.UserName }
             };
 
