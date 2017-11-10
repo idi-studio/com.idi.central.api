@@ -28,7 +28,7 @@ namespace IDI.Central.Models.Sales
         [JsonProperty("pname")]
         public string ProductName { get; set; }
 
-        [JsonProperty("enabled")]
+        [JsonProperty("active")]
         public bool Enabled { get; set; }
     }
 }
