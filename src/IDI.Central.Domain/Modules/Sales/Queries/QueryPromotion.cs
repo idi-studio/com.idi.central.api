@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using IDI.Central.Common.JsonTypes;
 using IDI.Central.Domain.Modules.Sales.AggregateRoots;
 using IDI.Central.Models.Sales;
@@ -31,10 +30,10 @@ namespace IDI.Central.Domain.Modules.Sales.Queries
                 ProductId = promotion.ProductId,
                 ProductName = promotion.Product.Name,
                 Subject = promotion.Subject,
-                StartTime = promotion.StartTime,//.AsShortDate(),
-                EndTime = promotion.EndTime,//.AsShortDate(),
+                StartTime = promotion.StartTime,
+                EndTime = promotion.EndTime,
                 Enabled = promotion.Enabled,
-                Price = promotion.Price.To<PromotionPrice>(),
+                Price = promotion.Price.To<PromotionPrice>() ?? new PromotionPrice(),
             };
 
             return Result.Success(model);
