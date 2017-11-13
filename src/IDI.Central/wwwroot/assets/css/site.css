@@ -1,3 +1,12 @@
 ﻿.logo img {
     margin-top: -5px;
 }
+
+.dropdown {
+    height: 50px !important;
+}
+
+    .dropdown .dropdown-toggle {
+        height: 50px !important;
+        padding-top: 12px !important;
+    }
