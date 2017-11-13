@@ -48,17 +48,23 @@ namespace IDI.Central.Controllers
             return Redirect("https://github.com/idi-studio");
         }
 
+        public IActionResult CentralAPI()
+        {
+            return Redirect("https://github.com/idi-studio/com.idi.central.api");
+        }
+
+        public IActionResult CentralWeb()
+        {
+            return Redirect("https://github.com/idi-studio/com.idi.central.web");
+        }
+
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
-
             return View();
         }
     }

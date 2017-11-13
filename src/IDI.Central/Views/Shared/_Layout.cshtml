@@ -3,51 +3,76 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - IDI Studio &trade;</title>
+    <title>@ViewData["Title"] - IDI Studio</title>
     <link rel="icon" type="image/x-icon" href="~/assets/favicon.ico">
 
     <environment include="Development">
         <link rel="stylesheet" href="~/assets/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/assets/lib/font-awesome/css/font-awesome.css" />
         <link rel="stylesheet" href="~/assets/css/site.css" />
+        <link rel="stylesheet" href="~/assets/css/ie10-viewport-bug-workaround.css" />
+        <link rel="stylesheet" href="~/assets/css/carousel.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/assets/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/assets/lib/font-awesome/css/font-awesome.min.css" asp-append-version="true">
         <link rel="stylesheet" href="~/assets/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/assets/css/ie10-viewport-bug-workaround.min.css" asp-append-version="true">
+        <link rel="stylesheet" href="~/assets/css/carousel.min.css" asp-append-version="true">
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-wrapper">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">IDI Studio &trade;</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a target="_blank" asp-area="" asp-controller="Home" asp-action="Central">Central</a></li>
-                    <li><a target="_blank" asp-area="" asp-controller="Home" asp-action="API">APIs</a></li>
-                    <li><a target="_blank" asp-area="" asp-controller="Home" asp-action="GitHub">GitHub</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-            </div>
+
+            <nav class="navbar navbar-inverse navbar-static-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand logo" asp-area="" asp-controller="Home" asp-action="Index">
+                            <img alt="IDI Studio" src="~/assets/images/logo/logo@32.png" />
+                        </a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">IDI Studio</a></li>
+                            <li><a target="_blank" asp-area="" asp-controller="Home" asp-action="Central">Central</a></li>
+                            <li><a target="_blank" asp-area="" asp-controller="Home" asp-action="API">API</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-github" aria-hidden="true"></i> GitHub <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a target="_blank" asp-area="" asp-controller="Home" asp-action="GitHub">Home</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Repositories</li>
+                                    <li><a target="_blank" asp-area="" asp-controller="Home" asp-action="CentralAPI">Central API</a></li>
+                                    <li><a target="_blank" asp-area="" asp-controller="Home" asp-action="CentralWeb">Central Web</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
         </div>
-    </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
+    </div>
+
+    @RenderBody()
+
+    <div class="container">
         <footer>
-            <div class="row">
-                <div class="col-xs-4">&copy; 2017 - IDI Studio &trade;</div>
-                <div class="col-xs-4"></div>
-                <div class="col-xs-4"><a class="pull-right" style="color:black" target="_blank" href="http://www.miitbeian.gov.cn">蜀ICP备17037852号</a></div>
-            </div>
+            <p>&copy; 2017 IDI Studio, Inc. &middot; <a target="_blank" href="http://www.miitbeian.gov.cn">蜀ICP备17037852号</a></p>
+            <p class="pull-right"><a href="#">Back to top</a></p>
         </footer>
     </div>
 
@@ -55,6 +80,8 @@
         <script src="~/assets/lib/jquery/dist/jquery.js"></script>
         <script src="~/assets/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/assets/js/site.js" asp-append-version="true"></script>
+        <script src="~/assets/js/holder.min.js" asp-append-version="true"></script>
+        <script src="~/assets/js/ie10-viewport-bug-workaround.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -69,6 +96,8 @@
                 crossorigin="anonymous"
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
+        <script src="~/assets/js/holder.min.js" asp-append-version="true"></script>
+        <script src="~/assets/js/ie10-viewport-bug-workaround.js" asp-append-version="true"></script>
         <script src="~/assets/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
