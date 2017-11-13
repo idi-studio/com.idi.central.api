@@ -22,6 +22,15 @@
         <link rel="stylesheet" href="~/assets/css/ie10-viewport-bug-workaround.min.css" asp-append-version="true">
         <link rel="stylesheet" href="~/assets/css/carousel.min.css" asp-append-version="true">
     </environment>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?44a07a8fe33b348073fb4f98671b4658";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 </head>
 <body>
     <div class="navbar-wrapper">
@@ -72,8 +81,10 @@
     <div class="container">
         <footer>
             <p class="pull-right"><a href="#"><img title="Back to Top" alt="back to top" height="32" width="32" src="~/assets/images/top.svg" /></a></p>
-            <p>&copy; 2017 IDI Studio, Inc. &middot; <a target="_blank" href="http://www.miitbeian.gov.cn">
-                <img  height="18" width="18" src="~/assets/images/icp.svg" /><span> 蜀ICP备17037852号</span></a>
+            <p>
+                &copy; 2017 IDI Studio, Inc. &middot; <a target="_blank" href="http://www.miitbeian.gov.cn">
+                    <img height="18" width="18" src="~/assets/images/icp.svg" /><span> 蜀ICP备17037852号</span>
+                </a>
             </p>
         </footer>
     </div>
@@ -84,15 +95,6 @@
         <script src="~/assets/js/site.js" asp-append-version="true"></script>
         <script src="~/assets/js/holder.min.js" asp-append-version="true"></script>
         <script src="~/assets/js/ie10-viewport-bug-workaround.js" asp-append-version="true"></script>
-        <script>
-            var _hmt = _hmt || [];
-            (function () {
-                var hm = document.createElement("script");
-                hm.src = "https://hm.baidu.com/hm.js?44a07a8fe33b348073fb4f98671b4658";
-                var s = document.getElementsByTagName("script")[0];
-                s.parentNode.insertBefore(hm, s);
-            })();
-        </script>
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -110,15 +112,6 @@
         <script src="~/assets/js/holder.min.js" asp-append-version="true"></script>
         <script src="~/assets/js/ie10-viewport-bug-workaround.js" asp-append-version="true"></script>
         <script src="~/assets/js/site.min.js" asp-append-version="true"></script>
-        <script>
-             var _hmt = _hmt || [];
-             (function () {
-                 var hm = document.createElement("script");
-                 hm.src = "https://hm.baidu.com/hm.js?44a07a8fe33b348073fb4f98671b4658";
-                 var s = document.getElementsByTagName("script")[0];
-                 s.parentNode.insertBefore(hm, s);
-             })();
-        </script>
     </environment>
 
     @RenderSection("Scripts", required: false)
