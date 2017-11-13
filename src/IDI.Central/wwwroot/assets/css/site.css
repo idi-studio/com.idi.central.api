@@ -10,3 +10,12 @@
         height: 50px !important;
         padding-top: 12px !important;
     }
+
+footer > p > a {
+    color: #5a5a5a;
+}
+
+    footer > p > a:hover {
+        color: #5a5a5a;
+        text-decoration: underline;
+    }
