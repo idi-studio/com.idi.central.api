@@ -23,15 +23,15 @@ namespace IDI.Central.Controllers
     [Module(Configuration.Modules.BasicInfo)]
     public class ProductController : Controller, IAuthorizable
     {
-        private readonly ApplicationOptions options;
         private readonly ICommandBus bus;
         private readonly IQuerier querier;
+        private readonly ApplicationOptions options;
 
-        public ProductController(IOptionsSnapshot<ApplicationOptions> options, ICommandBus bus, IQuerier querier)
+        public ProductController(ICommandBus bus, IQuerier querier, IOptionsSnapshot<ApplicationOptions> options)
         {
-            this.options = options.Value;
             this.bus = bus;
             this.querier = querier;
+            this.options = options.Value;
         }
 
         [HttpPost]
@@ -97,13 +97,15 @@ namespace IDI.Central.Controllers
 
         [HttpGet("{id}")]
         [Permission("product", PermissionType.Read)]
-        public Result<ProductModel> Get(Guid id, [FromServices]IHostingEnvironment env)
+        //public Result<ProductModel> Get(Guid id, [FromServices]IHostingEnvironment env)
+        public Result<ProductModel> Get(Guid id)
         {
             var condition = new QueryProductCondition
             {
                 Id = id,
                 Domain = this.options.Domain,
-                SavePath = env.WebRootPath
+                //SavePath = env.WebRootPath
+                SavePath = options.UploadFolder
             };
 
             return querier.Execute<QueryProductCondition, ProductModel>(condition);

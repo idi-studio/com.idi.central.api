@@ -9,8 +9,8 @@ using IDI.Core.Authentication;
 using IDI.Core.Common;
 using IDI.Core.Common.Enums;
 using IDI.Core.Infrastructure.Messaging;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace IDI.Central.Controllers
 {
@@ -20,20 +20,24 @@ namespace IDI.Central.Controllers
     {
         private readonly ICommandBus bus;
         private readonly IQuerier querier;
+        private readonly ApplicationOptions options;
 
-        public ProductPictureController(ICommandBus bus, IQuerier querier)
+        public ProductPictureController(ICommandBus bus, IQuerier querier, IOptionsSnapshot<ApplicationOptions> options)
         {
             this.bus = bus;
             this.querier = querier;
+            this.options = options.Value;
         }
 
         [HttpPost]
         [Permission("product-picture", PermissionType.Upload)]
-        public Result Post([FromServices]IHostingEnvironment env)
+        //public Result Post([FromServices]IHostingEnvironment env)
+        public Result Post()
         {
             var command = new ProductPictureCommand
             {
-                SavePath = env.WebRootPath,
+                //SavePath = env.WebRootPath,
+                SavePath = options.UploadFolder,
                 ProductId = this.HttpContext.Request.Form["pid"].ToString().ToGuid(),
                 Files = this.HttpContext.Request.Form.Files.ToList(),
                 Category = ImageCategory.Picture,

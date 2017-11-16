@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net;
-using IDI.Central.Domain.Modules.Administration.Commands;
+﻿using IDI.Central.Domain.Modules.Administration.Commands;
 using IDI.Core.Common;
 using IDI.Core.Infrastructure.Messaging;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +21,7 @@ namespace IDI.Central.Controllers
             return View();
         }
 
-        public IActionResult API()
+        public IActionResult Swagger()
         {
             var result = bus.Send(new DatabaseInitalCommand());
 
@@ -37,10 +35,11 @@ namespace IDI.Central.Controllers
 
         public IActionResult Central()
         {
-            if (Request.Host.Host.Equals("localhost", StringComparison.CurrentCultureIgnoreCase))
-                return Redirect("http://localhost:4200/central");
+            //if (Request.Host.Host.Equals("localhost", StringComparison.CurrentCultureIgnoreCase))
+            //    return Redirect("http://localhost:4200/central");
 
-            return Redirect("http://www.idi-studio.com.cn/central");
+            //return Redirect("http://www.idi-studio.com.cn/central");
+            return Redirect("~/central");
         }
 
         public IActionResult GitHub()
@@ -48,24 +47,14 @@ namespace IDI.Central.Controllers
             return Redirect("https://github.com/idi-studio");
         }
 
-        public IActionResult CentralAPI()
+        public IActionResult API()
         {
             return Redirect("https://github.com/idi-studio/com.idi.central.api");
         }
 
-        public IActionResult CentralWeb()
+        public IActionResult Web()
         {
             return Redirect("https://github.com/idi-studio/com.idi.central.web");
-        }
-
-        public IActionResult About()
-        {
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            return View();
         }
     }
 }

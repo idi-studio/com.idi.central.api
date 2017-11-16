@@ -36,7 +36,8 @@ namespace IDI.Central.Domain.Modules.BasicInfo.Queries
         {
             var product = this.Products.Include(e => e.Pictures).Include(e => e.Stock).Find(condition.Id);
 
-            var url = $"{condition.Domain}/assets/images/products";
+            //var url = $"{condition.Domain}/assets/images/products";
+            var url = $"./assets/images/products";
 
             var model = new ProductModel
             {
